@@ -1,5 +1,7 @@
 const { User, Profile } = require(`../models/index`);
 const { sequelize } = require('../models')
+const { compareHash } = require('../helpers/bycrpt')
+const { getToken } = require('../helpers/jwt')
 
 const clientRegister = async (req, res, next) => {
     const transaction = await sequelize.transaction();
@@ -55,6 +57,7 @@ const clientLogin = async (req, res, next) => {
 
         res.status(200).json({access_token});
     } catch (error) {
+        console.log(error)
         next(error);
     }
 };
