@@ -1,7 +1,7 @@
 const bcrypt = require(`bcryptjs`)
 
 const hashPass = (val) => {
-    return bcrypt.hashSync(val, process.env.HASH_SALT);
+    return bcrypt.hashSync(val, Number(process.env.HASH_SALT));
 }
 
 const compareHash = (val, hashData) => {
