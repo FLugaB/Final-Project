@@ -37,7 +37,8 @@ const authorization = async (req, res, next) => {
         })
 
         req.auth = {
-            id: findUser.id
+            id: findUser.id,
+            role: findUser.role
         }
 
         if(!findUser) throw { name: "FORBIDDEN" }
