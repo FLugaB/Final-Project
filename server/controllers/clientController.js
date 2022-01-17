@@ -19,7 +19,7 @@ const clientRegister = async (req, res, next) => {
             address,
             photoProfile,
             phoneNumber,
-            userId: addUser.id
+            UserId: addUser.id
         }, { transaction })
 
         await transaction.commit();
@@ -62,7 +62,37 @@ const clientLogin = async (req, res, next) => {
     }
 };
 
+const clientAccount = async (req, res, next) => {
+    try {
+        
+        const findUser = await User.findOne({
+            where: {
+                id: req.auth.id
+            },
+            attributes: {
+                exclude: ["updatedAt", "createdAt" ]
+            },
+            include: [
+                {
+                    model: Profile,
+                    attributes: {
+                        exclude: ['createdAt', `updatedAt`, ]
+                    },
+                }, 
+            ]
+        });
+
+        if (!findUser) throw { name: `FORBIDDEN` }
+
+        res.status(200).json({findUser});
+    } catch (error) {
+        console.log(error)
+        next(error);
+    }
+};
+
 module.exports = {
     clientRegister,
-    clientLogin
+    clientLogin,
+    clientAccount
 }

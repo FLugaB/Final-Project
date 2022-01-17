@@ -22,7 +22,7 @@ const errorLog = (err, req, res, next) => {
     } else if ( err.name === `FORBIDDEN`){
         code = 403
         message = "Invalid access"
-   }
+    }
 
     res.status(code).json({message})
 
