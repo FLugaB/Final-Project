@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
         notNull: { msg: "Phone Number is required" }
       }
     },
-    userId: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Profile',
