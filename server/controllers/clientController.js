@@ -57,7 +57,6 @@ const clientLogin = async (req, res, next) => {
 
         res.status(200).json({access_token});
     } catch (error) {
-        console.log(error)
         next(error);
     }
 };
@@ -86,13 +85,70 @@ const clientAccount = async (req, res, next) => {
 
         res.status(200).json({findUser});
     } catch (error) {
-        console.log(error)
         next(error);
+    }
+};
+
+const clientUpdateAccount = async (req, res, next) => {
+
+    const transaction = await sequelize.transaction();
+
+    try {
+        
+        const findUser = await User.findOne({
+            where: {
+                id: req.auth.id
+            },
+            attributes: {
+                exclude: ["updatedAt", "createdAt" ]
+            },
+            include: [
+                {
+                    model: Profile,
+                    attributes: {
+                        exclude: ['createdAt', `updatedAt`, ]
+                    },
+                }, 
+            ]
+        });
+
+        if (!findUser) throw { name: `FORBIDDEN` }
+
+        const {  email, password, fullName, birthdate, gender, address, photoProfile, phoneNumber } = req.body
+
+        const updateUser = await User.update(
+            { email, password  }, 
+            { where: { id: findUser.id }, 
+            returning: true, transaction 
+        });
+
+        const updateProfile = await Profile.update({
+            fullName,
+            birthdate,
+            gender,
+            address,
+            photoProfile,
+            phoneNumber,
+        }, { 
+            where: { 
+                UserId: findUser.id 
+            },
+            returning: true, transaction 
+        });
+
+        const successText = "Success update profile"
+        
+        await transaction.commit();
+        res.status(200).json({successText});
+    } catch (error) {
+        next(error);
+        await transaction.rollback()
     }
 };
 
 module.exports = {
     clientRegister,
     clientLogin,
-    clientAccount
+    clientAccount,
+    clientUpdateAccount
 }

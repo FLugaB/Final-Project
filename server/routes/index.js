@@ -1,6 +1,6 @@
 const route = require(`express`).Router();
 
-const { clientLogin, clientRegister, clientAccount } = require('../controllers/clientController')
+const { clientLogin, clientRegister, clientAccount, clientUpdateAccount } = require('../controllers/clientController')
 const { cmsRegister, cmsLogin } = require('../controllers/cmsController')
 
 const { authentication, authorization, authorizationCMS } = require("../middlewere/auth");
@@ -17,6 +17,7 @@ route.post('/register', clientRegister);
 route.post('/login', clientLogin);
 
 route.get('/account',[authentication, authorization], clientAccount);
+route.put('/account',[authentication, authorization], clientUpdateAccount);
 
 
 
