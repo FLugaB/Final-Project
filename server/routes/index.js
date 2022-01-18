@@ -8,26 +8,27 @@ const { requestSnapToken } = require('../apis/midtransController')
 const { authentication, authorization, authorizationCMS } = require("../middlewere/auth");
 const errorsLog  = require("../middlewere/errorHandler");
 
-//admin & Doctor
+//===== ADMIN
 route.post('/cms/login', cmsLogin);
-
 route.post('/cms/register',[authentication, authorization, authorizationCMS], cmsRegister);
 
+route.get('/cms/products', [authentication, authorization, authorizationCMS], showProduct)
+route.get('/cms/products/:id', [authentication, authorization, authorizationCMS], showProductById)
+route.post('/cms/products', [authentication, authorization, authorizationCMS], addProduct)
+route.put('/cms/products/:id', [authentication, authorization, authorizationCMS], updateProduct)
+route.delete('/cms/products/:id', [authentication, authorization, authorizationCMS], deleteProduct)
 
-//customer
+
+//===== CUSTOMER
 route.post('/register', clientRegister);
 route.post('/login', clientLogin);
 
 route.get('/account',[authentication, authorization], clientAccount);
 route.put('/account',[authentication, authorization], clientUpdateAccount);
 
-//product
 
-route.get('/products', [authentication, authorization], showProduct)
-route.get('/products/:id', [authentication, authorization], showProductById)
-route.post('/products', [authentication, authorization], addProduct)
-route.put('/products/:id', [authentication, authorization], updateProduct)
-route.delete('/products/:id', [authentication, authorization], deleteProduct)
+
+
 
 route.post('/cart/payment',[ authentication, authorization], requestSnapToken);
 

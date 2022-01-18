@@ -56,7 +56,7 @@ const authorization = async (req, res, next) => {
 const authorizationCMS = async (req, res, next) => {
     try {
 
-        if(!req.auth.role != "Admin") throw { name: "FORBIDDEN" }
+        if(req.auth.role != "Admin") throw { name: "FORBIDDEN" }
 
         next();
 
