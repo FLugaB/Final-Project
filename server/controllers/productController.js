@@ -1,4 +1,4 @@
-const {Product} = require("../models")
+const {Product, DetailProduct} = require("../models")
 
 module.exports = class Controller {
 
@@ -6,9 +6,7 @@ module.exports = class Controller {
     try {
       const {title, type} = req.body
       const input = {title, type}
-      console.log(input);
       const result = await Product.create(input)
-      console.log(result);
       res.status(201).json(result)
     } catch (err) {
       console.log(err);
@@ -23,9 +21,7 @@ module.exports = class Controller {
         res.status(200).json({msg: "There is no product"})
       }
       res.status(200).json(result)
-      
     } catch (err) {
-      console.log(err);
       next(err)
     } 
   }
@@ -55,7 +51,6 @@ module.exports = class Controller {
       const result = await Product.update(input, {where: {id}, returning:true})
       res.status(200).json(result)      
     } catch (err) {
-      console.log(err);
       next(err)
     }
   }
@@ -68,6 +63,76 @@ module.exports = class Controller {
         throw {name: "Product_not_found"}
       }
       const result = await Product.destroy ({where : {id}})
+      res.status(200).json({message: "Success Delete Product"})
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static addDetail =  async(req, res, next) =>{
+    try {
+      console.log("masuk>>>>>>>", req.body);
+      const {ProductId, name, price, stock, category, imageUrl, description} = req.body
+      const input = {ProductId, name, price, stock, category, imageUrl, description}
+      const result = await DetailProduct.create(input)
+      res.status(201).json(result)
+    } catch (err) {
+      console.log(err);
+      next (err)
+    }
+  }
+
+  static showDetail = async(req,res, next) => {
+    try {
+      const result = await DetailProduct.findAll()
+      if(result.length === 0) {
+        res.status(200).json({msg: "There is no product"})
+      }
+      res.status(200).json(result)
+    } catch (err) {
+      console.log(err);
+      next(err)
+    } 
+  }
+
+  static showDetailById = async(req,res,next) =>{
+    try {
+      const {id} = req.params
+      const result = await DetailProduct.findByPk(id) 
+      if (!result) {
+        throw {name: "Product_not_found"}
+      } 
+      res.status(200).json(result)
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static updateDetail = async(req,res,next) => {
+    try {
+      const {id} = req.params
+      const {ProductId, name, price, stock, category, imageUrl, description} = req.body
+      const input = {ProductId, name, price, stock, category,imageUrl, description}
+      const find = await DetailProduct.findByPk(id)
+      if(!find) {
+        throw {name: "Product_not_found"}
+      }
+      const result = await DetailProduct.update(input, {where: {id}, returning:true})
+      res.status(200).json(result)      
+    } catch (err) {
+      console.log(err);
+      next(err)
+    }
+  }
+
+  static deleteDetail = async (req,res,next) =>{
+    try {
+      const {id} = req.params
+      const find = await DetailProduct.findByPk(id)
+      if (!find) {
+        throw {name: "Product_not_found"}
+      }
+      const result = await DetailProduct.destroy ({where : {id}})
       res.status(200).json({message: "Success Delete Product"})
     } catch (err) {
       next(err)

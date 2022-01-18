@@ -2,7 +2,7 @@ const route = require(`express`).Router();
 
 const { clientLogin, clientRegister, clientAccount, clientUpdateAccount } = require('../controllers/clientController')
 const { cmsRegister, cmsLogin } = require('../controllers/cmsController');
-const { addProduct, showProduct, showProductById, updateProduct, deleteProduct } = require('../controllers/productController');
+const { addProduct, showProduct, showProductById, updateProduct, deleteProduct, showDetail, showDetailById, addDetail, updateDetail, deleteDetail } = require('../controllers/productController');
 const { requestSnapToken } = require('../apis/midtransController')
 
 const { authentication, authorization, authorizationCMS } = require("../middlewere/auth");
@@ -17,6 +17,12 @@ route.get('/cms/products/:id', [authentication, authorization, authorizationCMS]
 route.post('/cms/products', [authentication, authorization, authorizationCMS], addProduct)
 route.put('/cms/products/:id', [authentication, authorization, authorizationCMS], updateProduct)
 route.delete('/cms/products/:id', [authentication, authorization, authorizationCMS], deleteProduct)
+
+route.get('/cms/details', [authentication, authorization, authorizationCMS], showDetail)
+route.get('/cms/details/:id', [authentication, authorization, authorizationCMS], showDetailById)
+route.post('/cms/details', [authentication, authorization, authorizationCMS], addDetail)
+route.put('/cms/details/:id', [authentication, authorization, authorizationCMS], updateDetail)
+route.delete('/cms/details/:id', [authentication, authorization, authorizationCMS], deleteDetail)
 
 
 //===== CUSTOMER
