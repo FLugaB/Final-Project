@@ -1,0 +1,29 @@
+[
+  {
+    "ProductId": 3,
+    "name": "VASELINE Lip Theraphy Jar",
+    "price": 31000,
+    "category": "Lip care",
+    "stock": 4,
+    "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+    "description": "Vaseline Lip Therapy dari USA dengan kandungan Petroleum Jelly yang memberikan kelembaban pada bibir. Gunakan setiap hari untuk mengurangi bibir kering dan pecah-pecah serta menjaga kesehatan bibir. Simpan ditempat sejuk dan hindari dari paparan matahari langsung.Jika terjadi iritasi pada bibir harap hentikan penggunaan produk Oleskan lip care secara merata di bibir.How to Use : Gunakan sebelum memakai lipstick, atau kapanpun ketika bibir terasa kering.Ingredients : Petrolatum; Butyrospermum Parkii (Shea) Butter; Tocopheryl Acetate"
+  },
+  {
+    "ProductId": 3,
+    "name": "Senka - Perfect Whip",
+    "price": 29000,
+    "category": "Facewash",
+    "stock": 5,
+    "imageUrl": "https://images.soco.id/b85bac8d-38ac-4506-b49e-fca873c46609-image-0-1629982004097",
+    "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik untuk menciptakan busa yang lembut, tebal dan melimpah yang mampu membersihkan make-up, kotoran dan minyak berlebih dengan halus."
+  },
+  {
+    "ProductId": 3,
+    "name": "NEUTROGENA - Hydro Boost Water Gel",
+    "price": 179000,
+    "category": "Mouisturizer",
+    "stock": 8,
+    "imageUrl": "https://images.soco.id/54725414970-1595823182690.png",
+    "description": "Pengaruh dan perubahan pada lingkungan dapat mengakibatkan kulitmu menjadi kering dan kurang sehat. Neutrogena Hydro Boost Water Gel secara klinis terbukti membantu menghidrasi kulitmu, menstimulasinya untuk menghasilkan asam hialuronatnya (HA) sendiri dari dalam untuk hidrasi hingga 72 jam*. Teknologi hidrasi ini membantu menjadikan kulitmu tampak lebih cerah, terasa kencang dan kenyal, lembut, sehat dan bercahaya"
+  }
+]
