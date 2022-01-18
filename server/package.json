@@ -4,7 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon bin/www",
+    "test:up": "npx sequelize-cli db:create --env=test && npx sequelize-cli db:migrate --env=test && npx sequelize-cli --env test db:seed:all",
+    "test:down": "npx sequelize-cli db:migrate:undo:all --env=test",
+    "test": "clear && jest --runInBand --detectOpenHandles --forceExit",
     "dev": "nodemon app.js",
     "dev:up": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "dev:down": "npx sequelize-cli db:migrate:undo:all"
@@ -23,7 +26,9 @@
     "sequelize": "^6.13.0"
   },
   "devDependencies": {
+    "jest": "^27.4.7",
     "nodemon": "^2.0.15",
-    "sequelize-cli": "^6.4.1"
+    "sequelize-cli": "^6.4.1",
+    "supertest": "^6.2.1"
   }
 }
