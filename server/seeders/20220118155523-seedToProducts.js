@@ -11,6 +11,12 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+     const data = require("../dummyData/products.json")
+     data.forEach(element => {
+       element.createdAt = new Date(),
+       element.updatedAt = new Date()
+     });
+      await queryInterface.bulkInsert('Products', data, {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -20,5 +26,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+      await queryInterface.bulkDelete('Products', null, {});
   }
 };
