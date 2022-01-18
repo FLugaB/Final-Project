@@ -38,7 +38,12 @@ const clientRegister = async (req, res, next) => {
 const clientLogin = async (req, res, next) => {
     try {
         const {  email, password } = req.body
-
+        if (!email || !password) {
+            throw ({
+                name: "BAD_REQUEST",
+                message: "Email/Password is required"
+            })
+        }
         const findUser = await User.findOne({
             where: {
                 email: email
@@ -57,6 +62,7 @@ const clientLogin = async (req, res, next) => {
 
         res.status(200).json({access_token});
     } catch (error) {
+        console.log(error);
         next(error);
     }
 };
