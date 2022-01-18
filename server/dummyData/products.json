@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Chat consultation", 
+    "type": "Ticket Chat"
+  },
+  {
+    "title": "Booking consultation", 
+    "type": "Ticket Booking"
+  },
+  {
+    "title": "Skincare", 
+    "type": "Product Skincare"
+  }
+]
