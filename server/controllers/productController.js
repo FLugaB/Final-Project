@@ -19,8 +19,11 @@ module.exports = class Controller {
   static showProduct = async(req,res, next) => {
     try {
       const result = await Product.findAll()
-      console.log(result,">>>>>>>>>>>");
+      if(result.length === 0) {
+        res.status(200).json({msg: "There is no product"})
+      }
       res.status(200).json(result)
+      
     } catch (err) {
       console.log(err);
       next(err)
@@ -46,7 +49,6 @@ module.exports = class Controller {
       const {title, type} = req.body
       const input = {title, type}
       const find = await Product.findByPk(id)
-      console.log(find,">>>>>>>>>>");
       if(!find) {
         throw {name: "Product_not_found"}
       }
