@@ -183,7 +183,24 @@ class TransactionController {
         }
     }
 
-  }
+    static fetchStatusTransactions = async (req, res, next) => {
+
+        try {
+
+            const findAllTransactions = await Transaction.findAll({
+                where: {
+                    UserId: req.auth.id 
+                }
+            })
+
+            res.status(200).json(findAllTransactions)
+            
+        } catch (error) {
+            next()
+        }
+    }
+
+}
 
 module.exports = {
     TransactionController
