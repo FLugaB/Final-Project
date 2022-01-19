@@ -123,11 +123,9 @@ module.exports = class Controller {
       const result = await DetailProduct.update(input, {where: {id}, returning:true, transaction:t})
       res.status(200).json(result)   
       await t.commit()
-
     } catch (err) {
       next(err)
       await t.rollBack()
-
     }
   }
 
@@ -142,11 +140,9 @@ module.exports = class Controller {
       const result = await DetailProduct.destroy ({where : {id}, transaction:t})
       res.status(200).json({message: "Success Delete Product"})
       await t.commit()
-
     } catch (err) {
       next(err)
       await t.rollBack()
-
     }
   }
 }
