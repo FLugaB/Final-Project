@@ -16,12 +16,22 @@ module.exports = class Controller {
 
   static showProduct = async(req,res, next) => {
     try {
-      const result = await Product.findAll()
+      const result = await Product.findAll({
+        include: [
+          {
+              model: DetailProduct,
+              attributes: {
+                  exclude: ['createdAt', `updatedAt`, ]
+              }
+          }, 
+      ]
+      })
       if(result.length === 0) {
         res.status(200).json({msg: "There is no product"})
       }
       res.status(200).json(result)
     } catch (err) {
+      console.log(err)
       next(err)
     } 
   }
