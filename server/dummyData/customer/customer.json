@@ -1,0 +1,17 @@
+[
+    {
+        "email": "customer1@mail.com",
+        "password": "customer",
+        "role": "Customer"
+    },
+    {
+        "email": "customer2@mail.com",
+        "password": "customer",
+        "role": "Customer"
+    },
+    {
+        "email": "customer3@mail.com",
+        "password": "customer",
+        "role": "Customer"
+    }
+]

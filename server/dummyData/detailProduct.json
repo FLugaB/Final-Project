@@ -1,6 +1,6 @@
 [
   {
-    "ProductId": 3,
+    "ProductId": 1,
     "name": "VASELINE Lip Theraphy Jar",
     "price": 31000,
     "category": "Lip care",
@@ -9,7 +9,7 @@
     "description": "Vaseline Lip Therapy dari USA dengan kandungan Petroleum Jelly yang memberikan kelembaban pada bibir. Gunakan setiap hari untuk mengurangi bibir kering dan pecah-pecah serta menjaga kesehatan bibir. Simpan ditempat sejuk dan hindari dari paparan matahari langsung.Jika terjadi iritasi pada bibir harap hentikan penggunaan produk Oleskan lip care secara merata di bibir.How to Use : Gunakan sebelum memakai lipstick, atau kapanpun ketika bibir terasa kering.Ingredients : Petrolatum; Butyrospermum Parkii (Shea) Butter; Tocopheryl Acetate"
   },
   {
-    "ProductId": 3,
+    "ProductId": 2,
     "name": "Senka - Perfect Whip",
     "price": 29000,
     "category": "Facewash",
