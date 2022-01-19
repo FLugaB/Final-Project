@@ -62,9 +62,9 @@ describe("New Client Test on Register Field", () => {
       .then((res) => {
         expect(res.status).toBe(201);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("id", 2)
-        expect(res.body).toHaveProperty("email", "newClient2@gmail.com")
-        expect(res.body).toHaveProperty("fullName", "newClient2")
+        expect(res.body).toHaveProperty("id", 2);
+        expect(res.body).toHaveProperty("email", "newClient2@gmail.com");
+        expect(res.body).toHaveProperty("fullName", "newClient2");
         done();
       })
       .catch((err) => {
@@ -91,7 +91,7 @@ describe("New Client Test on Register Field", () => {
       .then((res) => {
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Email is required")
+        expect(res.body).toHaveProperty("message", "Email is required");
         done();
       })
       .catch((err) => {
@@ -119,7 +119,7 @@ describe("New Client Test on Register Field", () => {
       .then((res) => {
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Email is required")
+        expect(res.body).toHaveProperty("message", "Email is required");
         done();
       })
       .catch((err) => {
@@ -127,7 +127,35 @@ describe("New Client Test on Register Field", () => {
       });
   });
 
-  //TODO 4 Register password is null
+  //TODO 4 Register email invalid format
+  test("Register email invalid format should be return invalid response", (done) => {
+    request(app)
+      .post("/register")
+      .send({
+        email: "newClient1@gmail.com",
+        password: "newClient1",
+        role: "Client",
+        fullName: "newClient1",
+        birthdate: "1998-03-29 13:34:00.000 +0700",
+        gender: "Male",
+        address: "Bekasi",
+        photoProfile:
+          "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+        phoneNumber: "082258852654",
+        UserId: 1,
+      })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Email must be unique");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  //TODO 5 Register password is null
   test("Register password is null should be return invalid response", (done) => {
     request(app)
       .post("/register")
@@ -146,7 +174,7 @@ describe("New Client Test on Register Field", () => {
       .then((res) => {
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Password is required")
+        expect(res.body).toHaveProperty("message", "Password is required");
         done();
       })
       .catch((err) => {
@@ -154,7 +182,7 @@ describe("New Client Test on Register Field", () => {
       });
   });
 
-  //TODO 5 Register password is empty
+  //TODO 6 Register password is empty
   test("Register password is empty should be return invalid response", (done) => {
     request(app)
       .post("/register")
@@ -176,7 +204,7 @@ describe("New Client Test on Register Field", () => {
         console.log(res.status, `reqStatus`);
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Password is required")
+        expect(res.body).toHaveProperty("message", "Password is required");
         done();
       })
       .catch((err) => {
@@ -184,7 +212,7 @@ describe("New Client Test on Register Field", () => {
       });
   });
 
-  //TODO 6 Register fullName is null
+  //TODO 7 Register fullName is null
   test("Register fullName is null should be return invalid response", (done) => {
     request(app)
       .post("/register")
@@ -200,10 +228,10 @@ describe("New Client Test on Register Field", () => {
         phoneNumber: "082258852654",
         UserId: 1,
       })
-      .then((res) => {        
+      .then((res) => {
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Fullname is required")
+        expect(res.body).toHaveProperty("message", "Fullname is required");
         done();
       })
       .catch((err) => {
@@ -211,7 +239,7 @@ describe("New Client Test on Register Field", () => {
       });
   });
 
-  //TODO 7 Register fullName is empty
+  //TODO 8 Register fullName is empty
   test("Register fullName is empty should be return invalid response", (done) => {
     request(app)
       .post("/register")
@@ -231,7 +259,7 @@ describe("New Client Test on Register Field", () => {
       .then((res) => {
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Fullname is required")
+        expect(res.body).toHaveProperty("message", "Fullname is required");
         done();
       })
       .catch((err) => {
@@ -239,7 +267,7 @@ describe("New Client Test on Register Field", () => {
       });
   });
 
-  //TODO 8 Register birthdate is null
+  //TODO 9 Register birthdate is null
   test("Register birthdate is null should be return invalid response", (done) => {
     request(app)
       .post("/register")
@@ -259,7 +287,7 @@ describe("New Client Test on Register Field", () => {
       .then((res) => {
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Birthdate is required")
+        expect(res.body).toHaveProperty("message", "Birthdate is required");
         done();
       })
       .catch((err) => {
@@ -267,7 +295,7 @@ describe("New Client Test on Register Field", () => {
       });
   });
 
-  //TODO 9 Register birthdate is empty
+  //TODO 10 Register birthdate is empty
   test("Register birthdate is empty should be return invalid response", (done) => {
     request(app)
       .post("/register")
@@ -287,7 +315,7 @@ describe("New Client Test on Register Field", () => {
       .then((res) => {
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Invalid date format")
+        expect(res.body).toHaveProperty("message", "Invalid date format");
         done();
       })
       .catch((err) => {
@@ -295,7 +323,7 @@ describe("New Client Test on Register Field", () => {
       });
   });
 
-  //TODO 10 Register gender is null
+  //TODO 11 Register gender is null
   test("Register gender is null should be return invalid response", (done) => {
     request(app)
       .post("/register")
@@ -314,7 +342,7 @@ describe("New Client Test on Register Field", () => {
       .then((res) => {
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Gender is required")
+        expect(res.body).toHaveProperty("message", "Gender is required");
         done();
       })
       .catch((err) => {
@@ -322,7 +350,7 @@ describe("New Client Test on Register Field", () => {
       });
   });
 
-  //TODO 11 Register gender is empty
+  //TODO 12 Register gender is empty
   test("Register gender is empty should be return invalid response", (done) => {
     request(app)
       .post("/register")
@@ -342,7 +370,7 @@ describe("New Client Test on Register Field", () => {
       .then((res) => {
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Gender is required")
+        expect(res.body).toHaveProperty("message", "Gender is required");
         done();
       })
       .catch((err) => {
@@ -350,7 +378,7 @@ describe("New Client Test on Register Field", () => {
       });
   });
 
-  //TODO 12 Register address is null
+  //TODO 13 Register address is null
   test("Register address is null should be return invalid response", (done) => {
     request(app)
       .post("/register")
@@ -369,7 +397,7 @@ describe("New Client Test on Register Field", () => {
       .then((res) => {
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Address is required")
+        expect(res.body).toHaveProperty("message", "Address is required");
         done();
       })
       .catch((err) => {
@@ -377,7 +405,7 @@ describe("New Client Test on Register Field", () => {
       });
   });
 
-  //TODO 13 Register address is empty
+  //TODO 14 Register address is empty
   test("Register address is empty should be return invalid response", (done) => {
     request(app)
       .post("/register")
@@ -397,7 +425,7 @@ describe("New Client Test on Register Field", () => {
       .then((res) => {
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Address is required")
+        expect(res.body).toHaveProperty("message", "Address is required");
         done();
       })
       .catch((err) => {
@@ -405,7 +433,7 @@ describe("New Client Test on Register Field", () => {
       });
   });
 
-  //TODO 16 Register phoneNumber is null
+  //TODO 15 Register phoneNumber is null
   test("Register phoneNumber is null should be return invalid response", (done) => {
     request(app)
       .post("/register")
@@ -417,7 +445,8 @@ describe("New Client Test on Register Field", () => {
         birthdate: "1998-03-29 13:34:00.000 +0700",
         gender: "Male",
         address: "Bekasi",
-        photoProfile: "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+        photoProfile:
+          "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
         // phoneNumber: "082258852654",
         UserId: 1,
       })
@@ -426,7 +455,7 @@ describe("New Client Test on Register Field", () => {
         console.log(res.body, `checker`);
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Phone Number is required")
+        expect(res.body).toHaveProperty("message", "Phone Number is required");
         done();
       })
       .catch((err) => {
@@ -434,7 +463,7 @@ describe("New Client Test on Register Field", () => {
       });
   });
 
-  //TODO 17 Register phoneNumber is empty
+  //TODO 16 Register phoneNumber is empty
   test("Register phoneNumber is empty should be return invalid response", (done) => {
     request(app)
       .post("/register")
@@ -446,7 +475,8 @@ describe("New Client Test on Register Field", () => {
         birthdate: "1998-03-29 13:34:00.000 +0700",
         gender: "Male",
         address: "Bekasi",
-        photoProfile: "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+        photoProfile:
+          "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
         phoneNumber: "",
         UserId: 1,
       })
@@ -455,7 +485,7 @@ describe("New Client Test on Register Field", () => {
         console.log(res.body, `checker`);
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Phone Number is required")
+        expect(res.body).toHaveProperty("message", "Phone Number is required");
         done();
       })
       .catch((err) => {
@@ -476,6 +506,7 @@ describe("New Client Test on Login Field", () => {
       })
       .then((res) => {
         expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object));
         expect(res.body).toEqual({ access_token: res.body.access_token });
         done();
       })
@@ -485,17 +516,104 @@ describe("New Client Test on Login Field", () => {
       });
   });
 
-  // TODO 2 Login password is Invalid
+  // TODO 2 Login email is null
+  test("Login email is null should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        password: "passwordInvalid",
+        role: "Client",
+      })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Email/Password is required",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+  
+  // TODO 3 Login email is empty
+  test("Login email is empty should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "",
+        password: "passwordInvalid",
+        role: "Client",
+      })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Email/Password is required",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 4 Login password is null
   test("Login password is null should be return invalid response", (done) => {
     request(app)
       .post("/login")
       .send({
         email: "newClient1@gmail.com",
+        role: "Client",
+      })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Email/Password is required",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 5 Login password is empty
+  test("Login password is empty should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "newClient1@gmail.com",
+        password: "",
+        role: "Client",
+      })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Email/Password is required",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 6 Login findUser not found
+  test("Login findUser not found should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "newClient1000@gmail.com",
         password: "passwordInvalid",
         role: "Client",
       })
       .then((res) => {
         expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
         expect(res.body).toEqual({
           message: "Invalid email/password",
         });
@@ -506,18 +624,20 @@ describe("New Client Test on Login Field", () => {
       });
   });
 
-  // TODO 3 Login email is null
-  test("Login email is null should be return invalid response", (done) => {
+  // TODO 7 Login verify is undefined
+  test("Login verify is undefined should be return invalid response", (done) => {
     request(app)
       .post("/login")
       .send({
+        email: "newClient1000@gmail.com",
         password: "passwordInvalid",
         role: "Client",
       })
       .then((res) => {
-        expect(res.status).toBe(400);
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
         expect(res.body).toEqual({
-          message: "Email/Password is required",
+          message: "Invalid email/password",
         });
         done();
       })
@@ -525,4 +645,6 @@ describe("New Client Test on Login Field", () => {
         done(err);
       });
   });
+
+  
 });
