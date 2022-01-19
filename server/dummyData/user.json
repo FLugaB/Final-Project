@@ -5,43 +5,14 @@
         "role": "Admin"
     },
     {
-        "email": "admin2@mail.com",
-        "password": "admin",
-        "role": "Admin"
-    },
-    {
-        "email": "admin3@mail.com",
-        "password": "admin",
-        "role": "Admin"
-    },
-    {
-        "email": "doctor1@mail.com",
-        "password": "doctor",
+        "email": "doctor@mail.com",
+        "password": "$2a$12$587LSboi9GPsIJN1jjn9ruf5D8QYotFqktbrSMiz/RFuQpVWKfjzK",
         "role": "Doctor"
     },
     {
-        "email": "doctor2@mail.com",
-        "password": "doctor",
+        "email": "vera@mail.com",
+        "password": "$2a$12$rIhUkNUIawft9bg34/toz.rjzRxMAzDEnn5jz8PlIHUUx0peA7.XO",
         "role": "Doctor"
-    },
-    {
-        "email": "doctor3@mail.com",
-        "password": "doctor",
-        "role": "Doctor"
-    },
-    {
-        "email": "customer1@mail.com",
-        "password": "customer",
-        "role": "Customer"
-    },
-    {
-        "email": "customer2@mail.com",
-        "password": "customer",
-        "role": "Customer"
-    },
-    {
-        "email": "customer3@mail.com",
-        "password": "customer",
-        "role": "Customer"
+
     }
 ]

@@ -2,7 +2,7 @@
 // jadwal dokter
 // data dockter: spesialisasi, dll
 
-const {Product, DetailProduct} = require("../models")
+const {Product, DetailProduct, User, Profile} = require("../models")
 
 class DoctorController {
   static async addSchedule(req, res, next) {
@@ -33,4 +33,6 @@ class DoctorController {
   }
 }
 
-module.exports = Doctor
+module.exports = {
+  DoctorController
+}

@@ -2,6 +2,10 @@
 
 const errorLog = (err, req, res, next) => {
 
+    console.log(err)
+
+    console.log(err.name)
+
     let code = 500
     let message = "Internal server error"
 
@@ -25,8 +29,8 @@ const errorLog = (err, req, res, next) => {
     } else if ( err.name === `FORBIDDEN`){
         code = 403
         message = "Invalid access"
-    } else if ( err.name === `Product_not_found`){
-        code = 401
+    } else if ( err.name === `Product_not_found`) {
+        code = 404
         message = "Product not found"
     } else if ( err.name === `VALIDATE_NAME_FILE`){
         code = 400
@@ -40,6 +44,9 @@ const errorLog = (err, req, res, next) => {
     } else if ( err.name === `NOT_ALLOWED_TYPE_FILE`){
         code = 413
         message = "File Type have to Image Type (png, jpg, jpeg)"
+    } else if ( err.name === `NOT_FOUND`) {
+        code = 404
+        message = "Not Found"
     } 
 
     res.status(code).json({message})

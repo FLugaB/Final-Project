@@ -1,83 +1,29 @@
 [
-  {
-    "fullName": "Admin Admin1",
-    "birthdate": "1990-01-17",
-    "gender": "Male",
-    "address": "Jl. Admin-1",
-    "photoProfile": "https://i.ibb.co/N69fnmM/admin.png",
-    "phoneNumber": "+62 877 545 3647",
-    "UserId": 1
-  },
-  {
-    "fullName": "Admin Admin2",
-    "birthdate": "1985-04-22",
-    "gender": "Female",
-    "address": "Jl. Admin-2",
-    "photoProfile": "https://i.ibb.co/N69fnmM/admin.png",
-    "phoneNumber": "+62 892 545 8475",
-    "UserId": 2
-  },
-  {
-    "fullName": "Admin Admin3",
-    "birthdate": "1989-11-17",
-    "gender": "Male",
-    "address": "Jl. Admin-3",
-    "photoProfile": "https://i.ibb.co/N69fnmM/admin.png",
-    "phoneNumber": "+62 882 545 3849",
-    "UserId": 3
-  },
-  {
-    "fullName": "Doctor Doctor1",
-    "birthdate": "1973-03-16",
-    "gender": "Female",
-    "address": "Jl. Doctor-1",
-    "photoProfile": "https://i.ibb.co/XDx2DHz/doctor.png",
-    "phoneNumber": "+62 824 545 3647",
-    "UserId": 4
-  },
-  {
-    "fullName": "Doctor Doctor2",
-    "birthdate": "1981-03-11",
-    "gender": "Female",
-    "address": "Jl. Doctor-2",
-    "photoProfile": "https://i.ibb.co/XDx2DHz/doctor.png",
-    "phoneNumber": "+62 879 545 8475",
-    "UserId": 5
-  },
-  {
-    "fullName": "Doctor Doctor3",
-    "birthdate": "1971-12-05",
-    "gender": "Male",
-    "address": "Jl. Doctor-3",
-    "photoProfile": "https://i.ibb.co/XDx2DHz/doctor.png",
-    "phoneNumber": "+62 888 545 6843",
-    "UserId": 6
-  },
-  {
-    "fullName": "Customer Customer1",
-    "birthdate": "2001-03-12",
-    "gender": "Female",
-    "address": "Jl. Customer-1",
-    "photoProfile": "https://i.ibb.co/DMvW3xZ/user.png",
-    "phoneNumber": "+62 894 545 3647",
-    "UserId": 7
-  },
-  {
-    "fullName": "Customer Customer2",
-    "birthdate": "1997-07-14",
-    "gender": "Male",
-    "address": "Jl. Customer-2",
-    "photoProfile": "https://i.ibb.co/DMvW3xZ/user.png",
-    "phoneNumber": "+62 822 545 8475",
-    "UserId": 8
-  },
-  {
-    "fullName": "Customer Customer3",
-    "birthdate": "1971-12-05",
-    "gender": "Female",
-    "address": "Jl. Customer-3",
-    "photoProfile": "https://i.ibb.co/DMvW3xZ/user.png",
-    "phoneNumber": "+62 876 545 6843",
-    "UserId": 9
-  } 
+    {
+        "fullName": "Admin Admin",
+        "birthdate": "2022-01-17 20:07:24+07",
+        "gender": "Male",
+        "address": "Jl. Admin Ajah",
+        "photoProfile": "https://image.pngaaa.com/396/5315396-middle.png",
+        "phoneNumber": "+62 8xx xxx xxxx",
+        "UserId": 1
+    },
+    {
+        "fullName": "Dr Manal Youssef",
+        "birthdate": "2022-01-17 20:07:24+07",
+        "gender": "Female",
+        "address": "Craigieburn Medical and Cosmetic Centre address, 33 Craigieburn Road, Craigieburn VIC 3064.",
+        "photoProfile": "https://healthengine.imgix.net/photos/doctors/doc56968-20171005035313.jpg?auto=compress&h=100&ixlib=php-3.3.1&or=0&w=100",
+        "phoneNumber": "+62 8xx xxx xxxx",
+        "UserId": 2
+    },
+    {
+        "fullName": "Dr Vera",
+        "birthdate": "2022-01-17 20:07:24+07",
+        "gender": "Female",
+        "address": "Plasthetic Clinic Alam Sutera",
+        "photoProfile": "https://plasthetic.com/wp-content/uploads/2021/10/dr.-Vera.jpg",
+        "phoneNumber": "+62 8xx xxx xxxx",
+        "UserId": 3
+    }
 ]
