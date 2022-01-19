@@ -15,7 +15,7 @@ class TransactionController {
             }
         })
 
-        const tryAddTicket = await OrderProduct.create({
+        await OrderProduct.create({
             UserId: req.auth.id,
             ProductId: findTicket.id,
             status: 'pending'
@@ -23,7 +23,7 @@ class TransactionController {
 
         const successText = "Checkout first before you could chat with our doctor"
 
-        res.status(201).json({tryAddTicket});
+        res.status(201).json({successText});
 
       } catch (err) {
         console.log(err, `==============`)
@@ -183,7 +183,24 @@ class TransactionController {
         }
     }
 
-  }
+    static fetchStatusTransactions = async (req, res, next) => {
+
+        try {
+
+            const findAllTransactions = await Transaction.findAll({
+                where: {
+                    UserId: req.auth.id 
+                }
+            })
+
+            res.status(200).json(findAllTransactions)
+            
+        } catch (error) {
+            next()
+        }
+    }
+
+}
 
 module.exports = {
     TransactionController
