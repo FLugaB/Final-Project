@@ -28,7 +28,19 @@ const errorLog = (err, req, res, next) => {
     } else if ( err.name === `Product_not_found`){
         code = 401
         message = "Product not found"
-    }
+    } else if ( err.name === `VALIDATE_NAME_FILE`){
+        code = 400
+        message = "Name of File Cannot be Empty"
+    } else if ( err.name === `VALIDATE_CONTENT_FILE`){
+        code = 400
+        message = "Description of FIle Cannot be Empty"
+    } else if ( err.name === `NOT_ALLOWED_SIZE_FILE`){
+        code = 413
+        message = "File Size Maximal 255kb"
+    } else if ( err.name === `NOT_ALLOWED_TYPE_FILE`){
+        code = 413
+        message = "File Type have to Image Type (png, jpg, jpeg)"
+    } 
 
     res.status(code).json({message})
 

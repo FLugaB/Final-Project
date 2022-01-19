@@ -81,7 +81,6 @@ module.exports = class Controller {
 
   static addDetail =  async(req, res, next) =>{
     try {
-      console.log("masuk>>>>>>>", req.body);
       const {ProductId, name, price, stock, category, imageUrl, description} = req.body
       const input = {ProductId, name, price, stock, category, imageUrl, description}
       const result = await DetailProduct.create(input)
