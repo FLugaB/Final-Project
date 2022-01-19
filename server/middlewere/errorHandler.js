@@ -2,6 +2,10 @@
 
 const errorLog = (err, req, res, next) => {
 
+    console.log(err)
+
+    console.log(err.name)
+
     let code = 500
     let message = "Internal server error"
 
@@ -25,10 +29,13 @@ const errorLog = (err, req, res, next) => {
     } else if ( err.name === `FORBIDDEN`){
         code = 403
         message = "Invalid access"
-    } else if ( err.name === `Product_not_found`){
-        code = 401
+    } else if ( err.name === `Product_not_found`) {
+        code = 404
         message = "Product not found"
-    }
+    } else if ( err.name === `NOT_FOUND`) {
+        code = 404
+        message = "Not Found"
+    } 
 
     res.status(code).json({message})
 
