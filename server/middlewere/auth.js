@@ -22,10 +22,9 @@ const authentication = async (req, res, next) => {
 
         next();
     } catch (error) {
-        console.log(error, `EEEEERRROOOOORR`)
-      next(error);
+        next(error);
     }
-   
+    
 }
 
 const authorization = async (req, res, next) => {
@@ -49,11 +48,11 @@ const authorization = async (req, res, next) => {
         next();
 
     } catch (error) {
-  
+        
         next(error);
 
     }
-   
+    
 }
 
 const authorizationCMS = async (req, res, next) => {
@@ -64,11 +63,11 @@ const authorizationCMS = async (req, res, next) => {
         next();
 
     } catch (error) {
-  
+        
         next(error);
 
     }
-   
+    
 }
 
 module.exports = {
