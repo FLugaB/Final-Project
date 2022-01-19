@@ -62,7 +62,6 @@ const clientLogin = async (req, res, next) => {
 
         res.status(200).json({access_token});
     } catch (error) {
-        console.log(error);
         next(error);
     }
 };
@@ -75,7 +74,7 @@ const clientAccount = async (req, res, next) => {
                 id: req.auth.id
             },
             attributes: {
-                exclude: ["updatedAt", "createdAt" ]
+                exclude: ["updatedAt", "createdAt", "password" ]
             },
             include: [
                 {

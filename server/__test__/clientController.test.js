@@ -41,7 +41,7 @@ beforeAll(async () => {
   await Profile.create(newProfile);
 });
 
-describe("New Client Test on Register Field", () => {
+describe("New Client Test on clientRegister Field", () => {
   //TODO 1 Register Success
   test("Register success should be return valid response", (done) => {
     request(app)
@@ -494,7 +494,7 @@ describe("New Client Test on Register Field", () => {
   });
 });
 
-describe("New Client Test on Login Field", () => {
+describe("New Client Test on clientLogin Field", () => {
   //TODO 1 Login Success
   test("Login success should be return valid response", (done) => {
     request(app)
@@ -648,3 +648,26 @@ describe("New Client Test on Login Field", () => {
 
   
 });
+
+describe("New Client Test on clientAccount Field", () => {
+  //TODO 1 CLient Account Found
+  test("CLient Account Found should be return valid response", (done) => {
+    request(app)
+      .post("/account")
+      .send({
+        email: "newClient1@gmail.com",
+        password: "newClient",
+        role: "Client",
+      })
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object));
+        
+        done();
+      })
+      .catch((err) => {
+        console.log(err);
+        done(err);
+      });
+  });
+})
