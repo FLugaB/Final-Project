@@ -4,6 +4,10 @@ const { clientLogin, clientRegister, clientAccount, clientUpdateAccount, clientD
 const { cmsRegister, cmsLogin } = require('../controllers/cmsController');
 const { addProduct, showProduct, showProductById, updateProduct, deleteProduct, showDetail, showDetailById, addDetail, updateDetail, deleteDetail } = require('../controllers/productController');
 const { TransactionController } = require(`../controllers/transactionController`)
+
+const ImageKit_API = require('../middlewere/imageKit')
+const MulterStorage = require('../middlewere/multer')
+
 const { DoctorController } = require('../controllers/doctorController')
 
 
@@ -23,7 +27,9 @@ route.delete('/cms/products/:id', [authentication, authorization, authorizationC
 
 route.get('/cms/details', [authentication, authorization, authorizationCMS], showDetail)
 route.get('/cms/details/:id', [authentication, authorization, authorizationCMS], showDetailById)
-route.post('/cms/details', [authentication, authorization, authorizationCMS], addDetail)
+
+route.post('/cms/details', [authentication, authorization, authorizationCMS], MulterStorage, ImageKit_API, addDetail)
+
 route.put('/cms/details/:id', [authentication, authorization, authorizationCMS], updateDetail)
 route.delete('/cms/details/:id', [authentication, authorization, authorizationCMS], deleteDetail)
 

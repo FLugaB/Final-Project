@@ -1,7 +1,7 @@
 [
     {
-        "email": "admin@mail.com",
-        "password": "$2a$12$ts6zToPZd5WS7PheWpif3.pPViY9/AEYwrEEYD56B.uPePMUl8s.i",
+        "email": "admin1@mail.com",
+        "password": "admin",
         "role": "Admin"
     },
     {
@@ -13,5 +13,6 @@
         "email": "vera@mail.com",
         "password": "$2a$12$rIhUkNUIawft9bg34/toz.rjzRxMAzDEnn5jz8PlIHUUx0peA7.XO",
         "role": "Doctor"
+
     }
 ]
