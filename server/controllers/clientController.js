@@ -74,7 +74,7 @@ const clientAccount = async (req, res, next) => {
                 id: req.auth.id
             },
             attributes: {
-                exclude: ["updatedAt", "createdAt", "password" ]
+                exclude: ["updatedAt", "createdAt", ]
             },
             include: [
                 {

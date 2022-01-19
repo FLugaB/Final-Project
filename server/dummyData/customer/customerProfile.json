@@ -1,0 +1,29 @@
+[
+    {
+        "fullName": "Customer Customer1",
+        "birthdate": "2001-03-12",
+        "gender": "Female",
+        "address": "Jl. Customer-1",
+        "photoProfile": "https://image.pngaaa.com/396/5315396-middle.png",
+        "phoneNumber": "+62 894 545 3647",
+        "UserId": 7
+    },
+    {
+        "fullName": "Customer Customer2",
+        "birthdate": "1997-07-14",
+        "gender": "Male",
+        "address": "Jl. Customer-2",
+        "photoProfile": "https://image.pngaaa.com/396/5315396-middle.png",
+        "phoneNumber": "+62 822 545 8475",
+        "UserId": 8
+    },
+    {
+        "fullName": "Customer Customer3",
+        "birthdate": "1971-12-05",
+        "gender": "Female",
+        "address": "Jl. Customer-3",
+        "photoProfile": "https://image.pngaaa.com/396/5315396-middle.png",
+        "phoneNumber": "+62 876 545 6843",
+        "UserId": 9
+    }
+]

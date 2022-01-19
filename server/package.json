@@ -10,7 +10,7 @@
     "test": "clear && jest --runInBand --watchAll --detectOpenHandles --forceExit",
     "dev": "nodemon app.js",
     "dev:up": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "dev:down": "npx sequelize-cli db:migrate:undo:all"
+    "dev:down": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate:undo:all"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +21,10 @@
     "cors": "^2.8.5",
     "dotenv": "^14.2.0",
     "express": "^4.17.2",
+    "form-data": "^4.0.0",
+    "imagekit": "^3.2.4",
     "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.4",
     "pg": "^8.7.1",
     "sequelize": "^6.13.0"
   },

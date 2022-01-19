@@ -44,7 +44,7 @@ const cmsLogin = async (req, res, next) => {
                 email: email
             }
         });
-
+        
         if (!findUser) throw { name: `USER_NOT_FOUND` }
         if (findUser.role != 'Admin') throw { name: `FORBIDDEN` }
 
