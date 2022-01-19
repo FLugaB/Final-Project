@@ -6,7 +6,7 @@ const { addProduct, showProduct, showProductById, updateProduct, deleteProduct, 
 const { TransactionController } = require(`../controllers/transactionController`)
 
 
-const { requestSnapToken } = require('../apis/midtransController')
+const { requestSnapToken, updateStatusTransactions } = require('../apis/midtransController')
 const { authentication, authorization, authorizationCMS } = require("../middlewere/auth");
 const errorsLog  = require("../middlewere/errorHandler");
 
@@ -45,6 +45,8 @@ route.post('/products/chat',[authentication, authorization], TransactionControll
 route.get('/account/cart',[authentication, authorization], TransactionController.clientCart);
 route.get('/account/detail-checkout',[authentication, authorization], TransactionController.clientDetailCheckout);
 route.post('/account/payment',[ authentication, authorization, TransactionController.checkoutMid], requestSnapToken);
+route.get('/account/status-transactions', [authentication, authorization], TransactionController.fetchStatusTransactions)
+route.patch('/account/status-transactions/:orderId', [authentication, authorization], updateStatusTransactions)
 
 
 
