@@ -1,10 +1,16 @@
 const app = require("../");
 const request = require("supertest");
 const { User, Profile } = require("../models");
+const { getToken } = require("../helpers/jwt");
+
 const defaultImage =
   "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332";
 
 console.log("test user testing");
+
+let tokenMatch1;
+let invalidToken =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJjaW5keVZAZ21haWwuY29tIiwiaWF0IjoxNjQyNjAzMzQ1fQ.bx0MAXaSmsYCa3Qbac8KQpCftEzKtFgpr8I96I1xZed";
 
 beforeAll(async () => {
   await User.destroy({
@@ -26,19 +32,29 @@ beforeAll(async () => {
     role: "Client",
   };
 
-  const createdUser = await User.create(newClientTest);
+  try {
+    const createdUser = await User.create(newClientTest);
+    let payload1 = {
+      id: createdUser.id,
+      email: createdUser.email,
+    };
 
-  let newProfile = {
-    fullName: "newClient",
-    birthdate: "1998-03-29 13:34:00.000 +0700",
-    gender: "Male",
-    address: "Bekasi",
-    photoProfile: defaultImage,
-    phoneNumber: "082258852654",
-    UserId: createdUser.id,
-  };
+    tokenMatch1 = getToken(payload1);
 
-  await Profile.create(newProfile);
+    let newProfile = {
+      fullName: "newClient",
+      birthdate: "1998-03-29 13:34:00.000 +0700",
+      gender: "Male",
+      address: "Bekasi",
+      photoProfile: defaultImage,
+      phoneNumber: "082258852654",
+      UserId: createdUser.id,
+    };
+
+    await Profile.create(newProfile);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 describe("New Client Test on clientRegister Field", () => {
@@ -536,7 +552,7 @@ describe("New Client Test on clientLogin Field", () => {
         done(err);
       });
   });
-  
+
   // TODO 3 Login email is empty
   test("Login email is empty should be return invalid response", (done) => {
     request(app)
@@ -645,15 +661,14 @@ describe("New Client Test on clientLogin Field", () => {
         done(err);
       });
   });
-
-  
 });
 
-describe("New Client Test on clientAccount Field", () => {
-  //TODO 1 CLient Account Found
-  test("CLient Account Found should be return valid response", (done) => {
+describe("New Client Test on clientAccount Authentication Field", () => {
+  //TODO 1 Client Account Authentication Found
+  test("Client Account Authentication Found should be return valid response", (done) => {
     request(app)
-      .post("/account")
+      .get("/account")
+      .set("access_token", tokenMatch1)
       .send({
         email: "newClient1@gmail.com",
         password: "newClient",
@@ -662,7 +677,16 @@ describe("New Client Test on clientAccount Field", () => {
       .then((res) => {
         expect(res.status).toBe(200);
         expect(res.body).toEqual(expect.any(Object));
-        
+        expect(res.body).toHaveProperty("findUser.id", 1);
+        expect(res.body).toHaveProperty(
+          "findUser.email",
+          "newClient1@gmail.com"
+        );
+        expect(res.body).toHaveProperty("findUser.role", "Client");
+        expect(res.body).toHaveProperty(
+          "findUser.Profile.fullName",
+          "newClient"
+        );
         done();
       })
       .catch((err) => {
@@ -670,4 +694,50 @@ describe("New Client Test on clientAccount Field", () => {
         done(err);
       });
   });
-})
+
+  //TODO 2 Client Account Authentication Invalid Access Token
+  test("Client Account Authentication Invalid Access Token should be return invalid response", (done) => {
+    request(app)
+      .get("/account")
+      .set("access_token", invalidToken)
+      .send({
+        email: "newClient1@gmail.com",
+        password: "newClient",
+        role: "Client",
+      })
+      .then((res) => {
+        console.log(res.body, `resbodyyyyy`);
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Invalid token")
+        done();
+      })
+      .catch((err) => {
+        console.log(err);
+        done(err);
+      });
+  });
+
+  //TODO 3 Client Account Authentication payload undefined
+  test("Client Account Authentication payload undefined should be return invalid response", (done) => {
+    request(app)
+      .get("/account")
+      .set("access_token", invalidToken)
+      .send({
+        email: "newClient1@gmail.com",
+        password: "newClient",
+        role: "Client",
+      })
+      .then((res) => {
+        console.log(res.body, `resbodyyyyy`);
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Invalid token")
+        done();
+      })
+      .catch((err) => {
+        console.log(err);
+        done(err);
+      });
+  });
+});
