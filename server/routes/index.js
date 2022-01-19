@@ -3,8 +3,10 @@ const route = require(`express`).Router();
 const { clientLogin, clientRegister, clientAccount, clientUpdateAccount } = require('../controllers/clientController')
 const { cmsRegister, cmsLogin } = require('../controllers/cmsController');
 const { addProduct, showProduct, showProductById, updateProduct, deleteProduct, showDetail, showDetailById, addDetail, updateDetail, deleteDetail } = require('../controllers/productController');
-const { requestSnapToken } = require('../apis/midtransController')
+const { TransactionController } = require(`../controllers/transactionController`)
 
+
+const { requestSnapToken } = require('../apis/midtransController')
 const { authentication, authorization, authorizationCMS } = require("../middlewere/auth");
 const errorsLog  = require("../middlewere/errorHandler");
 
@@ -34,9 +36,15 @@ route.put('/account',[authentication, authorization], clientUpdateAccount);
 
 
 
+route.post('/products/chat',[authentication, authorization], TransactionController.ticketConsultation);
 
 
-route.post('/cart/payment',[ authentication, authorization], requestSnapToken);
+
+
+
+route.get('/account/cart',[authentication, authorization], TransactionController.clientCart);
+route.get('/account/detail-checkout',[authentication, authorization], TransactionController.clientDetailCheckout);
+route.post('/account/payment',[ authentication, authorization, TransactionController.checkoutMid], requestSnapToken);
 
 
 

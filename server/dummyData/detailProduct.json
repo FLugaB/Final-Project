@@ -1,6 +1,15 @@
 [
   {
     "ProductId": 1,
+    "name": "Ticket Consultation",
+    "price": 240000,
+    "category": "Ticket",
+    "stock": 0,
+    "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+    "description": "Ticket Counsultation via Chat"
+  },
+  {
+    "ProductId": 3,
     "name": "VASELINE Lip Theraphy Jar",
     "price": 31000,
     "category": "Lip care",
@@ -9,7 +18,7 @@
     "description": "Vaseline Lip Therapy dari USA dengan kandungan Petroleum Jelly yang memberikan kelembaban pada bibir. Gunakan setiap hari untuk mengurangi bibir kering dan pecah-pecah serta menjaga kesehatan bibir. Simpan ditempat sejuk dan hindari dari paparan matahari langsung.Jika terjadi iritasi pada bibir harap hentikan penggunaan produk Oleskan lip care secara merata di bibir.How to Use : Gunakan sebelum memakai lipstick, atau kapanpun ketika bibir terasa kering.Ingredients : Petrolatum; Butyrospermum Parkii (Shea) Butter; Tocopheryl Acetate"
   },
   {
-    "ProductId": 2,
+    "ProductId": 4,
     "name": "Senka - Perfect Whip",
     "price": 29000,
     "category": "Facewash",
@@ -18,7 +27,7 @@
     "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik untuk menciptakan busa yang lembut, tebal dan melimpah yang mampu membersihkan make-up, kotoran dan minyak berlebih dengan halus."
   },
   {
-    "ProductId": 3,
+    "ProductId": 5,
     "name": "NEUTROGENA - Hydro Boost Water Gel",
     "price": 179000,
     "category": "Mouisturizer",

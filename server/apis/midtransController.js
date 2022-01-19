@@ -13,11 +13,13 @@ const requestSnapToken = async (req, res, next) => {
             Accept: "application/json",
             Authorization : `Basic ${AUTH_STRING}`,
         }
+
+        console.log(req.user.checkout.order_id, req.user.checkout.ammount)
         
         const parameter = {
             "transaction_details": {
-              "order_id": "FF-02", // OrderId Must Unique
-              "gross_amount": 1000000 // Total Ammount
+              "order_id": req.user.checkout.order_id, // OrderId Must Unique
+              "gross_amount": req.user.checkout.ammount // Total Ammount
             }
           }
 
@@ -36,7 +38,7 @@ const requestSnapToken = async (req, res, next) => {
         })
         
     } catch (error) {
-        console.log(error)
+        next(error)
     }
 }
 
