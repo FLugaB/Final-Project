@@ -3,14 +3,16 @@ const {Product, DetailProduct} = require("../models")
 module.exports = class Controller {
 
   static addProduct =  async(req, res, next) =>{
+    const t = await sequelize.transaction()
     try {
       const {title, type} = req.body
       const input = {title, type}
-      const result = await Product.create(input)
+      const result = await Product.create(input,  {transaction:t})
       res.status(201).json(result)
+      await t.commit()
     } catch (err) {
-      console.log(err);
       next (err)
+      await t.rollBack()
     }
   }
 
@@ -40,6 +42,7 @@ module.exports = class Controller {
   }
 
   static updateProduct = async(req,res,next) => {
+    const t = await sequelize.transaction()
     try {
       const {id} = req.params
       const {title, type} = req.body
@@ -48,9 +51,11 @@ module.exports = class Controller {
       if(!find) {
         throw {name: "Product_not_found"}
       }
-      const result = await Product.update(input, {where: {id}, returning:true})
+      const result = await Product.update(input, {where: {id}, returning:true, transaction:t})
+      await t.commit()
       res.status(200).json(result)      
     } catch (err) {
+      await t.rollBack()
       next(err)
     }
   }
@@ -70,45 +75,41 @@ module.exports = class Controller {
   }
 
   static addDetail =  async(req, res, next) =>{
+    const t = await sequelize.transaction()
     try {
-      console.log("masuk>>>>>>>", req.body);
       const {ProductId, name, price, stock, category, imageUrl, description} = req.body
       const input = {ProductId, name, price, stock, category, imageUrl, description}
-      const result = await DetailProduct.create(input)
+      const result = await DetailProduct.create(input, {transaction:t})
+      console.log(result,">>>>ini result");
       res.status(201).json(result)
+      await t.commit()
+
     } catch (err) {
-      console.log(err);
       next (err)
+      await t.rollBack()
+
     }
   }
 
-  static showDetail = async(req,res, next) => {
-    try {
-      const result = await DetailProduct.findAll()
-      if(result.length === 0) {
-        res.status(200).json({msg: "There is no product"})
-      }
-      res.status(200).json(result)
-    } catch (err) {
-      console.log(err);
-      next(err)
-    } 
-  }
 
   static showDetailById = async(req,res,next) =>{
     try {
       const {id} = req.params
-      const result = await DetailProduct.findByPk(id) 
+      const ProductId = id
+      const result = await DetailProduct.findOne({where: {ProductId}})
+      console.log(result);
       if (!result) {
         throw {name: "Product_not_found"}
       } 
       res.status(200).json(result)
     } catch (err) {
+      console.log(err);
       next(err)
     }
   }
 
   static updateDetail = async(req,res,next) => {
+    const t = await sequelize.transaction()
     try {
       const {id} = req.params
       const {ProductId, name, price, stock, category, imageUrl, description} = req.body
@@ -117,11 +118,14 @@ module.exports = class Controller {
       if(!find) {
         throw {name: "Product_not_found"}
       }
-      const result = await DetailProduct.update(input, {where: {id}, returning:true})
-      res.status(200).json(result)      
+      const result = await DetailProduct.update(input, {where: {id}, returning:true, transaction:t})
+      res.status(200).json(result)   
+      await t.commit()
+
     } catch (err) {
-      console.log(err);
       next(err)
+      await t.rollBack()
+
     }
   }
 

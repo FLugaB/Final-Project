@@ -18,7 +18,6 @@ route.post('/cms/products', [authentication, authorization, authorizationCMS], a
 route.put('/cms/products/:id', [authentication, authorization, authorizationCMS], updateProduct)
 route.delete('/cms/products/:id', [authentication, authorization, authorizationCMS], deleteProduct)
 
-route.get('/cms/details', [authentication, authorization, authorizationCMS], showDetail)
 route.get('/cms/details/:id', [authentication, authorization, authorizationCMS], showDetailById)
 route.post('/cms/details', [authentication, authorization, authorizationCMS], addDetail)
 route.put('/cms/details/:id', [authentication, authorization, authorizationCMS], updateDetail)

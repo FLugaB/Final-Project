@@ -8,7 +8,31 @@
     "type": "Ticket Booking"
   },
   {
-    "title": "Skincare", 
-    "type": "Product Skincare"
+    "title": "LipCare", 
+    "type": "Lip Mouisturizer"
+  },
+  {
+    "title": "Cleanser", 
+    "type": "Face Wash"
+  },
+  {
+    "title": "Mouisturizer", 
+    "type": "Face Cream"
+  },
+  {
+    "title": "Shampoo", 
+    "type": "Hair Care"
+  },
+  {
+    "title": "Hair Color", 
+    "type": "Hair Care"
+  },
+  {
+    "title": "Face Peeling", 
+    "type": "Peeling"
+  },
+  {
+    "title": "Sunscreen", 
+    "type": "Sun Care"
   }
 ]
