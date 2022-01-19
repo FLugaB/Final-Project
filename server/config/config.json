@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "postgres",
-    "password": "postgres",
+    "password": "felix13",
     "database": "ffdb",
     "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": "postgres",
+    "password": "felix13",
     "database": "ffdb_db_test",
     "host": "127.0.0.1",
     "dialect": "postgres",

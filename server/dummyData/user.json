@@ -2,55 +2,46 @@
     {
         "email": "admin1@mail.com",
         "password": "admin",
-        "sip": "",
         "role": "Admin"
     },
     {
         "email": "admin2@mail.com",
         "password": "admin",
-        "sip": "",
         "role": "Admin"
     },
     {
         "email": "admin3@mail.com",
         "password": "admin",
-        "sip": "",
         "role": "Admin"
     },
     {
         "email": "doctor1@mail.com",
         "password": "doctor",
-        "sip": "123/doctor/2025",
         "role": "Doctor"
     },
     {
         "email": "doctor2@mail.com",
         "password": "doctor",
-        "sip": "123/doctor/2025",
         "role": "Doctor"
     },
     {
         "email": "doctor3@mail.com",
         "password": "doctor",
-        "sip": "123/doctor/2025",
         "role": "Doctor"
     },
     {
         "email": "customer1@mail.com",
         "password": "customer",
-        "sip": "",
         "role": "Customer"
     },
     {
         "email": "customer2@mail.com",
         "password": "customer",
-        "sip": "",
         "role": "Customer"
     },
     {
         "email": "customer3@mail.com",
         "password": "customer",
-        "sip": "",
         "role": "Customer"
     }
 ]
