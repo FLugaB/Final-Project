@@ -10,8 +10,6 @@ const authentication = async (req, res, next) => {
 
         const payload = verifyToken(access_token)
 
-        console.log(payload, `=========`)
-
         if(!payload || payload.length < 1) throw { name: "INVALID_TOKEN" }
 
         const findUser = await User.findByPk(payload.id)
