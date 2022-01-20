@@ -9,6 +9,7 @@ const { TransactionController } = require(`../controllers/transactionController`
 const { requestSnapToken } = require('../apis/midtransController')
 const { authentication, authorization, authorizationCMS } = require("../middlewere/auth");
 const errorsLog  = require("../middlewere/errorHandler");
+const { addClientCart, deleteClientCart } = require('../controllers/clientCart');
 
 //===== ADMIN
 route.post('/cms/login', cmsLogin);
@@ -38,7 +39,8 @@ route.put('/account',[authentication, authorization], clientUpdateAccount);
 route.post('/products/chat',[authentication, authorization], TransactionController.ticketConsultation);
 
 
-
+route.post('/account/client-cart/:id', [authentication,authorization], addClientCart)
+route.delete('/account/client-cart/:id', [authentication, authorization], deleteClientCart )
 
 
 route.get('/account/cart',[authentication, authorization], TransactionController.clientCart);

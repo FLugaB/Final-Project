@@ -9,6 +9,15 @@
     "description": "Ticket Counsultation via Chat"
   },
   {
+    "ProductId": 2,
+    "name": "Ticket Booking",
+    "price": 300000,
+    "category": "Ticket",
+    "stock": 0,
+    "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+    "description": "Ticket Counsultation via Chat"
+  },
+  {
     "ProductId": 3,
     "name": "VASELINE Lip Theraphy Jar",
     "price": 31000,

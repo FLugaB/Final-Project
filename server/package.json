@@ -1,7 +1,6 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "start": "nodemon bin/www",
@@ -30,5 +29,9 @@
     "nodemon": "^2.0.15",
     "sequelize-cli": "^6.4.1",
     "supertest": "^6.2.1"
-  }
+  },
+  "bin": {
+    "server": "www.js"
+  },
+  "description": ""
 }
