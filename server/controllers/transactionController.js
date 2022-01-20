@@ -146,7 +146,7 @@ class TransactionController {
              }
 
              findUserOrder.forEach(element => {
-                orderDetail.totalPrice += element.Product.DetailProduct.price
+                orderDetail.totalPrice += element.Product.DetailProducts[0].price
                 orderDetail.product.push(element.Product)
             });
 
