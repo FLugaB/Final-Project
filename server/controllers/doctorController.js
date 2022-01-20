@@ -2,7 +2,8 @@
 // jadwal dokter
 // data dockter: spesialisasi, dll
 
-const {Product, Voucher, Schedule} = require("../models")
+const { Product, Voucher, Schedule } = require("../models")
+const url = require('url')
 
 class DoctorController {
   static async getSchedules(req, res, next) {
