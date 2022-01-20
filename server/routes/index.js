@@ -68,6 +68,11 @@ route.get('/account/status-transactions', [authentication, authorization], Trans
 route.get('/doctors/:DoctorId', clientDoctorDetail);
 route.patch('/account/status-transactions/:orderId', [authentication, authorization], updateStatusTransactions)
 
+// route khusus untuk char, pakai server socket
+route.use('/doctors/chat', (req, res, next) => {
+  res.send('di route chat konsultasi')
+})
+
 
 
 
