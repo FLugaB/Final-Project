@@ -2,10 +2,6 @@
 
 const errorLog = (err, req, res, next) => {
 
-    console.log(err)
-
-    console.log(err.name)
-
     let code = 500
     let message = "Internal server error"
 
@@ -51,7 +47,10 @@ const errorLog = (err, req, res, next) => {
     } else if ( err.name === `NOT_FOUND`) {
         code = 404
         message = "Not Found"
-    } 
+    } else if ( err.name === 'PLEASE_PAY_FIRST'){
+        code = 400
+        message = "If you just pay, please wait for a momment, else pay the ticket first before u could use it"
+    }
 
     res.status(code).json({message})
 
