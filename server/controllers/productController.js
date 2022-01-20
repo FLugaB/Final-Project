@@ -87,7 +87,7 @@ module.exports = class Controller {
     }
   }
 
-  static addDetail =  async(req, res, next) =>{
+  static addDetail =  async(req, res, next) => {
     const t = await sequelize.transaction()
     try {
       const {ProductId, name, price, stock, category, imageUrl, description} = req.body
