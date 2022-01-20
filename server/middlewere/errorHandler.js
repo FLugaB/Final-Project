@@ -16,12 +16,9 @@ const errorLog = (err, req, res, next) => {
     } else if (err.name === `BAD_REQUEST`) {
         code = 400
         message = err.message
-<<<<<<< HEAD
     } else if (err.name === `JsonWebTokenError`) {
         code = 401
         message = err.errors[0].message
-=======
->>>>>>> 004aa2f7f7878e0d691e3dca69e015a7a83ada3e
     } else if ( err.name === `USER_NOT_FOUND`) {
         code = 401
         message = "Invalid email/password"
@@ -36,12 +33,9 @@ const errorLog = (err, req, res, next) => {
     } else if ( err.name === `Product_not_found`) {
         code = 404
         message = "Product not found"
-<<<<<<< HEAD
     } else if ( err.name === `Order_not_found`){
         code = 401
         message = "Order not found"
-    }
-=======
     } else if ( err.name === `VALIDATE_NAME_FILE`){
         code = 400
         message = "Name of File Cannot be Empty"
@@ -58,7 +52,6 @@ const errorLog = (err, req, res, next) => {
         code = 404
         message = "Not Found"
     } 
->>>>>>> 004aa2f7f7878e0d691e3dca69e015a7a83ada3e
 
     res.status(code).json({message})
 
