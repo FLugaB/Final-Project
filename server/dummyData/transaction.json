@@ -1,0 +1,23 @@
+[
+  {
+    "transactionId": "TRX201909260001",
+    "date": "2019-18-01 07:36:35",
+    "status": "pending",
+    "amount": 499999,
+    "UserId": 7
+  },
+  {
+    "transactionId": "TRX202209260004",
+    "date": "2022-18-01 07:36:35",
+    "status": "expire",
+    "amount": 7999999,
+    "UserId": 8
+  },
+  {
+    "transactionId": "TRX202109260023",
+    "date": "2021-18-01 07:36:35",
+    "status": "settlement",
+    "amount": 2999999,
+    "UserId": 9
+  }
+]

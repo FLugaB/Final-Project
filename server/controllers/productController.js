@@ -3,13 +3,18 @@ const {Product, DetailProduct, sequelize} = require("../models")
 module.exports = class Controller {
 
   static addProduct =  async(req, res, next) =>{
+    const t = await sequelize.transaction()
     try {
       const {title, type} = req.body
       const input = {title, type}
-      const result = await Product.create(input)
+      const result = await Product.create(input, {transaction: t})
       res.status(201).json(result)
+      await t.commit()
+
     } catch (err) {
       next (err)
+      await t.rollback()
+
     }
   }
 
@@ -49,8 +54,10 @@ module.exports = class Controller {
   }
 
   static updateProduct = async(req,res,next) => {
+    const {id} = req.params
+    const t = await sequelize.transaction()
+
     try {
-      const {id} = req.params
       const {title, type} = req.body
       const input = {title, type}
       if (id == 1 || id == 2) {
@@ -64,15 +71,20 @@ module.exports = class Controller {
         throw {name: "Product_not_found"}
       }
       const result = await Product.update(input, {where: {id}, returning:true})
-      res.status(200).json(result)      
+      await t.commit()
+      res.status(200).json(result)     
+
     } catch (err) {
       next(err)
+      await t.rollback()
+
     }
   }
 
   static deleteProduct = async (req,res,next) =>{
     try {
       const {id} = req.params
+    const t = await sequelize.transaction()
       if (id == 1 || id == 2) {
         res.status(200).json({msg: "you can't delete product"})
       }
@@ -80,10 +92,13 @@ module.exports = class Controller {
       if (!find) {
         throw {name: "Product_not_found"}
       }
-      const result = await Product.destroy ({where : {id}})
+      const result = await Product.destroy ({where : {id}, transaction:t})
+      await t.commit()
       res.status(200).json({message: "Success Delete Product"})
     } catch (err) {
       next(err)
+      await t.rollback()
+
     }
   }
 

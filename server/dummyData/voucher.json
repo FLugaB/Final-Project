@@ -1,0 +1,20 @@
+[
+  {
+    "voucherToken": "3eR8zjaaMDwrhlB7jViX_gZwqCTc8bndNkXiCoODQRA",
+    "status": "pending",
+    "transactionId": 1,
+    "UserId": 7
+  },
+  {
+    "voucherToken": "qkdmvkpTvHGb79UiJCwKsvxJK6KSQ0Tv_vEh_cZ--eQ",
+    "status": "expire",
+    "transactionId": 2,
+    "UserId": 8
+  },
+  {
+    "voucherToken": "E3-BKuyUlruFYXlsOnILoQcdntA0YoLRMBoCFC_3lJY",
+    "status": "used",
+    "transactionId": 3,
+    "UserId": 8
+  }
+]
