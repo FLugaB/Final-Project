@@ -3,7 +3,7 @@ import {
   FETCH_DOCTOR_DETAIL,
   SET_LOADING,
   SET_ERROR,
-} from "../actionTypes/index.js";
+} from "../actionType/doctors.js";
 
 export const fetchDoctors = () => {
   return (dispatch, getState) => {
