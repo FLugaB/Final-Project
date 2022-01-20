@@ -50,6 +50,12 @@ const errorLog = (err, req, res, next) => {
     } else if ( err.name === 'PLEASE_PAY_FIRST'){
         code = 400
         message = "If you just pay, please wait for a momment, else pay the ticket first before u could use it"
+    } else if ( err.name === `FAILED_ADD_PRODUCT`) {
+        code = 401
+        message = "Failed Add Product"
+    } else if ( err.name === `FAILED_ADD_DETAIL`) {
+        code = 401
+        message = "Failed Add Detail Product"
     }
 
     res.status(code).json({message})

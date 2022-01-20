@@ -1,15 +1,42 @@
 const {Product, DetailProduct, sequelize} = require("../models")
-
 module.exports = class Controller {
 
   static addProduct =  async(req, res, next) =>{
+    const transaction = await sequelize.transaction()
+      const { title, type, name, price, stock, category, imageUrl, description 
+      } = req.body
+
+      const inputProduct = { title, type }
+        
     try {
-      const {title, type} = req.body
-      const input = {title, type}
-      const result = await Product.create(input)
-      res.status(201).json(result)
+      const addProduct = await Product.create(inputProduct, 
+        { transaction })
+      
+      if(!addProduct) throw { name: 'FAILED_ADD_PRODUCT'}
+
+      const inputDetail = { ProductId: addProduct.id, name, price, stock, category, imageUrl, description }
+      const addDetail = await DetailProduct.create(inputDetail, 
+        { transaction })
+      
+      if(!addDetail) throw { name: 'FAILED_ADD_DETAIL'}
+        
+      await transaction.commit();
+      res.status(201).json({
+        id: addProduct.id,
+        title: addProduct.title,
+        type: addProduct.type,
+        ProductId: addDetail.id,
+        name: addDetail.name,
+        stock: addDetail.stock,
+        price: addDetail.price,
+        description: addDetail.description,
+        category: addDetail.category,
+        imageUrl: addDetail.imageUrl,
+      })
+
     } catch (err) {
       next (err)
+      await transaction.rollback()
     }
   }
 
@@ -73,9 +100,9 @@ module.exports = class Controller {
   static deleteProduct = async (req,res,next) =>{
     try {
       const {id} = req.params
-      if (id == 1 || id == 2) {
-        res.status(200).json({msg: "you can't delete product"})
-      }
+      // if (id == 1 || id == 2) {
+      //   res.status(200).json({msg: "you can't delete product"})
+      // }
       const find = await Product.findByPk(id)
       if (!find) {
         throw {name: "Product_not_found"}

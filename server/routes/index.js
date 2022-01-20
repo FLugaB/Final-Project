@@ -22,7 +22,9 @@ route.post('/cms/register',[authentication, authorization, authorizationCMS], cm
 
 route.get('/cms/products', [authentication, authorization, authorizationCMS], showProduct)
 route.get('/cms/products/:id', [authentication, authorization, authorizationCMS], showProductById)
-route.post('/cms/products', [authentication, authorization, authorizationCMS], addProduct)
+
+route.post('/cms/products', [authentication, authorization, authorizationCMS], MulterStorage, ImageKit_API, addProduct)
+
 route.put('/cms/products/:id', [authentication, authorization, authorizationCMS], updateProduct)
 route.delete('/cms/products/:id', [authentication, authorization, authorizationCMS], deleteProduct)
 
@@ -31,6 +33,7 @@ route.get('/cms/details/:id', [authentication, authorization, authorizationCMS],
 route.post('/cms/details', [authentication, authorization, authorizationCMS], MulterStorage, ImageKit_API, addDetail)
 
 route.put('/cms/details/:id', [authentication, authorization, authorizationCMS], updateDetail)
+
 route.delete('/cms/details/:id', [authentication, authorization, authorizationCMS], deleteDetail)
 
 
