@@ -10,20 +10,21 @@ const errorLog = (err, req, res, next) => {
     let message = "Internal server error"
 
     if ( err.name === `SequelizeUniqueConstraintError` || 
-         err.name === `SequelizeValidationError` ) {
-         code = 400
-         message = err.errors[0].message
+        err.name === `SequelizeValidationError` ) {
+        code = 400
+        message = err.errors[0].message
     } else if (err.name === `BAD_REQUEST`) {
         code = 400
         message = err.message
     } else if (err.name === `JsonWebTokenError`) {
-         code = 401
-         message = err.errors[0].message
+        code = 401
+        message = err.errors[0].message
     } else if ( err.name === `USER_NOT_FOUND`) {
         code = 401
         message = "Invalid email/password"
     } else if ( err.name === `NO_TOKEN` || 
-                err.name === `INVALID_TOKEN ` ){
+                err.name === `INVALID_TOKEN ` ||
+                err.name === `JsonWebTokenError`){
         code = 401
         message = "Invalid token"
     } else if ( err.name === `FORBIDDEN`){
@@ -32,6 +33,9 @@ const errorLog = (err, req, res, next) => {
     } else if ( err.name === `Product_not_found`) {
         code = 404
         message = "Product not found"
+    } else if ( err.name === `Order_not_found`){
+        code = 401
+        message = "Order not found"
     } else if ( err.name === `VALIDATE_NAME_FILE`){
         code = 400
         message = "Name of File Cannot be Empty"

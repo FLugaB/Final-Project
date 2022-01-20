@@ -10,8 +10,6 @@ const authentication = async (req, res, next) => {
 
         const payload = verifyToken(access_token)
 
-        console.log(payload, `=========`)
-
         if(!payload || payload.length < 1) throw { name: "INVALID_TOKEN" }
 
         const findUser = await User.findByPk(payload.id)
@@ -22,10 +20,9 @@ const authentication = async (req, res, next) => {
 
         next();
     } catch (error) {
-        console.log(error, `EEEEERRROOOOORR`)
-      next(error);
+        next(error);
     }
-   
+    
 }
 
 const authorization = async (req, res, next) => {
@@ -49,11 +46,11 @@ const authorization = async (req, res, next) => {
         next();
 
     } catch (error) {
-  
+        
         next(error);
 
     }
-   
+    
 }
 
 const authorizationCMS = async (req, res, next) => {
@@ -64,11 +61,11 @@ const authorizationCMS = async (req, res, next) => {
         next();
 
     } catch (error) {
-  
+        
         next(error);
 
     }
-   
+    
 }
 
 module.exports = {
