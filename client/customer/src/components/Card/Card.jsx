@@ -17,7 +17,7 @@ const Card = () => {
     <div>
       <ul className="cards">
         {
-          doctors.map((el) => {
+          doctors.map((el, index) => {
             return (
               <li>
                 <a href="" className="card">
@@ -31,11 +31,12 @@ const Card = () => {
                       <svg className="card__arc" xmlns="http://www.w3.org/2000/svg">
                         <path />
                       </svg>
-                      <img
-                        className="card__thumb"
-                        src={el.Profile.photoProfile}
-                        alt=""
-                      />
+                      {/* <div className="card__thumb">
+                        <img
+                          src={el.Profile.photoProfile}
+                          alt=""
+                        />
+                      </div> */}
                       <div className="card__header-text">
                         <h3 className="card__title">{el.Profile.fullName}</h3>
                         <span className="card__status"></span>
