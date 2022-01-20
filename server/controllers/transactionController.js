@@ -1,5 +1,5 @@
 const { Product, DetailProduct, OrderProduct, Transaction } = require("../models")
-const { Op, where } = require("sequelize");
+const { Op } = require("sequelize");
 
 class TransactionController {
 
@@ -40,6 +40,47 @@ class TransactionController {
             const findUserOrder = await OrderProduct.findAll({
                 where: {
                     UserId: req.auth.id
+                },
+                include: [
+                    {
+                        model: Product,
+                        attributes: {
+                            exclude: ['createdAt', `updatedAt`, ]
+                        },
+                        include: [
+                            {
+                                model: DetailProduct,
+                                attributes: {
+                                    exclude: ['createdAt', `updatedAt`, ]
+                                }
+                            }, 
+                        ]
+                    }, 
+                ]
+            })
+
+            if (findUserOrder.length < 1) {
+                res.status(200).json({ msg: `there is no orders yet`})
+            } else {
+                res.status(200).json(findUserOrder);
+            }
+            
+        } catch (error) {
+            console.log(error)
+            next (error)
+        }
+    }
+
+    static clientTickets = async (req, res, next) => {
+
+        try {
+
+            const findUserOrder = await OrderProduct.findAll({
+                where: {
+                    [Op.and]: [
+                        { UserId: req.auth.id }, 
+                        { status: `completed` }
+                    ], 
                 },
                 include: [
                     {
@@ -183,7 +224,24 @@ class TransactionController {
         }
     }
 
-  }
+    static fetchStatusTransactions = async (req, res, next) => {
+
+        try {
+
+            const findAllTransactions = await Transaction.findAll({
+                where: {
+                    UserId: req.auth.id 
+                }
+            })
+
+            res.status(200).json(findAllTransactions)
+            
+        } catch (error) {
+            next()
+        }
+    }
+
+}
 
 module.exports = {
     TransactionController
