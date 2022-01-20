@@ -38,7 +38,10 @@ class DoctorController {
       }
       const ticket = await Voucher.create(input)
       if (!ticket) throw { name: 'CreateTicketFailed' }
-      res.status(201).json(ticket)
+      res.redirect(url.format({
+        pathname:'/doctors/chat',
+        query: ticket
+      }))
     } catch (error) {
       console.log(error)
       next(error)
