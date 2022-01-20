@@ -1,4 +1,4 @@
-const {Product, DetailProduct} = require("../models")
+const {Product, DetailProduct, sequelize} = require("../models")
 
 module.exports = class Controller {
 
@@ -9,7 +9,6 @@ module.exports = class Controller {
       const result = await Product.create(input)
       res.status(201).json(result)
     } catch (err) {
-      console.log(err);
       next (err)
     }
   }
@@ -21,7 +20,7 @@ module.exports = class Controller {
           {
               model: DetailProduct,
               attributes: {
-                  exclude: ['createdAt', `updatedAt`, ]
+                  exclude: ['createdAt', `updatedAt`]
               }
           }, 
       ]
@@ -54,7 +53,13 @@ module.exports = class Controller {
       const {id} = req.params
       const {title, type} = req.body
       const input = {title, type}
-      const find = await Product.findByPk(id)
+      if (id == 1 || id == 2) {
+        
+        res.status(200).json({msg: "you can't update product"})
+      }
+      const find = await Product.findOne({
+        where: {id},
+      })
       if(!find) {
         throw {name: "Product_not_found"}
       }
@@ -68,6 +73,9 @@ module.exports = class Controller {
   static deleteProduct = async (req,res,next) =>{
     try {
       const {id} = req.params
+      if (id == 1 || id == 2) {
+        res.status(200).json({msg: "you can't delete product"})
+      }
       const find = await Product.findByPk(id)
       if (!find) {
         throw {name: "Product_not_found"}
@@ -79,72 +87,88 @@ module.exports = class Controller {
     }
   }
 
-  static addDetail =  async(req, res, next) =>{
+  static addDetail =  async(req, res, next) => {
+    const t = await sequelize.transaction()
     try {
       const {ProductId, name, price, stock, category, imageUrl, description} = req.body
       const input = {ProductId, name, price, stock, category, imageUrl, description}
-      const result = await DetailProduct.create(input)
+      const result = await DetailProduct.create(input, {transaction:t})
       res.status(201).json(result)
+      await t.commit()
+
     } catch (err) {
-      console.log(err);
       next (err)
+      await t.rollBack()
     }
   }
 
-  static showDetail = async(req,res, next) => {
-    try {
-      const result = await DetailProduct.findAll()
-      if(result.length === 0) {
-        res.status(200).json({msg: "There is no product"})
-      }
-      res.status(200).json(result)
-    } catch (err) {
-      console.log(err);
-      next(err)
-    } 
-  }
 
   static showDetailById = async(req,res,next) =>{
     try {
       const {id} = req.params
-      const result = await DetailProduct.findByPk(id) 
+      const ProductId = id
+      const result = await DetailProduct.findOne({where: {ProductId}})
+      console.log(result);
       if (!result) {
         throw {name: "Product_not_found"}
       } 
       res.status(200).json(result)
     } catch (err) {
-      next(err)
-    }
-  }
-
-  static updateDetail = async(req,res,next) => {
-    try {
-      const {id} = req.params
-      const {ProductId, name, price, stock, category, imageUrl, description} = req.body
-      const input = {ProductId, name, price, stock, category,imageUrl, description}
-      const find = await DetailProduct.findByPk(id)
-      if(!find) {
-        throw {name: "Product_not_found"}
-      }
-      const result = await DetailProduct.update(input, {where: {id}, returning:true})
-      res.status(200).json(result)      
-    } catch (err) {
       console.log(err);
       next(err)
     }
   }
 
-  static deleteDetail = async (req,res,next) =>{
+  static updateDetail = async(req,res,next) => {
+    const {ProductId, name, price, stock, category, imageUrl, description} = req.body
+    const t = await sequelize.transaction()
     try {
       const {id} = req.params
-      const find = await DetailProduct.findByPk(id)
-      if (!find) {
-        throw {name: "Product_not_found"}
+      if (id == 1 || id == 2) {
+        const input = {price}
+        const find = await DetailProduct.findByPk(id)
+        if(!find) {
+          throw {name: "Product_not_found"}
+        }
+        const result = await DetailProduct.update(input, {where: {id}, returning:true, transaction:t})
+        res.status(200).json(result)   
+        await t.commit()
+      } else {
+        const input = {ProductId, name, price, stock, category,imageUrl, description}
+        const find = await DetailProduct.findByPk(id)
+        if(!find) {
+          throw {name: "Product_not_found"}
+        }
+        const result = await DetailProduct.update(input, {where: {id}, returning:true, transaction:t})
+        res.status(200).json(result)   
+        await t.commit()
       }
-      const result = await DetailProduct.destroy ({where : {id}})
-      res.status(200).json({message: "Success Delete Product"})
     } catch (err) {
       next(err)
+      await t.rollBack()
+    }
+  }
+
+  static deleteDetail = async (req,res,next) =>{
+    const {id} = req.params
+    const t = await sequelize.transaction()
+    try {
+      if (id == 1 || id == 2) {
+        res.status(200).json({msg: "you can't delete product"})
+      } else {
+        const find = await DetailProduct.findByPk(id)
+        if (!find) {
+          throw {name: "Product_not_found"}
+        }
+        const result = await DetailProduct.destroy ({where : {id}, transaction:t})
+        res.status(200).json({message: "Success Delete Product"})
+        await t.commit()
+
+      }
+    } catch (err) {
+      next(err)
+      await t.rollback()
+
     }
   }
 }

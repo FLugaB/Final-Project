@@ -14,6 +14,7 @@ const { DoctorController } = require('../controllers/doctorController')
 const { requestSnapToken, updateStatusTransactions } = require('../apis/midtransController')
 const { authentication, authorization, authorizationCMS } = require("../middlewere/auth");
 const errorsLog  = require("../middlewere/errorHandler");
+const { addClientCart, deleteClientCart } = require('../controllers/clientCart');
 
 //===== ADMIN
 route.post('/cms/login', cmsLogin);
@@ -25,7 +26,6 @@ route.post('/cms/products', [authentication, authorization, authorizationCMS], a
 route.put('/cms/products/:id', [authentication, authorization, authorizationCMS], updateProduct)
 route.delete('/cms/products/:id', [authentication, authorization, authorizationCMS], deleteProduct)
 
-route.get('/cms/details', [authentication, authorization, authorizationCMS], showDetail)
 route.get('/cms/details/:id', [authentication, authorization, authorizationCMS], showDetailById)
 
 route.post('/cms/details', [authentication, authorization, authorizationCMS], MulterStorage, ImageKit_API, addDetail)
@@ -48,7 +48,8 @@ route.put('/account',[authentication, authorization], clientUpdateAccount);
 
 route.post('/products/chat',[authentication, authorization], TransactionController.ticketConsultation);
 
-
+route.post('/account/client-cart/:id', [authentication,authorization], addClientCart)
+route.delete('/account/client-cart/:id', [authentication, authorization], deleteClientCart )
 
 
 route.get('/account/tickets',[authentication, authorization], TransactionController.clientTickets);
@@ -63,6 +64,11 @@ route.get('/account/status-transactions', [authentication, authorization], Trans
 
 route.get('/doctors/:DoctorId', clientDoctorDetail);
 route.patch('/account/status-transactions/:orderId', [authentication, authorization], updateStatusTransactions)
+
+// route khusus untuk char, pakai server socket
+router.use('/doctors/chat', (req, res, next) => {
+  res.send('di route chat konsultasi')
+})
 
 
 

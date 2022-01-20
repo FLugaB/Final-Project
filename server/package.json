@@ -1,7 +1,6 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "start": "nodemon bin/www",
@@ -10,7 +9,7 @@
     "test": "clear && jest --runInBand --watchAll --detectOpenHandles --forceExit",
     "dev": "nodemon app.js",
     "dev:up": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "dev:down": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate:undo:all"
+    "dev:down": "npx sequelize-cli db:migrate:undo:all"
   },
   "keywords": [],
   "author": "",
@@ -33,5 +32,9 @@
     "nodemon": "^2.0.15",
     "sequelize-cli": "^6.4.1",
     "supertest": "^6.2.1"
-  }
+  },
+  "bin": {
+    "server": "www.js"
+  },
+  "description": ""
 }
