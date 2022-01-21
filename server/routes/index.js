@@ -8,7 +8,7 @@ const { TransactionController } = require(`../controllers/transactionController`
 const ImageKit_API = require('../middlewere/imageKit')
 const MulterStorage = require('../middlewere/multer')
 
-const { DoctorController } = require('../controllers/doctorController')
+const DoctorController = require('../controllers/doctorController')
 
 
 const { requestSnapToken, updateStatusTransactions } = require('../apis/midtransController')
@@ -69,6 +69,9 @@ route.patch('/account/status-transactions/:orderId', [authentication, authorizat
 route.use('/doctors/chat', (req, res, next) => {
   res.send('di route chat konsultasi')
 })
+
+// route ke DoctorController
+route.use('/schedules', DoctorController.getSchedules)
 
 
 

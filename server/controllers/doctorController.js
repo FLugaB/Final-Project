@@ -2,7 +2,7 @@
 // jadwal dokter
 // data dockter: spesialisasi, dll
 
-const { Product, Voucher, Schedule } = require("../models")
+const { User, Product, Voucher, Schedule } = require("../models")
 const url = require('url')
 
 class DoctorController {
@@ -18,10 +18,10 @@ class DoctorController {
             attributes: {
               exclude: ['password']
             }
-          },
-          {
-            model: Tag
           }
+          // {
+          //   model: Tag
+          // }
         ]
       })
       res.status(200).json(schedules)
@@ -63,6 +63,4 @@ class DoctorController {
   }
 }
 
-module.exports = {
-  DoctorController
-}
+module.exports = DoctorController

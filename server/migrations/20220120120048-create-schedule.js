@@ -23,6 +23,9 @@ module.exports = {
       UserId: {
         type: Sequelize.INTEGER
       },
+      ScheduleTagId: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

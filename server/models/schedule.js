@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     hour: DataTypes.STRING,
     price: DataTypes.INTEGER,
     hospital: DataTypes.STRING,
-    UserId: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER,
+    ScheduleTagId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Schedule',
