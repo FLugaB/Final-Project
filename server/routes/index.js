@@ -1,94 +1,35 @@
 const route = require(`express`).Router();
-
-const { clientLogin, clientRegister, clientAccount, clientUpdateAccount, clientDoctorFetch, clientDoctorDetail } = require('../controllers/clientController')
-const { cmsRegister, cmsLogin } = require('../controllers/cmsController');
-const { addProduct, showProduct, showProductById, updateProduct, deleteProduct, showDetail, showDetailById, addDetail, updateDetail, deleteDetail } = require('../controllers/productController');
-const { TransactionController } = require(`../controllers/transactionController`)
-
-const ImageKit_API = require('../middlewere/imageKit')
-const ImageKit_Profile = require('../middlewere/imageKitProfile')
-const MulterStorage = require('../middlewere/multer')
-const MulterStorageProfile = require('../middlewere/multerProfile')
-
-const DoctorController = require('../controllers/doctorController')
+const clientRoutes = require('./clientRoutes')
+const productRoutes = require('./productRoutes')
+const administrationRoutes = require('./administrationRoutes')
+const transactionRoutes = require('./transactionRoutes')
+const chatProductRoutes = require('./chatProductRoutes')
+const skincareProductRoutes = require('./skincareProductRoutes')
 
 
-const { requestSnapToken, updateStatusTransactions } = require('../apis/midtransController')
-const { authentication, authorization, authorizationCMS } = require("../middlewere/auth");
 const errorsLog  = require("../middlewere/errorHandler");
-const { addClientCart, deleteClientCart } = require('../controllers/clientCart');
-const videoDaily = require('../controllers/videoDaily.js');
 
-//===== ADMIN
-route.post('/cms/login', cmsLogin);
-route.post('/cms/register',[authentication, authorization, authorizationCMS], cmsRegister);
+// ADMINISTRATION ROUTE
+route.use('/', administrationRoutes)
 
-route.get('/cms/products', [authentication, authorization, authorizationCMS], showProduct)
-route.get('/cms/products/:id', [authentication, authorization, authorizationCMS], showProductById)
-route.post('/cms/products', [authentication, authorization, authorizationCMS], addProduct)
-route.put('/cms/products/:id', [authentication, authorization, authorizationCMS], updateProduct)
-route.delete('/cms/products/:id', [authentication, authorization, authorizationCMS], deleteProduct)
+// CLIENT ROUTE
+route.use('/', clientRoutes)
 
-route.get('/cms/details/:id', [authentication, authorization, authorizationCMS], showDetailById)
+// TRANSACTION 
+route.use('/', transactionRoutes)
 
-route.post('/cms/details', [authentication, authorization, authorizationCMS], MulterStorage, ImageKit_API, addDetail)
+// PRODUCT ROUTE
+route.use('/', productRoutes)
 
-route.put('/cms/details/:id', [authentication, authorization, authorizationCMS], updateDetail)
-route.delete('/cms/details/:id', [authentication, authorization, authorizationCMS], deleteDetail)
+// CHAT PRODUCT 
+route.use('/', chatProductRoutes)
 
+// SKINCARE PRODUCT 
+route.use('/', skincareProductRoutes)
 
-//===== CUSTOMER
-route.post('/register',  MulterStorageProfile , ImageKit_Profile, clientRegister);
-route.post('/login', clientLogin);
-route.get('/doctors', clientDoctorFetch);
-
-route.post('/notification/handling', TransactionController.notificationTransaction);
-
-
-route.get('/account',[authentication, authorization], clientAccount);
-route.put('/account',[authentication, authorization],  MulterStorageProfile , ImageKit_Profile, clientUpdateAccount);
-
-
-
-
-route.post('/products/chat',[authentication, authorization], TransactionController.ticketConsultation);
-
-route.post('/account/client-cart/:id', [authentication,authorization], addClientCart)
-route.delete('/account/client-cart/:id', [authentication, authorization], deleteClientCart )
-
-
-route.get('/account/tickets',[authentication, authorization], TransactionController.clientTickets);
-route.get('/account/cart',[authentication, authorization], TransactionController.clientCart);
-
-
-route.get('/account/detail-checkout',[authentication, authorization], TransactionController.clientDetailCheckout);
-route.post('/account/payment',[ authentication, authorization, TransactionController.checkoutMid], requestSnapToken);
-route.get('/account/status-transactions', [authentication, authorization], TransactionController.fetchStatusTransactions)
-
-
-
-route.get('/doctors/:DoctorId', clientDoctorDetail);
-route.patch('/account/status-transactions/:orderId', [authentication, authorization], updateStatusTransactions)
-
-// route khusus untuk char, pakai server socket
-route.use('/doctors/chat', (req, res, next) => {
-  res.send('di route chat konsultasi')
-})
-
-// route chat Daily.co
-route.get("/video-call/:id", videoDaily)
 // route ke DoctorController
-route.use('/schedules', DoctorController.getSchedules)
-
-
-
-
-
-
-
+// route.use('/schedules', DoctorController.getSchedules)
 
 
 route.use(errorsLog);
-
 module.exports = route
-
