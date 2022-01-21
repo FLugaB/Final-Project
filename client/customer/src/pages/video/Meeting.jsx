@@ -5,12 +5,12 @@ import { useParams  } from "react-router-dom";
 
 export default function Video({ match }) {
   const { id } = useParams();
-
+  
   useEffect(() => {
     const domain = "https://forsythiateam.daily.co/";
 
     axios
-      .get(`http://localhost:3000/video-call/${id}`)
+      .get(`http://localhost:5000/video-call/${id}`)
       .then((res) => {
         console.log(`tersend`);
         if (res.status === 200) {
