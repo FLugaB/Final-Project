@@ -2,6 +2,7 @@ const { User, Profile } = require(`../models/index`);
 const { sequelize } = require('../models')
 const { compareHash } = require('../helpers/bycrpt')
 const { getToken } = require('../helpers/jwt')
+const { Op } = require("sequelize");
 
 const clientRegister = async (req, res, next) => {
     const transaction = await sequelize.transaction();
@@ -38,7 +39,12 @@ const clientRegister = async (req, res, next) => {
 const clientLogin = async (req, res, next) => {
     try {
         const {  email, password } = req.body
-
+        if (!email || !password) {
+            throw ({
+                name: "BAD_REQUEST",
+                message: "Email/Password is required"
+            })
+        }
         const findUser = await User.findOne({
             where: {
                 email: email
@@ -57,6 +63,7 @@ const clientLogin = async (req, res, next) => {
 
         res.status(200).json({access_token});
     } catch (error) {
+        console.log(error);
         next(error);
     }
 };
@@ -146,9 +153,75 @@ const clientUpdateAccount = async (req, res, next) => {
     }
 };
 
+const clientDoctorFetch = async (req, res, next) => {
+    try {
+
+      const findAllDoctors = await User.findAll({
+        where: {
+          role: 'Doctor'
+        },
+        attributes: {
+            exclude: ['createdAt', `updatedAt`, 'password' ]
+        },
+        include: [
+            {
+                model: Profile,
+                attributes: {
+                    exclude: ['createdAt', `updatedAt`, ]
+                }
+            }, 
+          ]
+      })
+
+      res.status(200).json(findAllDoctors)
+
+    } catch (error) {
+      next(error)
+    }
+}
+
+const clientDoctorDetail = async (req, res, next) => {
+
+    try {
+
+        const { DoctorId } = req.params
+
+        if (!DoctorId) throw { name: "NOT_FOUND"}
+
+        const findDoctorDetail = await User.findOne({
+            where: {
+                [Op.and]: [
+                    { id: DoctorId }, 
+                    { role: `Doctor` }
+                ], 
+            },
+            attributes: {
+                exclude: ['createdAt', `updatedAt`, 'password' ]
+            },
+            include: [
+                {
+                    model: Profile,
+                    attributes: {
+                        exclude: ['createdAt', `updatedAt`, ]
+                    }
+                }, 
+            ]
+        })
+
+        if (!findDoctorDetail) throw { name: "NOT_FOUND"}
+
+        res.status(200).json(findDoctorDetail)
+
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     clientRegister,
     clientLogin,
     clientAccount,
-    clientUpdateAccount
+    clientUpdateAccount,
+    clientDoctorFetch,
+    clientDoctorDetail
 }

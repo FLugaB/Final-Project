@@ -1,0 +1,111 @@
+[
+  {
+    "ProductId": 1,
+    "name": "Ticket Consultation",
+    "price": 240000,
+    "category": "Ticket",
+    "stock": 0,
+    "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+    "description": "Ticket Counsultation via Chat"
+  },
+  {
+    "ProductId": 2,
+    "name": "Ticket Booking",
+    "price": 300000,
+    "category": "Ticket",
+    "stock": 0,
+    "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+    "description": "Ticket Counsultation via Chat"
+  },
+  {
+    "ProductId": 3,
+    "name": "VASELINE Lip Theraphy Jar",
+    "price": 31000,
+    "category": "Lip care",
+    "stock": 4,
+    "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+    "description": "Vaseline Lip Therapy dari USA dengan kandungan Petroleum Jelly yang memberikan kelembaban pada bibir. Gunakan setiap hari untuk mengurangi bibir kering dan pecah-pecah serta menjaga kesehatan bibir. Simpan ditempat sejuk dan hindari dari paparan matahari langsung.Jika terjadi iritasi pada bibir harap hentikan penggunaan produk Oleskan lip care secara merata di bibir.How to Use : Gunakan sebelum memakai lipstick, atau kapanpun ketika bibir terasa kering.Ingredients : Petrolatum; Butyrospermum Parkii (Shea) Butter; Tocopheryl Acetate"
+  },
+  {
+    "ProductId": 4,
+    "name": "Senka - Perfect Whip",
+    "price": 29000,
+    "category": "Facewash",
+    "stock": 5,
+    "imageUrl": "https://images.soco.id/b85bac8d-38ac-4506-b49e-fca873c46609-image-0-1629982004097",
+    "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik untuk menciptakan busa yang lembut, tebal dan melimpah yang mampu membersihkan make-up, kotoran dan minyak berlebih dengan halus."
+  },
+  {
+    "ProductId": 5,
+    "name": "NEUTROGENA - Hydro Boost Water Gel",
+    "price": 179000,
+    "category": "Mouisturizer",
+    "stock": 8,
+    "imageUrl": "https://images.soco.id/54725414970-1595823182690.png",
+    "description": "Pengaruh dan perubahan pada lingkungan dapat mengakibatkan kulitmu menjadi kering dan kurang sehat. Neutrogena Hydro Boost Water Gel secara klinis terbukti membantu menghidrasi kulitmu, menstimulasinya untuk menghasilkan asam hialuronatnya (HA) sendiri dari dalam untuk hidrasi hingga 72 jam*. Teknologi hidrasi ini membantu menjadikan kulitmu tampak lebih cerah, terasa kencang dan kenyal, lembut, sehat dan bercahaya"
+  },
+  {
+    "ProductId": 5,
+    "name": "WHITELAB Brightening Day Cream",
+    "price": 61000,
+    "category": "Mouisturizer",
+    "stock": 5,
+    "imageUrl": "https://images.soco.id/59317919224-1598338448467.png",
+    "description": "dermatologically Tested Untuk semua jenis kulit.Suitable for Acne Prone & Sensitive Skin.Boleh dipakai dari umur 12 tahun keatas.Isi 20 gram"
+  },
+  {
+    "ProductId": 5,
+    "name": "SCARLETT WHITENING Scarlett Whitening Brightly Ever After Day Cream",
+    "price": 82500,
+    "category": "Mouisturizer",
+    "stock": 15,
+    "imageUrl": "https://images.soco.id/f9b1d837-44f0-4cdb-90d6-c70c80762793-image-0-1613628656557",
+    "description": "Didalam Brightly Ever After Day Cream terdapat kandungan Glutathione, Rainbow Algae, Hexapeptide-8, Rosehip Oil, Poreaway, Triceramide dan Aqua Peptide Glow yang dimana bermanfaat sebagai : 1. Membantu meningkatkan kelembapan serta elastisitas kulit wajah. 2. Membantu mencerahkan kulit wajah secara merata. 3. Membantu memudarkan bekas-bekas jerawat pada kulit wajah. 4. Membantu meingkatkan hidrasi kulit, menutrisi kulit juga membuat kulit menjadi lebih glowing. 5. Membantu menghilangkan garis halus juga mengencangkan kulit wajah. 6. Membantu meingkatkan hidrasi kulit, menutrisi kulit juga membuat kulit menjadi lebih glowing."
+  },
+  {
+    "ProductId": 6,
+    "name": "LOVE BEAUTY AND PLANET Blooming Color Murumuru Butter & Rose Shampoo",
+    "price": 50000,
+    "category": "Shampoo",
+    "stock": 22,
+    "imageUrl": "https://images.soco.id/image-1-1595314860808",
+    "description": "Kandungan Amazonian Murumuru Butter dan keharuman Bulgarian Rose menyegarkan, melembapkan, memelihara, dan melindungi rambut agar tampak sehat berkilau termasuk rambut berwarna. Blooming Color Shampoo ini  dikemas dalam  100% botol daur ulang, vegan-certified, cruelty free, bebas dari pewarna, silikon, dan paraben.How to Use : Aplikasikan pada rambut basah, pijat hingga berbusa, bilas hingga bersih Ingredients : Water, Sodium Laureth Sulfate, Cocamidopropyl Betaine, Sodium Chloride, Glycol Distearate, Perfume, Sodium Benzoate, Citric Acid, Polyquaternium-10, Cocamide MEA, PPG-9, Disodium EDTA, Glycerin, Cocos Nucifera (Coconut) Oi.."
+  },
+  {
+    "ProductId": 6,
+    "name": "PANTENE Pantene Conditioner Micellar Cleanse and Hydrate",
+    "price": 85000,
+    "category": "Shampoo",
+    "stock": 29,
+    "imageUrl": "https://images.soco.id/image-1-1595314860808",
+    "description": "BARU! Pantene Micellar Rose Water Terbuat dari Mawar Gallica Perancis yang kaya akan Vitamin B3 & B5* Untuk rambut yang terjaga kelembapannya hingga keesokan hari"
+  },
+  {
+    "ProductId": 7,
+    "name": "GARNIER Twinpack Garnier Color Naturals Ultra Color Cat Rambut",
+    "price": 74000,
+    "category": "Hair Color",
+    "stock": 29,
+    "imageUrl": "https://images.soco.id/image-1-1595314860808",
+    "description": "Paket Ini Terdiri Dari : Garnier Color Naturals Ultra Color Cat Rambut Bisa Pilih Shade"
+  },
+  {
+    "ProductId": 8,
+    "name": "NEOGEN DERMALOGY Bio Peel Gauze Peeling - 30 Pads",
+    "price": 274000,
+    "category": "Face Peeling",
+    "stock": 22,
+    "imageUrl": "https://s3-ap-southeast-1.amazonaws.com/img-sociolla/img/p/1/8/8/4/4/18844-large_default.jpg",
+    "description": "Neogen Bio Peel Peeling Gauze Wine mengandung resveratrol yang didapat dari ekstrak anggur yang difermentasi dan juga AHA untuk membantu meluruhkan sel-sel kulit mati (eksfoliasi). Resveratrol adalah antioksidan kuat yang dapat mencegah tanda-tanda penuaan akibat radikal bebas seperti bintik hitam atau keriput."
+  },
+  {
+    "ProductId": 9,
+    "name": "Biore UV Aqua Rich Watery Essence SPF 50+/PA+++",
+    "price": 115000,
+    "category": "Sunscreen",
+    "stock": 15,
+    "imageUrl": "https://images.soco.id/81bb86d9-f023-480e-80ef-669818d09f4c-image-0-1607662622797",
+    "description": "Biore UV Aqua Rich Watery Essence SPF 50+/PA+++ adalah pelindung wajah dan badan dari efek buruk sinar UVA dan UVB. Dilengkapi kandungan Aqua Micro Capsule yang memberikan sensasi sejuk di kulit, “mengunci” UV dan bertekstur ringan seperti air, sehingga mampu menjaga kelembaban kulit lebih lama. Terdapat juga kandungan Hyaluronic Acid & Citrus Essence untuk menjaga kulit tetap lembab dan segar tanpa rasa lengket karena mudah menyerap ke dalam kulit."
+  }
+
+]

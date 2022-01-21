@@ -1,0 +1,20 @@
+[
+    {
+        "email": "doctor1@mail.com",
+        "password": "doctor",
+        "sip": "123/doctor/2025",
+        "role": "Doctor"
+    },
+    {
+        "email": "doctor2@mail.com",
+        "password": "doctor",
+        "sip": "123/doctor/2025",
+        "role": "Doctor"
+    },
+    {
+        "email": "doctor3@mail.com",
+        "password": "doctor",
+        "sip": "123/doctor/2025",
+        "role": "Doctor"
+    }
+]

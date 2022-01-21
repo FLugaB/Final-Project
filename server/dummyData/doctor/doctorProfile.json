@@ -1,0 +1,29 @@
+[
+    {
+        "fullName": "Doctor Doctor1",
+        "birthdate": "1973-03-16",
+        "gender": "Female",
+        "address": "Jl. Doctor-1",
+        "photoProfile": "https://image.pngaaa.com/396/5315396-middle.png",
+        "phoneNumber": "+62 824 545 3647",
+        "UserId": 4
+    },
+    {
+        "fullName": "Doctor Doctor2",
+        "birthdate": "1981-03-11",
+        "gender": "Female",
+        "address": "Jl. Doctor-2",
+        "photoProfile": "https://image.pngaaa.com/396/5315396-middle.png",
+        "phoneNumber": "+62 879 545 8475",
+        "UserId": 5
+    },
+    {
+        "fullName": "Doctor Doctor3",
+        "birthdate": "1971-12-05",
+        "gender": "Male",
+        "address": "Jl. Doctor-3",
+        "photoProfile": "https://image.pngaaa.com/396/5315396-middle.png",
+        "phoneNumber": "+62 888 545 6843",
+        "UserId": 6
+    }
+]

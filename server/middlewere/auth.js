@@ -20,9 +20,9 @@ const authentication = async (req, res, next) => {
 
         next();
     } catch (error) {
-      next(error);
+        next(error);
     }
-   
+    
 }
 
 const authorization = async (req, res, next) => {
@@ -46,26 +46,26 @@ const authorization = async (req, res, next) => {
         next();
 
     } catch (error) {
-  
+        
         next(error);
 
     }
-   
+    
 }
 
 const authorizationCMS = async (req, res, next) => {
     try {
 
-        if(!req.auth.role != "Admin") throw { name: "FORBIDDEN" }
+        if(req.auth.role != "Admin") throw { name: "FORBIDDEN" }
 
         next();
 
     } catch (error) {
-  
+        
         next(error);
 
     }
-   
+    
 }
 
 module.exports = {

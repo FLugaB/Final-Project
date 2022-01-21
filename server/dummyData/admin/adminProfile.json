@@ -1,0 +1,29 @@
+[
+    {
+        "fullName": "Admin Admin1",
+        "birthdate": "1990-01-17",
+        "gender": "Male",
+        "address": "Jl. Admin-1",
+        "photoProfile": "https://image.pngaaa.com/396/5315396-middle.png",
+        "phoneNumber": "+62 877 545 3647",
+        "UserId": 1
+    },
+    {
+        "fullName": "Admin Admin2",
+        "birthdate": "1985-04-22",
+        "gender": "Female",
+        "address": "Jl. Admin-2",
+        "photoProfile": "https://image.pngaaa.com/396/5315396-middle.png",
+        "phoneNumber": "+62 892 545 8475",
+        "UserId": 2
+    },
+    {
+        "fullName": "Admin Admin3",
+        "birthdate": "1989-11-17",
+        "gender": "Male",
+        "address": "Jl. Admin-3",
+        "photoProfile": "https://image.pngaaa.com/396/5315396-middle.png",
+        "phoneNumber": "+62 882 545 3849",
+        "UserId": 3
+    }
+]
