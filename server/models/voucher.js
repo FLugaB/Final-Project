@@ -16,8 +16,9 @@ module.exports = (sequelize, DataTypes) => {
   Voucher.init({
     voucherToken: DataTypes.STRING,
     status: DataTypes.STRING,
-    userId: DataTypes.STRING,
-    transactionId: DataTypes.STRING
+    DoctorId: DataTypes.INTEGER,
+    ClientId: DataTypes.INTEGER,
+    transactionId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Voucher',

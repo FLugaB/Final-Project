@@ -1,4 +1,4 @@
-const { Product, DetailProduct, OrderProduct, Transaction } = require("../models")
+const { Product, DetailProduct, OrderProduct, Transaction, Voucher } = require("../models")
 const { Op } = require("sequelize");
 
 class TransactionController {
@@ -246,6 +246,65 @@ class TransactionController {
             
         } catch (error) {
             next()
+        }
+    }
+
+    static notificationTransaction = async (req, res, next) => {
+        try {
+
+            const status = req.body
+
+            console.log(status)
+
+            const findTransaction = await Transaction.findOne({
+                where: {
+                    order_id: status.order_id
+                }
+            })
+
+            if (!findTransaction) throw { name: "TRANSACTION_NOT_FOUND" }
+
+            let newStatus;
+
+            if (status.status_code === 404) {
+                newStatus = `failed`
+            }
+
+            if (status.transaction_status === `expire` || 
+                status.transaction_status === `cancel` ||
+                status.transaction_status === `deny`) {
+                newStatus = `failed`
+            } else if ( status.transaction_status === `settlement` ||
+                        status.transaction_status === `capture`) {
+                newStatus = `paid`
+            } 
+
+            if (!newStatus) throw { name: "PLEASE_PAY_FIRST" }
+
+            const findOneOrderId = await Transaction.update(
+                {
+                    status: newStatus
+                },
+                {
+                where: {
+                    order_id: status.order_id
+                },
+                returning: true
+            })
+
+            const newVoucher = await Voucher.create({
+                voucherToken: '',
+                status: 'useable',
+                DoctorId: null,
+                ClientId: findOneOrderId[1][0].UserId,
+                transactionId: findOneOrderId[1][0].id
+            })
+
+            res.status(200).json(findOneOrderId)
+            
+        } catch (error) {
+            console.log(error)
+            next(error)
         }
     }
 
