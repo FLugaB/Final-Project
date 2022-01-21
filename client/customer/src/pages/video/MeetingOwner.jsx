@@ -10,9 +10,9 @@ export default function Video({ match }) {
     const domain = "https://forsythiateam.daily.co/";
 
     axios
-      .get(`http://localhost:3000/video-call/${id}`)
+      .get(`http://localhost:3000/video-call-owner/${id}`)
       .then((res) => {
-        console.log(`tersend CUSTOMERS`);
+        console.log(`tersend OWNER`);
         if (res.status === 200) {
           console.log("status ", res.status);
           const script = document.createElement("script");

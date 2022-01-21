@@ -16,6 +16,7 @@ const { authentication, authorization, authorizationCMS } = require("../middlewe
 const errorsLog  = require("../middlewere/errorHandler");
 const { addClientCart, deleteClientCart } = require('../controllers/clientCart');
 const videoDaily = require('../controllers/videoDaily.js');
+const videoDailyOwner = require('../controllers/videoDailyOwner');
 
 //===== ADMIN
 route.post('/cms/login', cmsLogin);
@@ -75,6 +76,7 @@ route.use('/doctors/chat', (req, res, next) => {
 
 // route chat Daily.co
 route.get("/video-call/:id", videoDaily)
+route.get("/video-call-owner/:id", videoDailyOwner)
 // route ke DoctorController
 route.use('/schedules', DoctorController.getSchedules)
 

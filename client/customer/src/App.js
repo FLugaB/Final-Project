@@ -9,6 +9,7 @@ import { Routes, Route } from "react-router-dom";
 // import { useAuthState } from 'react-firebase-hooks/auth'
 
 import VideoCall from "./pages/video/Meeting.jsx";
+import VideoCallOwner from "./pages/video/MeetingOwner.jsx";
 import JoinMeeting from "./pages/video/Join.jsx";
 import Notif from './components/Notif'
 
@@ -46,6 +47,7 @@ function App() {
           <Route path="/notification/handling" element={<Notif />} />
           <Route path="/start-video" element={<JoinMeeting />} />
           <Route path="/video/:id" element={<VideoCall />} />
+          <Route path="/video-owner/:id" element={<VideoCallOwner />} />
       </Routes>
     </div>
   );
