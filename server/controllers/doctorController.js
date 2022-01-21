@@ -10,8 +10,15 @@ class DoctorController {
     // ngambil schedule berdasarkan hari dan tag (type service)
     // tag kirim dari req.body bisa arr atau obj
     const { day, tag } = req.body
+    console.log(day)
+    const options = {}
+    if (day) {
+      options.day = day
+    }
+    console.log(options)
     try {
       const schedules = await Schedule.findAll({
+        where: options,
         include: [
           {
             model: User,
@@ -23,6 +30,7 @@ class DoctorController {
           //   model: Tag
           // }
         ]
+        
       })
       res.status(200).json(schedules)
     } catch (err) {
