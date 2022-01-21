@@ -311,7 +311,7 @@ iframe body {
   padding: 25px;
   background: rgba(255, 255, 255, 0.13);
   border-radius: 30px;
-  color: #fff;
+  color: var(--bright);
   box-shadow: 0px 0px 16px 9px rgba(0, 0, 0, 0.07);
 }
 
@@ -369,7 +369,6 @@ iframe body {
 
 .form-group__input:focus {
   outline: none;
-  border: 1px solid #fff;
   background: transparent;
 }
 
@@ -480,7 +479,6 @@ input[type=checkbox]:checked + label:after {
 }
 
 ::-webkit-input-placeholder {
-  /* Chrome/Opera/Safari */
   font-weight: 300;
   color: rgba(255, 255, 255, 0.5);
 }
