@@ -3,6 +3,7 @@ import "./App.css";
 import HomePage from "./pages/HomePage.jsx";
 import Navbar from './components/Navbar/Navbar'
 import Dashboard from "./pages/Dashboard.jsx";
+import Navigator from "./routes";
 import { Routes, Route } from "react-router-dom";
 // import { auth } from './firebase.js'
 // import { useAuthState } from 'react-firebase-hooks/auth'
