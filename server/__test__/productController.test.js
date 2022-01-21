@@ -362,10 +362,16 @@ describe("update product", () => {
 
 describe("delete product", () => {
 
-    test('Success Case', done => {
-      request(app)
 
-      .delete(`/cms/products/5`)
+    test('Success Case', done => {
+      Product.bulkCreate (list)
+      .then(newaData => {
+        done()
+      }).catch(err => {
+        done(err)
+      })
+      request(app)
+      .delete(`/cms/products/3`)
       .set("access_token", tokenMatch1)
       .end((err, res) => {
         if (err) return done(err)
@@ -376,6 +382,7 @@ describe("delete product", () => {
     })
 
     test('Unauthorized Access Token Case', done => {
+      
       Product.bulkCreate (list)
       .then(newaData => {
         done()
@@ -406,13 +413,13 @@ describe("delete product", () => {
         if (err) return done(err)
         expect(res.status).toBe(401)
         expect(res.body).toHaveProperty('message', "Invalid token")
-        done()
+        done()     
       })
     })
 
     test('no product Case', (done) => {
       request(app)
-      .delete(`/cms/products/11`)
+      .delete(`/cms/products/30`)
       .set("access_token", tokenMatch1)
       .end((err, res) => {
         if (err) return done(err)
