@@ -2,6 +2,13 @@ import { useEffect } from 'react'
 import "./App.css";
 import HomePage from "./pages/HomePage.jsx";
 import Navbar from './components/Navbar/Navbar'
+import Dashboard from "./pages/Dashboard.jsx";
+import { Routes, Route } from "react-router-dom";
+// import { auth } from './firebase.js'
+// import { useAuthState } from 'react-firebase-hooks/auth'
+
+import VideoCall from "./pages/video/Meeting.jsx";
+import JoinMeeting from "./pages/video/Join.jsx";
 
 function App() {
 
@@ -32,7 +39,11 @@ function App() {
   return (
     <div className="App">
       <Navbar navbarLinks={navbarLinks} />
-      <HomePage />
+      <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/start-video" element={<JoinMeeting />} />
+          <Route path="/video/:id" element={<VideoCall />} />
+      </Routes>
     </div>
   );
 }

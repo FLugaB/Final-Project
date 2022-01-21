@@ -50,3 +50,8 @@
 
 .bg-soft { background-color: var(--soft); }
 .bg-hard { background-color: var(--hard); }
+
+body {
+  height: 99vh;
+  margin: 0;
+}
