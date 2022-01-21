@@ -8,7 +8,21 @@ import Hero from "../components/Hero/Hero";
 import Slider from "../components/Slider/Slider";
 import Card from "../components/Card/Card";
 
+import axios from 'axios'
+
 const HomePage = () => {
+
+  const midtransService = async () => {
+    try {
+      const server = "http://localhost:3000/account/payment"
+      let access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJvaUBtYWlsLmNvbSIsImlhdCI6MTY0MjY4MzU2M30.NFI7h-DdNfXDpr8qme4CLv1BbmbvL3HOEJGKfwUtyR0"
+      const response = await axios.post(server, {}, { headers: { access_token}})
+      
+      window.snap.pay(response.data.snap_token.token)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
 
@@ -38,6 +52,9 @@ const HomePage = () => {
         </div>
         <div className="section-wrapper w-100vw bg-hard">
           <Card />
+        </div>
+        <div className="section-wrapper w-100vw bg-hard">
+          <button onClick={midtransService}>Ceritanya Di cart</button>
         </div>
       </div>
     </div>
