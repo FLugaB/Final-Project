@@ -1,0 +1,130 @@
+[
+  {
+    "day": "selasa",
+    "hour": "09.00 - 11.00",
+    "price": 145000,
+    "hospital": "RS Unggul Karsa Medika",
+    "UserId": 4,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "kamis",
+    "hour": "09.00 - 11.00",
+    "price": 145000,
+    "hospital": "RS Unggul Karsa Medika",
+    "UserId": 4,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "jumat",
+    "hour": "09.00 - 11.00",
+    "price": 145000,
+    "hospital": "RS Unggul Karsa Medika",
+    "UserId": 4,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "senin",
+    "hour": "16.00 - 18.00",
+    "price": 100000,
+    "hospital": "Siloam Hospitals Purwakarta",
+    "UserId": 4,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "selasa",
+    "hour": "16.00 - 18.00",
+    "price": 100000,
+    "hospital": "Siloam Hospitals Purwakarta",
+    "UserId": 4,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "rabu",
+    "hour": "16.00 - 18.00",
+    "price": 100000,
+    "hospital": "Siloam Hospitals Purwakarta",
+    "UserId": 4,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "kamis",
+    "hour": "16.00 - 18.00",
+    "price": 100000,
+    "hospital": "Siloam Hospitals Purwakarta",
+    "UserId": 4,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "jumat",
+    "hour": "16.00 - 18.00",
+    "price": 100000,
+    "hospital": "Siloam Hospitals Purwakarta",
+    "UserId": 4,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "sabtu",
+    "hour": "16.00 - 18.00",
+    "price": 100000,
+    "hospital": "Siloam Hospitals Purwakarta",
+    "UserId": 4,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "senin",
+    "hour": "13.00 - 15.00",
+    "price": 200000,
+    "hospital": "Rumah Sakit Edelweiss",
+    "UserId": 5,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "selasa",
+    "hour": "09.00 - 12.00",
+    "price": 200000,
+    "hospital": "Rumah Sakit Edelweiss",
+    "UserId": 5,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "rabu",
+    "hour": "08.00 - 10.00",
+    "price": 200000,
+    "hospital": "Rumah Sakit Edelweiss",
+    "UserId": 5,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "kamis",
+    "hour": "08.00 - 10.00",
+    "price": 200000,
+    "hospital": "Rumah Sakit Edelweiss",
+    "UserId": 5,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "jumat",
+    "hour": "12.00 - 14.00",
+    "price": 200000,
+    "hospital": "Rumah Sakit Edelweiss",
+    "UserId": 5,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "selasa",
+    "hour": "14.30 - 16.30",
+    "price": 175000,
+    "hospital": "RSU Pindad Bandung",
+    "UserId": 6,
+    "ScheduleTagId": 0
+  },
+  {
+    "day": "kamis",
+    "hour": "09.00 - 11.30",
+    "price": 175000,
+    "hospital": "RSU Pindad Bandung",
+    "UserId": 6,
+    "ScheduleTagId": 0
+  }
+]

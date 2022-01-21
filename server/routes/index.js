@@ -8,13 +8,14 @@ const { TransactionController } = require(`../controllers/transactionController`
 const ImageKit_API = require('../middlewere/imageKit')
 const MulterStorage = require('../middlewere/multer')
 
-const { DoctorController } = require('../controllers/doctorController')
+const DoctorController = require('../controllers/doctorController')
 
 
 const { requestSnapToken, updateStatusTransactions } = require('../apis/midtransController')
 const { authentication, authorization, authorizationCMS } = require("../middlewere/auth");
 const errorsLog  = require("../middlewere/errorHandler");
 const { addClientCart, deleteClientCart } = require('../controllers/clientCart');
+const videoDaily = require('../controllers/videoDaily.js');
 
 //===== ADMIN
 route.post('/cms/login', cmsLogin);
@@ -70,6 +71,14 @@ route.use('/doctors/chat', (req, res, next) => {
   res.send('di route chat konsultasi')
 })
 
+<<<<<<< HEAD
+// route chat Daily.co
+route.get("/video-call/:id", videoDaily)
+=======
+// route ke DoctorController
+route.use('/schedules', DoctorController.getSchedules)
+
+>>>>>>> ecb398d66253c1c4aca08e59752985f4b23829ac
 
 
 
