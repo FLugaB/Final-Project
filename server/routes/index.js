@@ -71,14 +71,11 @@ route.use('/doctors/chat', (req, res, next) => {
   res.send('di route chat konsultasi')
 })
 
-<<<<<<< HEAD
 // route chat Daily.co
 route.get("/video-call/:id", videoDaily)
-=======
 // route ke DoctorController
 route.use('/schedules', DoctorController.getSchedules)
 
->>>>>>> ecb398d66253c1c4aca08e59752985f4b23829ac
 
 
 
