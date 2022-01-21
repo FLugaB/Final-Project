@@ -15,6 +15,7 @@ const { requestSnapToken, updateStatusTransactions } = require('../apis/midtrans
 const { authentication, authorization, authorizationCMS } = require("../middlewere/auth");
 const errorsLog  = require("../middlewere/errorHandler");
 const { addClientCart, deleteClientCart } = require('../controllers/clientCart');
+const videoDaily = require('../controllers/videoDaily.js');
 
 //===== ADMIN
 route.post('/cms/login', cmsLogin);
@@ -70,6 +71,8 @@ route.use('/doctors/chat', (req, res, next) => {
   res.send('di route chat konsultasi')
 })
 
+// route chat Daily.co
+route.get("/video-call/:id", videoDaily)
 
 
 
