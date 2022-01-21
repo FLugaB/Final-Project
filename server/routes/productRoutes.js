@@ -16,7 +16,7 @@ route.put('/cms/products/:id', [authentication, authorization, authorizationCMS]
 route.delete('/cms/products/:id', [authentication, authorization, authorizationCMS], deleteProduct)
 
 // THIS IS LIKE ITEM PRODUCT ITSELF
-route.post('/cms/details', [authentication, authorization, authorizationCMS], MulterStorage, ImageKit_API, addDetail)
+// route.post('/cms/details', [authentication, authorization, authorizationCMS], MulterStorage, ImageKit_API, addDetail)
 route.put('/cms/details/:id', [authentication, authorization, authorizationCMS], MulterStorage, ImageKit_API, updateDetail)
 route.delete('/cms/details/:id', [authentication, authorization, authorizationCMS], deleteDetail)
 

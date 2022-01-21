@@ -7,7 +7,7 @@ module.exports = class Controller {
     try {
       const UserId= req.auth.id
       const { id:ProductId } = req.params
-      const status = ''
+      const status = 'pending'
       const input = {UserId, ProductId, status}
       const result = await OrderProduct.create(input, {transaction:t})
       res.status(201).json(result)

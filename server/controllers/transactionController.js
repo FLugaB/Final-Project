@@ -25,8 +25,6 @@ class TransactionController {
             status: 'pending'
         })
 
-        // const successText = "Checkout first before you could chat with our doctor"
-
         res.status(201).json({
             msg: "Checkout first before you could chat with our doctor",
             result

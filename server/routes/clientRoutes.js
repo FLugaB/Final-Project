@@ -11,5 +11,5 @@ route.get('/doctors', clientDoctorFetch);
 
 route.get('/doctors/:DoctorId', clientDoctorDetail);
 // route khusus untuk chat, pakai server socket
-route.get('/doctors-chat', DoctorController.getSchedules);
+// route.get('/doctors-chat', DoctorController.getSchedules);
 module.exports = route
