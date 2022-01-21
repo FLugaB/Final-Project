@@ -1,6 +1,6 @@
 
 
-const errorLog = (err, req, res, next) => {
+const errorsLog = (err, req, res, next) => {
 
     let code = 500
     let message = "Internal server error"
@@ -53,9 +53,9 @@ const errorLog = (err, req, res, next) => {
     } else if ( err.name === `FAILED_ADD_DETAIL`) {
         code = 401
         message = "Failed Add Detail Product"
-    } else if ( err.response.data.error_messages[0] === 'transaction_details.order_id sudah digunakan') {
+    } else if ( err.name === `NO_ITEM_ON_CART`) {
         code = 404
-        message = "Transaction ID Has Been Used"
+        message = "Not Found Order Product"
     } 
     // else if ( err.name === "CANNOT_DELETE_PRODUCT") {
     //     code = 403
@@ -65,9 +65,13 @@ const errorLog = (err, req, res, next) => {
     //     code = 403
     //     message = "you can't update this product"
     // }
+    // NEXT
+    // else if ( err.response.data.error_messages[0] === 'transaction_details.order_id sudah digunakan') {
+    //     code = 404
+    //     message = "Transaction ID Has Been Used"
+    // } 
 
-    res.status(code).json({message})
-
+   res.status(code).json({message})
 }
 
-module.exports = errorLog
+module.exports = errorsLog

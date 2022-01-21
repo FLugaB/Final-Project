@@ -9,8 +9,7 @@ route.get('/products', [authentication, authorization, authorizationCMS], showPr
 route.get('/products/:id', [authentication, authorization, authorizationCMS], showProductById)
 
 // CAN BE ACCESS ONLY BY ADMIN
-// THIS IS LIKE CONTAINER OF PRODUCT IF CAN ADD DETAIL TO THIS ?
-// THIS IS ONLY LIKE CATEGORY OF PRODUCT IF ENDPOINT ADD DETAIL NOT USED ?
+// THIS IS LIKE CONTAINER OF PRODUCT, U CAN ADD ONLY AS ADD ITEM IN ORDER PRODUCT
 route.post('/cms/products', [authentication, authorization, authorizationCMS], MulterStorage, ImageKit_API, addProduct)
 route.put('/cms/products/:id', [authentication, authorization, authorizationCMS], updateProduct)
 route.delete('/cms/products/:id', [authentication, authorization, authorizationCMS], deleteProduct)
