@@ -12,6 +12,13 @@ let tokenMatch1, tokenMatch2, tokenPayloadInvalid;
 let invalidToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJjaW5keVZAZ21haWwuY29tIiwiaWF0IjoxNjQyNjAzMzQ1fQ.bx0MAXaSmsYCa3Qbac8KQpCftEzKtFgpr8I96I1xZed";
 
+// const doctor = {
+//   id:
+//   email:
+//   password:
+//   role:
+// };
+
 beforeAll(async () => {
   await User.destroy({
     where: {},
@@ -1094,7 +1101,7 @@ describe("Client Update Profile", () => {
         });
     });
   
-    //TODO 16 update phoneNumber is empty
+    //TODO 12 update phoneNumber is empty
     test("update phoneNumber is empty should be return invalid response", (done) => {
       request(app)
         .put("/account")
@@ -1124,4 +1131,73 @@ describe("Client Update Profile", () => {
           done(err);
         });
     });
+})
+
+describe("Fetch doctor list", () => {
+
+  //TODO 1 fetch doctor list empty
+  test("fetch doctor list empty", (done) => {
+    request(app)
+      .get("/doctors")
+      .set("access_token", tokenMatch1)
+      .then((res) => {
+        console.log(res);
+        expect(res.status).toBe(200)
+        expect(res.body).toHaveProperty("message", "There is no Doctor");
+        expect(res.body).toEqual(expect.any(Object))
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });  
+  });
+
+  //TODO 2 fetch doctor list success
+  test("fetch doctor list success", (done) => {
+    request(app)
+      .get("/doctors")
+      .set("access_token", tokenMatch1)
+      .then((res) => {
+        expect(res.status).toBe(200)
+        expect(res.body).toEqual(expect.any(Object))
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });  
+  });
+})
+
+describe("Fetch doctor detail", () => {
+  //TODO 1 fetch doctor detail empty
+  test("fetch doctor detail empty", (done) => {
+    request(app)
+      .get("/doctors/1")
+      .set("access_token", tokenMatch1)
+      .then((res) => {
+        console.log(res);
+        expect(res.status).toBe(404)
+        expect(res.body).toHaveProperty("message", "Not Found");
+        expect(res.body).toEqual(expect.any(Object))
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });  
+  });
+
+  //TODO 2 fetch doctor list success
+  test("fetch doctor list success", (done) => {
+    request(app)
+      .get("/doctors/1")
+      .set("access_token", tokenMatch1)
+      .then((res) => {
+        expect(res.status).toBe(200)
+        expect(res.body).toEqual(expect.any(Object))
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });  
+  });
 })

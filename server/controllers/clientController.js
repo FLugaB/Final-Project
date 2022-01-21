@@ -169,13 +169,15 @@ const clientDoctorFetch = async (req, res, next) => {
                     exclude: ['createdAt', `updatedAt`, ]
                 }
             }, 
-          ]
-      })
-
-      res.status(200).json(findAllDoctors)
-
+        ]
+    })
+    if (!findAllDoctors.length) {
+        console.log("masuk sini");
+        res.status(200).json({message: "There is no Doctor"})
+    }
+    res.status(200).json(findAllDoctors)
     } catch (error) {
-      next(error)
+        next(error)
     }
 }
 
