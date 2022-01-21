@@ -1,9 +1,6 @@
 const axios = require("axios");
 
-
-    
-    const API_KEY =
-      "6a879d7e4dd4d3d5824dded02867527f781a72b79a1ada7bb665e0b570552b4e";
+    const API_KEY = "6a879d7e4dd4d3d5824dded02867527f781a72b79a1ada7bb665e0b570552b4e";
 
     const headers = {
       Accept: "application/json",
@@ -11,33 +8,43 @@ const axios = require("axios");
       Authorization: "Bearer " + API_KEY,
     };
     
-    const getRoom = (room) => axios({
-      method: "GET",
-      url: `https://api.daily.co/v1/rooms/${room}`,
-      headers
-    })
+    const getRoom = (room) => {
+      return axios(`https://api.daily.co/v1/rooms/${room}`, {
+        method: "GET",
+        headers,
+      })
+        .then((response) => {
+          return response.data;
+        })
+        .catch((err) => console.error("error:" + err));
+    };
 
-    
-
-    // .then((res) => res.json())
-    // .then((json) => {
-    //   return json;
-    // })
-    // .catch((err) => console.error("error:" + err));
-
-    const createRoom = (room) => axios({
-      method: "POST",
-      url: `https://api.daily.co/v1/rooms`,
-      headers,
-      body: getRoom
-    })
+    const createRoom = (room) => {
+      return axios("https://api.daily.co/v1/rooms", {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+          name: room,
+          properties: {
+            enable_screenshare: true,
+            enable_chat: true,
+            start_video_off: true,
+            start_audio_off: false,
+            lang: "en",
+          },
+        }),
+      })
+        .then((res) => res.data.json())
+        .then((json) => {
+          return json;
+        })
+        .catch((err) => console.log("error:" + err));
+    };
 
 const videoDaily = async (req, res, next) => {
   try {
+
     const roomId = req.params.id;
-    // const instance = axios.create({
-    //   baseURL: "https://api.daily.co/v1/rooms",
-    // });
 
     const room = await getRoom(roomId);
     if (room.error) {
@@ -47,7 +54,6 @@ const videoDaily = async (req, res, next) => {
       res.status(200).send(room);
     }
 
-    console.log(room, "ROOM");
   } catch (error) {
     console.log(error);
     next(error);

@@ -14,11 +14,14 @@ module.exports = {
       status: {
         type: Sequelize.STRING
       },
-      userId: {
-        type: Sequelize.STRING
+      DoctorId: {
+        type: Sequelize.INTEGER
+      },
+      ClientId: {
+        type: Sequelize.INTEGER
       },
       transactionId: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
