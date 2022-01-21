@@ -10,6 +10,7 @@ import { Routes, Route } from "react-router-dom";
 
 import VideoCall from "./pages/video/Meeting.jsx";
 import JoinMeeting from "./pages/video/Join.jsx";
+import Notif from './components/Notif'
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
       <Navbar navbarLinks={navbarLinks} />
       <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/notification/handling" element={<Notif />} />
           <Route path="/start-video" element={<JoinMeeting />} />
           <Route path="/video/:id" element={<VideoCall />} />
       </Routes>

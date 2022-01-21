@@ -42,6 +42,8 @@ route.post('/register',  MulterStorageProfile , ImageKit_Profile, clientRegister
 route.post('/login', clientLogin);
 route.get('/doctors', clientDoctorFetch);
 
+route.post('/notification/handling', TransactionController.notificationTransaction);
+
 
 route.get('/account',[authentication, authorization], clientAccount);
 route.put('/account',[authentication, authorization],  MulterStorageProfile , ImageKit_Profile, clientUpdateAccount);
