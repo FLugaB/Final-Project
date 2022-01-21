@@ -82,12 +82,12 @@ const clientAccount = async (req, res, next) => {
                 {
                     model: Profile,
                     attributes: {
-                        exclude: ['createdAt', `updatedAt`, ]
+                        exclude: ['createdAt', `updatedAt` ]
                     },
                 }, 
             ]
         });
-
+        console.log(findUser,">>>>>>>>>>ini finduser");
         if (!findUser) throw { name: `FORBIDDEN` }
 
         res.status(200).json({findUser});
@@ -101,7 +101,6 @@ const clientUpdateAccount = async (req, res, next) => {
     const transaction = await sequelize.transaction();
 
     try {
-        
         const findUser = await User.findOne({
             where: {
                 id: req.auth.id
@@ -170,13 +169,15 @@ const clientDoctorFetch = async (req, res, next) => {
                     exclude: ['createdAt', `updatedAt`, ]
                 }
             }, 
-          ]
-      })
-
-      res.status(200).json(findAllDoctors)
-
+        ]
+    })
+    if (!findAllDoctors.length) {
+        console.log("masuk sini");
+        res.status(200).json({message: "There is no Doctor"})
+    }
+    res.status(200).json(findAllDoctors)
     } catch (error) {
-      next(error)
+        next(error)
     }
 }
 

@@ -88,12 +88,20 @@ module.exports = class Controller {
   }
 
   static updateProduct = async(req,res,next) => {
+    const {id} = req.params
+    const t = await sequelize.transaction()
+
     try {
-      const {id} = req.params
       const {title, type} = req.body
       const input = {title, type}
+      if (!title ||title.length === 0) {
+        throw {name: "BAD_REQUEST", message: "Title is required"}
+      } 
+      if (!type ||type.length === 0) {
+        throw {name: "BAD_REQUEST", message: "Type is required"}
+      } 
       // if (id == 1 || id == 2) {
-      //   throw {name: "CANNOT_UPDATE_PRODUCT"}
+      //   res.status(200).json({msg: "you can't update product"})
       // }
       const find = await Product.findOne({
         where: {id},
@@ -102,10 +110,14 @@ module.exports = class Controller {
         throw {name: "Product_not_found"}
       }
       const result = await Product.update(input, {where: {id}, returning:true})
-      res.status(200).json(result)      
+      res.status(200).json(result)     
+      await t.commit()
+
     } catch (err) {
       console.log(err,"<<<<<");
       next(err)
+      await t.rollback()
+
     }
   }
 
@@ -127,6 +139,8 @@ module.exports = class Controller {
     } catch (err) {
       console.log(err,"<<<<<");
       next(err)
+      await t.rollback()
+
     }
   }
 
@@ -155,7 +169,6 @@ module.exports = class Controller {
       } 
       res.status(200).json(result)
     } catch (err) {
-      console.log(err);
       next(err)
     }
   }

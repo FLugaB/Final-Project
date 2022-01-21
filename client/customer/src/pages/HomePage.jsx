@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import bg_flower from "../assets/bg-flower.jpg";
 import bg_flowerClean from "../assets/bg-flower-clean.jpg";
 import bg_flowerForsythia from "../assets/bg-forsythia.png";

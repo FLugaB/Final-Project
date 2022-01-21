@@ -25,4 +25,7 @@ route.get('/account/status-transactions', [authentication, authorization], Trans
 // OR update Status OrderProduct
 route.patch('/account/status-transactions/:orderId', [authentication, authorization], updateStatusTransactions)
 
+// trigger by notification
+route.post('/notification/handling', TransactionController.notificationTransaction);
+
 module.exports = route
