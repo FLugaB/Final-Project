@@ -15,15 +15,20 @@ class TransactionController {
             }
         })
 
-        await OrderProduct.create({
+        if (!findTicket) {
+            throw {name: "Product_not_found"}
+        }
+        
+        const result = await OrderProduct.create({
             UserId: req.auth.id,
             ProductId: findTicket.id,
             status: 'pending'
         })
 
-        const successText = "Checkout first before you could chat with our doctor"
-
-        res.status(201).json({successText});
+        res.status(201).json({
+            msg: "Checkout first before you could chat with our doctor",
+            result
+        });
 
       } catch (err) {
         console.log(err, `==============`)
@@ -118,7 +123,10 @@ class TransactionController {
 
             const findUserOrder = await OrderProduct.findAll({
                 where: {
-                    UserId: req.auth.id
+                    [Op.and]: [
+                        { UserId: req.auth.id }, 
+                        { status: `pending` }
+                    ], 
                 },
                 include: [
                     {
@@ -138,17 +146,20 @@ class TransactionController {
                 ]
             })
 
-            if (findUserOrder.length < 1) throw { name: "NO_ITEM_ON_CART" }
+            console.log("%c 🚵‍♂️: TransactionController -> staticclientDetailCheckout -> findUserOrder ", "font-size:16px;background-color:#01e5d1;color:black;", findUserOrder)
 
+            if (findUserOrder.length < 1) {
+                throw { name: "NO_ITEM_ON_CART" }
+            }
             let orderDetail = { 
                 totalPrice: 0,
                 product: [],
-             }
-
-             findUserOrder.forEach(element => {
-                orderDetail.totalPrice += element.Product.DetailProducts[0].price
-                orderDetail.product.push(element.Product)
-            });
+            }
+             
+            //  findUserOrder.forEach(element => {
+            //     orderDetail.totalPrice += element.Product.DetailProducts[0].price
+            //     orderDetail.product.push(element.Product)
+            // });
 
             const findOrderID = await Transaction.findOne({
                 where: {
@@ -160,6 +171,7 @@ class TransactionController {
             })
 
             if(findOrderID){
+                console.log("FIND TRANSACTION, <<<<<<<<<<<<<<<<<");
                 orderDetail.order_id = findOrderID.order_id
                 const HistoryLog = await Transaction.update({
                     ammount: orderDetail.totalPrice
@@ -170,6 +182,7 @@ class TransactionController {
                 })
                 res.status(200).json({orderDetail})
             } else {
+                console.log("NOT FIND TRANSACTION, <<<<<<<<<<<<<<<<<");
                 const HistoryLog = await Transaction.create({
                     order_id: `${req.auth.id}${(Math.random() + 1).toString(36).substring(7)}`,
                     UserId: req.auth.id,
@@ -183,7 +196,7 @@ class TransactionController {
             }
             
         } catch (error) {
-            console.log(error)
+            console.log(error,"<<<<<<<<<<<< ERROR")
             next(error)
         }
     }

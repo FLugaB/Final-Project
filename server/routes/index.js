@@ -1,41 +1,36 @@
 const route = require(`express`).Router();
-
-const { clientLogin, clientRegister, clientAccount, clientUpdateAccount, clientDoctorFetch, clientDoctorDetail } = require('../controllers/clientController')
-const { cmsRegister, cmsLogin } = require('../controllers/cmsController');
-const { addProduct, showProduct, showProductById, updateProduct, deleteProduct, showDetail, showDetailById, addDetail, updateDetail, deleteDetail } = require('../controllers/productController');
-const { TransactionController } = require(`../controllers/transactionController`)
-
-const ImageKit_API = require('../middlewere/imageKit')
-const MulterStorage = require('../middlewere/multer')
-
-const DoctorController = require('../controllers/doctorController')
+const clientRoutes = require('./clientRoutes')
+const productRoutes = require('./productRoutes')
+const administrationRoutes = require('./administrationRoutes')
+const transactionRoutes = require('./transactionRoutes')
+const chatProductRoutes = require('./chatProductRoutes')
+const skincareProductRoutes = require('./skincareProductRoutes')
 
 
-const { requestSnapToken, updateStatusTransactions } = require('../apis/midtransController')
-const { authentication, authorization, authorizationCMS } = require("../middlewere/auth");
 const errorsLog  = require("../middlewere/errorHandler");
 const { addClientCart, deleteClientCart } = require('../controllers/clientCart');
 const videoDaily = require('../controllers/videoDaily.js');
 const videoDailyOwner = require('../controllers/videoDailyOwner');
 
-//===== ADMIN
-route.post('/cms/login', cmsLogin);
-route.post('/cms/register',[authentication, authorization, authorizationCMS], cmsRegister);
+// ADMINISTRATION ROUTE
+route.use('/', administrationRoutes)
 
-route.get('/cms/products', [authentication, authorization, authorizationCMS], showProduct)
-route.get('/cms/products/:id', [authentication, authorization, authorizationCMS], showProductById)
-route.post('/cms/products', [authentication, authorization, authorizationCMS], addProduct)
-route.put('/cms/products/:id', [authentication, authorization, authorizationCMS], updateProduct)
-route.delete('/cms/products/:id', [authentication, authorization, authorizationCMS], deleteProduct)
+// CLIENT ROUTE
+route.use('/', clientRoutes)
 
-route.get('/cms/details/:id', [authentication, authorization, authorizationCMS], showDetailById)
+// TRANSACTION 
+route.use('/', transactionRoutes)
 
-route.post('/cms/details', [authentication, authorization, authorizationCMS], MulterStorage, ImageKit_API, addDetail)
+// PRODUCT ROUTE
+route.use('/', productRoutes)
 
-route.put('/cms/details/:id', [authentication, authorization, authorizationCMS], updateDetail)
-route.delete('/cms/details/:id', [authentication, authorization, authorizationCMS], deleteDetail)
+// CHAT PRODUCT 
+route.use('/', chatProductRoutes)
 
+// SKINCARE PRODUCT 
+route.use('/', skincareProductRoutes)
 
+<<<<<<< HEAD
 //===== CUSTOMER
 route.post('/register', clientRegister);
 route.post('/login', clientLogin);
@@ -77,18 +72,11 @@ route.use('/doctors/chat', (req, res, next) => {
 // route chat Daily.co
 route.get("/video-call/:id", videoDaily)
 route.get("/video-call-owner/:id", videoDailyOwner)
+=======
+>>>>>>> ac98fd7016b9e1a2e6af0c24c4592ea98a2223de
 // route ke DoctorController
-route.use('/schedules', DoctorController.getSchedules)
-
-
-
-
-
-
-
+// route.use('/schedules', DoctorController.getSchedules)
 
 
 route.use(errorsLog);
-
 module.exports = route
-

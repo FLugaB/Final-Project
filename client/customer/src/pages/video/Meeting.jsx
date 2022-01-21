@@ -20,7 +20,7 @@ export default function Video({ match }) {
             iframeStyle: {
               position: "relative",
               width: "100%",
-              height: "100%",
+              height: "100vh",
               border: "0",
               zIndex: 9999
             },
@@ -36,5 +36,9 @@ export default function Video({ match }) {
       .catch((err) => console.log(err));
   }, [id]);
 
-  return <div></div>;
+  return (
+    <div className="homepage-container">
+
+    </div>
+  );
 }

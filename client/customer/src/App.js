@@ -1,19 +1,28 @@
-import { useEffect } from 'react'
-import "./App.css";
+import { useEffect, useState } from 'react'
+
 import HomePage from "./pages/HomePage.jsx";
 import Navbar from './components/Navbar/Navbar'
-import Dashboard from "./pages/Dashboard.jsx";
-import Navigator from "./routes";
+import Login from './pages/Login'
 import { Routes, Route } from "react-router-dom";
-// import { auth } from './firebase.js'
-// import { useAuthState } from 'react-firebase-hooks/auth'
-
 import VideoCall from "./pages/video/Meeting.jsx";
 import VideoCallOwner from "./pages/video/MeetingOwner.jsx";
 import JoinMeeting from "./pages/video/Join.jsx";
-import Notif from './components/Notif'
+import Notif from './components/Notif' 
+import { pageLoad } from './Hooks/load'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+
 
 function App() {
+
+  const [loader, setLoader] = useState(true)
+
+  useEffect(() => {
+    setTimeout( () => {
+      setLoader(false)
+    }, 5000)
+  }, [])
 
   useEffect(() => {
     const snapSrcUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
@@ -30,24 +39,21 @@ function App() {
     }
   }, []);
 
-  const navbarLinks = [
-    { url: "#", title: "Home" },
-    { url: "#", title: "About" },
-    { url: "#", title: "Contact" },
-    { url: "#", title: "Service" },
-    { url: "#", title: "Products" },
-    { url: "#", title: "Consultation" },
-  ];
+  const mode = 'login';
+
+  if (loader) return pageLoad()
+
 
   return (
     <div className="App">
-      <Navbar navbarLinks={navbarLinks} />
+      <Navbar />
       <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/notification/handling" element={<Notif />} />
           <Route path="/start-video" element={<JoinMeeting />} />
           <Route path="/video/:id" element={<VideoCall />} />
           <Route path="/video-owner/:id" element={<VideoCallOwner />} />
+          <Route path="/login" element={< Login mode={mode} />} />
       </Routes>
     </div>
   );

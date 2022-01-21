@@ -6,9 +6,9 @@ module.exports = class Controller {
     const t = await sequelize.transaction()
     try {
       const UserId= req.auth.id
-      const {ProductId} = req.params
-      const status = ''
-      const input = {UserId, ProductId,status}
+      const { id:ProductId } = req.params
+      const status = 'pending'
+      const input = {UserId, ProductId, status}
       const result = await OrderProduct.create(input, {transaction:t})
       res.status(201).json(result)
       await t.commit()
