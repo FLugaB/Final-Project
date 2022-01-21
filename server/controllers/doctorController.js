@@ -7,18 +7,31 @@ const url = require('url')
 
 class DoctorController {
   static async getSchedules(req, res, next) {
-
-  }
-  static async addSchedule(req, res, next) {
+    // ngambil schedule berdasarkan hari dan tag (type service)
+    // tag kirim dari req.body bisa arr atau obj
+    const { day, tag } = req.body
     try {
-      const {title, type} = req.body
-      const input = {title, type}
-      const result = await Product.create(input)
-      res.status(201).json(result)
+      const schedules = await Schedule.findAll({
+        include: [
+          {
+            model: User,
+            attributes: {
+              exclude: ['password']
+            }
+          },
+          {
+            model: Tag
+          }
+        ]
+      })
+      res.status(200).json(schedules)
     } catch (err) {
-      console.log(err);
+      console.log(err)
       next (err)
     }
+  }
+  static async addSchedule(req, res, next) {
+    
   }
   static async editSchedule(req, res, next) {
 
