@@ -252,7 +252,7 @@ describe("update product", () => {
       expect(resp.body).toEqual(expect.any(Object))
       expect(resp.status).toBe(200)
       done()
-    })   
+    })     
     .catch((err => {
       done(err)
     }))
@@ -364,7 +364,8 @@ describe("delete product", () => {
 
     test('Success Case', done => {
       request(app)
-      .delete(`/cms/products/1`)
+
+      .delete(`/cms/products/5`)
       .set("access_token", tokenMatch1)
       .end((err, res) => {
         if (err) return done(err)

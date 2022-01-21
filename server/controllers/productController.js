@@ -89,16 +89,18 @@ module.exports = class Controller {
     const t = await sequelize.transaction()
     try {
       const {id} = req.params
-      // if (id == 1 || id == 2) {
-      //   res.status(200).json({msg: "you can't delete product"})
-      // }
-      const find = await Product.findByPk(id)
-      if (!find) {
-        throw {name: "Product_not_found"}
+      if (id == 1 || id == 2) {
+        res.status(200).json({msg: "you can't delete product"})
+      } else {
+        
+        const find = await Product.findByPk(id)
+        if (!find) {
+          throw {name: "Product_not_found"}
+        }
+        const result = await Product.destroy ({where : {id}, transaction:t})
+        await t.commit()
+        res.status(200).json({message: "Success Delete Product"})
       }
-      const result = await Product.destroy ({where : {id}, transaction:t})
-      await t.commit()
-      res.status(200).json({message: "Success Delete Product"})
     } catch (err) {
       next(err)
       await t.rollback()
