@@ -3,7 +3,53 @@
   margin: 0;
   padding: 0;
   font-family: 'Antic Didone', serif;
+  overflow-x: hidden;
 }
+
+:root {
+  --soft: #E9E0E5;
+  --medium: #DED4DA;
+  --hard: #412C42;
+  --texting: #22293F;
+  --bright: #CCC4D1;
+}
+
+.bg-cover { 
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.w-100vw { width: 100vw; }
+.h-100vh { height: 100vh; }
+
+.section-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+  text-align: center;
+  background-color: var(--soft);
+}
+
+.section-wrapper {
+  min-height: 100vh;
+  height: 100%;
+}
+
+.soft-background-images {
+  background-image: url('./assets/bg-flower-clean.jpg');
+}
+
+.parallax-hero {
+  position: fixed;
+  top: 0;
+}
+
+.bg-soft { background-color: var(--soft); }
+.bg-hard { background-color: var(--hard); }
 
 body {
   height: 99vh;
