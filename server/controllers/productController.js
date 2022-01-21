@@ -35,7 +35,6 @@ module.exports = class Controller {
       }
       res.status(200).json(result)
     } catch (err) {
-      console.log(err)
       next(err)
     } 
   }
@@ -60,10 +59,15 @@ module.exports = class Controller {
     try {
       const {title, type} = req.body
       const input = {title, type}
-      if (id == 1 || id == 2) {
-        
-        res.status(200).json({msg: "you can't update product"})
-      }
+      if (!title ||title.length === 0) {
+        throw {name: "BAD_REQUEST", message: "Title is required"}
+      } 
+      if (!type ||type.length === 0) {
+        throw {name: "BAD_REQUEST", message: "Type is required"}
+      } 
+      // if (id == 1 || id == 2) {
+      //   res.status(200).json({msg: "you can't update product"})
+      // }
       const find = await Product.findOne({
         where: {id},
       })
@@ -71,8 +75,8 @@ module.exports = class Controller {
         throw {name: "Product_not_found"}
       }
       const result = await Product.update(input, {where: {id}, returning:true})
-      await t.commit()
       res.status(200).json(result)     
+      await t.commit()
 
     } catch (err) {
       next(err)
@@ -82,12 +86,12 @@ module.exports = class Controller {
   }
 
   static deleteProduct = async (req,res,next) =>{
+    const t = await sequelize.transaction()
     try {
       const {id} = req.params
-    const t = await sequelize.transaction()
-      if (id == 1 || id == 2) {
-        res.status(200).json({msg: "you can't delete product"})
-      }
+      // if (id == 1 || id == 2) {
+      //   res.status(200).json({msg: "you can't delete product"})
+      // }
       const find = await Product.findByPk(id)
       if (!find) {
         throw {name: "Product_not_found"}
@@ -123,13 +127,11 @@ module.exports = class Controller {
       const {id} = req.params
       const ProductId = id
       const result = await DetailProduct.findOne({where: {ProductId}})
-      console.log(result);
       if (!result) {
         throw {name: "Product_not_found"}
       } 
       res.status(200).json(result)
     } catch (err) {
-      console.log(err);
       next(err)
     }
   }

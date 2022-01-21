@@ -10,8 +10,6 @@ const authentication = async (req, res, next) => {
 
         const payload = verifyToken(access_token)
 
-        console.log(payload, `=========`)
-
         if(!payload || payload.length < 1) throw { name: "INVALID_TOKEN" }
 
         const findUser = await User.findByPk(payload.id)
@@ -38,7 +36,6 @@ const authorization = async (req, res, next) => {
                 email: email
             }
         })
-
         req.auth = {
             id: findUser.id,
             role: findUser.role
@@ -58,7 +55,6 @@ const authorization = async (req, res, next) => {
 
 const authorizationCMS = async (req, res, next) => {
     try {
-
         if(req.auth.role != "Admin") throw { name: "FORBIDDEN" }
 
         next();

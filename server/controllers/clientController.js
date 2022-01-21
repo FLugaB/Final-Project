@@ -82,12 +82,12 @@ const clientAccount = async (req, res, next) => {
                 {
                     model: Profile,
                     attributes: {
-                        exclude: ['createdAt', `updatedAt`, ]
+                        exclude: ['createdAt', `updatedAt` ]
                     },
                 }, 
             ]
         });
-
+        console.log(findUser,">>>>>>>>>>ini finduser");
         if (!findUser) throw { name: `FORBIDDEN` }
 
         res.status(200).json({findUser});
