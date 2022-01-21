@@ -1,20 +1,46 @@
 const {Product, DetailProduct, sequelize} = require("../models")
-
 module.exports = class Controller {
 
-  static addProduct =  async(req, res, next) =>{
-    const t = await sequelize.transaction()
+  static addProduct =  async(req, res, next) => {
+    const transaction = await sequelize.transaction()
+      const { title, type, name, price, stock, category, imageUrl, description 
+      } = req.body
+
+      const inputProduct = { title, type }
     try {
-      const {title, type} = req.body
-      const input = {title, type}
-      const result = await Product.create(input, {transaction: t})
-      res.status(201).json(result)
-      await t.commit()
+      const addProduct = await Product.create(inputProduct, 
+        { transaction })
+        
+        if(!addProduct) throw { name: 'FAILED_ADD_PRODUCT'}
+        
+      const inputDetail = { ProductId: addProduct.id, name, price, stock, category, imageUrl, description }
+      const addDetail = await DetailProduct.create(inputDetail, 
+        { transaction })
+      
+      if(!addDetail) throw { name: 'FAILED_ADD_DETAIL'}
+        
+      await transaction.commit();
+      res.status(201).json({
+        id: addProduct.id,
+        title: addProduct.title,
+        type: addProduct.type,
+        DetailProducts: [
+          {
+            id: addDetail.id,
+            ProductId: addProduct.id,
+            name: addDetail.name,
+            price: addDetail.price,
+            stock: addDetail.stock,
+            category: addDetail.category,
+            imageUrl: addDetail.imageUrl,
+            description: addDetail.description,
+          }
+        ]
+      })
 
     } catch (err) {
       next (err)
-      await t.rollback()
-
+      await transaction.rollback()
     }
   }
 
@@ -28,10 +54,10 @@ module.exports = class Controller {
                   exclude: ['createdAt', `updatedAt`]
               }
           }, 
-      ]
+        ]
       })
-      if(result.length === 0) {
-        res.status(200).json({msg: "There is no product"})
+      if (!result) {
+        throw {name: "Product_not_found"}
       }
       res.status(200).json(result)
     } catch (err) {
@@ -39,10 +65,19 @@ module.exports = class Controller {
     } 
   }
 
-  static showProductById = async(req,res,next) =>{
+  static showProductById = async(req,res,next) => {
     try {
       const {id} = req.params
-      const result = await Product.findByPk(id) 
+      const result = await Product.findByPk(id, {
+        include: [
+          {
+              model: DetailProduct,
+              attributes: {
+                  exclude: ['createdAt', `updatedAt`]
+              }
+          }, 
+        ]
+      }) 
       if (!result) {
         throw {name: "Product_not_found"}
       } 
@@ -81,29 +116,30 @@ module.exports = class Controller {
       }
 
     } catch (err) {
+      console.log(err,"<<<<<");
       next(err)
       await t.rollback()
 
     }
   }
 
-  static deleteProduct = async (req,res,next) =>{
-    const t = await sequelize.transaction()
+  static deleteProduct = async (req,res,next) => {
     try {
       const {id} = req.params
-      if (id == 1 || id == 2) {
-        res.status(200).json({msg: "you can't delete product"})
+      
+      if (+id === 1 || +id === 10) {
+        // throw {name: "CANNOT_DELETE_PRODUCT"}
+        res.status(403).json({message: "You Can't Delete This Product"})
       } else {
-        
         const find = await Product.findByPk(id)
         if (!find) {
-          throw {name: "Product_not_found"}
+            throw {name: "Product_not_found"}
         }
-        const result = await Product.destroy ({where : {id}, transaction:t})
-        await t.commit()
+        await Product.destroy ({where : {id}})
         res.status(200).json({message: "Success Delete Product"})
       }
     } catch (err) {
+      console.log(err,"<<<<<");
       next(err)
       await t.rollback()
 
@@ -116,8 +152,8 @@ module.exports = class Controller {
       const {ProductId, name, price, stock, category, imageUrl, description} = req.body
       const input = {ProductId, name, price, stock, category, imageUrl, description}
       const result = await DetailProduct.create(input, {transaction:t})
-      res.status(201).json(result)
       await t.commit()
+      res.status(201).json(result)
 
     } catch (err) {
       next (err)
@@ -125,8 +161,7 @@ module.exports = class Controller {
     }
   }
 
-
-  static showDetailById = async(req,res,next) =>{
+  static showDetailById = async(req,res,next) => {
     try {
       const {id} = req.params
       const ProductId = id
@@ -165,6 +200,7 @@ module.exports = class Controller {
         await t.commit()
       }
     } catch (err) {
+      console.log(err);
       next(err)
       await t.rollBack()
     }
@@ -175,13 +211,13 @@ module.exports = class Controller {
     const t = await sequelize.transaction()
     try {
       if (id == 1 || id == 2) {
-        res.status(200).json({msg: "you can't delete product"})
+        res.status(200).json({msg: "You Can't Delete This Product"})
       } else {
         const find = await DetailProduct.findByPk(id)
         if (!find) {
           throw {name: "Product_not_found"}
         }
-        const result = await DetailProduct.destroy ({where : {id}, transaction:t})
+        await DetailProduct.destroy ({where : {id}, transaction:t})
         res.status(200).json({message: "Success Delete Product"})
         await t.commit()
 
