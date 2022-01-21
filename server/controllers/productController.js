@@ -65,18 +65,20 @@ module.exports = class Controller {
       if (!type ||type.length === 0) {
         throw {name: "BAD_REQUEST", message: "Type is required"}
       } 
-      // if (id == 1 || id == 2) {
-      //   res.status(200).json({msg: "you can't update product"})
-      // }
-      const find = await Product.findOne({
-        where: {id},
-      })
-      if(!find) {
-        throw {name: "Product_not_found"}
+      if (id == 1 || id == 2) {
+        res.status(200).json({msg: "you can't update product"})
+      } else {
+
+        const find = await Product.findOne({
+          where: {id},
+        })
+        if(!find) {
+          throw {name: "Product_not_found"}
+        }
+        const result = await Product.update(input, {where: {id}, returning:true})
+        res.status(200).json(result)     
+        await t.commit()
       }
-      const result = await Product.update(input, {where: {id}, returning:true})
-      res.status(200).json(result)     
-      await t.commit()
 
     } catch (err) {
       next(err)
