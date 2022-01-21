@@ -11,6 +11,8 @@ import VideoCall from "./pages/video/Meeting.jsx";
 import JoinMeeting from "./pages/video/Join.jsx";
 import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
+import UserPage from "./pages/patient/user";
+import UserPageDoctor from "./pages/doctor/user";
 
 function App() {
   useEffect(() => {
@@ -29,7 +31,7 @@ function App() {
   }, []);
 
   const navbarLinks = [
-    { url: "#", title: "Home" },
+    { url: "/", title: "Home" },
     { url: "#", title: "About" },
     { url: "#", title: "Contact" },
     { url: "#", title: "Service" },
@@ -44,8 +46,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/start-video" element={<JoinMeeting />} />
         <Route path="/video/:id" element={<VideoCall />} />
-        <Route path="login" element={<Login />}></Route>
-        <Route path="register" element={<Register />}></Route>
+        <Route path="user" element={<UserPage />}></Route>
+        <Route path="doctor" element={<UserPageDoctor />}></Route>
       </Routes>
     </div>
   );

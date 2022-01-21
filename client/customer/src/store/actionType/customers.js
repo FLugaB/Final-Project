@@ -5,4 +5,6 @@ export const SET_ERROR = 'error/customers'
 
 //login & register
 export const CUSTOMER_LOGIN=`customer/login`
+export const CUSTOMER_LOGIN_SUCCESS=`customer/login/success`
+export const CUSTOMER_LOGIN_FAILED=`customer/login/failed`
 export const CUSTOMER_REGISTER=`customer/register`

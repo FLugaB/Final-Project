@@ -3,6 +3,7 @@ import {
   FETCH_CUSTOMER_DETAIL,
   SET_LOADING,
   SET_ERROR,
+  CUSTOMER_LOGIN,
 } from "../actionType/customers";
 
 const initialState = {
@@ -34,6 +35,8 @@ export default function customersReducer(state = initialState, action) {
         ...state,
         errorCustomers: action.payload,
       }
+    case CUSTOMER_LOGIN:
+      return state
     default:
       return state;
   }
