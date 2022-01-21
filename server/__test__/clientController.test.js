@@ -1108,7 +1108,7 @@ describe("Client Update Profile", () => {
             "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
           phoneNumber: "",
           UserId: 1,
-        })
+        })   
         .then((res) => {
           expect(res.status).toBe(400);
           expect(res.body).toEqual(expect.any(Object));
