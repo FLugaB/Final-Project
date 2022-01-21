@@ -26,7 +26,8 @@ route.use('/', chatProductRoutes)
 // SKINCARE PRODUCT 
 route.use('/', skincareProductRoutes)
 
-
+// route ke DoctorController
+// route.use('/schedules', DoctorController.getSchedules)
 
 route.use(errorsLog);
 module.exports = route

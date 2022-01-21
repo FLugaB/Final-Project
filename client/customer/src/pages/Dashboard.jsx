@@ -2,21 +2,24 @@ import React from "react";
 import bg_flower from "../assets/bg-flower.jpg";
 import bg_flowerClean from "../assets/bg-flower-clean.jpg";
 import bg_flowerForsythia from "../assets/bg-forsythia.png";
-import "./Dashboard.css"
+// import "./Dashboard.css"
 
 import Navbar from "../components/Navbar/Navbar.jsx";
 import Hero from "../components/Hero/Hero";
 import Slider from "../components/Slider/Slider";
 import Card from "../components/Card/Card";
 
+
 const Dashboard = () => {
   const navbarLinks = [
-    { url: "#", title: "Home" },
+    { url: "/", title: "Home" },
     { url: "#", title: "About" },
     { url: "#", title: "Contact" },
     { url: "#", title: "Service" },
     { url: "#", title: "Products" },
     { url: "#", title: "Consultation" },
+    { url: "/login", title: "Login" },
+    { url: "/register", title: "Register" },
   ];
 
   return (

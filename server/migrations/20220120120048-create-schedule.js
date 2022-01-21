@@ -20,10 +20,10 @@ module.exports = {
       hospital: {
         type: Sequelize.STRING
       },
-      sip: {
-        type: Sequelize.STRING
-      },
       UserId: {
+        type: Sequelize.INTEGER
+      },
+      ScheduleTagId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

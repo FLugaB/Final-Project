@@ -33,6 +33,7 @@ body {
 .card__image {
   width: 100%;
   height: auto;
+  max-width: fit-content;
 }
 
 .card__overlay {
@@ -86,6 +87,11 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 50%;
+}
+
+.card__thumb > img {
+  width: 100%;
+  height: auto;
 }
 
 .card__title {
