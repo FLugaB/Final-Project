@@ -57,8 +57,6 @@ const updateStatusTransactions = async (req, res, next) => {
             }
         })
 
-        console.log(findTransaction)
-
         if (!findTransaction) throw { name: "TRANSACTION_NOT_FOUND" }
 
         let AUTH_STRING = Buffer.from(`${process.env.MID_SERVER_KEY}:`).toString('base64')

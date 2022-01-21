@@ -6,7 +6,9 @@ const { addProduct, showProduct, showProductById, updateProduct, deleteProduct, 
 const { TransactionController } = require(`../controllers/transactionController`)
 
 const ImageKit_API = require('../middlewere/imageKit')
+const ImageKit_Profile = require('../middlewere/imageKitProfile')
 const MulterStorage = require('../middlewere/multer')
+const MulterStorageProfile = require('../middlewere/multerProfile')
 
 const DoctorController = require('../controllers/doctorController')
 
@@ -36,7 +38,7 @@ route.delete('/cms/details/:id', [authentication, authorization, authorizationCM
 
 
 //===== CUSTOMER
-route.post('/register', clientRegister);
+route.post('/register',  MulterStorageProfile , ImageKit_Profile, clientRegister);
 route.post('/login', clientLogin);
 route.get('/doctors', clientDoctorFetch);
 
@@ -44,7 +46,7 @@ route.post('/notification/handling', TransactionController.notificationTransacti
 
 
 route.get('/account',[authentication, authorization], clientAccount);
-route.put('/account',[authentication, authorization], clientUpdateAccount);
+route.put('/account',[authentication, authorization],  MulterStorageProfile , ImageKit_Profile, clientUpdateAccount);
 
 
 
