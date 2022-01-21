@@ -9,14 +9,17 @@ import Hero from "../components/Hero/Hero";
 import Slider from "../components/Slider/Slider";
 import Card from "../components/Card/Card";
 
+
 const Dashboard = () => {
   const navbarLinks = [
-    { url: "#", title: "Home" },
+    { url: "/", title: "Home" },
     { url: "#", title: "About" },
     { url: "#", title: "Contact" },
     { url: "#", title: "Service" },
     { url: "#", title: "Products" },
     { url: "#", title: "Consultation" },
+    { url: "/login", title: "Login" },
+    { url: "/register", title: "Register" },
   ];
 
   return (
