@@ -5,7 +5,8 @@ const administrationRoutes = require('./administrationRoutes')
 const transactionRoutes = require('./transactionRoutes')
 const chatProductRoutes = require('./chatProductRoutes')
 const skincareProductRoutes = require('./skincareProductRoutes')
-
+const videoDaily = require('../controllers/videoDaily.js');
+const videoDailyOwner = require('../controllers/videoDailyOwner');
 
 const errorsLog  = require("../middlewere/errorHandler");
 
@@ -27,6 +28,9 @@ route.use('/', chatProductRoutes)
 // SKINCARE PRODUCT 
 route.use('/', skincareProductRoutes)
 
+// route chat Daily.co
+route.get("/video-call/:id", videoDaily)
+route.get("/video-call-owner/:id", videoDailyOwner)
 // route ke DoctorController
 // route.use('/schedules', DoctorController.getSchedules)
 
