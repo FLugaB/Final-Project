@@ -15,15 +15,22 @@ class TransactionController {
             }
         })
 
-        await OrderProduct.create({
+        if (!findTicket) {
+            throw {name: "Product_not_found"}
+        }
+        
+        const result = await OrderProduct.create({
             UserId: req.auth.id,
             ProductId: findTicket.id,
             status: 'pending'
         })
 
-        const successText = "Checkout first before you could chat with our doctor"
+        // const successText = "Checkout first before you could chat with our doctor"
 
-        res.status(201).json({successText});
+        res.status(201).json({
+            msg: "Checkout first before you could chat with our doctor",
+            result
+        });
 
       } catch (err) {
         console.log(err, `==============`)
@@ -118,7 +125,10 @@ class TransactionController {
 
             const findUserOrder = await OrderProduct.findAll({
                 where: {
-                    UserId: req.auth.id
+                    [Op.and]: [
+                        { UserId: req.auth.id }, 
+                        { status: `pending` }
+                    ], 
                 },
                 include: [
                     {

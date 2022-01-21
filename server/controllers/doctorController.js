@@ -7,7 +7,13 @@ const url = require('url')
 
 class DoctorController {
   static async getSchedules(req, res, next) {
-
+    try {
+      res.status(200).json({
+        msg: 'GO TO DOCTOR'
+      })
+    } catch (error) {
+      console.log(error);
+    }
   }
   static async addSchedule(req, res, next) {
     try {
