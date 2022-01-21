@@ -156,10 +156,10 @@ class TransactionController {
                 product: [],
             }
              
-            //  findUserOrder.forEach(element => {
-            //     orderDetail.totalPrice += element.Product.DetailProducts[0].price
-            //     orderDetail.product.push(element.Product)
-            // });
+             findUserOrder.forEach(element => {
+                orderDetail.totalPrice += element.Product.DetailProducts[0].price
+                orderDetail.product.push(element.Product)
+            });
 
             const findOrderID = await Transaction.findOne({
                 where: {
