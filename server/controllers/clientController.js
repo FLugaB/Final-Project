@@ -39,7 +39,6 @@ const clientRegister = async (req, res, next) => {
 const clientLogin = async (req, res, next) => {
     try {
         const {  email, password } = req.body
-        console.log(req.body);
         if (!email || !password) {
             throw ({
                 name: "BAD_REQUEST",

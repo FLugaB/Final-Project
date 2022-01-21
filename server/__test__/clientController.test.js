@@ -744,7 +744,7 @@ describe("New Client Test on clientAccount Authentication Field", () => {
         role: "Client",
       })
       .then((res) => {
-        console.log(res.body, `resbodyyyyy`);
+        console.log(res, `resbodyyyyy`);
         expect(res.status).toBe(401);
         expect(res.body).toEqual(expect.any(Object));
         expect(res.body).toHaveProperty("message", "Invalid token")
@@ -771,6 +771,7 @@ describe("New Client Test on clientAccount Authentication Field", () => {
         done();
       })
       .catch((err) => {
+        console.log(err,">>>>>ini err")
         done(err);
       });
   });
@@ -828,4 +829,299 @@ describe("New Client Test on clientAccount Authentication Field", () => {
   });
 
   
+
+  
 });
+
+describe("Client Update Profile", () => {
+
+  //TODO 1 client update profile user not found no access token
+  test("client update profile user not found no access token", (done) => {
+    request(app)
+      .put("/account")
+      .set("access_token", "")
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Invalid token")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  })
+
+  //TODO 2 client update profile user not found invalid access token
+  test("client update profile user not found invalid access token", (done) => {
+    request(app)
+      .put("/account")
+      .set("access_token", invalidToken)
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Invalid token")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  })
+
+    //TODO 3 client success update
+    test("update success should be return valid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", tokenMatch1)
+        .send({
+          email: "editClientSuccess@gmail.com",
+          password: "editClientSuccess",
+          fullName: "editClientSuccess",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+        })
+        .then((res) => {
+          console.log(res.body,">>>>>>>>>>>>>>>99999999");
+          expect(res.status).toBe(200);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toEqual({successText: "Success update profile"});
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+    //TODO 4 Update email is empty
+    test("Update email is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", tokenMatch1)
+        .send({
+          email: "",
+          password: "newClient2",
+          fullName: "newClient2",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+        })
+        .then((res) => {
+          console.log(res,"4444444444444");
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Email is required");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+    //TODO 5 update email invalid format
+    test("update email invalid format should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", tokenMatch1)
+        .send({
+          email: "newClient1gmail.com",
+          password: "newClient1",
+          fullName: "newClient1",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+        })
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Invalid email format");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+    //TODO 6 update password is empty
+    test("update password is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", tokenMatch1)
+        .send({
+          email: "newClient2@gmail.com",
+          password: "",
+          fullName: "newClient2",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+        })
+        .then((res) => {
+          console.log(res);
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Password is required");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+    //TODO 7 Update fullName is empty
+    test("Update fullName is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", tokenMatch1)
+        .send({
+          email: "newClient3@gmail.com",
+          password: "newClient3",
+          role: "Client",
+          fullName: "",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+          UserId: 1,
+        })
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Fullname is required");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+    //TODO 9 update birthdate is empty
+    test("update birthdate is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", tokenMatch1)
+        .send({
+          email: "newClient3@gmail.com",
+          password: "newClient3",
+          role: "Client",
+          fullName: "newClient3",
+          birthdate: "",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+          UserId: 1,
+        })
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Invalid date format");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+
+    //TODO 10 Update gender is empty
+    test("Update gender is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", tokenMatch1)
+        .send({
+          email: "newClient3@gmail.com",
+          password: "newClient3",
+          role: "Client",
+          fullName: "newClient3",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+          UserId: 1,
+        })
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Gender is required");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+
+    //TODO 11 update address is empty
+    test("update address is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", tokenMatch1)
+        .send({
+          email: "newClient3@gmail.com",
+          password: "newClient3",
+          role: "Client",
+          fullName: "newClient3",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+          UserId: 1,
+        })
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Address is required");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+    //TODO 16 update phoneNumber is empty
+    test("update phoneNumber is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", tokenMatch1)
+        .send({
+          email: "newClient3@gmail.com",
+          password: "newClient3",
+          role: "Client",
+          fullName: "newClient3",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "",
+          UserId: 1,
+        })
+        .then((res) => {
+          console.log(res.status, `resstatus`);
+          console.log(res.body, `checker`);
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Phone Number is required");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+})
