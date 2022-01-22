@@ -33,7 +33,7 @@ const videoDaily = async (req, res, next) => {
     const roomId = req.params.id;
     const roomGET = await getRoom(roomId);
     console.log(roomGET, "roomget");
-
+    res.status(200).send(roomGET)
     const result = await axios('https://api.daily.co/v1/meeting-tokens', {
         method: 'POST',
         headers: headerTokenDoctor,
@@ -45,7 +45,7 @@ const videoDaily = async (req, res, next) => {
         }})
     });
     console.log(result.data, "result");
-
+    
   } catch (error) {
     console.log(error);
     next(error);

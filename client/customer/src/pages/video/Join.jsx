@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import CardSlider from "../../components/Card/CardSlider";
 export default function JoinRoom() {
   const [room, setRoom] = useState(null);
   const [roomOwner, setRoomOwner] = useState(null);
@@ -15,16 +15,19 @@ export default function JoinRoom() {
   };
 
   return (
-    <div style={{marginTop: 100}}>
-      <input type="text" onChange={(e) => setRoom(e.target.value)} />
-      <button onClick={onSubmit}>Submit CUSTOMERS</button>
+    <div className="mt-5 carousel">
+      <div style={{marginTop: 100}}>
+        <h1 className="slider_title">Doctor</h1>
+        <CardSlider />
+        <input type="text" onChange={(e) => setRoom(e.target.value)} />
+        <button onClick={onSubmit}>Submit CUSTOMERS</button>
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <input type="text" onChange={(e) => setRoomOwner(e.target.value)} />
-      <button onClick={onSubmitOwner}>Submit OWNER</button>
+        <br />
+        <br />
+        <input type="text" onChange={(e) => setRoomOwner(e.target.value)} />
+        <button onClick={onSubmitOwner}>Submit OWNER</button>
+      </div>
+
     </div>
 
     
