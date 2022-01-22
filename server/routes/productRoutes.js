@@ -5,8 +5,8 @@ const MulterStorage = require('../middlewere/multer')
 const { addProduct, showProduct, showProductById, updateProduct, deleteProduct, showDetail, showDetailById, addDetail, updateDetail, deleteDetail } = require('../controllers/productController');
 
 // CAN BE ACCESS BY ADMIN OR CUSTOMER SIDE
-route.get('/products', [authentication, authorization, authorizationCMS], showProduct)
-route.get('/products/:id', [authentication, authorization, authorizationCMS], showProductById)
+route.get('/products', [authentication, authorization], showProduct)
+route.get('/products/:id', [authentication, authorization], showProductById)
 
 // CAN BE ACCESS ONLY BY ADMIN
 // THIS IS LIKE CONTAINER OF PRODUCT, U CAN ADD ONLY AS ADD ITEM IN ORDER PRODUCT

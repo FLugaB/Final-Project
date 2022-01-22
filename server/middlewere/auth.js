@@ -14,7 +14,7 @@ const authentication = async (req, res, next) => {
 
         const findUser = await User.findByPk(payload.id)
 
-        if(!findUser) throw { name: "NO_TOKEN" }
+        if(!findUser) throw { name: "INVALID_TOKEN" }
 
         req.user = {  email: findUser.email }
 
