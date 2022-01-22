@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userRole } from "../store/actionCreator/userRole";
 
+import DashboardSidebar from '../components/DashboardSidebar'
+import { Container, Row, Col } from 'react-bootstrap'
+
 const Dashboard = () => {
   const dispatch=useDispatch()
   const { role, loading, error } = useSelector(
@@ -11,12 +14,19 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(userRole())
   }, [role]);
-  if (role === "Doctor") {
-    return <div><h1>doctor Dashboard</h1></div>;
-    return
-  } else {
-    return <div><h1>patient Dashboard</h1></div>;
-  }
+
+    return (
+        <div className="dashboard">
+            <Container>
+                <Row>
+                    <Col md={4}> <DashboardSidebar /> </Col>
+                    <Col md={8}>
+
+                    </Col>
+                </Row>
+            </Container>
+        </div>
+    );
 };
 
 export default Dashboard;
