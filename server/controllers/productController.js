@@ -207,23 +207,14 @@ module.exports = class Controller {
   }
 
   static updateDetail = async(req,res,next) => {
-<<<<<<< HEAD
     const {name, price, stock, category, imageUrl, description} = req.body
-=======
->>>>>>> 0d2422ec877337a262255083a3f596a482d10a16
     const t = await sequelize.transaction()
     try {
       
       const {id} = req.params
-<<<<<<< HEAD
       const getProductId = await DetailProduct.findOne({where: {id}})
 
       if (getProductId.ProductId !== 3) {
-=======
-      const {ProductId, name, price, stock, category, imageUrl, description} = req.body
-
-      if (id == 1 || id == 2) {
->>>>>>> 0d2422ec877337a262255083a3f596a482d10a16
         const input = {price}
         const find = await DetailProduct.findByPk(id)
         if(!find) {
@@ -234,12 +225,7 @@ module.exports = class Controller {
         res.status(200).json(result)   
         
       } else {
-<<<<<<< HEAD
         const input = {ProductId: getProductId.ProductId, name, price, stock, category,imageUrl, description}
-=======
-
-        const input = {ProductId, name, price, stock, category,imageUrl, description}
->>>>>>> 0d2422ec877337a262255083a3f596a482d10a16
         const find = await DetailProduct.findByPk(id)
         if(!find) {
           throw {name: "Product_not_found"}
