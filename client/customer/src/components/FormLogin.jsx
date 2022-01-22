@@ -13,7 +13,6 @@ const FormLogin = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
   const [newemail, setNewEmail] = useState("");
   const [newpassword, setNewPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -117,89 +116,95 @@ const FormLogin = (props) => {
         </div>
 
         <div className="form-group form-group--signup">
-          <div style={{display:"inline-flex"}}>
-            <Form.Control
-              className="form-group__input"
-              disabled={props.mode === "login"}
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              placeholder="Your Full Name"
-              type="text"
-              required
-            />
-            <Form.Control
-              className="form-group__input"
-              disabled={props.mode === "login"}
-              value={birthDate}
-              onChange={(e) => setBirthDate(e.target.value)}
-              placeholder="Birthdate"
-              type="date"
-              required
-            />
+            <div className="d-flex justify-content-between half-wrapper">
+              <Form.Control
+                    className="form-group__input"
+                    disabled={props.mode === "login"}
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    placeholder="Your Full Name"
+                    type="text"
+                    required
+              />
+
+              <Form.Control
+                    className="form-group__input"
+                    disabled={props.mode === "login"}
+                    value={birthDate}
+                    onChange={(e) => setBirthDate(e.target.value)}
+                    placeholder="Birthdate"
+                    type="date"
+                    required
+              />
+            </div>
+
+            <div className="d-flex justify-content-between half-wrapper">
+                <Form.Control
+                    className="form-group__input"
+                    disabled={props.mode === "login"}
+                    value={newemail}
+                    onChange={(e) => setNewEmail(e.target.value)}
+                    placeholder="Email"
+                    type="email"
+                    required
+                />
+
+                <Form.Control
+                    className="form-group__input"
+                    disabled={props.mode === "login"}
+                    value={newpassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="Password"
+                    type="password"
+                    required
+                />
+            </div>
 
             <Form.Control
-              className="form-group__input"
-              disabled={props.mode === "login"}
-              value={newemail}
-              onChange={(e) => setNewEmail(e.target.value)}
-              placeholder="Email"
-              type="email"
-              required
+                className="form-group__input"
+                disabled={props.mode === "login"}
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                placeholder="Address"
+                type="text"
+                required
             />
 
-            <Form.Control
-              className="form-group__input"
-              disabled={props.mode === "login"}
-              value={newpassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="Password"
-              type="password"
-              required
-            />
-          </div>
-          <div>
-            <Form.Control
-              className="form-group__input"
-              disabled={props.mode === "login"}
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="Address"
-              type="text"
-              required
-            />
+            <div className="d-flex justify-content-between half-wrapper">
+                <Form.Control
+                    className="form-group__input"
+                    disabled={props.mode === "login"}
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    placeholder="PhoneNumber"
+                    type="tel"
+                    required
+                />
 
-            <Form.Control
-              className="form-group__input"
-              disabled={props.mode === "login"}
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder="PhoneNumber"
-              type="tel"
-              required
-            />
+                <Form.Select
+                        className="form-group__input"
+                        disabled={props.mode === "login"}
+                        aria-label="Default select example"
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
+                        required
+                    >
+                    <option>Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </Form.Select>
+            </div>
 
-            <Form.Select
-              disabled={props.mode === "login"}
-              aria-label="Default select example"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-              required
-            >
-              <option>Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </Form.Select>
-
-            <Form.Control
-              className="form-group__input"
-              disabled={props.mode === "login"}
-              value={photoProfile}
-              onChange={(e) => setPhotoProfile(e.target.value)}
-              placeholder="Photo Profile"
-              type="file"
-              required
-            />
-          </div>
+              <Form.Control
+                className="form-group__input py-1 ps-1 mt-2"
+                disabled={props.mode === "login"}
+                value={photoProfile}
+                onChange={(e) => setPhotoProfile(e.target.value)}
+                placeholder="Photo Profile"
+                type="file"
+                required
+              />
+        
         </div>
       </div>
       <button className="button button--primary full-width" type="submit">

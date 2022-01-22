@@ -356,6 +356,15 @@ iframe body {
   transition: all 0.25s cubic-bezier(0.36, 1, 0.62, 0.98) 0.3s;
 }
 
+.form-block--is-signup,
+.form-block--is-login {
+  transition: 0.3s;
+}
+
+.form-block--is-signup {
+  width: 50vw;
+}
+
 .form-block--is-signup .form-block__input-wrapper {
   height: 300px;
   transition: all 0.5s cubic-bezier(0.36, 1, 0.62, 0.98) 0.2s;
@@ -395,9 +404,41 @@ iframe body {
   color: rgba(255,255,255,.6);
 }
 
-.form-block--is-signup .form-group__input {
+.form-block--is-signup  .form-group__input {
   transform: translateX(-150%);
 }
+
+.half-wrapper {
+  align-content: space-between;
+  flex-wrap: wrap;
+  transform: translateX(-150%);
+}
+.half-wrapper > select.form-group__input,
+.half-wrapper > input.form-group__input {
+  width: 47%;
+  transform: translateX(0);
+}
+
+/* .btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+} */
+
 .form-group--login .form-group__input {
   opacity: 1;
 }
