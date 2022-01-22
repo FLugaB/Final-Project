@@ -7,6 +7,7 @@ import "./Homepage.css"
 import Hero from "../components/Hero/Hero";
 import Slider from "../components/Slider/Slider";
 import Card from "../components/Card/Card";
+import CntentSlider from '../components/CntentSlider'
 
 import axios from 'axios'
 
@@ -33,22 +34,29 @@ const HomePage = () => {
       <div className="section-container">
         <div className="section-wrapper w-100vw bg-cover soft-background-images">
           <Slider
-            imageSrc={bg_flowerForsythia}
+            imageSrc="https://www.drmanalyoussef.com.au/wp-content/uploads/brizy/38/assets/images/iW=5000&iH=any/f9fc8d65c576afbe222b43ec99822d05.jpg"
+            // imageSrc={bg_flowerForsythia}
             title={"PRODUCT FROM FORSYTHIA"}
             subtitle={
               "A professional skin consultation should be the first step you take when you're considering starting treatments or skincare"
             }
           />
         </div>
-        <div className="section-wrapper w-100vw bg-soft">
+        <div className="section-wrapper w-100vw bg-cover bg-soft ">
           <Slider
-            imageSrc={bg_flowerClean}
+            // imageSrc={bg_flowerClean}
+            imageSrc="https://www.drmanalyoussef.com.au/wp-content/uploads/brizy/36/assets/images/iW=5000&iH=any/b2fa36305709632245add4e5c041aa9d.jpg"
             title={"SERVICE TREATMENT ONSITE"}
             subtitle={
               "Does your skin have fine lines? Age spots? Acne scars or other issues you’d like to clear up? Cosmetic treatments may help improve the look and feel of your skin"
             }
             flipped={true}
           />
+        </div>
+        <div className="section-wrapper">
+          <div className="slider-outer-wrapper">
+            <CntentSlider />
+          </div>
         </div>
         <div className="section-wrapper w-100vw bg-hard">
           <Card />
