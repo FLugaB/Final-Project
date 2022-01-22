@@ -3,17 +3,12 @@ import { useEffect, useState } from 'react'
 import HomePage from "./pages/HomePage.jsx";
 import Navbar from './components/Navbar/Navbar'
 import Login from './pages/Login'
-import Dashboard from "./pages/Dashboard.jsx";
-import Navigator from "./routes";
 import { Routes, Route } from "react-router-dom";
-// import { auth } from './firebase.js'
-// import { useAuthState } from 'react-firebase-hooks/auth'
-
 import VideoCall from "./pages/video/Meeting.jsx";
+import VideoCallOwner from "./pages/video/MeetingOwner.jsx";
 import JoinMeeting from "./pages/video/Join.jsx";
 import Notif from './components/Notif' 
 import { pageLoad } from './Hooks/load'
-
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
@@ -57,6 +52,7 @@ function App() {
           <Route path="/notification/handling" element={<Notif />} />
           <Route path="/start-video" element={<JoinMeeting />} />
           <Route path="/video/:id" element={<VideoCall />} />
+          <Route path="/video-owner/:id" element={<VideoCallOwner />} />
           <Route path="/login" element={< Login mode={mode} />} />
       </Routes>
     </div>
