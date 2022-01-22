@@ -38,7 +38,7 @@ const cmsRegister = async (req, res, next) => {
 const cmsLogin = async (req, res, next) => {
     try {
         const {  email, password } = req.body
-
+        // console.log("LOGIN ADMIN");
         const findUser = await User.findOne({
             where: {
                 email: email

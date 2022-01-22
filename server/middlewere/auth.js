@@ -14,12 +14,13 @@ const authentication = async (req, res, next) => {
 
         const findUser = await User.findByPk(payload.id)
 
-        if(!findUser) throw { name: "NO_TOKEN" }
+        if(!findUser) throw { name: "INVALID_TOKEN" }
 
         req.user = {  email: findUser.email }
 
         next();
     } catch (error) {
+        console.log(error);
         next(error);
     }
     
@@ -35,7 +36,6 @@ const authorization = async (req, res, next) => {
                 email: email
             }
         })
-
         req.auth = {
             id: findUser.id,
             role: findUser.role
@@ -55,7 +55,6 @@ const authorization = async (req, res, next) => {
 
 const authorizationCMS = async (req, res, next) => {
     try {
-
         if(req.auth.role != "Admin") throw { name: "FORBIDDEN" }
 
         next();

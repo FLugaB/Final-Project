@@ -3,6 +3,7 @@ const { sequelize } = require('../models')
 const { compareHash } = require('../helpers/bycrpt')
 const { getToken } = require('../helpers/jwt')
 const { Op } = require("sequelize");
+const e = require('express');
 
 const clientRegister = async (req, res, next) => {
     const transaction = await sequelize.transaction();
@@ -82,12 +83,11 @@ const clientAccount = async (req, res, next) => {
                 {
                     model: Profile,
                     attributes: {
-                        exclude: ['createdAt', `updatedAt`, ]
+                        exclude: ['createdAt', `updatedAt` ]
                     },
                 }, 
             ]
         });
-
         if (!findUser) throw { name: `FORBIDDEN` }
 
         res.status(200).json({findUser});
@@ -101,7 +101,6 @@ const clientUpdateAccount = async (req, res, next) => {
     const transaction = await sequelize.transaction();
 
     try {
-        
         const findUser = await User.findOne({
             where: {
                 id: req.auth.id
@@ -170,24 +169,25 @@ const clientDoctorFetch = async (req, res, next) => {
                     exclude: ['createdAt', `updatedAt`, ]
                 }
             }, 
-          ]
-      })
-
-      res.status(200).json(findAllDoctors)
-
+        ]
+    })
+    if (findAllDoctors.length <1) {
+        console.log("maasuk sini........", findAllDoctors);
+        res.status(200).json({message: "There is no Doctor"})
+    } else {
+        res.status(200).json(findAllDoctors)
+    }
     } catch (error) {
-      next(error)
+        next(error)
     }
 }
 
 const clientDoctorDetail = async (req, res, next) => {
 
     try {
-
         const { DoctorId } = req.params
-
+        console.log(req.params,">>>>>>>>>ini");
         if (!DoctorId) throw { name: "NOT_FOUND"}
-
         const findDoctorDetail = await User.findOne({
             where: {
                 [Op.and]: [
@@ -204,14 +204,11 @@ const clientDoctorDetail = async (req, res, next) => {
                     attributes: {
                         exclude: ['createdAt', `updatedAt`, ]
                     }
-                }, 
+                }
             ]
         })
-
-        if (!findDoctorDetail) throw { name: "NOT_FOUND"}
-
-        res.status(200).json(findDoctorDetail)
-
+        if (!findDoctorDetail ) throw { name: "NOT_FOUND"}
+        await res.status(200).json(findDoctorDetail)
     } catch (error) {
         next(error)
     }

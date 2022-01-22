@@ -10,9 +10,9 @@ export default function Video({ match }) {
     const domain = "https://forsythiateam.daily.co/";
 
     axios
-      .get(`http://localhost:5000/video-call/${id}`)
+      .get(`http://localhost:3000/video-call/${id}`)
       .then((res) => {
-        console.log(`tersend`);
+        console.log(`tersend CUSTOMERS`);
         if (res.status === 200) {
           console.log("status ", res.status);
           const script = document.createElement("script");
@@ -20,7 +20,7 @@ export default function Video({ match }) {
             iframeStyle: {
               position: "relative",
               width: "100%",
-              height: "100%",
+              height: "100vh",
               border: "0",
               zIndex: 9999
             },
@@ -36,5 +36,9 @@ export default function Video({ match }) {
       .catch((err) => console.log(err));
   }, [id]);
 
-  return <div></div>;
+  return (
+    <div className="homepage-container">
+
+    </div>
+  );
 }

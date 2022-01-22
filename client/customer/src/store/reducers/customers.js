@@ -1,6 +1,7 @@
 import {
   FETCH_CUSTOMERS,
   FETCH_CUSTOMER_DETAIL,
+  CUSTOMER_IS_SUCCESS_LOGIN,
   SET_LOADING,
   SET_ERROR,
   CUSTOMER_LOGIN,
@@ -11,6 +12,7 @@ const initialState = {
   customerDetail: [],
   loadingCustomers: false,
   errorCustomers: null,
+  isSuccessLogin: false
 };
 
 export default function customersReducer(state = initialState, action) {
@@ -25,6 +27,8 @@ export default function customersReducer(state = initialState, action) {
         ...state,
         customerDetail: action.payload,
       }
+    case CUSTOMER_IS_SUCCESS_LOGIN:
+      return { ...state, isSuccessLogin: action.payload }
     case SET_LOADING: 
       return {
         ...state,

@@ -1,53 +1,50 @@
 const axios = require("axios");
 
+const API_KEY =
+  "6a879d7e4dd4d3d5824dded02867527f781a72b79a1ada7bb665e0b570552b4e";
 
-    
-    const API_KEY =
-      "6a879d7e4dd4d3d5824dded02867527f781a72b79a1ada7bb665e0b570552b4e";
+const headers = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
+  Authorization: "Bearer " + API_KEY,
+};
 
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + API_KEY,
-    };
-    
-    const getRoom = (room) => axios({
-      method: "GET",
-      url: `https://api.daily.co/v1/rooms/${room}`,
-      headers
+const headerTokenCustomers = {
+  'authorization': 'Bearer ' + API_KEY,
+  'content-type': 'application/json',
+  'Content-Type': 'application/json; charset=UTF-8'
+}
+
+const getRoom = (room) => {
+  return axios(`https://api.daily.co/v1/rooms/${room}`, {
+    method: "GET",
+    headers,
+  })
+    .then((response) => {
+      return response.data;
     })
-
-    
-
-    // .then((res) => res.json())
-    // .then((json) => {
-    //   return json;
-    // })
-    // .catch((err) => console.error("error:" + err));
-
-    const createRoom = (room) => axios({
-      method: "POST",
-      url: `https://api.daily.co/v1/rooms`,
-      headers,
-      body: getRoom
-    })
+    .catch((err) => console.error("error:" + err));
+};
 
 const videoDaily = async (req, res, next) => {
   try {
     const roomId = req.params.id;
-    // const instance = axios.create({
-    //   baseURL: "https://api.daily.co/v1/rooms",
-    // });
-
     const room = await getRoom(roomId);
-    if (room.error) {
-      const newRoom = await createRoom(roomId);
-      res.status(200).send(newRoom);
-    } else {
-      res.status(200).send(room);
-    }
+    console.log(room, "roomget");
+    
+    const result = await axios('https://api.daily.co/v1/meeting-tokens', {
+        method: 'POST',
+        headers: headerTokenCustomers,
+        data: JSON.stringify({
+          "properties": {
+            "user_name":"Customers", 
+            "room_name":"DrVera"
+        }})
+    });
+    console.log(result.data, "result");
 
-    console.log(room, "ROOM");
+    
+
   } catch (error) {
     console.log(error);
     next(error);

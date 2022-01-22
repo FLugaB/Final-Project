@@ -1,10 +1,10 @@
 
 
-const errorLog = (err, req, res, next) => {
+const errorsLog = (err, req, res, next) => {
 
     let code = 500
     let message = "Internal server error"
-
+    console.log(err,"<<<<<<<<<<<<<<<<<");
     if ( err.name === `SequelizeUniqueConstraintError` || 
         err.name === `SequelizeValidationError` ) {
         code = 400
@@ -15,11 +15,13 @@ const errorLog = (err, req, res, next) => {
     } else if ( err.name === `USER_NOT_FOUND`) {
         code = 401
         message = "Invalid email/password"
-    } else if ( err.name === `NO_TOKEN` || 
-                err.name === `INVALID_TOKEN ` ||
+    } else if (err.name === `INVALID_TOKEN ` ||
                 err.name === `JsonWebTokenError`){
         code = 401
         message = "Invalid token"
+    } else if ( err.name === `NO_TOKEN`){
+        code = 403
+        message = "Pleae Login first"
     } else if ( err.name === `FORBIDDEN`){
         code = 403
         message = "Invalid access"
@@ -47,10 +49,31 @@ const errorLog = (err, req, res, next) => {
     } else if ( err.name === 'PLEASE_PAY_FIRST'){
         code = 400
         message = "If you just pay, please wait for a momment, else pay the ticket first before u could use it"
-    }
+    } else if ( err.name === `FAILED_ADD_PRODUCT`) {
+        code = 401
+        message = "Failed Add Product"
+    } else if ( err.name === `FAILED_ADD_DETAIL`) {
+        code = 401
+        message = "Failed Add Detail Product"
+    } else if ( err.name === `NO_ITEM_ON_CART`) {
+        code = 404
+        message = "Not Found Order Product"
+    } 
+    // else if ( err.name === "CANNOT_DELETE_PRODUCT") {
+    //     code = 403
+    //     message = "You Can't Delete This Product"
+    // } 
+    // else if ( err.name === `CANNOT_UPDATE_PRODUCT`) {
+    //     code = 403
+    //     message = "you can't update this product"
+    // }
+    // NEXT
+    // else if ( err.response.data.error_messages[0] === 'transaction_details.order_id sudah digunakan') {
+    //     code = 404
+    //     message = "Transaction ID Has Been Used"
+    // } 
 
-    res.status(code).json({message})
-
+   res.status(code).json({message})
 }
 
-module.exports = errorLog
+module.exports = errorsLog

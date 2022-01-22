@@ -23,6 +23,7 @@ const requestSnapToken = async (req, res, next) => {
               "gross_amount": req.user.checkout.ammount // Total Ammount
             }
           }
+        console.log("%c 💥: requestSnapToken -> parameter ", "font-size:16px;background-color:#cdcfa3;color:black;", parameter)
 
         const response = await axios.post( 
             `${SANDBOX_BASE_URL}/snap/v1/transactions`, 
@@ -31,6 +32,8 @@ const requestSnapToken = async (req, res, next) => {
                 headers: headers
             }
         )
+        
+        console.log("%c 💠: requestSnapToken -> response ", "font-size:16px;background-color:#b2d137;color:black;", response)
 
         const snap_token = response.data
         
@@ -39,6 +42,7 @@ const requestSnapToken = async (req, res, next) => {
         })
         
     } catch (error) {
+        console.log(error.response.data);
         next(error)
     }
 }
@@ -56,8 +60,6 @@ const updateStatusTransactions = async (req, res, next) => {
                 order_id: orderId
             }
         })
-
-        console.log(findTransaction)
 
         if (!findTransaction) throw { name: "TRANSACTION_NOT_FOUND" }
 
