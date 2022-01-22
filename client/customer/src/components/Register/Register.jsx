@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { FormButton, FormGroup, FormTitle, Label, Input } from "../../style/formElement";
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -28,48 +29,48 @@ export const Register = () => {
     //dispatch to store here
   };
   return (
-    <div>
-      <h1>This is Register</h1>
-      <label>email</label>
-      <input type={"text"} id={"email"} onChange={handleFieldChange}></input>
-      <label>password</label>
-      <input
+    <FormGroup>
+      <FormTitle>This is Register</FormTitle>
+      <Label>email</Label>
+      <Input type={"text"} id={"email"} onChange={handleFieldChange}></Input>
+      <Label>password</Label>
+      <Input
         type={"password"}
         id={"password"}
         onChange={handleFieldChange}
-      ></input>
-      <label>fullName</label>
-      <input type={"text"} id={"fullName"} onChange={handleFieldChange}></input>
-      <label>birthdate</label>
-      <input
+      ></Input>
+      <Label>fullName</Label>
+      <Input type={"text"} id={"fullName"} onChange={handleFieldChange}></Input>
+      <Label>birthdate</Label>
+      <Input
         type={"date"}
         id={"birthdate"}
         onChange={handleFieldChange}
-      ></input>
-      <label>gender</label> {/* nanti diganti select option */}
+      ></Input>
+      <Label>gender</Label> {/* nanti diganti select option */}
       <select id={"gender"} onChange={handleFieldChange}>
         <option value={"male"}>Male</option>
         <option value={"female"}>Female</option>
       </select>
-      <label>address</label>
-      <input
+      <Label>address</Label>
+      <Input
         type={"textarea"}
         id={"address"}
         onChange={handleFieldChange}
-      ></input>
-      <label>photoProfile</label>
-      <input
+      ></Input>
+      <Label>photoProfile</Label>
+      <Input
         type={"file"}
         id={"photoProfile"}
         onChange={handleFieldChange}
-      ></input>
-      <label>phoneNumber</label> {/* nanti diganti select option */}
-      <input
+      ></Input>
+      <Label>phoneNumber</Label> {/* nanti diganti select option */}
+      <Input
         type={"text"}
         id={"phoneNumber"}
         onChange={handleFieldChange}
-      ></input>
-      <button onClick={submit}>Register</button>
-    </div>
+      ></Input>
+      <FormButton onClick={submit}>Register</FormButton>
+    </FormGroup>
   );
 };

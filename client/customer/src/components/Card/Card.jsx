@@ -46,6 +46,7 @@ const Card = () => {
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Asperiores, blanditiis?
                     </p>
+
                   </div>
                 </a>
               </li>

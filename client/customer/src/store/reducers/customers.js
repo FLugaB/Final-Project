@@ -4,6 +4,8 @@ import {
   CUSTOMER_IS_SUCCESS_LOGIN,
   SET_LOADING,
   SET_ERROR,
+  CUSTOMER_LOGIN,
+  CUSTOMER_IS_SUCCESS_REGISTER,
 } from "../actionType/customers";
 
 const initialState = {
@@ -11,7 +13,8 @@ const initialState = {
   customerDetail: [],
   loadingCustomers: false,
   errorCustomers: null,
-  isSuccessLogin: false
+  isSuccessLogin: false,
+  isSuccessRegister: false
 };
 
 export default function customersReducer(state = initialState, action) {
@@ -28,6 +31,8 @@ export default function customersReducer(state = initialState, action) {
       }
     case CUSTOMER_IS_SUCCESS_LOGIN:
       return { ...state, isSuccessLogin: action.payload }
+    case CUSTOMER_IS_SUCCESS_REGISTER:
+      return { ...state, isSuccessRegister: action.payload }
     case SET_LOADING: 
       return {
         ...state,
@@ -38,6 +43,8 @@ export default function customersReducer(state = initialState, action) {
         ...state,
         errorCustomers: action.payload,
       }
+    case CUSTOMER_LOGIN:
+      return state
     default:
       return state;
   }

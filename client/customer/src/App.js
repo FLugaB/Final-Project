@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import { Routes, Route } from "react-router-dom";
 import VideoCall from "./pages/video/Meeting.jsx";
 import VideoCallOwner from "./pages/video/MeetingOwner.jsx";
+import Dashboard from './pages/Dashboard'
 import JoinMeeting from "./pages/video/Join.jsx";
 import Notif from './components/Notif' 
 import { pageLoad } from './Hooks/load'
@@ -27,18 +28,18 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const snapSrcUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
-    const myMidtransClientKey = 'SB-Mid-client-a4h5p1uZna2ekBBq';
-  
-    const script = document.createElement('script');
+    const snapSrcUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
+    const myMidtransClientKey = "SB-Mid-client-a4h5p1uZna2ekBBq";
+
+    const script = document.createElement("script");
     script.src = snapSrcUrl;
-    script.setAttribute('data-client-key', myMidtransClientKey);
+    script.setAttribute("data-client-key", myMidtransClientKey);
     script.async = true;
     document.body.appendChild(script);
-  
+
     return () => {
       document.body.removeChild(script);
-    }
+    };
   }, []);
 
   const mode = 'login';
