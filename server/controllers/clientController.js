@@ -3,6 +3,7 @@ const { sequelize } = require('../models')
 const { compareHash } = require('../helpers/bycrpt')
 const { getToken } = require('../helpers/jwt')
 const { Op } = require("sequelize");
+const e = require('express');
 
 const clientRegister = async (req, res, next) => {
     const transaction = await sequelize.transaction();
