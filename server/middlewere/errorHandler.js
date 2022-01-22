@@ -75,7 +75,7 @@ const errorsLog = (err, req, res, next) => {
         message = "there is no orders yet, please order again"
     } else if ( err.name === `NOT_FOUND_DOCTOR`) {
         code = 404
-        message = "there is no doctor"
+        message = "There is no Doctor"
     }
     // NEXT
     // else if ( err.response.data.error_messages[0] === 'transaction_details.order_id sudah digunakan') {

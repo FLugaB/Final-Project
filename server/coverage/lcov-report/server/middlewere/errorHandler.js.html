@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">54.38% </span>
+                <span class="strong">41.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>31/57</span>
+                <span class='fraction'>31/75</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.89% </span>
+                <span class="strong">44% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>22/38</span>
+                <span class='fraction'>22/50</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">54.38% </span>
+                <span class="strong">41.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>31/57</span>
+                <span class='fraction'>31/75</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -141,9 +141,19 @@
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
 <a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">37x</span>
 <span class="cline-any cline-yes">37x</span>
@@ -201,14 +211,24 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -219,7 +239,7 @@
 <span class="cline-any cline-yes">37x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
 &nbsp;
 const errorsLog = (err, req, res, next) =&gt; {
 &nbsp;
@@ -279,15 +299,25 @@ const errorsLog = (err, req, res, next) =&gt; {
     } else <span class="cstat-no" title="statement not covered" >if ( err.name === `NO_ITEM_ON_CART`) {</span>
 <span class="cstat-no" title="statement not covered" >        code = 404</span>
 <span class="cstat-no" title="statement not covered" >        message = "Not Found Order Product"</span>
-    } 
-    // else if ( err.name === "CANNOT_DELETE_PRODUCT") {
-    //     code = 403
-    //     message = "You Can't Delete This Product"
-    // } 
-    // else if ( err.name === `CANNOT_UPDATE_PRODUCT`) {
-    //     code = 403
-    //     message = "you can't update this product"
-    // }
+    } else <span class="cstat-no" title="statement not covered" >if ( err.name === `CANNOT_ADD_PRODUCT`) {</span>
+<span class="cstat-no" title="statement not covered" >        code = 403</span>
+<span class="cstat-no" title="statement not covered" >        message = "Product is Exist, Please Only Add to Detail Product Refer to this Product Id"</span>
+    } else <span class="cstat-no" title="statement not covered" >if ( err.name === "CANNOT_DELETE_PRODUCT") {</span>
+<span class="cstat-no" title="statement not covered" >        code = 403</span>
+<span class="cstat-no" title="statement not covered" >        message = "You Can't Delete This Product"</span>
+    } else <span class="cstat-no" title="statement not covered" >if ( err.name === `CANNOT_UPDATE_PRODUCT`) {</span>
+<span class="cstat-no" title="statement not covered" >        code = 403</span>
+<span class="cstat-no" title="statement not covered" >        message = "You Can't Update This Product"</span>
+    } else <span class="cstat-no" title="statement not covered" >if ( err.name === `NO_ORDER_COMPLETED`) {</span>
+<span class="cstat-no" title="statement not covered" >        code = 404</span>
+<span class="cstat-no" title="statement not covered" >        message = "there is no orders that completed"</span>
+    } else <span class="cstat-no" title="statement not covered" >if ( err.name === `NOT_FOUND_ORDER`) {</span>
+<span class="cstat-no" title="statement not covered" >        code = 404</span>
+<span class="cstat-no" title="statement not covered" >        message = "there is no orders yet, please order again"</span>
+    } else <span class="cstat-no" title="statement not covered" >if ( err.name === `NOT_FOUND_DOCTOR`) {</span>
+<span class="cstat-no" title="statement not covered" >        code = 404</span>
+<span class="cstat-no" title="statement not covered" >        message = "there is no doctor"</span>
+    }
     // NEXT
     // else if ( err.response.data.error_messages[0] === 'transaction_details.order_id sudah digunakan') {
     //     code = 404
@@ -304,7 +334,7 @@ module.exports = errorsLog</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sat Jan 22 2022 16:18:06 GMT+0700 (Western Indonesia Time)
+                at Sat Jan 22 2022 16:53:21 GMT+0700 (Indochina Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
