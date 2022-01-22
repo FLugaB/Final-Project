@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login, register } from "../store/actionCreator/customers";
 
-import { Form, Row, Col } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 import { timerAlert, errorAlert } from "../Hooks/alert";
 import { localLoad } from "../Hooks/load";
