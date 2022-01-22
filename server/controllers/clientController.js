@@ -40,6 +40,7 @@ const clientRegister = async (req, res, next) => {
 const clientLogin = async (req, res, next) => {
     try {
         const {  email, password } = req.body
+        console.log(email, password);
         if (!email || !password) {
             throw ({
                 name: "BAD_REQUEST",
@@ -53,7 +54,7 @@ const clientLogin = async (req, res, next) => {
         });
 
         if (!findUser) throw { name: `USER_NOT_FOUND` }
-
+        console.log(`user found`);
         const verfyPass = compareHash(password, findUser.password)
 
         if (!verfyPass) throw { name: `USER_NOT_FOUND` }

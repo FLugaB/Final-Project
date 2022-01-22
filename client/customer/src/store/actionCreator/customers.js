@@ -11,6 +11,7 @@ export const login = (payload) => {
             dispatch(isSuccess(false))
             dispatch(isLoading(true))
             dispatch(isError(null))
+            console.log(payload);
             const response = await fetch(`${server}/login`, {
                 method: "POST",
                 body: JSON.stringify(payload),
