@@ -3,6 +3,49 @@ const { Op } = require("sequelize");
 
 module.exports = class Controller {
 
+  static showProduct = async(req,res, next) => {
+    try {
+      const result = await Product.findAll({
+        include: [
+          {
+              model: DetailProduct,
+              attributes: {
+                  exclude: ['createdAt', `updatedAt`]
+              }
+          }, 
+        ]
+      })
+      if (!result) {
+        throw {name: "Product_not_found"}
+      }
+      res.status(200).json(result)
+    } catch (err) {
+      next(err)
+    } 
+  }
+
+  static showProductById = async(req,res,next) => {
+    try {
+      const {id} = req.params
+      const result = await Product.findByPk(id, {
+        include: [
+          {
+              model: DetailProduct,
+              attributes: {
+                  exclude: ['createdAt', `updatedAt`]
+              }
+          }, 
+        ]
+      }) 
+      if (!result) {
+        throw {name: "Product_not_found"}
+      } 
+      res.status(200).json(result)
+    } catch (err) {
+      next(err)
+    }
+  }
+
   static addProduct =  async(req, res, next) => {
     const transaction = await sequelize.transaction()
       const { title, type, 
@@ -56,48 +99,6 @@ module.exports = class Controller {
     }
   }
 
-  static showProduct = async(req,res, next) => {
-    try {
-      const result = await Product.findAll({
-        include: [
-          {
-              model: DetailProduct,
-              attributes: {
-                  exclude: ['createdAt', `updatedAt`]
-              }
-          }, 
-        ]
-      })
-      if (!result) {
-        throw {name: "Product_not_found"}
-      }
-      res.status(200).json(result)
-    } catch (err) {
-      next(err)
-    } 
-  }
-
-  static showProductById = async(req,res,next) => {
-    try {
-      const {id} = req.params
-      const result = await Product.findByPk(id, {
-        include: [
-          {
-              model: DetailProduct,
-              attributes: {
-                  exclude: ['createdAt', `updatedAt`]
-              }
-          }, 
-        ]
-      }) 
-      if (!result) {
-        throw {name: "Product_not_found"}
-      } 
-      res.status(200).json(result)
-    } catch (err) {
-      next(err)
-    }
-  }
 
   static updateProduct = async(req,res,next) => {
     const {id} = req.params

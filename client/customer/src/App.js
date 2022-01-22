@@ -10,6 +10,8 @@ import JoinMeeting from "./pages/video/Join.jsx";
 import Notif from './components/Notif' 
 import { pageLoad } from './Hooks/load'
 
+import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
@@ -53,7 +55,13 @@ function App() {
           <Route path="/start-video" element={<JoinMeeting />} />
           <Route path="/video/:id" element={<VideoCall />} />
           <Route path="/video-owner/:id" element={<VideoCallOwner />} />
-          <Route path="/login" element={< Login mode={mode} />} />
+
+          <Route path="/login" element={
+            <LogGuard>
+              <Login mode={mode} />
+            </LogGuard>
+          } />
+          
       </Routes>
     </div>
   );

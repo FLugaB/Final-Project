@@ -3,7 +3,7 @@ const request = require("supertest");
 const { User, DetailProduct, Product } = require("../models")
 const { getToken } = require("../helpers/jwt");
 
-let tokenMatch1, tokenPayloadInvalid
+let tokenMatch1, tokenPayloadInvalid, clientToken
 const list = [
   {
     "title": "Chat consultation", 
@@ -23,7 +23,7 @@ const list = [
   }
 ]
 
-beforeAll(async () => {
+afterAll(async () => {
   await User.destroy({
     where: {},
     truncate: true,
@@ -50,6 +50,12 @@ beforeAll(async () => {
     password: "newAdmin",
     role: "Admin",
   };
+
+  let newClient = {
+    email: "newClient@gmail.com",
+    password: "newClient",
+    role: "Client",
+  }; 
     
   try {
     const createdUser = await User.create(newAdmin);
@@ -58,18 +64,148 @@ beforeAll(async () => {
       email: createdUser.email,
     };
     tokenMatch1 = getToken(payload1);
+
+    const createdClient = await User.create(newClient);
+    let payload2 = {
+      id: createdClient.id,
+      email: createdClient.email,
+    };
+    clientToken = getToken(payload2);
     
     let wrongPayload = {
       id: 1000,
       email: "wrongEmail@gmail.com",
     };
-    
     tokenPayloadInvalid = getToken(wrongPayload);
   } catch (err) {
     console.log(err);
   }
 })
 
+describe("show product Client", () => {
+  //TODO 1 show product empty
+  test("don't have product", (done) => {
+    request(app)
+      .get("/products")
+      .set("access_token", clientToken)
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object));
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  //TODO 2 show product success
+  test("success show product", (done) => {
+    request(app)
+      .get("/products")
+      .set("access_token", clientToken)
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object))
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+    //TODO 3 show product failed
+    test("failed show product", (done) => {
+      request(app)
+        .get("/products")
+        .then((res) => {
+          expect(res.status).toBe(403);
+          expect(res.body).toHaveProperty('message', "Pleae Login first")
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+
+    //TODO 4 show product not authorized
+    test("show product not authorized", (done) => {
+      request(app)
+        .get("/products")
+        .set("access_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
+        .then((res) => {
+          expect(res.status).toBe(401);
+          expect(res.body).toHaveProperty('message', "Invalid token")
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+})
+
+describe("show product by id Client", () => {
+  //TODO 1 don't have product by id
+  test("don't have product by id", (done) => {
+    request(app)
+      .get("/products/9")
+      .set("access_token", clientToken)
+      .then((res) => {
+        expect(res.status).toBe(404);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Product not found");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  //TODO 2 show product success
+  test.only("success show product", (done) => {
+    request(app)
+      .get("/products/1")
+      .set("access_token", clientToken)
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object));
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+  
+  //TODO 3 show product failed no access_token
+  test("failed show product no access_token", (done) => {
+    request(app)
+      .get("/products")
+      .then((res) => {
+        expect(res.status).toBe(403);
+        expect(res.body).toHaveProperty('message', "Pleae Login first")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  //TODO 4 show product not authorized
+  test("show product not authorized", (done) => {
+    request(app)
+      .get("/products")
+      .set("access_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toHaveProperty('message', "Invalid token")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+})
   
 describe("add product", () => {
   //TODO 1 success add product
@@ -171,72 +307,72 @@ describe("add product", () => {
 
 })
 
-describe("show product", () => {
-  //TODO 1 show product
-  test("don't have product", (done) => {
-    request(app)
-      .get("/cms/products")
-      .set("access_token", tokenMatch1)
-      .then((res) => {
-        expect(res.status).toBe(200);
-        expect(res.body).toEqual(expect.any(Object));
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
+// describe("show product admin", () => {
+//   //TODO 1 show product
+//   test("don't have product", (done) => {
+//     request(app)
+//       .get("/cms/products")
+//       .set("access_token", tokenMatch1)
+//       .then((res) => {
+//         expect(res.status).toBe(200);
+//         expect(res.body).toEqual(expect.any(Object));
+//         done();
+//       })
+//       .catch((err) => {
+//         done(err);
+//       });
+//   });
 
-  //TODO 2 show product
-  test("success show product", (done) => {
-    request(app)
-      .get("/cms/products")
-      .set("access_token", tokenMatch1)
-      .then((res) => {
-        expect(res.status).toBe(200);
-        expect(res.body).toEqual(expect.any(Object))
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
+//   //TODO 2 show product
+//   test("success show product", (done) => {
+//     request(app)
+//       .get("/cms/products")
+//       .set("access_token", tokenMatch1)
+//       .then((res) => {
+//         expect(res.status).toBe(200);
+//         expect(res.body).toEqual(expect.any(Object))
+//         done();
+//       })
+//       .catch((err) => {
+//         done(err);
+//       });
+//   });
   
-})
+// })
 
-describe("show product by id", () => {
-  //TODO 1 don't have product by id
-  test("don't have product by id", (done) => {
-    request(app)
-      .get("/cms/products/9")
-      .set("access_token", tokenMatch1)
-      .then((res) => {
-        expect(res.status).toBe(404);
-        expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Product not found");
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
+// describe("show product by id admin", () => {
+//   //TODO 1 don't have product by id
+//   test("don't have product by id", (done) => {
+//     request(app)
+//       .get("/cms/products/9")
+//       .set("access_token", tokenMatch1)
+//       .then((res) => {
+//         expect(res.status).toBe(404);
+//         expect(res.body).toEqual(expect.any(Object));
+//         expect(res.body).toHaveProperty("message", "Product not found");
+//         done();
+//       })
+//       .catch((err) => {
+//         done(err);
+//       });
+//   });
 
-  //TODO 2 show product
-  test("success show product", (done) => {
-    request(app)
-      .get("/cms/products/1")
-      .set("access_token", tokenMatch1)
-      .then((res) => {
-        expect(res.status).toBe(200);
-        expect(res.body).toEqual(expect.any(Object));
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
+//   //TODO 2 show product
+//   test("success show product", (done) => {
+//     request(app)
+//       .get("/cms/products/1")
+//       .set("access_token", tokenMatch1)
+//       .then((res) => {
+//         expect(res.status).toBe(200);
+//         expect(res.body).toEqual(expect.any(Object));
+//         done();
+//       })
+//       .catch((err) => {
+//         done(err);
+//       });
+//   });
   
-})
+// })
 
 describe("update product", () => {
   //TODO 1 success update product
@@ -428,6 +564,41 @@ describe("delete product", () => {
         done()
       })
     })
+})
+
+
+describe("show product by id Client", () => {
+  //TODO 1 don't have product by id
+  test("don't have product by id", (done) => {
+    request(app)
+      .get("/cms/details/9")
+      .set("access_token", clientToken)
+      .then((res) => {
+        expect(res.status).toBe(404);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Product not found");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  //TODO 2 show product details
+  test("success show product by id", (done) => {
+    request(app)
+      .get("/cms/details/1")
+      .set("access_token", clientToken)
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object));
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+  
 })
 
 

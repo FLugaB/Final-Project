@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
-// import { login } from '../store/actionCreator/users'
+import { login } from '../store/actionCreator/customers'
 
 import { Form } from "react-bootstrap"
 
@@ -21,7 +21,7 @@ const FormLogin = (props) => {
     const [phonenumber, setPhoneNumber] = useState("");
     const [address, setAddress] = useState("");
 
-    // const { isErrorUsers, isSuccessLogin } = useSelector((state) => state.user)
+    const { errorCustomers, isSuccessLogin } = useSelector((state) => state.customers)
     
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -35,27 +35,27 @@ const FormLogin = (props) => {
             password: password
         }
 
-        // dispatch(login(tryLog))
+        dispatch(login(tryLog))
     }
 
-    // const logError = (isErrorUsers) => {
-    //     if (isErrorUsers) {
-    //         setClickLoad(false)
-    //         errorAlert(isErrorUsers)
-    //     }
-    // }
+    const logError = (errorCustomers) => {
+        if (errorCustomers) {
+            setClickLoad(false)
+            errorAlert(errorCustomers)
+        }
+    }
 
-    // const logSuccess = (isSuccessLogin) => {
-    //     if (isSuccessLogin) {
-    //         setClickLoad(false)
-    //         navigate('/')
-    //         const text = "Hi, Welcomeback Buddy !"
-    //         timerAlert(text)
-    //     }
-    // }
+    const logSuccess = (isSuccessLogin) => {
+        if (isSuccessLogin) {
+            setClickLoad(false)
+            navigate('/')
+            const text = "Hi, Welcomeback <fullName> !"
+            timerAlert(text)
+        }
+    }
 
-    // useEffect(() => logError(isErrorUsers), [isErrorUsers]);
-    // useEffect(() => logSuccess(isSuccessLogin), [isSuccessLogin]);
+    useEffect(() => logError(errorCustomers), [errorCustomers]);
+    useEffect(() => logSuccess(isSuccessLogin), [isSuccessLogin]);
 
     if (clickLoad) return localLoad()
     

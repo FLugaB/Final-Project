@@ -15,11 +15,13 @@ const errorsLog = (err, req, res, next) => {
     } else if ( err.name === `USER_NOT_FOUND`) {
         code = 401
         message = "Invalid email/password"
-    } else if ( err.name === `NO_TOKEN` || 
-                err.name === `INVALID_TOKEN ` ||
+    } else if (err.name === `INVALID_TOKEN ` ||
                 err.name === `JsonWebTokenError`){
         code = 401
         message = "Invalid token"
+    } else if ( err.name === `NO_TOKEN`){
+        code = 403
+        message = "Pleae Login first"
     } else if ( err.name === `FORBIDDEN`){
         code = 403
         message = "Invalid access"

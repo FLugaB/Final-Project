@@ -1,4 +1,4 @@
-import { CUSTOMER_LOGIN, CUSTOMER_REGISTER } from "../actionType/customers";
+import { CUSTOMER_LOGIN, CUSTOMER_REGISTER, CUSTOMER_IS_SUCCESS_LOGIN } from "../actionType/customers";
 import { isError, isSuccess, isLoading } from './status'
 
 //Server EndPoint
@@ -21,7 +21,7 @@ export const login = (payload) => {
             const output = await response.json()
             if (!response.ok) throw (output)
             localStorage.setItem('access_token', output.access_token)
-            dispatch({ type: IS_SUCCESS_LOGIN, payload: true});
+            dispatch({ type: CUSTOMER_IS_SUCCESS_LOGIN, payload: true});
         } catch (error) {
             dispatch(isError(error));
         } finally { dispatch(isLoading(false)); }
