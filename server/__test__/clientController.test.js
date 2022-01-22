@@ -6,7 +6,7 @@ const { getToken } = require("../helpers/jwt");
 const defaultImage =
   "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332";
 
-let tokenMatch1, tokenMatch2, tokenPayloadInvalid;
+let tokenMatch1, tokenMatch2, adminToken, tokenPayloadInvalid;
 let invalidToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJjaW5keVZAZ21haWwuY29tIiwiaWF0IjoxNjQyNjAzMzQ1fQ.bx0MAXaSmsYCa3Qbac8KQpCftEzKtFgpr8I96I1xZed";
 
@@ -42,6 +42,13 @@ beforeAll(async () => {
     role: "Client",
   };
 
+  
+  let newAdmin = {
+    email: "newAdmin@gmail.com",
+    password: "newAdmin",
+    role: "Admin",
+  };
+
   try {
     const createdUser = await User.create(newClientTest);
     let payload1 = {
@@ -50,6 +57,14 @@ beforeAll(async () => {
     };
 
     tokenMatch1 = getToken(payload1);
+
+    const createdAdmin = await User.create(newClientTest);
+    let payload2 = {
+      id: createdAdmin.id,
+      email: createdAdmin.email,
+    };
+
+    adminToken = getToken(payload2);
 
     let wrongPayload = {
       id: 1000,
@@ -705,6 +720,158 @@ describe("New Client Test on clientLogin Field", () => {
   });
 });
 
+describe("New Admin Test on admin login Field", () => {
+  //TODO 1 Login Success
+  test("Login success should be return valid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "newAdmin@gmail.com",
+        password: "newAdmin",
+        role: "Admin",
+      })
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({ access_token: res.body.access_token });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 2 Login email is null
+  test("Login email is null should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        password: "newAdmin",
+        role: "Admin",
+      })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Email/Password is required",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 3 Login email is empty
+  test("Login email is empty should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "",
+        password: "newAdmin",
+        role: "Admin",
+      })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Email/Password is required",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 4 Login password is null
+  test("Login password is null should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "newAdmin@gmail.com",
+        role: "Admin",
+      })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Email/Password is required",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 5 Login password is empty
+  test("Login password is empty should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "newAdmin@gmail.com",
+        password: "",
+        role: "Admin",
+      })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Email/Password is required",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 6 Login find Admin not found
+  test("Login find Admin not found should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "newAdmin11@gmail.com",
+        password: "newAdmin",
+        role: "Admin",
+      })
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Invalid email/password",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 7 Login verify is undefined
+  test("Login verify is undefined should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "newAdmin@gmail.com",
+        password: "newAdmin111",
+        role: "Admin",
+      })
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Invalid email/password",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+});
+
 describe("New Client Test on clientAccount Authentication Field", () => {
   //TODO 1 Client Account Authentication Found
   test("Client Account Authentication Found should be return valid response", (done) => {
@@ -825,10 +992,128 @@ describe("New Client Test on clientAccount Authentication Field", () => {
         done(err);
       });
   });
+});
 
-  
+describe("New Admin Test on adminAccount Authentication Field", () => {
+  //TODO 1 admin Account Authentication Found
+  test("admin Account Authentication Found should be return valid response", (done) => {
+    request(app)
+      .get("/account")
+      .set("access_token", adminToken)
+      .send({
+        email: "newClient1@gmail.com",
+        role: "Client",
+      })
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("findUser.id", 2);
+        expect(res.body).toHaveProperty(
+          "findUser.email",
+          "newClient1@gmail.com"
+        );
+        expect(res.body).toHaveProperty("findUser.role", "Client");
+        expect(res.body).toHaveProperty(
+          "findUser.Profile.fullName",
+          "newClient"
+        );
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
 
-  
+  //TODO 2 Client Account Authentication Invalid Access Token
+  test("Client Account Authentication Invalid Access Token should be return invalid response", (done) => {
+    request(app)
+      .get("/account")
+      .set("access_token", invalidToken)
+      .send({
+        email: "newClient1@gmail.com",
+        role: "Client",
+      })
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Invalid token")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  //TODO 3 Client Account Authentication Access Token undefined
+  test("Client Account Authentication Access Token undefined should be return invalid response", (done) => {
+    request(app)
+      .get("/account")
+      .send({
+        email: "newClient1@gmail.com",
+        role: "Client",
+      })
+      .then((res) => {
+        expect(res.status).toBe(403);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Pleae Login first")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  //TODO 4 Client Account Authentication payload undefined
+  test("Client Account Authentication payload undefined should be return invalid response", (done) => {
+    request(app)
+      .get("/account")
+      .set("access_token", invalidToken)
+      .send({
+        email: "newClient1@gmail.com",
+        role: "Client",
+      })
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Invalid token")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  //TODO 5 Client Account Authentication payload less than 1
+  test("Client Account Authentication payload less than 1 should be return invalid response", (done) => {
+    request(app)
+      .get("/account")
+      .set("access_token", "")
+      .then((res) => {
+        expect(res.status).toBe(403);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Pleae Login first")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  //TODO 6 Client Account Authentication user not found
+  test("Client Account Authentication user not found should be return invalid response", (done) => {
+    request(app)
+      .get("/account")
+      .set("access_token", "gt55f")
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Invalid token")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
 });
 
 describe("Client Update Profile", () => {
@@ -1184,7 +1469,7 @@ describe("Fetch doctor list", () => {
   
 
   //TODO 1 fetch doctor list empty
-  test("fetch doctor list empty", (done) => {
+  test.only("fetch doctor list empty", (done) => {
     const data = async () => {
       await User.destroy({
         where: {role : "Doctor"},
@@ -1195,7 +1480,7 @@ describe("Fetch doctor list", () => {
     }
     console.log(data,"0000000000");
     request(app)
-    .get("/doctors")
+    .get(`/doctors`)
     .then((res) => {
       console.log(res.body,"in hasilnya ..............");
       expect(res.status).toBe(200)
