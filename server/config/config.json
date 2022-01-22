@@ -11,7 +11,8 @@
     "password": "felix13",
     "database": "ffdb_db_test",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logger": false
   },
   "production": {
     "use_env_variable": "DATABASE_URL",
