@@ -83,7 +83,7 @@ const clientAccount = async (req, res, next) => {
                 {
                     model: Profile,
                     attributes: {
-                        exclude: ['createdAt', `updatedAt` ]
+                        exclude: ['createdAt', `updatedAt`, 'password' ]
                     },
                 }, 
             ]

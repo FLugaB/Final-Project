@@ -111,7 +111,7 @@ module.exports = class Controller {
         if(!find) {
           throw {name: "Product_not_found"}
         }
-        const result = await Product.update(input, {where: {id}, returning:true})
+        const result = await Product.update(input, {where: {id}, returning:true, transaction:t})
         res.status(200).json(result)     
         await t.commit()
       }
@@ -125,10 +125,12 @@ module.exports = class Controller {
   }
 
   static deleteProduct = async (req,res,next) => {
+    const {id} = req.params
+    const t = await sequelize.transaction()
+    
     try {
-      const {id} = req.params
       
-      if (+id === 1 || +id === 10) {
+      if (+id === 1 || +id === 2) {
         // throw {name: "CANNOT_DELETE_PRODUCT"}
         res.status(403).json({message: "You Can't Delete This Product"})
       } else {
@@ -136,9 +138,11 @@ module.exports = class Controller {
         if (!find) {
             throw {name: "Product_not_found"}
         }
-        await Product.destroy ({where : {id}})
+        await Product.destroy ({where : {id}, transaction:t})
+        await t.commit()
         res.status(200).json({message: "Success Delete Product"})
       }
+
     } catch (err) {
       console.log(err,"<<<<<");
       next(err)
