@@ -50,7 +50,7 @@ function App() {
       <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/notification/handling" element={<Notif />} />
-          <Route path="/start-video" element={<JoinMeeting />} />
+          <Route path="/doctors" element={<JoinMeeting />} />
           <Route path="/video/:id" element={<VideoCall />} />
           <Route path="/video-owner/:id" element={<VideoCallOwner />} />
           <Route path="/login" element={< Login mode={mode} />} />
@@ -58,5 +58,5 @@ function App() {
     </div>
   );
 }
-
+// https://dailyphil.daily.co/test-room?t=INSERT_TOKEN_HERE
 export default App;
