@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.43% </span>
+                <span class="strong">38.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/23</span>
+                <span class='fraction'>7/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.43% </span>
+                <span class="strong">38.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/23</span>
+                <span class='fraction'>7/18</span>
             </div>
         
             
@@ -117,18 +117,16 @@
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,11 +147,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -164,22 +162,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -191,59 +173,50 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const axios = require("axios");
 &nbsp;
-    const API_KEY = "6a879d7e4dd4d3d5824dded02867527f781a72b79a1ada7bb665e0b570552b4e";
+const API_KEY =
+  "6a879d7e4dd4d3d5824dded02867527f781a72b79a1ada7bb665e0b570552b4e";
 &nbsp;
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + API_KEY,
-    };
-    
-    const getRoom = <span class="fstat-no" title="function not covered" >(r</span>oom) =&gt; {
-<span class="cstat-no" title="statement not covered" >      return axios(`https://api.daily.co/v1/rooms/${room}`, {</span>
-        method: "GET",
-        headers,
-      })
-        .then(<span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; {
-<span class="cstat-no" title="statement not covered" >          return response.data;</span>
-        })
-        .catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; <span class="cstat-no" title="statement not covered" >console.error("error:" + err))</span>;
-    };
+const headers = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
+  Authorization: "Bearer " + API_KEY,
+};
 &nbsp;
-    const createRoom = <span class="fstat-no" title="function not covered" >(r</span>oom) =&gt; {
-<span class="cstat-no" title="statement not covered" >      return axios("https://api.daily.co/v1/rooms", {</span>
-        method: "POST",
-        headers,
-        body: JSON.stringify({
-          name: room,
-          properties: {
-            enable_screenshare: true,
-            enable_chat: true,
-            start_video_off: true,
-            start_audio_off: false,
-            lang: "en",
-          },
-        }),
-      })
-        .then(<span class="fstat-no" title="function not covered" >(r</span>es) =&gt; <span class="cstat-no" title="statement not covered" >res.data.json())</span>
-        .then(<span class="fstat-no" title="function not covered" >(j</span>son) =&gt; {
-<span class="cstat-no" title="statement not covered" >          return json;</span>
-        })
-        .catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; <span class="cstat-no" title="statement not covered" >console.log("error:" + err))</span>;
-    };
+const headerTokenCustomers = {
+  'authorization': 'Bearer ' + API_KEY,
+  'content-type': 'application/json',
+  'Content-Type': 'application/json; charset=UTF-8'
+}
+&nbsp;
+const getRoom = <span class="fstat-no" title="function not covered" >(r</span>oom) =&gt; {
+<span class="cstat-no" title="statement not covered" >  return axios(`https://api.daily.co/v1/rooms/${room}`, {</span>
+    method: "GET",
+    headers,
+  })
+    .then(<span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; {
+<span class="cstat-no" title="statement not covered" >      return response.data;</span>
+    })
+    .catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; <span class="cstat-no" title="statement not covered" >console.error("error:" + err))</span>;
+};
 &nbsp;
 const videoDaily = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
 <span class="cstat-no" title="statement not covered" >  try {</span>
-&nbsp;
     const roomId = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
-&nbsp;
     const room = <span class="cstat-no" title="statement not covered" >await getRoom(roomId);</span>
-<span class="cstat-no" title="statement not covered" >    if (room.error) {</span>
-      const newRoom = <span class="cstat-no" title="statement not covered" >await createRoom(roomId);</span>
-<span class="cstat-no" title="statement not covered" >      res.status(200).send(newRoom);</span>
-    } else {
-<span class="cstat-no" title="statement not covered" >      res.status(200).send(room);</span>
-    }
+<span class="cstat-no" title="statement not covered" >    console.log(room, "roomget");</span>
+    
+    const result = <span class="cstat-no" title="statement not covered" >await axios('https://api.daily.co/v1/meeting-tokens', {</span>
+        method: 'POST',
+        headers: headerTokenCustomers,
+        data: JSON.stringify({
+          "properties": {
+            "user_name":"Customers", 
+            "room_name":"DrVera"
+        }})
+    });
+<span class="cstat-no" title="statement not covered" >    console.log(result.data, "result");</span>
+&nbsp;
+    
 &nbsp;
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    console.log(error);</span>
@@ -259,7 +232,7 @@ module.exports = videoDaily;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sat Jan 22 2022 14:43:16 GMT+0700 (Western Indonesia Time)
+                at Sat Jan 22 2022 14:44:45 GMT+0700 (Western Indonesia Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
