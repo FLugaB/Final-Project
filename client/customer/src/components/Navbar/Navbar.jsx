@@ -1,12 +1,19 @@
 import React, { useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { statusLog } from '../../store/actionCreator/status'
+
 import "./Navbar.css";
 
 const Navbar = ({ navbarLinks }) => {
 
   const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
   const height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     document.addEventListener('scroll', function() {
@@ -19,6 +26,12 @@ const Navbar = ({ navbarLinks }) => {
 
   }, [])
 
+  const tryLogout = () => {
+    dispatch(statusLog())
+    localStorage.clear();
+    navigate('/login')
+}
+
   return (
     <nav id="navigate" className="navigation-fixed">
       <ul className="justify-content-md-center d-flex">
@@ -27,7 +40,13 @@ const Navbar = ({ navbarLinks }) => {
           <li><a href="#">Services</a></li>
           <li><a href="#">Team</a></li>
           <li><a href="#">Contact</a></li>
-          <li><Link to="/login">Login</Link></li>
+          {
+            localStorage.getItem(`access_token`) ? 
+            <li><a href="" onClick={tryLogout}>Logout</a></li>
+            :
+            <li><Link to="/login">Login</Link></li>
+          }
+          
       </ul>
     </nav>
   );
