@@ -29,8 +29,10 @@ const getRoom = (room) => {
 const videoDaily = async (req, res, next) => {
   try {
     const roomId = req.params.id;
-    const room = await getRoom(roomId);
-    console.log(room, "roomget");
+    const roomGET = await getRoom(roomId);
+    res.status(200).send(roomGET)
+    
+    console.log(roomGET, "roomget");
     
     const result = await axios('https://api.daily.co/v1/meeting-tokens', {
         method: 'POST',

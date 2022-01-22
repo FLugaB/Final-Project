@@ -27,7 +27,7 @@ export default function Video({ match }) {
             showLeaveButton: true,
             showFullscreenButton: true,
           }).join({
-            url: "${domain}${id}",
+            url: "${domain}${id}?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvIjp0cnVlLCJ1IjoiRG9jdG9yIFZlcmEiLCJyIjoiRHJWZXJhIiwiZCI6IjBjZTAyOTY2LWQ5MTItNGRiMC04NWNhLTEyMDAzNDA0ODg0MyIsImlhdCI6MTY0Mjg1MjM3NX0.f9taHR_Hab_djWy1hw8wej2IiM3M3bp3d4V789jjLcU",
           });`;
 
           document.body.appendChild(script);
@@ -36,5 +36,5 @@ export default function Video({ match }) {
       .catch((err) => console.log(err));
   }, [id]);
 
-  return <div></div>;
+  return <div className="homepage-container"></div>;
 }

@@ -9,6 +9,7 @@ export default function Video({ match }) {
   useEffect(() => {
     const domain = "https://forsythiateam.daily.co/";
 
+    // https://forsythiateam.daily.co/DrVera
     axios
       .get(`http://localhost:3000/video-call/${id}`)
       .then((res) => {
@@ -27,7 +28,7 @@ export default function Video({ match }) {
             showLeaveButton: true,
             showFullscreenButton: true,
           }).join({
-            url: "${domain}${id}",
+            url: "${domain}DrVera?=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1IjoiQ3VzdG9tZXJzIiwiciI6IkRyVmVyYSIsImQiOiIwY2UwMjk2Ni1kOTEyLTRkYjAtODVjYS0xMjAwMzQwNDg4NDMiLCJpYXQiOjE2NDI4NTIwOTV9.ZqnJU3T5jKXRzitLW95KXvdNufdskA124-1C4hYBd_I",
           });`;
 
           document.body.appendChild(script);
