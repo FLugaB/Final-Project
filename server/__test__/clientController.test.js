@@ -1122,42 +1122,42 @@ describe("Client Update Profile", () => {
 })
 
 
-// describe("Fetch doctor list", () => {
+describe("Fetch doctor list", () => {
   
-//   //TODO 1 fetch doctor list empty
-//   test("fetch doctor list empty", (done) => {
-//     request(app)
-//     .get("/doctors")
-//     .set("access_token", tokenMatch1)
-//     .then((res) => {
-//       expect(res.status).toBe(200)
-//       expect(res.body).toHaveProperty("message", "There is no Doctor");
-//       expect(res.body).toEqual(expect.any(Object))
-//       done();
-//     })
-//     .catch((err) => {
-//       done(err);
-//     });  
-//   });
+  //TODO 1 fetch doctor list empty
+  test("fetch doctor list empty", (done) => {
+    request(app)
+    .get("/doctors")
+    .set("access_token", tokenMatch1)
+    .then((res) => {
+      expect(res.status).toBe(200)
+      expect(res.body).toHaveProperty("message", "There is no Doctor");
+      expect(res.body).toEqual(expect.any(Object))
+      done();
+    })
+    .catch((err) => {
+      done(err);
+    });  
+  });
   
-//   //TODO 2 fetch doctor list success
-//   test("fetch doctor list success", (done) => {
-//     User.create (data)
-//     .then(newaData => {
-//       done()
-//     }).catch(err => {
-//       done(err)
-//     })
-//     request(app)
-//     .get("/doctors")
-//     .set("access_token", tokenMatch1)
-//     .then((res) => {
-//       expect(res.status).toBe(200)
-//       expect(res.body).toEqual(expect.any(Object))
-//       done();
-//     })
-//     .catch((err) => {
-//       done(err);
-//     });  
-//   });
-// })
+  //TODO 2 fetch doctor list success
+  test("fetch doctor list success", (done) => {
+    User.create (data)
+    .then(newaData => {
+      done()
+    }).catch(err => {
+      done(err)
+    })
+    request(app)
+    .get("/doctors")
+    .set("access_token", tokenMatch1)
+    .then((res) => {
+      expect(res.status).toBe(200)
+      expect(res.body).toEqual(expect.any(Object))
+      done();
+    })
+    .catch((err) => {
+      done(err);
+    });  
+  });
+})

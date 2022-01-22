@@ -3,6 +3,7 @@ const { sequelize } = require('../models')
 const { compareHash } = require('../helpers/bycrpt')
 const { getToken } = require('../helpers/jwt')
 const { Op } = require("sequelize");
+const e = require('express');
 
 const clientRegister = async (req, res, next) => {
     const transaction = await sequelize.transaction();
@@ -171,11 +172,14 @@ const clientDoctorFetch = async (req, res, next) => {
             }, 
         ]
     })
-    if (!findAllDoctors.length) {
+    
+    if (findAllDoctors.length < 1) {
         console.log("masuk sini");
         res.status(200).json({message: "There is no Doctor"})
+    } else {
+        res.status(200).json(findAllDoctors)
     }
-    res.status(200).json(findAllDoctors)
+    
     } catch (error) {
         next(error)
     }
