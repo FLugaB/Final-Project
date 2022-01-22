@@ -814,11 +814,11 @@ describe("New Client Test on clientAccount Authentication Field", () => {
   test("Client Account Authentication user not found should be return invalid response", (done) => {
     request(app)
       .get("/account")
-      .set("access_token", "")
+      .set("access_token", "gt55f")
       .then((res) => {
-        expect(res.status).toBe(403);
+        expect(res.status).toBe(401);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Pleae Login first")
+        expect(res.body).toHaveProperty("message", "Invalid token")
         done();
       })
       .catch((err) => {
@@ -1184,7 +1184,7 @@ describe("Fetch doctor list", () => {
   
 
   //TODO 1 fetch doctor list empty
-  test.only("fetch doctor list empty", (done) => {
+  test("fetch doctor list empty", (done) => {
     const data = async () => {
       await User.destroy({
         where: {role : "Doctor"},

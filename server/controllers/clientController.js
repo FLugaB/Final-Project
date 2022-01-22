@@ -87,7 +87,6 @@ const clientAccount = async (req, res, next) => {
                 }, 
             ]
         });
-        console.log(findUser,">>>>>>>>>>ini finduser");
         if (!findUser) throw { name: `FORBIDDEN` }
 
         res.status(200).json({findUser});
@@ -186,6 +185,7 @@ const clientDoctorDetail = async (req, res, next) => {
 
     try {
         const { DoctorId } = req.params
+        console.log(req.params,">>>>>>>>>ini");
         if (!DoctorId) throw { name: "NOT_FOUND"}
         const findDoctorDetail = await User.findOne({
             where: {
