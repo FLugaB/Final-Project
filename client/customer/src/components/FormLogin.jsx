@@ -116,7 +116,7 @@ const FormLogin = (props) => {
         </div>
 
         <div className="form-group form-group--signup">
-            <div className="d-flex justify-content-between half-wrapper">
+            <div className=" justify-content-between half-wrapper">
               <Form.Control
                     className="form-group__input"
                     disabled={props.mode === "login"}
@@ -138,7 +138,7 @@ const FormLogin = (props) => {
               />
             </div>
 
-            <div className="d-flex justify-content-between half-wrapper">
+            <div className=" justify-content-between half-wrapper">
                 <Form.Control
                     className="form-group__input"
                     disabled={props.mode === "login"}
@@ -170,7 +170,7 @@ const FormLogin = (props) => {
                 required
             />
 
-            <div className="d-flex justify-content-between half-wrapper">
+            <div className=" justify-content-between half-wrapper">
                 <Form.Control
                     className="form-group__input"
                     disabled={props.mode === "login"}
