@@ -9,6 +9,7 @@ import VideoCallOwner from "./pages/video/MeetingOwner.jsx";
 import Dashboard from './pages/Dashboard'
 import JoinMeeting from "./pages/video/Join.jsx";
 import Notif from './components/Notif' 
+import NotFound from './pages/NotFound'
 import { pageLoad } from './Hooks/load'
 
 import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
@@ -65,6 +66,8 @@ function App() {
               <Login mode={mode} />
             </LogGuard>
           } />
+
+          <Route path="*" exact element={<NotFound />}></Route> 
           
       </Routes>
     </div>

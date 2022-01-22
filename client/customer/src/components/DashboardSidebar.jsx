@@ -55,8 +55,8 @@ const DashboardSidebar = () => {
                 <Link to="#" className="menu-bars" onClick={showSidebar}>
                     Menu<AiIcons.AiFillCaretRight />
                 </Link>
-                </div>
-                <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+            </div>
+            <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
                 <ul className="nav-menu-items" onClick={showSidebar}>
                     <li className="navbar-toggle">
                     <Link to="#" className="menu-bars">
@@ -67,16 +67,19 @@ const DashboardSidebar = () => {
 
                     {SidebarData.map((item, index) => {
                     return (
-                        <li key={index} className={item.cName}>
-                        <Link to={item.path}>
-                            {item.icon}
-                            <span>{item.title}</span>
-                        </Link>
-                        </li>
-                    );
+                            <li key={index} className={item.cName}>
+                                <Link to={item.path}>
+                                    {item.icon}
+                                    <span>{item.title}</span>
+                                </Link>
+                            </li>
+                        );
                     })}
                 </ul>
             </nav>
+            <div>
+                <img src="../soft-logo.png" alt="" />
+            </div>
         </>
     );
 };
