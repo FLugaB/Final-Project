@@ -15,6 +15,7 @@ const Slider = ({ imageSrc, title, subtitle, flipped }) => {
           <div className="slider__content">
             <h1 className="slider__title">{title}</h1>
             <p>{subtitle}</p>
+            <a href="#">Counsult With Us</a>
           </div>
         </>
       );
@@ -24,6 +25,7 @@ const Slider = ({ imageSrc, title, subtitle, flipped }) => {
           <div className="slider__content">
             <h1 className="slider__title">{title}</h1>
             <p>{subtitle}</p>
+            <a href="#">Book Shedule</a>
           </div>
           <img src={imageSrc} alt="Travel" className="slider__image" />
         </>
