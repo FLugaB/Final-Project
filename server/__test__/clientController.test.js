@@ -6,22 +6,9 @@ const { getToken } = require("../helpers/jwt");
 const defaultImage =
   "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332";
 
-const data  = {
-  email: "doctor@gmail.com",
-  password: "doctor",
-  role: "Doctor"
-}
-
 let tokenMatch1, tokenMatch2, tokenPayloadInvalid;
 let invalidToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJjaW5keVZAZ21haWwuY29tIiwiaWF0IjoxNjQyNjAzMzQ1fQ.bx0MAXaSmsYCa3Qbac8KQpCftEzKtFgpr8I96I1xZed";
-
-// const doctor = {
-//   id:
-//   email:
-//   password:
-//   role:
-// };
 
 beforeAll(async () => {
   await User.destroy({
@@ -36,6 +23,17 @@ beforeAll(async () => {
     restartIdentity: true,
     cascade: true,
   });
+
+  const newDoctor  = {
+    email: "doctor@gmail.com",
+    password: "doctor",
+    role: "Doctor"
+  }
+  try {
+    const result = User.create(newDoctor) 
+  } catch (err) {
+    console.log(err);
+  }
 
   //! USER1
   let newClientTest = {
@@ -129,7 +127,7 @@ describe("New Client Test on clientRegister Field", () => {
       .then((res) => {
         expect(res.status).toBe(201);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("id", 3);
+        expect(res.body).toHaveProperty("id", 4);
         expect(res.body).toHaveProperty("email", "newClientSuccess@gmail.com");
         expect(res.body).toHaveProperty("fullName", "newClientSuccess");
         done();
@@ -199,7 +197,7 @@ describe("New Client Test on clientRegister Field", () => {
     request(app)
       .post("/register")
       .send({
-        email: "newClient1@gmail.com",
+        email: "newClient1gmail.com",
         password: "newClient1",
         role: "Client",
         fullName: "newClient1",
@@ -214,7 +212,7 @@ describe("New Client Test on clientRegister Field", () => {
       .then((res) => {
         expect(res.status).toBe(400);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Email must be unique");
+        expect(res.body).toHaveProperty("message", "Invalid email format");
         done();
       })
       .catch((err) => {
@@ -720,7 +718,7 @@ describe("New Client Test on clientAccount Authentication Field", () => {
       .then((res) => {
         expect(res.status).toBe(200);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("findUser.id", 1);
+        expect(res.body).toHaveProperty("findUser.id", 2);
         expect(res.body).toHaveProperty(
           "findUser.email",
           "newClient1@gmail.com"
@@ -766,9 +764,9 @@ describe("New Client Test on clientAccount Authentication Field", () => {
         role: "Client",
       })
       .then((res) => {
-        expect(res.status).toBe(401);
+        expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Invalid token")
+        expect(res.body).toHaveProperty("message", "Pleae Login first")
         done();
       })
       .catch((err) => {
@@ -802,9 +800,9 @@ describe("New Client Test on clientAccount Authentication Field", () => {
       .get("/account")
       .set("access_token", "")
       .then((res) => {
-        expect(res.status).toBe(401);
+        expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Invalid token")
+        expect(res.body).toHaveProperty("message", "Pleae Login first")
         done();
       })
       .catch((err) => {
@@ -816,7 +814,7 @@ describe("New Client Test on clientAccount Authentication Field", () => {
   test("Client Account Authentication user not found should be return invalid response", (done) => {
     request(app)
       .get("/account")
-      .set("access_token", "")
+      .set("access_token", "gt55f")
       .then((res) => {
         expect(res.status).toBe(401);
         expect(res.body).toEqual(expect.any(Object));
@@ -841,9 +839,9 @@ describe("Client Update Profile", () => {
       .put("/account")
       .set("access_token", "")
       .then((res) => {
-        expect(res.status).toBe(401);
+        expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Invalid token")
+        expect(res.body).toHaveProperty("message", "Pleae Login first")
         done();
       })
       .catch((err) => {
@@ -1122,42 +1120,91 @@ describe("Client Update Profile", () => {
 })
 
 
-// describe("Fetch doctor list", () => {
+describe("Fetch doctor list", () => {
+  //TODO 2 fetch doctor list success
+  test("fetch doctor list success", (done) => {
+    request(app)
+    .get("/doctors")
+    .then((res) => {
+      expect(res.status).toBe(200)
+      expect(res.body).toEqual(expect.any(Object))
+      done();
+    })
+    .catch((err) => {
+      done(err);
+    });  
+  });
   
-//   //TODO 1 fetch doctor list empty
-//   test("fetch doctor list empty", (done) => {
-//     request(app)
-//     .get("/doctors")
-//     .set("access_token", tokenMatch1)
-//     .then((res) => {
-//       expect(res.status).toBe(200)
-//       expect(res.body).toHaveProperty("message", "There is no Doctor");
-//       expect(res.body).toEqual(expect.any(Object))
-//       done();
-//     })
-//     .catch((err) => {
-//       done(err);
-//     });  
-//   });
   
-//   //TODO 2 fetch doctor list success
-//   test("fetch doctor list success", (done) => {
-//     User.create (data)
-//     .then(newaData => {
-//       done()
-//     }).catch(err => {
-//       done(err)
-//     })
-//     request(app)
-//     .get("/doctors")
-//     .set("access_token", tokenMatch1)
-//     .then((res) => {
-//       expect(res.status).toBe(200)
-//       expect(res.body).toEqual(expect.any(Object))
-//       done();
-//     })
-//     .catch((err) => {
-//       done(err);
-//     });  
-//   });
-// })
+  //TODO 2 fetch doctor list by id success
+  test("fetch doctor list by id success", (done) => {
+    request(app)
+    .get("/doctors/1")
+    .then((res) => {
+      console.log(res,">>>>>>>>ini res");
+      expect(res.status).toBe(200)
+      expect(res.body).toEqual(expect.any(Object))
+      done();
+    })
+    .catch((err) => {
+      done(err);
+    });  
+  });
+  
+  //TODO 1 fetch doctor list wrong id by id
+  test("fetch doctor list wrong id by id", (done) => {
+    request(app)
+    .get("/doctors/9")
+    .then((res) => {
+      expect(res.status).toBe(404)
+      expect(res.body).toHaveProperty("message", "Not Found");
+      expect(res.body).toEqual(expect.any(Object))
+      done();
+    })
+    .catch((err) => {
+      done(err);
+    });  
+  });
+
+    //TODO 1 fetch doctor list wrong id by id
+    test("fetch doctor list no id by id", (done) => {
+      request(app)
+      .get("/doctors/")
+      .then((res) => {
+        console.log(res,">>>>>>>>>>>>fetch by id");
+        expect(res.status).toBe(404)
+        expect(res.body).toHaveProperty("message", "Not Found");
+        expect(res.body).toEqual(expect.any(Object))
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });  
+    });
+  
+
+  //TODO 1 fetch doctor list empty
+  test("fetch doctor list empty", (done) => {
+    const data = async () => {
+      await User.destroy({
+        where: {role : "Doctor"},
+        truncate: true,
+        restartIdentity: true,
+        cascade: true,     
+      });  
+    }
+    console.log(data,"0000000000");
+    request(app)
+    .get("/doctors")
+    .then((res) => {
+      console.log(res.body,"in hasilnya ..............");
+      expect(res.status).toBe(200)
+      expect(res.body).toHaveProperty("message", "There is no Doctor");
+      expect(res.body).toEqual(expect.any(Object))
+      done();
+    })
+    .catch((err) => {
+      done(err);
+    });  
+  });
+})
