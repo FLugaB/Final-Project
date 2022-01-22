@@ -3,7 +3,8 @@ module.exports = class Controller {
 
   static addProduct =  async(req, res, next) => {
     const transaction = await sequelize.transaction()
-      const { title, type, name, price, stock, category, imageUrl, description 
+      const { title, type, 
+        name, price, stock, category, imageUrl, description 
       } = req.body
 
       const inputProduct = { title, type }
