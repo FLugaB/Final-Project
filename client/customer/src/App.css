@@ -80,6 +80,11 @@ iframe .banner.jsx-3977386152 {
   filter: grayscale(50%);
 }
 
+.title {
+  color: var(--texting);
+  font-weight: bold;
+}
+
 .parallax-hero {
   position: fixed;
   top: 0;
@@ -331,6 +336,15 @@ iframe body {
   opacity: 0.92;
   background-color: rgba(0,0,0, .6);
 }
+
+.half-wrapper {
+  display: none!important;
+}
+
+.form-block--is-signup .half-wrapper {
+  display: flex!important;
+}
+
 .form-block-wrapper--is-signup {
   opacity: 0.94;
   background-color: rgba(0,0,0, .8);
@@ -426,6 +440,7 @@ iframe body {
 }
 
 .half-wrapper {
+  display: flex;
   align-content: space-between;
   flex-wrap: wrap;
   transform: translateX(-150%);
@@ -962,6 +977,10 @@ input[type=checkbox]:checked + label:after {
 /* SLIDER END */
 
 /* NAVBAR DASHBOARD START*/
+
+.dashboard {
+  overflow: hidden;
+}
 
 .navbar {
   background-color: var(--navBg);

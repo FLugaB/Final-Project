@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard'
 import JoinMeeting from "./pages/video/Join.jsx";
 import Notif from './components/Notif' 
 import NotFound from './pages/NotFound'
+import ProfileOutlet from './components/DashboardComponents/ProfileOutlet'
 import { pageLoad } from './Hooks/load'
 
 import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
@@ -54,7 +55,9 @@ function App() {
       <Routes>
           <Route path="/" element={<HomePage />} />
 
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/account" element={<Dashboard />}>
+            <Route path="profile" element={ <ProfileOutlet />} />
+          </Route>
           
           <Route path="/notification/handling" element={<Notif />} />
           <Route path="/doctors" element={<JoinMeeting />} />

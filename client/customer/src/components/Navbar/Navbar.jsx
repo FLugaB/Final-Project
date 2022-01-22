@@ -42,7 +42,10 @@ const Navbar = ({ navbarLinks }) => {
           <li><a href="#">Contact</a></li>
           {
             localStorage.getItem(`access_token`) ? 
-            <li><a href="" onClick={tryLogout}>Logout</a></li>
+
+            <li><Link to="/account">Account</Link></li>
+            // <li><a href="" onClick={tryLogout}>Logout</a></li>
+
             :
             <li><Link to="/login">Login</Link></li>
           }

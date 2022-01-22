@@ -181,10 +181,12 @@ module.exports = class Controller {
   // }
 
   static updateDetail = async(req,res,next) => {
-    const {ProductId, name, price, stock, category, imageUrl, description} = req.body
     const t = await sequelize.transaction()
     try {
+      
       const {id} = req.params
+      const {ProductId, name, price, stock, category, imageUrl, description} = req.body
+
       if (id == 1 || id == 2) {
         const input = {price}
         const find = await DetailProduct.findByPk(id)
@@ -192,22 +194,23 @@ module.exports = class Controller {
           throw {name: "Product_not_found"}
         }
         const result = await DetailProduct.update(input, {where: {id}, returning:true, transaction:t})
-        res.status(200).json(result)   
         await t.commit()
+        res.status(200).json(result)   
+        
       } else {
+
         const input = {ProductId, name, price, stock, category,imageUrl, description}
         const find = await DetailProduct.findByPk(id)
         if(!find) {
           throw {name: "Product_not_found"}
         }
         const result = await DetailProduct.update(input, {where: {id}, returning:true, transaction:t})
-        res.status(200).json(result)   
         await t.commit()
+        res.status(200).json(result)   
       }
     } catch (err) {
-      console.log(err);
       next(err)
-      await t.rollBack()
+      await t.rollback()
     }
   }
 
