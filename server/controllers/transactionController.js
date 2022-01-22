@@ -285,7 +285,7 @@ class TransactionController {
                         status.transaction_status === `capture`) {
                 newStatus = `paid`
             } 
-
+            // ini mestinya newStatus === 'failed' kan? bukan falsy
             if (!newStatus) throw { name: "PLEASE_PAY_FIRST" }
 
             const findOneOrderId = await Transaction.update(

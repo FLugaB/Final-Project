@@ -6,8 +6,11 @@ import Login from './pages/Login'
 import { Routes, Route } from "react-router-dom";
 import VideoCall from "./pages/video/Meeting.jsx";
 import VideoCallOwner from "./pages/video/MeetingOwner.jsx";
+import Dashboard from './pages/Dashboard'
 import JoinMeeting from "./pages/video/Join.jsx";
 import Notif from './components/Notif' 
+import NotFound from './pages/NotFound'
+import ProfileOutlet from './components/DashboardComponents/ProfileOutlet'
 import { pageLoad } from './Hooks/load'
 
 import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
@@ -27,18 +30,18 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const snapSrcUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
-    const myMidtransClientKey = 'SB-Mid-client-a4h5p1uZna2ekBBq';
-  
-    const script = document.createElement('script');
+    const snapSrcUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
+    const myMidtransClientKey = "SB-Mid-client-a4h5p1uZna2ekBBq";
+
+    const script = document.createElement("script");
     script.src = snapSrcUrl;
-    script.setAttribute('data-client-key', myMidtransClientKey);
+    script.setAttribute("data-client-key", myMidtransClientKey);
     script.async = true;
     document.body.appendChild(script);
-  
+
     return () => {
       document.body.removeChild(script);
-    }
+    };
   }, []);
 
   const mode = 'login';
@@ -51,8 +54,13 @@ function App() {
       <Navbar />
       <Routes>
           <Route path="/" element={<HomePage />} />
+
+          <Route path="/account" element={<Dashboard />}>
+            <Route path="profile" element={ <ProfileOutlet />} />
+          </Route>
+          
           <Route path="/notification/handling" element={<Notif />} />
-          <Route path="/start-video" element={<JoinMeeting />} />
+          <Route path="/doctors" element={<JoinMeeting />} />
           <Route path="/video/:id" element={<VideoCall />} />
           <Route path="/video-owner/:id" element={<VideoCallOwner />} />
 
@@ -61,10 +69,12 @@ function App() {
               <Login mode={mode} />
             </LogGuard>
           } />
+
+          <Route path="*" exact element={<NotFound />}></Route> 
           
       </Routes>
     </div>
   );
 }
-
+// https://dailyphil.daily.co/test-room?t=INSERT_TOKEN_HERE
 export default App;
