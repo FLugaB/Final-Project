@@ -52,6 +52,7 @@ function App() {
       <Navbar />
       <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/notification/handling" element={<Notif />} />
           <Route path="/doctors" element={<JoinMeeting />} />
           <Route path="/video/:id" element={<VideoCall />} />
