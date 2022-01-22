@@ -41,33 +41,15 @@ function App() {
     };
   }, []);
 
-<<<<<<< HEAD
-  const navbarLinks = [
-    { url: "/", title: "Home" },
-    { url: "#", title: "About" },
-    { url: "#", title: "Contact" },
-    { url: "#", title: "Service" },
-    { url: "#", title: "Products" },
-    { url: "#", title: "Consultation" },
-  ];
-=======
   const mode = 'login';
 
   if (loader) return pageLoad()
 
->>>>>>> db19500a6d1c7e313f79ea0896ca5c0c12f05c8b
 
   return (
     <div className="App">
       <Navbar />
       <Routes>
-<<<<<<< HEAD
-        <Route path="/" element={<HomePage />} />
-        <Route path="/start-video" element={<JoinMeeting />} />
-        <Route path="/video/:id" element={<VideoCall />} />
-        <Route path="user" element={<UserPage />}></Route>
-        <Route path="doctor" element={<UserPageDoctor />}></Route>
-=======
           <Route path="/" element={<HomePage />} />
           <Route path="/notification/handling" element={<Notif />} />
           <Route path="/start-video" element={<JoinMeeting />} />
@@ -80,7 +62,6 @@ function App() {
             </LogGuard>
           } />
           
->>>>>>> db19500a6d1c7e313f79ea0896ca5c0c12f05c8b
       </Routes>
     </div>
   );
