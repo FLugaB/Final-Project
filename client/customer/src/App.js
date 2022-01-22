@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-import { useEffect } from "react";
-import "./App.css";
-import HomePage from "./pages/HomePage.jsx";
-import Navbar from "./components/Navbar/Navbar";
-import Navigator from "./routes";
-=======
 import { useEffect, useState } from 'react'
 
 import HomePage from "./pages/HomePage.jsx";
 import Navbar from './components/Navbar/Navbar'
 import Login from './pages/Login'
->>>>>>> db19500a6d1c7e313f79ea0896ca5c0c12f05c8b
 import { Routes, Route } from "react-router-dom";
 import VideoCall from "./pages/video/Meeting.jsx";
 import VideoCallOwner from "./pages/video/MeetingOwner.jsx";
