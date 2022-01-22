@@ -171,8 +171,8 @@ const clientDoctorFetch = async (req, res, next) => {
             }, 
         ]
     })
-    if (!findAllDoctors.length) {
-        console.log("masuk sini");
+    if (findAllDoctors.length) {
+        // throw { name: "NOT_FOUND_DOCTOR" }
         res.status(200).json({message: "There is no Doctor"})
     }
     res.status(200).json(findAllDoctors)

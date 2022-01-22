@@ -1,14 +1,17 @@
 const {OrderProduct, sequelize} = require("../models")
+const {Product, DetailProduct} = require("../models")
 
 module.exports = class Controller {
 
   static addClientCart =  async(req, res, next) =>{
     const t = await sequelize.transaction()
     try {
-      const UserId= req.auth.id
-      const { id:ProductId } = req.params
-      const status = 'pending'
-      const input = {UserId, ProductId, status}
+      const {id} = req.params
+      const getProduct = await DetailProduct.findOne({where: {id}})
+      if (!getProduct) {
+        throw {name: "Product_not_found"}
+      }
+      const input = {UserId: req.auth.id, ProductId: getProduct.id, status:'pending'}
       const result = await OrderProduct.create(input, {transaction:t})
       res.status(201).json(result)
       await t.commit()

@@ -1,4 +1,6 @@
 const {Product, DetailProduct, sequelize} = require("../models")
+const { Op } = require("sequelize");
+
 module.exports = class Controller {
 
   static addProduct =  async(req, res, next) => {
@@ -9,6 +11,15 @@ module.exports = class Controller {
 
       const inputProduct = { title, type }
     try {
+      const productIsExist = await Product.findAll({
+        where: {
+          type: inputProduct.type
+        }
+      })
+      if (productIsExist) {
+        throw { name: "CANNOT_ADD_PRODUCT"}
+      }
+      
       const addProduct = await Product.create(inputProduct, 
         { transaction })
         
@@ -95,16 +106,21 @@ module.exports = class Controller {
     try {
       const {title, type} = req.body
       const input = {title, type}
-      if (!title ||title.length === 0) {
-        throw {name: "BAD_REQUEST", message: "Title is required"}
-      } 
-      if (!type ||type.length === 0) {
-        throw {name: "BAD_REQUEST", message: "Type is required"}
-      } 
-      if (id == 1 || id == 2) {
-        res.status(200).json({msg: "you can't update product"})
-      } else {
+      
+      // if (id == 1 || id == 2) {
+      //   res.status(200).json({msg: "you can't update product"})
+      
+      const getProductId = await Product.findOne({where: {id}})
 
+      if (getProductId.id !== 3) { 
+        throw {name: "CANNOT_UPDATE_PRODUCT"}
+      } else {
+        if (!title ||title.length === 0) {
+          throw {name: "BAD_REQUEST", message: "Title is required"}
+        } 
+        if (!type ||type.length === 0) {
+          throw {name: "BAD_REQUEST", message: "Type is required"}
+        } 
         const find = await Product.findOne({
           where: {id},
         })
@@ -117,7 +133,6 @@ module.exports = class Controller {
       }
 
     } catch (err) {
-      console.log(err,"<<<<<");
       next(err)
       await t.rollback()
 
@@ -140,7 +155,6 @@ module.exports = class Controller {
         res.status(200).json({message: "Success Delete Product"})
       }
     } catch (err) {
-      console.log(err,"<<<<<");
       next(err)
       await t.rollback()
 
@@ -150,8 +164,19 @@ module.exports = class Controller {
   static addDetail =  async(req, res, next) => {
     const t = await sequelize.transaction()
     try {
-      const {ProductId, name, price, stock, category, imageUrl, description} = req.body
-      const input = {ProductId, name, price, stock, category, imageUrl, description}
+      const isSkincare = await Product.findOne({
+        where: {
+          type: {
+            [Op.iLike]: '%Product Skincare'
+          }
+        }
+      })
+      
+      if (!isSkincare) {
+        throw { name: "Product_not_found"}
+      }
+      const {name, price, stock, category, imageUrl, description} = req.body
+      const input = {ProductId: isSkincare.id, name, price, stock, category, imageUrl, description}
       const result = await DetailProduct.create(input, {transaction:t})
       await t.commit()
       res.status(201).json(result)
@@ -177,11 +202,13 @@ module.exports = class Controller {
   }
 
   static updateDetail = async(req,res,next) => {
-    const {ProductId, name, price, stock, category, imageUrl, description} = req.body
+    const {name, price, stock, category, imageUrl, description} = req.body
     const t = await sequelize.transaction()
     try {
       const {id} = req.params
-      if (id == 1 || id == 2) {
+      const getProductId = await DetailProduct.findOne({where: {id}})
+
+      if (getProductId.ProductId !== 3) {
         const input = {price}
         const find = await DetailProduct.findByPk(id)
         if(!find) {
@@ -191,7 +218,7 @@ module.exports = class Controller {
         res.status(200).json(result)   
         await t.commit()
       } else {
-        const input = {ProductId, name, price, stock, category,imageUrl, description}
+        const input = {ProductId: getProductId.ProductId, name, price, stock, category,imageUrl, description}
         const find = await DetailProduct.findByPk(id)
         if(!find) {
           throw {name: "Product_not_found"}
@@ -211,8 +238,10 @@ module.exports = class Controller {
     const {id} = req.params
     const t = await sequelize.transaction()
     try {
-      if (id == 1 || id == 2) {
-        res.status(200).json({msg: "You Can't Delete This Product"})
+      const getProductId = await DetailProduct.findOne({where: {id}})
+
+      if (getProductId.ProductId !== 3) {
+        throw { name: "CANNOT_DELETE_PRODUCT" }
       } else {
         const find = await DetailProduct.findByPk(id)
         if (!find) {
