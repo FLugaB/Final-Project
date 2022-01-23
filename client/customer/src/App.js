@@ -55,7 +55,7 @@ function App() {
       <Routes>
           <Route path="/" element={<HomePage />} />
 
-          <Route path="/account" element={<Dashboard />}>
+          <Route path="account" element={<Dashboard />}>
             <Route path="profile" element={ <ProfileOutlet />} />
           </Route>
           

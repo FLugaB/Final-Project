@@ -12,37 +12,37 @@ const DashboardSidebar = () => {
     const SidebarData = [
         {
           title: "Profile",
-          path: "/",
+          path: "profile",
           icon: <IconName.FcBusinesswoman />,
           cName: "nav-text"
         },
         {
           title: "History Order",
-          path: "/reports",
+          path: "reports",
           icon: <IconName.FcSurvey />,
           cName: "nav-text"
         },
         {
           title: "Cart",
-          path: "/products",
+          path: "products",
           icon: <IconName.FcPaid />,
           cName: "nav-text"
         },
         {
           title: "Consultation",
-          path: "/consultation",
+          path: "consultation",
           icon: <IconName.FcWebcam />,
           cName: "nav-text"
         },
         {
           title: "Schedule",
-          path: "/",
+          path: "schedule",
           icon: <IconName.FcCalendar />,
           cName: "nav-text"
         },
         {
           title: "Logout",
-          path: "/logout",
+          path: "logout",
           icon: <IconName.FcDownLeft />,
           cName: "nav-text"
         }
