@@ -3,6 +3,7 @@ const request = require("supertest");
 const { User, Profile } = require("../models");
 const { getToken } = require("../helpers/jwt");
 
+
 const defaultImage =
   "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332";
 
