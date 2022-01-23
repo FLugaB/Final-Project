@@ -1,4 +1,4 @@
-import { CUSTOMER_LOGIN, CUSTOMER_REGISTER,CUSTOMER_IS_SUCCESS_REGISTER, CUSTOMER_IS_SUCCESS_LOGIN } from "../actionType/customers";
+import { CUSTOMER_LOGIN, CUSTOMER_REGISTER,CUSTOMER_IS_SUCCESS_REGISTER, CUSTOMER_IS_SUCCESS_LOGIN, CUSTOMER_IS_SUCCESS_LOGOUT } from "../actionType/customers";
 import { isError, isSuccess, isLoading } from './status'
 
 //Server EndPoint
@@ -50,4 +50,13 @@ export const register = (payload) => {
         } finally { dispatch(isLoading(false)); }
     }
 }
-  
+export const logout=(payload)=>{
+    return async (dispatch, getState) => {
+        try {
+            console.log(`masuk action`);
+            dispatch({ type: CUSTOMER_IS_SUCCESS_LOGOUT});
+        } catch (error) {
+            dispatch(isError(error));
+        } finally { dispatch(isLoading(false)); }
+    }
+}

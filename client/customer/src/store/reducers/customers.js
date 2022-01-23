@@ -6,6 +6,7 @@ import {
   SET_ERROR,
   CUSTOMER_LOGIN,
   CUSTOMER_IS_SUCCESS_REGISTER,
+  CUSTOMER_IS_SUCCESS_LOGOUT,
 } from "../actionType/customers";
 
 const initialState = {
@@ -31,6 +32,9 @@ export default function customersReducer(state = initialState, action) {
       }
     case CUSTOMER_IS_SUCCESS_LOGIN:
       return { ...state, isSuccessLogin: action.payload }
+    case CUSTOMER_IS_SUCCESS_LOGOUT:
+      localStorage.removeItem('access_token')
+      return initialState
     case CUSTOMER_IS_SUCCESS_REGISTER:
       return { ...state, isSuccessRegister: action.payload }
     case SET_LOADING: 

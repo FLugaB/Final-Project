@@ -13,14 +13,14 @@ const ProfileOutlet = () => {
             <Row>
                 <Col md={12} className="mb-5"><div className="title text-start"><h1>Profile</h1></div></Col>
                 <Col md={12} className="d-flex justify-content-start">
-                    <div>
+                    <div md={6}>
                     <p>{profile.fullName}</p>
                     <p>{profile.birthdate}</p>
                     <p>{profile.gender}</p>
                     <p>{profile.address}</p>
                     <p>{profile.phoneNumber}</p>
                     </div>
-                    <img className='img-fluid img-thumbnail' src={profile.photoProfile}/>
+                    <img md={6} className='img-fluid img-thumbnail' src={profile.photoProfile}/>
                 </Col>
             </Row>
         </Col>
