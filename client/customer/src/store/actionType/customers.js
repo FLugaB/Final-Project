@@ -8,3 +8,5 @@ export const CUSTOMER_LOGIN=`customer/login`
 export const CUSTOMER_REGISTER=`customer/register`
 export const CUSTOMER_IS_SUCCESS_LOGIN = `customer/successLogin`
 export const CUSTOMER_IS_SUCCESS_REGISTER = `customer/successRegister`
+//logout
+export const CUSTOMER_IS_SUCCESS_LOGOUT=`CUSTOMER_IS_SUCCESS_LOGOUT`
