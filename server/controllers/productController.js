@@ -15,7 +15,8 @@ module.exports = class Controller {
           }, 
         ]
       })
-      if (!result) {
+      
+      if (result.length < 1) {
         throw {name: "Product_not_found"}
       }
       res.status(200).json(result)
@@ -53,12 +54,17 @@ module.exports = class Controller {
       } = req.body
 
       const inputProduct = { title, type }
+      if (!type) {
+        throw { name: "TYPE_IS_NULL"}
+      }
+      console.log("MASUK CONTROLLER <<<<<<<<<<<<");
     try {
-      const productIsExist = await Product.findAll({
+      const productIsExist = await Product.findOne({
         where: {
           type: inputProduct.type
         }
       })
+      
       if (productIsExist) {
         throw { name: "CANNOT_ADD_PRODUCT"}
       }

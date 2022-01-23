@@ -4,7 +4,7 @@ const errorsLog = (err, req, res, next) => {
 
     let code = 500
     let message = "Internal server error"
-    console.log(err,"<<<<<<<<<<<<<<<<<");
+    // console.log(err,"<<<<<<<<<<<<<<<<< FROM ERROR HANDLER");
     if ( err.name === `SequelizeUniqueConstraintError` || 
         err.name === `SequelizeValidationError` ) {
         code = 400
@@ -76,6 +76,9 @@ const errorsLog = (err, req, res, next) => {
     } else if ( err.name === `NOT_FOUND_DOCTOR`) {
         code = 404
         message = "There is no Doctor"
+    } else if ( err.name === `TYPE_IS_NULL`) {
+        code = 404
+        message = "Type is Required"
     }
     // NEXT
     // else if ( err.response.data.error_messages[0] === 'transaction_details.order_id sudah digunakan') {

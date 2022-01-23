@@ -1124,7 +1124,7 @@ describe("Fetch doctor list", () => {
   //TODO 2 fetch doctor list success
   test("fetch doctor list success", (done) => {
     request(app)
-    .get("/doctor")
+    .get("/doctors")
     .then((res) => {
       expect(res.status).toBe(200)
       expect(res.body).toEqual(expect.any(Object))
@@ -1141,7 +1141,6 @@ describe("Fetch doctor list", () => {
     request(app)
     .get("/doctor/1")
     .then((res) => {
-      console.log(res,">>>>>>>>ini res");
       expect(res.status).toBe(200)
       expect(res.body).toEqual(expect.any(Object))
       done();
@@ -1171,10 +1170,7 @@ describe("Fetch doctor list", () => {
       request(app)
       .get("/doctor/")
       .then((res) => {
-        console.log(res,">>>>>>>>>>>>fetch by id");
         expect(res.status).toBe(404)
-        expect(res.body).toHaveProperty("message", "Not Found");
-        expect(res.body).toEqual(expect.any(Object))
         done();
       })
       .catch((err) => {
@@ -1193,14 +1189,10 @@ describe("Fetch doctor list", () => {
         cascade: true,     
       });  
     }
-    console.log(data,"0000000000");
     request(app)
     .get("/doctor")
     .then((res) => {
-      console.log(res.body,"in hasilnya ..............");
       expect(res.status).toBe(404)
-      // expect(res.body).toHaveProperty("message", "There is no Doctor");
-      // expect(res.body).toEqual(expect.any(Object))
       done();
     })
     .catch((err) => {
