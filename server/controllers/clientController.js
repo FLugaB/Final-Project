@@ -94,6 +94,7 @@ const clientAccount = async (req, res, next) => {
         res.status(200).json({findUser});
     } catch (error) {
         next(error);
+        // ERROR
     }
 };
 
@@ -172,27 +173,27 @@ const clientDoctorFetch = async (req, res, next) => {
             }, 
         ]
     })
-    if (findAllDoctors.length <1) {
-        console.log("maasuk sini........", findAllDoctors);
-        res.status(200).json({message: "There is no Doctor"})
+    
+    if (findAllDoctors.length < 1) {
+        throw { name: "NOT_FOUND_DOCTOR" }
+        //ERROR
     } else {
         res.status(200).json(findAllDoctors)
     }
+
     } catch (error) {
         next(error)
+        // ERROR
     }
 }
 
 const clientDoctorDetail = async (req, res, next) => {
-
     try {
-        const { DoctorId } = req.params
-        console.log(req.params,">>>>>>>>>ini");
-        if (!DoctorId) throw { name: "NOT_FOUND"}
+        const { id } = req.params
         const findDoctorDetail = await User.findOne({
             where: {
                 [Op.and]: [
-                    { id: DoctorId }, 
+                    { id: id }, 
                     { role: `Doctor` }
                 ], 
             },

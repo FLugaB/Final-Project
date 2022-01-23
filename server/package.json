@@ -6,10 +6,14 @@
     "start": "nodemon bin/www",
     "test:up": "npx sequelize-cli db:create --env=test && npx sequelize-cli db:migrate --env=test && npx sequelize-cli --env test db:seed:all",
     "test:down": "npx sequelize-cli db:migrate:undo:all --env=test",
-    "test": "clear && jest --verbose true  --coverage --runInBand --watchAll --detectOpenHandles --forceExit",
+    "test": "clear && npx jest -i clientController.test.js --detectOpenHandles --runInBand --forceExit",
+    "test0": "clear && npx jest -i testProduct.test.js --detectOpenHandles --runInBand --forceExit",
+    "test1": "clear && npx jest -i productController.test.js --verbose true --coverage --detectOpenHandles --runInBand --forceExit",
+    "test2": "clear && npx jest -i clientController.test.js --verbose true --coverage --runInBand --detectOpenHandles --forceExit",
+    "test3": "clear && jest --verbose true --coverage --runInBand --watchAll --detectOpenHandles --forceExit",
     "dev": "nodemon app.js",
-    "dev:up": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "dev:down": "npx sequelize-cli db:migrate:undo:all"
+    "dev:up": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "dev:down": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate:undo:all"
   },
   "keywords": [],
   "author": "",

@@ -4,7 +4,7 @@ const errorsLog = (err, req, res, next) => {
 
     let code = 500
     let message = "Internal server error"
-    console.log(err,"<<<<<<<<<<<<<<<<<");
+    // console.log(err,"<<<<<<<<<<<<<<<<< FROM ERROR HANDLER");
     if ( err.name === `SequelizeUniqueConstraintError` || 
         err.name === `SequelizeValidationError` ) {
         code = 400
@@ -58,15 +58,28 @@ const errorsLog = (err, req, res, next) => {
     } else if ( err.name === `NO_ITEM_ON_CART`) {
         code = 404
         message = "Not Found Order Product"
-    } 
-    // else if ( err.name === "CANNOT_DELETE_PRODUCT") {
-    //     code = 403
-    //     message = "You Can't Delete This Product"
-    // } 
-    // else if ( err.name === `CANNOT_UPDATE_PRODUCT`) {
-    //     code = 403
-    //     message = "you can't update this product"
-    // }
+    } else if ( err.name === `CANNOT_ADD_PRODUCT`) {
+        code = 403
+        message = "Product is Exist, Please Only Add to Detail Product Refer to this Product Id"
+    } else if ( err.name === "CANNOT_DELETE_PRODUCT") {
+        code = 403
+        message = "You Can't Delete This Product"
+    } else if ( err.name === `CANNOT_UPDATE_PRODUCT`) {
+        code = 403
+        message = "You Can't Update This Product"
+    } else if ( err.name === `NO_ORDER_COMPLETED`) {
+        code = 404
+        message = "there is no orders that completed"
+    } else if ( err.name === `NOT_FOUND_ORDER`) {
+        code = 404
+        message = "there is no orders yet, please order again"
+    } else if ( err.name === `NOT_FOUND_DOCTOR`) {
+        code = 404
+        message = "There is no Doctor"
+    } else if ( err.name === `TYPE_IS_NULL`) {
+        code = 404
+        message = "Type is Required"
+    }
     // NEXT
     // else if ( err.response.data.error_messages[0] === 'transaction_details.order_id sudah digunakan') {
     //     code = 404

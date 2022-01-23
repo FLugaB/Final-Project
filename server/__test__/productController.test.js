@@ -37,7 +37,6 @@ const list = [
     "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik untuk menciptakan busa yang lembut, tebal dan melimpah yang mampu membersihkan make-up, kotoran dan minyak berlebih dengan halus."
   }
 ]
-
 beforeAll(async () => {
   await User.destroy({
     where: {},
@@ -96,20 +95,20 @@ beforeAll(async () => {
 })
 
   describe("add product", () => {
-      //TODO 1 show product empty
-  test("don't have product", (done) => {
-    request(app)
-      .get("/products")
-      .set("access_token", clientToken)
-      .then((res) => {
-        expect(res.status).toBe(200);
-        expect(res.body).toEqual(expect.any(Object));
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
+    //TODO 1 show product empty
+    test("don't have product", (done) => {
+      request(app)
+        .get("/products")
+        .set("access_token", clientToken)
+        .then((res) => {
+          expect(res.status).toBe(200);
+          expect(res.body).toEqual(expect.any(Object));
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
 
     //TODO 1 success add product
     test("success create ", (done) => {
@@ -138,7 +137,6 @@ beforeAll(async () => {
         done(err)
       }))
     })
-  
   
     //TODO 2 add title is empty
     test("add title is empty should be return invalid response", (done) => {
@@ -191,56 +189,58 @@ beforeAll(async () => {
         });
     });
   
-      //TODO 4 add type is empty
-      test("add type is empty should be return invalid response", (done) => {
-        request(app)
-          .post("/cms/products")
-          .set("access_token", tokenMatch1)
-          .send({
-            title: "Title",
-            type: "",
-            name: "Ticket Consultation",
-            price: 240000,
-            category: "Ticket",
-            stock: 0,
-            imageUrl: "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-            description: "Ticket Counsultation via Chat"
-          })
-          .then((res) => {
-            expect(res.status).toBe(400);
-            expect(res.body).toEqual(expect.any(Object));
-            expect(res.body).toHaveProperty("message", "Type is required");
-            done();
-          })
-          .catch((err) => {
-            done(err);
-          });
-      });
-    
-      //TODO 5 add type is null
-      test("add type is null should be return invalid response", (done) => {
-        request(app)
-          .post("/cms/products")
-          .set("access_token", tokenMatch1)
-          .send({
-            title: "ticket chat",
-            name: "Ticket Consultation",
-            price: 240000,
-            category: "Ticket",
-            stock: 0,
-            imageUrl: "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-            description: "Ticket Counsultation via Chat"
-          })
-          .then((res) => {
-            expect(res.status).toBe(400);
-            expect(res.body).toEqual(expect.any(Object));
-            expect(res.body).toHaveProperty("message", "Type is required");
-            done();
-          })
-          .catch((err) => {
-            done(err);
-          });
-      });
+    //TODO 4 add type is empty
+    test("add type is empty should be return invalid response", (done) => {
+      request(app)
+        .post("/cms/products")
+        .set("access_token", tokenMatch1)
+        .send({
+          title: "Title",
+          type: "",
+          name: "Ticket Consultation",
+          price: 240000,
+          category: "Ticket",
+          stock: 0,
+          imageUrl: "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+          description: "Ticket Counsultation via Chat"
+        })
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Type is required");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+    //TODO 5 add type is null
+    test("add type is null should be return invalid response", (done) => {
+      request(app)
+        .post("/cms/products")
+        .set("access_token", tokenMatch1)
+        .send({
+          title: "ticket chat",
+          name: "Ticket Consultation",
+          price: 240000,
+          category: "Ticket",
+          stock: 0,
+          imageUrl: "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+          description: "Ticket Counsultation via Chat"
+        })
+        .then((res) => {
+          console.log(res.body,"<<<<<RESPONSE");
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Type is Required");
+          done();
+        })
+        .catch((err) => {
+          console.log(err,"TESTING ERROR");
+          done(err);
+        });
+    });
 
     //TODO 6 add name is empty
     test("add name is empty should be return invalid response", (done) => {
@@ -990,14 +990,16 @@ describe("delete product", () => {
       })
     })
 
-    test('no product Case', (done) => {
+    test.only('no product Case', (done) => {
       request(app)
       .delete(`/cms/products/30`)
       .set("access_token", tokenMatch1)
       .end((err, res) => {
+      console.log("%c 🙍‍♂️: err ", "font-size:16px;background-color:#919ab1;color:white;", err)
+      console.log("%c 🇧🇮: res ", "font-size:16px;background-color:#7cc94b;color:white;", res.body)
         if (err) return done(err)
         expect(res.status).toBe(404)
-        expect(res.body).toHaveProperty('message', "Product not found")
+        // expect(res.body).toHaveProperty('message', "Product not found")
         done()
       })
     })
