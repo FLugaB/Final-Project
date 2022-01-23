@@ -15,12 +15,12 @@ module.exports = class Controller {
           }, 
         ]
       })
-      
-      if (result.length < 1) {
+      if (result.length<1) {
         throw {name: "Product_not_found"}
       }
       res.status(200).json(result)
     } catch (err) {
+      console.log(err);
       next(err)
     } 
   }
@@ -43,22 +43,23 @@ module.exports = class Controller {
       } 
       res.status(200).json(result)
     } catch (err) {
+      console.log(err);
       next(err)
     }
   }
 
   static addProduct =  async(req, res, next) => {
+    console.log("masuk controller");
     const transaction = await sequelize.transaction()
       const { title, type, 
         name, price, stock, category, imageUrl, description 
       } = req.body
 
       const inputProduct = { title, type }
+      try {
       if (!type) {
         throw { name: "TYPE_IS_NULL"}
-      }
-      console.log("MASUK CONTROLLER <<<<<<<<<<<<");
-    try {
+      } 
       const productIsExist = await Product.findOne({
         where: {
           type: inputProduct.type
@@ -107,16 +108,12 @@ module.exports = class Controller {
 
 
   static updateProduct = async(req,res,next) => {
-    const {id} = req.params
     const t = await sequelize.transaction()
-
+    
     try {
+      const {id} = req.params
       const {title, type} = req.body
       const input = {title, type}
-      
-      // if (id == 1 || id == 2) {
-      //   res.status(200).json({msg: "you can't update product"})
-      
       const getProductId = await Product.findOne({where: {id}})
 
       if (getProductId.id !== 3) { 
@@ -135,8 +132,8 @@ module.exports = class Controller {
           throw {name: "Product_not_found"}
         }
         const result = await Product.update(input, {where: {id}, returning:true, transaction:t})
-        res.status(200).json(result)     
         await t.commit()
+        res.status(200).json(result)     
       }
 
     } catch (err) {
@@ -147,28 +144,25 @@ module.exports = class Controller {
   }
 
   static deleteProduct = async (req,res,next) => {
-    const {id} = req.params
     const t = await sequelize.transaction()
-    
     try {
+      const {id} = req.params
       
       if (+id === 1 || +id === 2) {
         // throw {name: "CANNOT_DELETE_PRODUCT"}
         res.status(403).json({message: "You Can't Delete This Product"})
-      } else {
+      } 
         const find = await Product.findByPk(id)
-        if (!find) {
+        if (!find || find.length === 0) {
             throw {name: "Product_not_found"}
         }
         await Product.destroy ({where : {id}, transaction:t})
-        await t.commit()
         res.status(200).json({message: "Success Delete Product"})
-      }
-
+        await t.commit()
+      
     } catch (err) {
       next(err)
       await t.rollback()
-
     }
   }
 
@@ -218,12 +212,15 @@ module.exports = class Controller {
     try {
       
       const {id} = req.params
+      const {ProductId, name, price, stock, category, imageUrl, description} = req.body
+      if (+id === 1 || +id === 2) {
       const getProductId = await DetailProduct.findOne({where: {id}})
 
       if (getProductId.ProductId !== 3) {
         const input = {price}
+
         const find = await DetailProduct.findByPk(id)
-        if(!find) {
+        if(!find || find.length=== 1) {
           throw {name: "Product_not_found"}
         }
         const result = await DetailProduct.update(input, {where: {id}, returning:true, transaction:t})
@@ -240,7 +237,9 @@ module.exports = class Controller {
         await t.commit()
         res.status(200).json(result)   
       }
+    }
     } catch (err) {
+      console.log(err , ">>>>>>>>>>>>>>err catch");
       next(err)
       await t.rollback()
     }
@@ -265,6 +264,7 @@ module.exports = class Controller {
 
       }
     } catch (err) {
+      console.log(err);
       next(err)
       await t.rollback()
 
