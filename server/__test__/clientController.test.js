@@ -929,7 +929,7 @@ describe("New Client Test on clientAccount Authentication Field", () => {
       .then((res) => {
         expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Pleae Login first")
+        expect(res.body).toHaveProperty("message", "Please Login first")
         done();
       })
       .catch((err) => {
@@ -965,7 +965,7 @@ describe("New Client Test on clientAccount Authentication Field", () => {
       .then((res) => {
         expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Pleae Login first")
+        expect(res.body).toHaveProperty("message", "Please Login first")
         done();
       })
       .catch((err) => {
@@ -1000,7 +1000,7 @@ describe("Client Update Profile", () => {
       .then((res) => {
         expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Pleae Login first")
+        expect(res.body).toHaveProperty("message", "Please Login first")
         done();
       })
       .catch((err) => {
@@ -1288,7 +1288,7 @@ describe("Doctor Update Profile", () => {
       .then((res) => {
         expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Pleae Login first")
+        expect(res.body).toHaveProperty("message", "Please Login first")
         done();
       })
       .catch((err) => {
@@ -1585,8 +1585,9 @@ describe("Fetch doctor list", () => {
   //TODO 2 fetch doctor list by id success
   test("fetch doctor list by id success", (done) => {
     request(app)
-    .get("/doctor/1")
+    .get("/doctors/2")
     .then((res) => {
+      console.log(res.bodu, "resDoctor");
       expect(res.status).toBe(200)
       expect(res.body).toEqual(expect.any(Object))
       done();
@@ -1599,7 +1600,7 @@ describe("Fetch doctor list", () => {
   //TODO 1 fetch doctor list wrong id by id
   test("fetch doctor list wrong id by id", (done) => {
     request(app)
-    .get("/doctor/9")
+    .get("/doctors/20")
     .then((res) => {
       expect(res.status).toBe(404)
       expect(res.body).toHaveProperty("message", "Not Found");
@@ -1614,7 +1615,7 @@ describe("Fetch doctor list", () => {
     //TODO 1 fetch doctor list wrong id by id
     test("fetch doctor list no id by id", (done) => {
       request(app)
-      .get("/doctor/")
+      .get("/doctors/100")
       .then((res) => {
         expect(res.status).toBe(404)
         done();
@@ -1638,7 +1639,7 @@ describe("Fetch doctor list", () => {
     request(app)
     .get(`/doctors`)
     .then((res) => {
-      expect(res.status).toBe(404)
+      expect(res.status).toBe(200)
       done();
     })
     .catch((err) => {
