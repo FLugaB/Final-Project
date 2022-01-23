@@ -24,7 +24,7 @@ route.use('/', productRoutes)
 
 // CHAT PRODUCT 
 route.use('/', chatProductRoutes)
-
+  
 // SKINCARE PRODUCT 
 route.use('/', skincareProductRoutes)
 

@@ -5,14 +5,13 @@
         "role": "Admin"
     },
     {
-        "email": "doctor@mail.com",
-        "password": "$2a$12$587LSboi9GPsIJN1jjn9ruf5D8QYotFqktbrSMiz/RFuQpVWKfjzK",
+        "email": "doctor1@mail.com",
+        "password": "doctor",
         "role": "Doctor"
     },
     {
-        "email": "vera@mail.com",
-        "password": "$2a$12$rIhUkNUIawft9bg34/toz.rjzRxMAzDEnn5jz8PlIHUUx0peA7.XO",
-        "role": "Doctor"
-
+        "email": "client1@mail.com",
+        "password": "client",
+        "role": "Client"
     }
 ]
