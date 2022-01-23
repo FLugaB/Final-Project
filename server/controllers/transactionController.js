@@ -7,21 +7,24 @@ class TransactionController {
 
       try {
 
-        const findTicket = await Product.findOne({
-            where: {
-                type: {
-                    [Op.iLike]: '%Ticket Chat'
-                }
-            }
-        })
+        // const findTicket = await Product.findOne({
+        //     where: {
+        //         type: {
+        //             [Op.iLike]: '%Ticket Chat'
+        //         }
+        //     }
+        // })
+        const getProduct = await DetailProduct.findOne({where: {
+            ProductId:1
+        }})
 
-        if (!findTicket) {
+        if (!getProduct) {
             throw {name: "Product_not_found"}
         }
         
         const result = await OrderProduct.create({
             UserId: req.auth.id,
-            ProductId: findTicket.id,
+            ProductId: getProduct.id,
             status: 'pending'
         })
 
@@ -44,22 +47,19 @@ class TransactionController {
 
             const findUserOrder = await OrderProduct.findAll({
                 where: {
-                    UserId: req.auth.id
+                    [Op.and]: [
+                        { UserId: req.auth.id }, 
+                        { status: `pending` }
+                    ], 
                 },
                 include: [
                     {
-                        model: Product,
+                        
+                        model: DetailProduct,
                         attributes: {
                             exclude: ['createdAt', `updatedAt`, ]
-                        },
-                        include: [
-                            {
-                                model: DetailProduct,
-                                attributes: {
-                                    exclude: ['createdAt', `updatedAt`, ]
-                                }
-                            }, 
-                        ]
+                        }
+                         
                     }, 
                 ]
             })
@@ -130,23 +130,15 @@ class TransactionController {
                 },
                 include: [
                     {
-                        model: Product,
+                        
+                        model: DetailProduct,
                         attributes: {
                             exclude: ['createdAt', `updatedAt`, ]
-                        },
-                        include: [
-                            {
-                                model: DetailProduct,
-                                attributes: {
-                                    exclude: ['createdAt', `updatedAt`, ]
-                                }
-                            }, 
-                        ]
+                        }
+                         
                     }, 
                 ]
             })
-
-            console.log("%c 🚵‍♂️: TransactionController -> staticclientDetailCheckout -> findUserOrder ", "font-size:16px;background-color:#01e5d1;color:black;", findUserOrder)
 
             if (findUserOrder.length < 1) {
                 throw { name: "NO_ITEM_ON_CART" }
@@ -155,11 +147,11 @@ class TransactionController {
                 totalPrice: 0,
                 product: [],
             }
-             
-            //  findUserOrder.forEach(element => {
-            //     orderDetail.totalPrice += element.Product.DetailProducts[0].price
-            //     orderDetail.product.push(element.Product)
-            // });
+            
+            findUserOrder.forEach((el, index) => { 
+                orderDetail.totalPrice += findUserOrder[index].DetailProduct.price
+                orderDetail.product.push(el)
+            })
 
             const findOrderID = await Transaction.findOne({
                 where: {
@@ -171,7 +163,7 @@ class TransactionController {
             })
 
             if(findOrderID){
-                console.log("FIND TRANSACTION, <<<<<<<<<<<<<<<<<");
+                
                 orderDetail.order_id = findOrderID.order_id
                 const HistoryLog = await Transaction.update({
                     ammount: orderDetail.totalPrice
@@ -182,7 +174,7 @@ class TransactionController {
                 })
                 res.status(200).json({orderDetail})
             } else {
-                console.log("NOT FIND TRANSACTION, <<<<<<<<<<<<<<<<<");
+                
                 const HistoryLog = await Transaction.create({
                     order_id: `${req.auth.id}${(Math.random() + 1).toString(36).substring(7)}`,
                     UserId: req.auth.id,
@@ -204,20 +196,30 @@ class TransactionController {
     static checkoutMid = async (req, res, next) => {
 
         try {
-
             const response = await Transaction.findOne({
                 where: {
+                    // [Op.or]: [{
+                    //     [Op.and]: [
+                    //         { UserId: req.auth.id }, 
+                    //         { status: `pending` }
+                    //     ],
+                    //     [Op.and]: [
+                    //         { UserId: req.auth.id }, 
+                    //         { status: `failed` }
+                    //     ]
+                    // }]
                     [Op.and]: [
                         { UserId: req.auth.id }, 
                         { status: `pending` }
-                    ], 
+                    ],
+                    
                 },
                 attributes: {
                     exclude: ['createdAt', `updatedAt`]
                 },    
             })  
             
-            if (response.length < 1) throw { msg: `there is no orders yet`}
+            if (!response) throw { name: `NOT_FOUND_ORDER`}
     
             const findOrderID = await Transaction.findOne({
                 where: {
@@ -256,7 +258,7 @@ class TransactionController {
 
     static notificationTransaction = async (req, res, next) => {
         try {
-
+            
             const status = req.body
 
             console.log(status)
@@ -283,7 +285,7 @@ class TransactionController {
                         status.transaction_status === `capture`) {
                 newStatus = `paid`
             } 
-
+            // ini mestinya newStatus === 'failed' kan? bukan falsy
             if (!newStatus) throw { name: "PLEASE_PAY_FIRST" }
 
             const findOneOrderId = await Transaction.update(
@@ -305,6 +307,7 @@ class TransactionController {
                 transactionId: findOneOrderId[1][0].id
             })
 
+            console.log(status,"<<<<<<<<<<<<<<<<<<<<<<");
             res.status(200).json(findOneOrderId)
             
         } catch (error) {

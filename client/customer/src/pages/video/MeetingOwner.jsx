@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
+import { Link } from 'react-router-dom'
 import axios from "axios";
 
 import { useParams  } from "react-router-dom";
 
 export default function Video({ match }) {
+
   const { id } = useParams();
   
   useEffect(() => {
@@ -20,9 +22,9 @@ export default function Video({ match }) {
             iframeStyle: {
               position: "relative",
               width: "100%",
-              height: "100%",
+              height: "90vh",
               border: "0",
-              zIndex: 9999
+              zIndex: 9
             },
             showLeaveButton: true,
             showFullscreenButton: true,
@@ -36,5 +38,12 @@ export default function Video({ match }) {
       .catch((err) => console.log(err));
   }, [id]);
 
-  return <div className="homepage-container"></div>;
+  
+
+  return (
+    <div className="meeting-container">
+      {/* <h1>Hope you enjoyed our services</h1>
+      <Link to="/">Back to Home</Link> */}
+    </div>
+  )
 }

@@ -1,5 +1,5 @@
 const route = require('express').Router()
-const { authentication, authorization, authorizationCMS } = require("../middlewere/auth");
+const { authentication, authorization, authorizationCMS } = require("../middlewere/auth")
 const { TransactionController } = require(`../controllers/transactionController`)
 const { requestSnapToken, updateStatusTransactions } = require('../apis/midtransController')
 

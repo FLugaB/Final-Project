@@ -9,6 +9,8 @@ import VideoCallOwner from "./pages/video/MeetingOwner.jsx";
 import Dashboard from './pages/Dashboard'
 import JoinMeeting from "./pages/video/Join.jsx";
 import Notif from './components/Notif' 
+import NotFound from './pages/NotFound'
+import ProfileOutlet from './components/DashboardComponents/ProfileOutlet'
 import { pageLoad } from './Hooks/load'
 
 import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
@@ -52,6 +54,11 @@ function App() {
       <Navbar />
       <Routes>
           <Route path="/" element={<HomePage />} />
+
+          <Route path="/account" element={<Dashboard />}>
+            <Route path="profile" element={ <ProfileOutlet />} />
+          </Route>
+          
           <Route path="/notification/handling" element={<Notif />} />
           <Route path="/doctors" element={<JoinMeeting />} />
           <Route path="/video/:id" element={<VideoCall />} />
@@ -62,6 +69,8 @@ function App() {
               <Login mode={mode} />
             </LogGuard>
           } />
+
+          <Route path="*" exact element={<NotFound />}></Route> 
           
       </Routes>
     </div>
