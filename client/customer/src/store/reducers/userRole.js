@@ -1,7 +1,8 @@
-import { USER_ROLE } from "../actionType/userRole";
+import { USER_ACCOUNT, USER_ROLE } from "../actionType/userRole";
 
 const initialState={
-    role:''
+    role:'',
+    profile:{}
 }
 
 export default function userRoleReducer(state=initialState,action){
@@ -11,7 +12,12 @@ export default function userRoleReducer(state=initialState,action){
                 ...state,
                 role:action.payload
             }
-    
+        case USER_ACCOUNT:
+            return{
+                ...state,
+                profile:action.payload
+
+            }
         default:
             return state
     }
