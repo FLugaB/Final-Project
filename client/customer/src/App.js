@@ -17,6 +17,7 @@ import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
+import { LogoutComponent } from './components/Logout.jsx';
 
 
 function App() {
@@ -55,8 +56,9 @@ function App() {
       <Routes>
           <Route path="/" element={<HomePage />} />
 
-          <Route path="/account" element={<Dashboard />}>
+          <Route path="account" element={<Dashboard />}>
             <Route path="profile" element={ <ProfileOutlet />} />
+            {/* <Route path="logout" element={ <ProfileOutlet />} /> */}
           </Route>
           
           <Route path="/notification/handling" element={<Notif />} />
@@ -69,7 +71,9 @@ function App() {
               <Login mode={mode} />
             </LogGuard>
           } />
-
+          <Route path="logout" element={
+            <LogoutComponent/>
+          }/>
           <Route path="*" exact element={<NotFound />}></Route> 
           
       </Routes>
