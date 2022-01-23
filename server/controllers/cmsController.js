@@ -9,7 +9,6 @@ const cmsRegister = async (req, res, next) => {
     try {
         const {  email, password, fullName, birthdate, gender, address, photoProfile, phoneNumber } = req.body
         const addUser = await User.create({ email, password, role: "Admin",  }, { transaction });
-
         if (!addUser) throw { name: `USER_NOT_FOUND` }
 
         const addProfile = await Profile.create({
@@ -19,9 +18,9 @@ const cmsRegister = async (req, res, next) => {
             address,
             photoProfile,
             phoneNumber,
-            userId: addUser.id
+            UserId: addUser.id
         }, { transaction })
-
+        console.log(addProfile, ">>>>>>>>>");
         await transaction.commit();
         res.status(201).json({
             id: addUser.id,
@@ -29,7 +28,7 @@ const cmsRegister = async (req, res, next) => {
             fullName: addProfile.fullName
         });
     } catch (error) {
-        console.log(error)
+        console.log(error,">>>>>>>>>>err")
         next(error);
         await transaction.rollback()
     }
@@ -38,7 +37,6 @@ const cmsRegister = async (req, res, next) => {
 const cmsLogin = async (req, res, next) => {
     try {
         const {  email, password } = req.body
-        // console.log("LOGIN ADMIN");
         const findUser = await User.findOne({
             where: {
                 email: email

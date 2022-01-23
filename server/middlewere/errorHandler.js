@@ -4,7 +4,6 @@ const errorsLog = (err, req, res, next) => {
 
     let code = 500
     let message = "Internal server error"
-    // console.log(err,"<<<<<<<<<<<<<<<<< FROM ERROR HANDLER");
     if ( err.name === `SequelizeUniqueConstraintError` || 
         err.name === `SequelizeValidationError` ) {
         code = 400
@@ -21,7 +20,7 @@ const errorsLog = (err, req, res, next) => {
         message = "Invalid token"
     } else if ( err.name === `NO_TOKEN`){
         code = 403
-        message = "Pleae Login first"
+        message = "Please Login first"
     } else if ( err.name === `FORBIDDEN`){
         code = 403
         message = "Invalid access"
@@ -80,12 +79,20 @@ const errorsLog = (err, req, res, next) => {
         code = 404
         message = "Type is Required"
     }
+    // else if ( err.name === "CANNOT_DELETE_PRODUCT") {
+    //     code = 403
+    //     message = "You Can't Delete This Product"
+    // } 
+    // else if ( err.name === `CANNOT_UPDATE_PRODUCT`) {
+    //     code = 403
+    //     message = "you can't update this product"
+    // }
     // NEXT
     // else if ( err.response.data.error_messages[0] === 'transaction_details.order_id sudah digunakan') {
     //     code = 404
     //     message = "Transaction ID Has Been Used"
     // } 
-
+console.log(err);
    res.status(code).json({message})
 }
 

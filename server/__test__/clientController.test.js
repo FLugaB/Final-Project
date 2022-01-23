@@ -6,7 +6,7 @@ const { getToken } = require("../helpers/jwt");
 const defaultImage =
   "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332";
 
-let tokenMatch1, tokenMatch2, tokenPayloadInvalid;
+let tokenMatch1, tokenMatch2, adminToken, tokenPayloadInvalid, doctorToken;
 let invalidToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJjaW5keVZAZ21haWwuY29tIiwiaWF0IjoxNjQyNjAzMzQ1fQ.bx0MAXaSmsYCa3Qbac8KQpCftEzKtFgpr8I96I1xZed";
 
@@ -29,17 +29,20 @@ beforeAll(async () => {
     password: "doctor",
     role: "Doctor"
   }
-  try {
-    const result = User.create(newDoctor) 
-  } catch (err) {
-    console.log(err);
-  }
+
 
   //! USER1
   let newClientTest = {
     email: "newClient1@gmail.com",
     password: "newClient",
     role: "Client",
+  };
+
+  
+  let newAdmin = {
+    email: "newAdmin@gmail.com",
+    password: "newAdmin",
+    role: "Admin",
   };
 
   try {
@@ -50,6 +53,23 @@ beforeAll(async () => {
     };
 
     tokenMatch1 = getToken(payload1);
+      const createdDoctor = await User.create(newDoctor);
+      let payload3 = {
+        id: createdDoctor.id,
+        email: createdDoctor.email,
+      };
+  
+      doctorToken = getToken(payload3);
+      console.log(doctorToken, ">>>>>>>>ini llaaa");
+
+
+    const createdAdmin = await User.create(newAdmin);
+    let payload2 = {
+      id: createdAdmin.id,
+      email: createdAdmin.email,
+    };
+
+    adminToken = getToken(payload2);
 
     let wrongPayload = {
       id: 1000,
@@ -127,7 +147,7 @@ describe("New Client Test on clientRegister Field", () => {
       .then((res) => {
         expect(res.status).toBe(201);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("id", 4);
+        expect(res.body).toHaveProperty("id", 5);
         expect(res.body).toHaveProperty("email", "newClientSuccess@gmail.com");
         expect(res.body).toHaveProperty("fullName", "newClientSuccess");
         done();
@@ -705,6 +725,158 @@ describe("New Client Test on clientLogin Field", () => {
   });
 });
 
+
+describe("New Doctor Test on  login Field", () => {
+  //TODO 1 Login Success
+  test("Login success should be return valid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "doctor@gmail.com",
+        password: "doctor",
+      })
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({ access_token: res.body.access_token });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 2 Login email is null
+  test("Login email is null should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        password: "doctor",
+        role: "Doctor"
+      })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Email/Password is required",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 3 Login email is empty
+  test("Login email is empty should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "",
+        password: "doctor",
+        role: "Doctor"
+      })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Email/Password is required",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 4 Login password is null
+  test("Login password is null should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "doctor@gmail.com",
+        role: "Doctor"
+      })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Email/Password is required",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 5 Login password is empty
+  test("Login password is empty should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "doctor@gmail.com",
+        password: "",
+        role: "Doctor"
+      })
+      .then((res) => {
+        expect(res.status).toBe(400);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Email/Password is required",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 6 Login find Admin not found
+  test("Login find Admin not found should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "doctor11@gmail.com",
+        password: "doctor",
+        role: "Doctor"
+      })
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Invalid email/password",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  // TODO 7 Login verify is undefined
+  test("Login verify is undefined should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "doctor@gmail.com",
+        password: "doctor222",
+        role: "Doctor"
+      })
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Invalid email/password",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+});
+
 describe("New Client Test on clientAccount Authentication Field", () => {
   //TODO 1 Client Account Authentication Found
   test("Client Account Authentication Found should be return valid response", (done) => {
@@ -718,16 +890,7 @@ describe("New Client Test on clientAccount Authentication Field", () => {
       .then((res) => {
         expect(res.status).toBe(200);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("findUser.id", 2);
-        expect(res.body).toHaveProperty(
-          "findUser.email",
-          "newClient1@gmail.com"
-        );
-        expect(res.body).toHaveProperty("findUser.role", "Client");
-        expect(res.body).toHaveProperty(
-          "findUser.Profile.fullName",
-          "newClient"
-        );
+        expect(res.body).toHaveProperty("findUser.id", 1);
         done();
       })
       .catch((err) => {
@@ -825,10 +988,6 @@ describe("New Client Test on clientAccount Authentication Field", () => {
         done(err);
       });
   });
-
-  
-
-  
 });
 
 describe("Client Update Profile", () => {
@@ -1119,6 +1278,293 @@ describe("Client Update Profile", () => {
     });
 })
 
+describe("Doctor Update Profile", () => {
+
+  //TODO 1 doctor update profile user not found no access token
+  test("doctor update profile user not found no access token", (done) => {
+    request(app)
+      .put("/account")
+      .set("access_token", "")
+      .then((res) => {
+        expect(res.status).toBe(403);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Pleae Login first")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  })
+
+  //TODO 2 doctor update profile user not found invalid access token
+  test("doctor update profile user not found invalid access token", (done) => {
+    request(app)
+      .put("/account")
+      .set("access_token", invalidToken)
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Invalid token")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  })
+
+    //TODO 3 doctor success update
+    test("update success should be return valid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", doctorToken)
+        .send({
+          email: "editDoctorSuccess@gmail.com",
+          password: "editDoctorSuccess",
+          fullName: "editDoctorSuccess",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+        })
+        .then((res) => {
+          expect(res.status).toBe(200);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toEqual({successText: "Success update profile"});
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+    //TODO 4 Update email is empty
+    test("Update email is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", doctorToken)
+        .send({
+          email: "",
+          password: "newDoctor2",
+          fullName: "newDoctor2",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+        })
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Email is required");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+    //TODO 5 update email invalid format
+    test("update email invalid format should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", doctorToken)
+        .send({
+          email: "newDoctor1gmail.com",
+          password: "newDoctor1",
+          fullName: "newDoctor1",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+        })
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Invalid email format");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+    //TODO 6 update password is empty
+    test("update password is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", doctorToken)
+        .send({
+          email: "newDoctor2@gmail.com",
+          password: "",
+          fullName: "newDoctor2",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+        })
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Password is required");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+    //TODO 7 Update fullName is empty
+    test("Update fullName is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", doctorToken)
+        .send({
+          email: "newDoctor3@gmail.com",
+          password: "newDoctor3",
+          role: "Doctor",
+          fullName: "",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+          UserId: 1,
+        })
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Fullname is required");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+    //TODO 9 update birthdate is empty
+    test("update birthdate is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", doctorToken)
+        .send({
+          email: "newDoctor3@gmail.com",
+          password: "newDoctor3",
+          role: "Doctor",
+          fullName: "newDoctor3",
+          birthdate: "",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+          UserId: 1,
+        })
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Invalid date format");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+
+    //TODO 10 Update gender is empty
+    test("Update gender is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", doctorToken)
+        .send({
+          email: "newDoctor3@gmail.com",
+          password: "newDoctor3",
+          role: "Doctor",
+          fullName: "newDoctor3",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+          UserId: 1,
+        })
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Gender is required");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+
+    //TODO 11 update address is empty
+    test("update address is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", doctorToken)
+        .send({
+          email: "newDoctor3@gmail.com",
+          password: "newDoctor3",
+          role: "Doctor",
+          fullName: "newDoctor3",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "082258852654",
+          UserId: 1,
+        })
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Address is required");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+  
+    //TODO 12 update phoneNumber is empty
+    test("update phoneNumber is empty should be return invalid response", (done) => {
+      request(app)
+        .put("/account")
+        .set("access_token", doctorToken)
+        .send({
+          email: "newDoctor3@gmail.com",
+          password: "newDoctor3",
+          role: "Doctor",
+          fullName: "newDoctor3",
+          birthdate: "1998-03-29 13:34:00.000 +0700",
+          gender: "Male",
+          address: "Bekasi",
+          photoProfile:
+            "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332",
+          phoneNumber: "",
+          UserId: 1,
+        })   
+        .then((res) => {
+          expect(res.status).toBe(400);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toHaveProperty("message", "Phone Number is required");
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+})
 
 describe("Fetch doctor list", () => {
   //TODO 2 fetch doctor list success
@@ -1190,7 +1636,7 @@ describe("Fetch doctor list", () => {
       });  
     }
     request(app)
-    .get("/doctor")
+    .get(`/doctors`)
     .then((res) => {
       expect(res.status).toBe(404)
       done();
