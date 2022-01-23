@@ -127,7 +127,7 @@ beforeAll(async () => {
 })
 
   describe("add product", () => {
-    // //TODO 1 show product empty
+    //TODO 1 show product empty
     // test("don't have product", (done) => {
     //   request(app)
     //     .get("/products")

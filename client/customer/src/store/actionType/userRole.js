@@ -1,1 +1,2 @@
 export const USER_ROLE='USER_ROLE'
+export const USER_ACCOUNT="USER_ACCOUNT"

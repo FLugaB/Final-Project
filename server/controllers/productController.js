@@ -27,7 +27,11 @@ module.exports = class Controller {
 
   static showProductById = async(req,res,next) => {
     try {
+      if(!req.params) {
+        throw {name: "NO_TOKEN"}
+      }
       const {id} = req.params
+      console.log(id,">>>>>>>>>>>ini id");
       const result = await Product.findByPk(id, {
         include: [
           {
@@ -194,9 +198,12 @@ module.exports = class Controller {
 
   static showDetailById = async(req,res,next) => {
     try {
+      if(!req.params) {
+        throw {name: "NO_TOKEN"}
+      }
       const {id} = req.params
       const ProductId = id
-      const result = await DetailProduct.findOne({where: {ProductId}})
+      const result = await DetailProduct.findOne({where: ProductId})
       if (!result) {
         throw {name: "Product_not_found"}
       } 
@@ -220,7 +227,7 @@ module.exports = class Controller {
         const input = {price}
 
         const find = await DetailProduct.findByPk(id)
-        if(!find || find.length=== 1) {
+        if(!find || find.length=== 0) {
           throw {name: "Product_not_found"}
         }
         const result = await DetailProduct.update(input, {where: {id}, returning:true, transaction:t})
@@ -230,7 +237,7 @@ module.exports = class Controller {
       } else {
         const input = {ProductId: getProductId.ProductId, name, price, stock, category,imageUrl, description}
         const find = await DetailProduct.findByPk(id)
-        if(!find) {
+        if(!find || find.length ===0) {
           throw {name: "Product_not_found"}
         }
         const result = await DetailProduct.update(input, {where: {id}, returning:true, transaction:t})
