@@ -929,10 +929,11 @@ describe("New Client Test on clientAccount Authentication Field", () => {
       .then((res) => {
         expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Pleae Login first")
+        expect(res.body).toHaveProperty("message", "Please Login first")
         done();
       })
       .catch((err) => {
+        console.log(err);
         done(err);
       });
   });
@@ -965,7 +966,7 @@ describe("New Client Test on clientAccount Authentication Field", () => {
       .then((res) => {
         expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Pleae Login first")
+        expect(res.body).toHaveProperty("message", "Please Login first")
         done();
       })
       .catch((err) => {
@@ -1000,7 +1001,7 @@ describe("Client Update Profile", () => {
       .then((res) => {
         expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Pleae Login first")
+        expect(res.body).toHaveProperty("message", "Please Login first")
         done();
       })
       .catch((err) => {
@@ -1288,7 +1289,7 @@ describe("Doctor Update Profile", () => {
       .then((res) => {
         expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toHaveProperty("message", "Pleae Login first")
+        expect(res.body).toHaveProperty("message", "Please Login first")
         done();
       })
       .catch((err) => {
@@ -1625,24 +1626,5 @@ describe("Fetch doctor list", () => {
     });
   
 
-  //TODO 1 fetch doctor list empty
-  test("fetch doctor list empty", (done) => {
-    const data = async () => {
-      await User.destroy({
-        where: {role : "Doctor"},
-        truncate: true,
-        restartIdentity: true,
-        cascade: true,     
-      });  
-    }
-    request(app)
-    .get(`/doctors`)
-    .then((res) => {
-      expect(res.status).toBe(404)
-      done();
-    })
-    .catch((err) => {
-      done(err);
-    });  
-  });
+  
 })
