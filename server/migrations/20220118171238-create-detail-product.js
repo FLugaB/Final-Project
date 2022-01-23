@@ -29,7 +29,7 @@ module.exports = {
       category: {
         type: Sequelize.STRING
       },
-      imageUrl: {
+      imageUrl: {  
         type: Sequelize.STRING
       },
       description: {

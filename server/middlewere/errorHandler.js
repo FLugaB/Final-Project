@@ -21,7 +21,7 @@ const errorsLog = (err, req, res, next) => {
         message = "Invalid token"
     } else if ( err.name === `NO_TOKEN`){
         code = 403
-        message = "Pleae Login first"
+        message = "Please Login first"
     } else if ( err.name === `FORBIDDEN`){
         code = 403
         message = "Invalid access"
@@ -58,7 +58,10 @@ const errorsLog = (err, req, res, next) => {
     } else if ( err.name === `NO_ITEM_ON_CART`) {
         code = 404
         message = "Not Found Order Product"
-    } 
+    } else if ( err.name === `TYPE_IS_NULL`) {
+        code = 404
+        message = "Type is Required"
+    }
     // else if ( err.name === "CANNOT_DELETE_PRODUCT") {
     //     code = 403
     //     message = "You Can't Delete This Product"
@@ -72,7 +75,7 @@ const errorsLog = (err, req, res, next) => {
     //     code = 404
     //     message = "Transaction ID Has Been Used"
     // } 
-
+console.log(err);
    res.status(code).json({message})
 }
 

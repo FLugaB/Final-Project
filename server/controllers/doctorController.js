@@ -10,7 +10,6 @@ class DoctorController {
     // ngambil schedule berdasarkan hari dan tag (type service)
     // tag kirim dari req.body bisa arr atau obj
     const { day, tag } = req.body
-    console.log(day)
     const options = {}
     if (day) {
       options.day = day
