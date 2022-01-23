@@ -16,7 +16,12 @@ export default function Video({ match }) {
       .then((res) => {
         console.log(`tersend OWNER`);
         if (res.status === 200) {
-          console.log("status ", res.status);
+          if (!res.data.token) {
+            return (
+              <h1>Wait For Second</h1>
+            )
+          }
+          console.log("status server as Owner", res);
           const script = document.createElement("script");
           script.innerHTML = `window.DailyIframe.createFrame({
             iframeStyle: {
@@ -29,7 +34,7 @@ export default function Video({ match }) {
             showLeaveButton: true,
             showFullscreenButton: true,
           }).join({
-            url: "${domain}${id}?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvIjp0cnVlLCJ1IjoiRG9jdG9yIFZlcmEiLCJyIjoiRHJWZXJhIiwiZCI6IjBjZTAyOTY2LWQ5MTItNGRiMC04NWNhLTEyMDAzNDA0ODg0MyIsImlhdCI6MTY0Mjg1MjM3NX0.f9taHR_Hab_djWy1hw8wej2IiM3M3bp3d4V789jjLcU",
+            url: "${domain}${id}?t=${res.data.token}",
           });`;
 
           document.body.appendChild(script);

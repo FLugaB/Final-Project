@@ -15,7 +15,11 @@ export default function Video({ match }) {
       .then((res) => {
         console.log(`tersend CUSTOMERS`);
         if (res.status === 200) {
-          console.log("status ", res.status);
+          if (!res.data.token) {
+            return (
+              <h1>Wait For Second</h1>
+            )
+          }
           const script = document.createElement("script");
           script.innerHTML = `window.DailyIframe.createFrame({
             iframeStyle: {
@@ -28,7 +32,7 @@ export default function Video({ match }) {
             showLeaveButton: true,
             showFullscreenButton: true,
           }).join({
-            url: "${domain}DrVera?=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1IjoiQ3VzdG9tZXJzIiwiciI6IkRyVmVyYSIsImQiOiIwY2UwMjk2Ni1kOTEyLTRkYjAtODVjYS0xMjAwMzQwNDg4NDMiLCJpYXQiOjE2NDI4NTIwOTV9.ZqnJU3T5jKXRzitLW95KXvdNufdskA124-1C4hYBd_I",
+            url: "${domain}DrVera?=${res.data.token}",
           });`;
 
           document.body.appendChild(script);
