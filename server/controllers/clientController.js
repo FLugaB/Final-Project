@@ -190,6 +190,7 @@ const clientDoctorFetch = async (req, res, next) => {
 const clientDoctorDetail = async (req, res, next) => {
     try {
         const { id } = req.params
+        console.log(id);
         const findDoctorDetail = await User.findOne({
             where: {
                 [Op.and]: [
