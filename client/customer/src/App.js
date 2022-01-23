@@ -18,6 +18,7 @@ import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import { LogoutComponent } from './components/Logout.jsx';
+import ProductPage  from './pages/Products.jsx';
 
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
           </Route>
           
           <Route path="/notification/handling" element={<Notif />} />
+          <Route path="/products" element={<ProductPage />} />
           <Route path="/doctors" element={<JoinMeeting />} />
           <Route path="/video/:id" element={<VideoCall />} />
           <Route path="/video-owner/:id" element={<VideoCallOwner />} />
