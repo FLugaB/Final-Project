@@ -9,7 +9,7 @@ export const fetchDoctors = () => {
   return (dispatch, getState) => {
     dispatch({ type: SET_LOADING, payload: true})
     setTimeout(() => {
-      fetch(`http://localhost:3000/Doctors`)
+      fetch(`http://localhost:3000/doctors`)
       .then((res) => {
         if (!res.ok) throw new Error ("throwed Error from Fetch Doctors")
         return res.json();
@@ -23,8 +23,33 @@ export const fetchDoctors = () => {
         dispatch({ type: SET_ERROR, payload: err})
       })
       .finally(() => {
-        dispatch({ type: SET_LOADING, payload: true})
+        dispatch({ type: SET_LOADING, payload: false})
       })
     }, 1200);
   }
 }
+
+export const fetchDoctorDetail = (id) => {
+  return (dispatch, getState) => {
+    dispatch({ type: SET_LOADING, payload: true})
+    setTimeout(() => {
+      fetch(`http://localhost:3000/doctors/${id}`)
+      .then((res) => {
+        if (!res.ok) throw new Error ("throwed Error from Fetch Doctors")
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data, `data FETCH DOCTOR DETAIL on actionCreator/index`);
+        dispatch({ type: FETCH_DOCTOR_DETAIL, payload: data})
+      })
+      .catch((err) => {
+        console.log(err, `error FETCH DOCTOR DETAIL on actionCreator/index`);
+        dispatch({ type: SET_ERROR, payload: err})
+      })
+      .finally(() => {
+        dispatch({ type: SET_LOADING, payload: false})
+      })
+    }, 1200);
+  }
+}
+

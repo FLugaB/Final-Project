@@ -10,47 +10,51 @@ import { useSelector } from "react-redux";
 // import { logout } from '../store/actionCreator/customers';
 
 const DashboardSidebar = () => {
-  const { profile } = useSelector((state) => state.userRole);
-  const [sidebar, setSidebar] = useState(false);
-  const SidebarData = [
-    {
-      title: "Profile",
-      path: "profile",
-      icon: <IconName.FcBusinesswoman />,
-      cName: "nav-text",
-    },
-    {
-      title: "History Order",
-      path: "reports",
-      icon: <IconName.FcSurvey />,
-      cName: "nav-text",
-    },
-    {
-      title: "Cart",
-      path: "products",
-      icon: <IconName.FcPaid />,
-      cName: "nav-text",
-    },
-    {
-      title: "Consultation",
-      path: "consultation",
-      icon: <IconName.FcWebcam />,
-      cName: "nav-text",
-    },
-    {
-      title: "Schedule",
-      path: "schedule",
-      icon: <IconName.FcCalendar />,
-      cName: "nav-text",
-    },
-    {
-      title: "Logout",
-      path: "/logout",
-      icon: <IconName.FcDownLeft />,
-      cName: "nav-text",
-      // onClick:{logOut}
-    },
-  ];
+    const [sidebar, setSidebar] = useState(false);
+    // const dispatch=useDispatch()
+    // const logOut=()=>{
+    //   console.log(`tombol logot`);
+    //   dispatch(logout())
+    // }
+    const SidebarData = [
+        {
+          title: "Profile",
+          path: "profile",
+          icon: <IconName.FcBusinesswoman />,
+          cName: "nav-text"
+        },
+        {
+          title: "History Order",
+          path: "history",
+          icon: <IconName.FcSurvey />,
+          cName: "nav-text"
+        },
+        {
+          title: "Cart",
+          path: "cart",
+          icon: <IconName.FcPaid />,
+          cName: "nav-text"
+        },
+        {
+          title: "Consultation",
+          path: "consultation",
+          icon: <IconName.FcWebcam />,
+          cName: "nav-text"
+        },
+        // {
+        //   title: "Schedule",
+        //   path: "schedule",
+        //   icon: <IconName.FcCalendar />,
+        //   cName: "nav-text"
+        // },
+        {
+          title: "Logout",
+          path: "/logout",
+          icon: <IconName.FcDownLeft />,
+          cName: "nav-text",
+          // onClick:{logOut}
+        }
+      ];
 
   const showSidebar = () => setSidebar(!sidebar);
   return (

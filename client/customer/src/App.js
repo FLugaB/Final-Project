@@ -11,6 +11,9 @@ import JoinMeeting from "./pages/video/Join.jsx";
 import Notif from './components/Notif' 
 import NotFound from './pages/NotFound'
 import ProfileOutlet from './components/DashboardComponents/ProfileOutlet'
+import CartOutlet from './components/DashboardComponents/CartOutlet'
+import HistoryOutlet from './components/DashboardComponents/HistoryOutlet'
+import DetailCheckOut from './components/DashboardComponents/DetaiCheckOut'
 import { pageLoad } from './Hooks/load'
 
 import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
@@ -18,7 +21,11 @@ import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import { LogoutComponent } from './components/Logout.jsx';
+<<<<<<< HEAD
 import ProductPage  from './pages/Products.jsx';
+=======
+import CardTicket from './components/Card/CardTicket.jsx';
+>>>>>>> f469b94f562b79493f9a828ff60db00b25ccc6bf
 
 
 function App() {
@@ -59,7 +66,11 @@ function App() {
 
           <Route path="account" element={<Dashboard />}>
             <Route path="profile" element={ <ProfileOutlet />} />
+            <Route path="cart" element={ <CartOutlet />} />
+            <Route path="checkout" element={ <DetailCheckOut />} />
+            <Route path="history" element={ <HistoryOutlet />} />
             {/* <Route path="logout" element={ <ProfileOutlet />} /> */}
+            <Route path="ticket" element={ <CardTicket />} />
           </Route>
           
           <Route path="/notification/handling" element={<Notif />} />
