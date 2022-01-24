@@ -12,7 +12,7 @@ route.get('/products/:id', [authentication, authorization], showProductById)
 // THIS IS CONTAINER OF PRODUCT
 route.post('/cms/products', [authentication, authorization, authorizationCMS], MulterStorage, ImageKit_API, addProduct)
 route.put('/cms/products/:id', [authentication, authorization, authorizationCMS], updateProduct)
-// route.delete('/cms/products/:id', [authentication, authorization, authorizationCMS], deleteProduct)
+route.delete('/cms/products/:id', [authentication, authorization, authorizationCMS], deleteProduct)
 
 // THIS IS ITEM PRODUCT ITSELF
 route.post('/cms/details', [authentication, authorization, authorizationCMS], MulterStorage, ImageKit_API, addDetail)

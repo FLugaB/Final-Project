@@ -933,6 +933,7 @@ describe("New Client Test on clientAccount Authentication Field", () => {
         done();
       })
       .catch((err) => {
+        console.log(err);
         done(err);
       });
   });
