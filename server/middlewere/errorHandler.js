@@ -25,6 +25,9 @@ const errorsLog = (err, req, res, next) => {
     } else if ( err.name === `FORBIDDEN`){
         code = 403
         message = "Invalid access"
+    } else if ( err.name === `TRANSACTION_NOT_FOUND`){
+        code = 403
+        message = "Invalid access"
     } else if ( err.name === `Product_not_found`) {
         code = 404
         message = "Product not found"
