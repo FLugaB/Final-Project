@@ -12,12 +12,12 @@ export const fetchConsultationTickets = () => {
   return async (dispatch, getState) => {
     try {
       dispatch({ type: SET_LOADING, payload: true });
+      const access_token = localStorage.getItem("access_token");
       const result = await axios("http://localhost:3000/account/tickets", {
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
-          access_token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJjaW5keUBtYWlsLmNvbSIsImlhdCI6MTY0MzAyOTc5NX0.IzU74Cj9gYFblu8xRmfoOvOcK-1n_ClkoLVVHsRA20k",
+          access_token: access_token,
         },
       });
       if(result.ok) throw new Error ("throwed Error from Fetch ConsultationTickets")

@@ -6,7 +6,7 @@ import {
   CUSTOMER_IS_SUCCESS_REGISTER,
   CUSTOMER_IS_SUCCESS_LOGIN,
   CUSTOMER_IS_SUCCESS_LOGOUT,
-  CUSTOMER_CHOOSE_DOCTOR
+  CUSTOMER_CHOOSE_DOCTOR,
 } from "../actionType/customers";
 import { isError, isSuccess, isLoading } from "./status";
 
