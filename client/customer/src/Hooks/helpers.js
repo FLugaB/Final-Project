@@ -3,4 +3,11 @@ export function formatCurrency(value) {
         style: 'currency', currency: 'IDR'
     }).format(value)    
 }
+
+export const formattedDate = (date) => {
+    date.toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'short', year: 'numeric'
+    }).replace(/ /g, '-');
+}
+
  

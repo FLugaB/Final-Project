@@ -61,9 +61,6 @@ const HomePage = () => {
         <div className="section-wrapper w-100vw bg-hard">
           <Card />
         </div>
-        <div className="section-wrapper w-100vw bg-hard">
-          <button onClick={midtransService}>Ceritanya Di cart</button>
-        </div>
       </div>
     </div>
   );

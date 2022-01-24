@@ -51,7 +51,7 @@ function App() {
             <Route path="checkout" element={ <DetailCheckOut />} />
             <Route path="history" element={ <HistoryOutlet />} />
             {/* <Route path="logout" element={ <ProfileOutlet />} /> */}
-            <Route path="ticket" element={ <CardTicket />} />
+            <Route path="consultation" element={ <CardTicket />} />
           </Route>
           
           <Route path="/notification/handling" element={<Notif />} />
