@@ -122,6 +122,7 @@ class DoctorController {
       next(error)
     }
   }
+
 }
 
 module.exports = DoctorController
