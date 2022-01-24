@@ -11,6 +11,8 @@ import JoinMeeting from "./pages/video/Join.jsx";
 import Notif from './components/Notif' 
 import NotFound from './pages/NotFound'
 import ProfileOutlet from './components/DashboardComponents/ProfileOutlet'
+import CartOutlet from './components/DashboardComponents/CartOutlet'
+import HistoryOutlet from './components/DashboardComponents/HistoryOutlet'
 import { pageLoad } from './Hooks/load'
 
 import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
@@ -58,6 +60,8 @@ function App() {
 
           <Route path="account" element={<Dashboard />}>
             <Route path="profile" element={ <ProfileOutlet />} />
+            <Route path="cart" element={ <CartOutlet />} />
+            <Route path="history" element={ <HistoryOutlet />} />
             {/* <Route path="logout" element={ <ProfileOutlet />} /> */}
           </Route>
           
