@@ -24,13 +24,13 @@ const DashboardSidebar = () => {
         },
         {
           title: "History Order",
-          path: "reports",
+          path: "history",
           icon: <IconName.FcSurvey />,
           cName: "nav-text"
         },
         {
           title: "Cart",
-          path: "products",
+          path: "cart",
           icon: <IconName.FcPaid />,
           cName: "nav-text"
         },
@@ -40,12 +40,12 @@ const DashboardSidebar = () => {
           icon: <IconName.FcWebcam />,
           cName: "nav-text"
         },
-        {
-          title: "Schedule",
-          path: "schedule",
-          icon: <IconName.FcCalendar />,
-          cName: "nav-text"
-        },
+        // {
+        //   title: "Schedule",
+        //   path: "schedule",
+        //   icon: <IconName.FcCalendar />,
+        //   cName: "nav-text"
+        // },
         {
           title: "Logout",
           path: "/logout",

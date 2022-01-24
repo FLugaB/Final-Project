@@ -20,7 +20,6 @@ const ProfileOutlet = () => {
                     </div>
                 </Col>
                 <Col md={12} className="d-flex justify-content-start">
-                    
                     <Row>
                         <Col md={6} className="text-start">
                             <p>Full Name: {profile.fullName}</p>
@@ -35,7 +34,6 @@ const ProfileOutlet = () => {
                             </div>
                         </Col>
                     </Row>
-                    
                 </Col>
             </Row>
         </Col>
