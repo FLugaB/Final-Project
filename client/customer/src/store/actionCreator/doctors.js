@@ -39,11 +39,11 @@ export const fetchDoctorDetail = (id) => {
         return res.json();
       })
       .then((data) => {
-        console.log(data, `data FETCH DOCTORS on actionCreator/index`);
+        console.log(data, `data FETCH DOCTOR DETAIL on actionCreator/index`);
         dispatch({ type: FETCH_DOCTOR_DETAIL, payload: data})
       })
       .catch((err) => {
-        console.log(err, `error FETCH DOCTORS on actionCreator/index`);
+        console.log(err, `error FETCH DOCTOR DETAIL on actionCreator/index`);
         dispatch({ type: SET_ERROR, payload: err})
       })
       .finally(() => {
