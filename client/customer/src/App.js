@@ -20,6 +20,7 @@ import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import { LogoutComponent } from './components/Logout.jsx';
+import CardTicket from './components/Card/CardTicket.jsx';
 
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
             <Route path="cart" element={ <CartOutlet />} />
             <Route path="history" element={ <HistoryOutlet />} />
             {/* <Route path="logout" element={ <ProfileOutlet />} /> */}
+            <Route path="ticket" element={ <CardTicket />} />
           </Route>
           
           <Route path="/notification/handling" element={<Notif />} />
