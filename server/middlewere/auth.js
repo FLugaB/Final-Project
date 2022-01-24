@@ -6,7 +6,11 @@ const authentication = async (req, res, next) => {
     try {
         const { access_token } = req.headers
 
+        console.log(access_token,`INI DI AUTH`)
+
         if(!access_token) throw { name: "NO_TOKEN" }
+
+        console.log(`LOLOS GAK SIH?`)
 
         const payload = verifyToken(access_token)
 
@@ -15,6 +19,8 @@ const authentication = async (req, res, next) => {
         const findUser = await User.findByPk(payload.id)
 
         if(!findUser) throw { name: "INVALID_TOKEN" }
+
+        console.log(`LOLOOOOOOOOOOOOS =========================`)
 
         req.user = {  email: findUser.email }
 
