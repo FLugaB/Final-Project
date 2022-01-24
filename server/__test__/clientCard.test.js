@@ -1,6 +1,6 @@
 const app = require("../");
 const request = require("supertest");
-const { User, OrderProduct } = require("../models");
+const { User, OrderProduct, Product, DetailProduct } = require("../models");
 const { getToken } = require("../helpers/jwt");
 
 const defaultImage =
@@ -37,6 +37,25 @@ beforeAll(async () => {
       status: "completed"
     }
   ]
+  
+  const product  = 
+{
+  "title": "Chat consultation", 
+  "type": "Ticket Chat"
+}
+const detail = 
+{
+  "ProductId": 1,
+  "name": "Ticket Chat",
+  "price": 300000,
+  "category": "Ticket",
+  "stock": 0,
+  "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+  "description": "Ticket Counsultation via Chat"
+}  
+const getProduct = await Product.create(product);
+const getDetail = await DetailProduct.create(detail);
+
 
   try {
     const createdClient = await User.create(newClientTest);

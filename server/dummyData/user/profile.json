@@ -25,5 +25,23 @@
         "photoProfile": "https://plasthetic.com/wp-content/uploads/2021/10/dr.-Vera.jpg",
         "phoneNumber": "+62 8xx xxx xxxx",
         "UserId": 3
+    },
+    {
+        "fullName": "DR. PUTRI REZKI, SP.BP-RE",
+        "birthdate": "2022-01-17 20:07:24+07",
+        "gender": "Female",
+        "address": "Plasthetic Clinic Benhil, Jakarta",
+        "photoProfile": "https://plasthetic.com/wp-content/uploads/2021/10/dr.-Puput-1200x800.jpg",
+        "phoneNumber": "+62 8xx xxx xxxx",
+        "UserId": 4
+    },
+    {
+        "fullName": "Dr Vera",
+        "birthdate": "2022-01-17 20:07:24+07",
+        "gender": "Female",
+        "address": "Alam Sutera",
+        "photoProfile": "https://plasthetic.com/wp-content/uploads/2021/10/dr.-Vera.jpg",
+        "phoneNumber": "+62 8xx xxx xxxx",
+        "UserId": 5
     }
 ]

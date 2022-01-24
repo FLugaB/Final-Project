@@ -4,36 +4,28 @@ const { Product,User, DetailProduct, OrderProduct, Transaction, Voucher } = requ
 const { getToken } = require("../helpers/jwt");
 
 let tokenMatch1,getOrder, tokenPayloadInvalid, clientToken
-const list = [
-  {
-    "title": "Booking consultation", 
-    "type": "Ticket Booking",
-    "name": "Ticket Booking",
-    "price": 300000,
-    "category": "Ticket",
-    "stock": 0,
-    "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-    "description": "Ticket Counsultation via Chat"
-  }
-]
 
-const product  = [
-  {
-    "title": "Chat consultation", 
-    "type": "Ticket Chat"
-  }
-]
+const product  = 
+{
+  "title": "Chat consultation", 
+  "type": "Ticket Chat"
+}
+const detail = 
+{
+  "ProductId": 1,
+  "name": "Ticket Chat",
+  "price": 300000,
+  "category": "Ticket",
+  "stock": 0,
+  "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+  "description": "Ticket Counsultation via Chat"
+}  
 
 const order = [
   {
-    "UserId" : 2,
-    "ProductId": 1,
-    "status": "pending"
-  },
-  {
     "UserId" : 3,
     "ProductId": 1,
-    "status": "completed"
+    "status": "pending"
   }
 ]
 
@@ -56,8 +48,12 @@ beforeAll(async () => {
     restartIdentity: true,
     cascade: true,
   });
-  await DetailProduct.bulkCreate(list)
-  await Product.bulkCreate(product)
+  await OrderProduct.destroy({
+    where: {},
+    truncate: true,
+    restartIdentity: true,
+    cascade: true,
+  });
 
   const newDoctor  = {
     email: "doctor@gmail.com",
@@ -102,7 +98,8 @@ beforeAll(async () => {
       email: "wrongEmail@gmail.com",
     };
     tokenPayloadInvalid = getToken(wrongPayload);
-    const getOrder = await OrderProduct.create(order);
+    const getProduct = await Product.create(product);
+    const getDetail = await DetailProduct.create(detail);
     
 
   } catch (err) {
@@ -110,17 +107,72 @@ beforeAll(async () => {
   }
 })
 
+describe("ticket consultation", () => {
+
+  test("create order product for consultation", (done) => {
+    request(app)
+        .post("/products/chat")
+        .set('access_token', tokenMatch1)
+        .then((res) => {
+          console.log(res,">>>>>>>>>>ini res");
+          expect(res.status).toBe(201);
+          expect(res.body).toEqual(expect.any(Object));
+          done();
+        })
+        .catch((err) => {
+          console.log(err, "ini err");
+          done(err);
+        });
+  })
+
+  test("create order productfail no access_token for consultation", (done) => {
+    request(app)
+        .post("/products/chat")
+        .then((res) => {
+          expect(res.status).toBe(403);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toEqual({
+            message: "Please Login first",
+          });
+          done();
+        })
+        .catch((err) => {
+          console.log(err, "ini err");
+          done(err);
+        });
+  })
+
+  test("create order product for consultation invalid access", (done) => {
+    request(app)
+        .post("/products/chat")
+        .set('access_token', 'fffj66g')
+        .then((res) => {
+          expect(res.status).toBe(401);
+          expect(res.body).toEqual(expect.any(Object));
+          expect(res.body).toEqual({
+            message: "Invalid token",
+          });
+          done();
+        })
+        .catch((err) => {
+          console.log(err, "ini err");
+          done(err);
+        });
+  })
+
+
+})
+
 describe ("client cart", () => {
 
-  //TODO 1 create order product for consultation no order yet
-  test("create order product for consultation no order yet", (done) => {
+  //TODO 1 show client card
+  test("show client card", (done) => {
     request(app)
     .get("/account/cart")
     .set('access_token', tokenMatch1)
     .then((res) => {
       expect(res.status).toBe(200);
       expect(res.body).toEqual(expect.any(Object));
-      expect(res.body).toEqual({ msg: "there is no orders yet" });
       done();
     })
     .catch((err) => {
@@ -128,29 +180,14 @@ describe ("client cart", () => {
     });
   })
 
-    //TODO 2 create order product 
-    test("create order product ", (done) => {
-      request(app)
-      .get("/account/cart")
-      .set('access_token', clientToken)
-      .then((res) => {
-        expect(res.status).toBe(200);
-        expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toEqual({ msg: "there is no orders yet" });
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-    })
-
-    test("create order product for consultation no order yet", (done) => {
+    //TODO 2 show client card no access_token
+    test("show client card no access_token", (done) => {
       request(app)
       .get("/account/cart")
       .then((res) => {
         expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toEqual({ message: "Please Login first" });
+        expect(res.body).toEqual({message: "Please Login first"});
         done();
       })
       .catch((err) => {
@@ -158,33 +195,38 @@ describe ("client cart", () => {
       });
     })
 
-    test("create order product for consultation no order yet", (done) => {
-      request(app)
-      .get("/account/cart")
-      .set('access_token', 'cdds6f')
-      .then((res) => {
-        expect(res.status).toBe(401);
-        expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toEqual({ message: "Invalid token" });
-        done();
-      })
-      .catch((err) => {
-        done(err);
+    //TODO 3 show client card invalid token
+  test("show client card invalid access_token", (done) => {
+    request(app)
+    .get("/account/cart")
+    .set('access_token', 'fffj66g')
+    .then((res) => {
+      console.log(res,">>>>>>>>ini res");
+      expect(res.status).toBe(401);
+      expect(res.body).toEqual(expect.any(Object));
+      expect(res.body).toEqual({
+        message: "Invalid token",
       });
+      done();
     })
+    .catch((err) => {
+      console.log(err, "ini err");
+      done(err);
+    });
+  })
 })
+
 
 describe ("client detail checkout", () => {
 
-  //TODO 1 create order product for consultation no order yet
-  test("create order product for consultation no order yet", (done) => {
+  //TODO 1 client detail chekout success
+  test("client detail checkout success", (done) => {
     request(app)
     .get("/account/detail-checkout")
     .set('access_token', tokenMatch1)
     .then((res) => {
       expect(res.status).toBe(200);
       expect(res.body).toEqual(expect.any(Object));
-      expect(res.body).toEqual({ msg: "there is no orders yet" });
       done();
     })
     .catch((err) => {
@@ -192,29 +234,14 @@ describe ("client detail checkout", () => {
     });
   })
 
-    //TODO 2 create order product 
-    test("create order product ", (done) => {
-      request(app)
-      .get("/account/detail-checkout")
-      .set('access_token', clientToken)
-      .then((res) => {
-        expect(res.status).toBe(200);
-        expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toEqual({ msg: "there is no orders yet" });
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-    })
-
-    test("create order product for consultation no access token", (done) => {
+    //TODO 2 client detail checkout no Access-token 
+    test("client detail checkout no Access-token ", (done) => {
       request(app)
       .get("/account/detail-checkout")
       .then((res) => {
         expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toEqual({ message: "Please Login first" });
+        expect(res.body).toEqual({message: "Please Login first"});
         done();
       })
       .catch((err) => {
@@ -222,7 +249,8 @@ describe ("client detail checkout", () => {
       });
     })
 
-    test("create order product for consultation not authorize", (done) => {
+    //TODO 3 client detail checkout invalid Access-token 
+    test("client detail checkout invalid token", (done) => {
       request(app)
       .get("/account/detail-checkout")
       .set('access_token', 'cdds6f')
@@ -238,21 +266,98 @@ describe ("client detail checkout", () => {
     })
 })
 
-// describe("ticket consultation", () => {
+describe ("post client detail checkout", () => {
 
-//   test("create order product for consultation", (done) => {
-//     request(app)
-//         .post("/products/chat")
-//         .set('access_token', tokenMatch1)
-//         .then((res) => {
-//           expect(res.status).toBe(201);
-//           expect(res.body).toEqual(expect.any(Object));
-//           expect(res.body).toEqual({ msg: "Checkout first before you could chat with our doctor" });
-//           done();
-//         })
-//         .catch((err) => {
-//           done(err);
-//         });
-//   })
+  //TODO 1 post client detail chekout success
+  test("post client detail checkout success", (done) => {
+    request(app)
+    .post("/account/payment")
+    .set('access_token', tokenMatch1)
+    .then((res) => {
+      expect(res.status).toBe(200);
+      expect(res.body).toEqual(expect.any(Object));
+      done();
+    })
+    .catch((err) => {
+      done(err);
+    });
+  })
 
-// })
+    //TODO 2 post client detail checkout invalid token 
+    test("post client detail checkout invalid token ", (done) => {
+      request(app)
+      .post("/account/payment")
+      .then((res) => {
+        expect(res.status).toBe(403);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({message: "Please Login first"});
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+    })
+
+    //TODO 3 client detail checkout invalid Access-token 
+    test(" post create order product for consultation not authorize", (done) => {
+      request(app)
+      .post("/account/payment")
+      .set('access_token', 'cdds6f')
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({ message: "Invalid token" });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+    })
+})
+
+
+
+//TODO 1 show client card empty
+test("show client card", (done) => {
+  request(app)
+  .get("/account/cart")
+  .set('access_token', tokenMatch1)
+  .then((res) => {
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual(expect.any(Object));
+    done();
+  })
+  .catch((err) => {
+    done(err);
+  });
+})
+
+  //TODO 1 client detail chekout success
+  test("client detail checkout success", (done) => {
+    request(app)
+    .get("/account/detail-checkout")
+    .set('access_token', tokenMatch1)
+    .then((res) => {
+      expect(res.status).toBe(200);
+      expect(res.body).toEqual(expect.any(Object));
+      done();
+    })
+    .catch((err) => {
+      done(err);
+    });
+  })
+
+    //TODO 1 client detail chekout success
+    test("client detail checkout success", (done) => {
+      request(app)
+      .get("/account/detail-checkout")
+      .set('access_token', tokenMatch1)
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object));
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+    })

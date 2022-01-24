@@ -94,6 +94,7 @@ const clientAccount = async (req, res, next) => {
         res.status(200).json({findUser});
     } catch (error) {
         next(error);
+        // ERROR
     }
 };
 
@@ -173,11 +174,11 @@ const clientDoctorFetch = async (req, res, next) => {
         ]
     })
     
-    // if (findAllDoctors.length < 1) {
-    //     throw { name: "NOT_FOUND_DOCTOR" }
-    // } else {
+    if (findAllDoctors.length < 1) {
+        throw { name: "NOT_FOUND_DOCTOR" }
+    } else {
         res.status(200).json(findAllDoctors)
-    // }
+    }
 
     } catch (error) {
         next(error)

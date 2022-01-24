@@ -4,6 +4,7 @@ const { compareHash } = require('../helpers/bycrpt')
 const { getToken } = require('../helpers/jwt')
 
 const cmsRegister = async (req, res, next) => {
+    
     const transaction = await sequelize.transaction();
 
     try {
