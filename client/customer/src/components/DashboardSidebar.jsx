@@ -71,7 +71,7 @@ const DashboardSidebar = () => {
             <Link to="#" className="menu-bars">
               <AiIcons.AiFillCaretLeft />
             </Link>
-            <span className="mb-0 mt-2 soft-font">{profile.fullName}</span>
+            <span className="mb-0 mt-2 soft-font">FullName</span>
           </li>
 
           {SidebarData.map((item, index) => {

@@ -21,11 +21,7 @@ import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import { LogoutComponent } from './components/Logout.jsx';
-<<<<<<< HEAD
-import ProductPage  from './pages/Products.jsx';
-=======
 import CardTicket from './components/Card/CardTicket.jsx';
->>>>>>> f469b94f562b79493f9a828ff60db00b25ccc6bf
 
 
 function App() {
@@ -74,7 +70,7 @@ function App() {
           </Route>
           
           <Route path="/notification/handling" element={<Notif />} />
-          <Route path="/products" element={<ProductPage />} />
+          {/* <Route path="/products" element={<ProductPage />} /> */}
           <Route path="/doctors" element={<JoinMeeting />} />
           <Route path="/video/:id" element={<VideoCall />} />
           <Route path="/video-owner/:id" element={<VideoCallOwner />} />
