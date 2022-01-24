@@ -8,7 +8,6 @@ const Card = () => {
   const { doctors, loadingDoctors, errorDoctors } = useSelector((state) => state.doctors)
   const dispatch = useDispatch();
 
-  console.log(doctors, "fetch Card.jsx");
   useEffect(() => {
     dispatch(fetchDoctors());
   }, [dispatch]);
