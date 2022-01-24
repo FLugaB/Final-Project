@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { fetchCart } from '../../store/actionCreator/customers'
+import { fetchCheckout } from '../../store/actionCreator/customers'
 import { Col, Row, Button, Card } from 'react-bootstrap'
 
-const CartOutlet = () => {
+const DetaiCheckOut = () => {
 
-    const { customerCart } = useSelector((state) => state.customers)
+    const { customerCheckout } = useSelector((state) => state.customers)
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     useEffect( () => {
         fetchDataCart()
@@ -17,15 +15,7 @@ const CartOutlet = () => {
 
     const fetchDataCart = async () => {
         try {
-            await dispatch(fetchCart())
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const onCheckOut = () => {
-        try {
-            navigate('/accpimt/checkout')
+            await dispatch(fetchCheckout())
         } catch (error) {
             console.log(error)
         }
@@ -36,14 +26,16 @@ const CartOutlet = () => {
             <Row>
                 <Col md={12} className="mb-5">
                     <div className="title text-start">
-                        <h1>Cart</h1>
+                        <h1>Detail Checkout</h1>
                     </div>
-                    { customerCart.msg && 
-                     <div>
-                         <h3 className="capitalize">{customerCart.msg}</h3>
-                     </div>
+
+                    { console.log(customerCheckout)}
+                    {/* { customerCheckout.msg && 
+                    <div>
+                        <h3 className="capitalize">{customerCheckout.msg}</h3>
+                    </div>
                     }
-                    { customerCart && customerCart.map((e) => {
+                    { customerCheckout && customerCheckout.orderDetail.product.map((e) => {
                         return (
                             <Card key={e.id} style={{ width: '18rem' }}>
                                 <Card.Img variant="top" src={e.DetailProduct.imageUrl} />
@@ -59,15 +51,15 @@ const CartOutlet = () => {
                                 </Card.Body>
                             </Card>
                         )
-                    }) }
+                    }) } */}
                     <div className="text-start mt-5">
-                        <Button variant="success" onClick={onCheckOut} className="text-white">Checkout</Button>
+                        <Button variant="success" className="text-white">Pay Now</Button>
                     </div>
                 </Col>
-     
+    
             </Row>
         </Col>
     );
 };
 
-export default CartOutlet;
+export default DetaiCheckOut;
