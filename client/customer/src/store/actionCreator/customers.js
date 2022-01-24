@@ -61,6 +61,21 @@ export const logout=(payload)=>{
     }
 }
 
+export const addTicketToCart = (payload) => {
+
+    return async (dispatch, getState) => {
+        try {
+            dispatch(isSuccess(false))
+            dispatch(isLoading(true))
+            dispatch(isError(null))
+            const access_token = localStorage.getItem(`access_token`)
+            const response = await axios.post(`${server}/products/chat`, {}, {headers: { access_token }});
+        } catch (error) {
+            dispatch(isError(error));
+        } finally { dispatch(isLoading(false)); }
+    }
+}
+
 export const fetchCart = (payload) => {
 
     return async (dispatch, getState) => {

@@ -4,8 +4,10 @@ import { Col, Row, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchConsultationTickets } from "../../store/actionCreator/consultationTickets";
 import { useNavigate } from "react-router-dom";
+import { formattedDate  } from '../../Hooks/helpers'
 const CardTicket = () => {
-  // let [lengthTicket, setLengthTicket] = useState(0)
+  const [isLoading, setIsLoad] = useState(true)
+  const [dateFormat, setDateFormat] = useState('')
   const {
     consultationTickets,
     loadingConsultationTickets,
@@ -14,10 +16,25 @@ const CardTicket = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect( async () => {
-    await dispatch(fetchConsultationTickets());
-    console.log(consultationTickets.length);
-  }, []);
+  useEffect( () => {
+    findTickets()
+  }, [isLoading]);
+
+  const findTickets = async () => {
+    try {
+      await dispatch(fetchConsultationTickets());
+      setIsLoad(false)
+      if (consultationTickets[0].createdAt) {
+        const test = consultationTickets[0].createdAt
+        console.log(test, `======================`)
+        const splited = test.split('T')[0].split('-')
+        setDateFormat(splited)
+      }
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const handleUseButton = () => {
     navigate(`/doctors`);
@@ -25,7 +42,7 @@ const CardTicket = () => {
 
   
 
-  if (loadingConsultationTickets) {
+  if (isLoading) {
     return (
       <div>
         <h2>LAODING</h2>
@@ -50,47 +67,40 @@ const CardTicket = () => {
           </div>
         </Col>
         <Col md={12} className="d-flex justify-content-start">
-          {consultationTickets.length < 1 ? (
+          {consultationTickets.msg ? (
             <div>
-              <h2>You have no Ticket</h2>
-            </div>
-          ) : (
+              <h2 className="text-capitalize">{consultationTickets.msg}</h2>
+            </div> ) : 
+            (
             <div className="containerTicket">
-              <div className="ticket">
-                <div className="stub">
-                  <div className="top">
-                    <span className="admit">Total Ticket</span>
+              <a href="#" onClick={() => handleUseButton()}>
+                <div className="ticket shadow-lg">
+                  <div className="stub">
+                    <div className="top">
+                      <span className="text-start">Total Ticket</span>
+                    </div>
+                    <div className="number">{consultationTickets.length}</div>
                   </div>
-                  <div className="number">{consultationTickets.length}</div>
-                </div>
-                <div className="check">
-                  <div className="big">Consultation Ticket</div>
-                  <div className="number">#1</div>
-                  <div className="info">
-                    <div>
-                      <div className="title">Date</div>
-                      <div>4/27/2016</div>
-                    </div>
-                    <div className=" ms-4">
-                      <div className="title">Status</div>
-                      <div>useable</div>
-                    </div>
-                    <div className=" ms-4">
-                      <div className="title">Button</div>
+                  <div className="check">
+                    <div className="big">Consultation Ticket</div>
+                    <div className="number">#{consultationTickets.length}</div>
+                    <div className="info">
                       <div>
-                        <Button
-                          variant="outline-primary"
-                          onClick={() => handleUseButton()}
-                        >
-                          Use
-                        </Button>{" "}
+                        <div className="title">Date</div>
+                        <div>{consultationTickets[0].createdAt && (`${dateFormat[2]}/${dateFormat[1]}/${dateFormat[0]}`)}</div>
+                      </div>
+                      <div className=" ms-4">
+                        <div className="title">Status</div>
+                        <div>useable</div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
-          )}
+          )
+         
+          }
         </Col>
       </Row>
     </Col>
