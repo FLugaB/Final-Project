@@ -52,7 +52,7 @@ export const fetchProductDetail = (id) => {
       })
       .then((data) => {
         console.log(data, `data FETCH PRODUCT DETAIL on actionCreator/index`);
-        dispatch({ type: FETCH_DOCTOR_DETAIL, payload: data})
+        dispatch({ type: FETCH_PRODUCT_DETAIL, payload: data})
       })
       .catch((err) => {
         console.log(err, `error FETCH PRODUCT DETAIL on actionCreator/index`);
