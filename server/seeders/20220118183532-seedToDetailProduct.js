@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-     const data = require("../dummyData/detailProduct.json")
+     const data = require("../dummyData/product/detailProduct.json")
      data.forEach(element => {
        element.createdAt = new Date(),
        element.updatedAt = new Date()

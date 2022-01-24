@@ -2,6 +2,8 @@ const app = require("../");
 const request = require("supertest");
 const { User, Profile } = require("../models");
 const { getToken } = require("../helpers/jwt");
+const ImageKit = require("imagekit");
+
 
 const defaultImage =
   "https://ik.imagekit.io/h8finalproject/profile_NmTGuU3dx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1642523645332";
@@ -832,27 +834,27 @@ describe("New Doctor Test on  login Field", () => {
       });
   });
 
-  // TODO 6 Login find Admin not found
-  test("Login find Admin not found should be return invalid response", (done) => {
-    request(app)
-      .post("/login")
-      .send({
-        email: "doctor11@gmail.com",
-        password: "doctor",
-        role: "Doctor"
-      })
-      .then((res) => {
-        expect(res.status).toBe(401);
-        expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toEqual({
-          message: "Invalid email/password",
-        });
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
+  // // TODO 6 Login find Admin not found
+  // test("Login find Admin not found should be return invalid response", (done) => {
+  //   request(app)
+  //     .post("/login")
+  //     .send({
+  //       email: "doctor11@gmail.com",
+  //       password: "doctor",
+  //       role: "Doctor"
+  //     })
+  //     .then((res) => {
+  //       expect(res.status).toBe(401);
+  //       expect(res.body).toEqual(expect.any(Object));
+  //       expect(res.body).toEqual({
+  //         message: "Invalid email/password",
+  //       });
+  //       done();
+  //     })
+  //     .catch((err) => {
+  //       done(err);
+  //     });
+  // });
 
   // TODO 7 Login verify is undefined
   test("Login verify is undefined should be return invalid response", (done) => {
@@ -933,6 +935,7 @@ describe("New Client Test on clientAccount Authentication Field", () => {
         done();
       })
       .catch((err) => {
+        console.log(err);
         done(err);
       });
   });
@@ -1646,4 +1649,50 @@ describe("Fetch doctor list", () => {
       done(err);
     });  
   });
+})
+
+describe("show client account", () => {
+  //TODO 1 success show client account
+  test("success show client account", (done) => {
+    request(app)  
+      .get("/account")
+      .set("access_token", tokenMatch1)
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object))
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+    //TODO 2 show client failed  if don't have accessToken
+    test("failed show client if don't have accessToken", (done) => {
+      request(app)
+        .get("/account")
+        .then((res) => {
+          expect(res.status).toBe(403);
+          expect(res.body).toHaveProperty('message', "Please Login first")
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+
+    //TODO 3 show profile not authorized
+    test("show profile not authorized", (done) => {
+      request(app)
+        .get("/account")
+        .set("access_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
+        .then((res) => {
+          expect(res.status).toBe(401);
+          expect(res.body).toHaveProperty('message', "Invalid token")
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
 })

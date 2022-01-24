@@ -342,6 +342,29 @@ class TransactionController {
   
             if (!newStatus) throw { name: "PLEASE_PAY_FIRST" }
 
+            const findCart = await OrderProduct.findAll(
+                {
+                    where: {
+                        [Op.and]: [
+                            { UserId: findTransaction.UserId }, 
+                            { status: `pending` }
+                        ], 
+                    }
+                }
+            )
+
+            let isTicket = findCart.map( (e) => {
+                if (e.ProductId === 1) {
+                    return {
+                        voucherToken: '',
+                        status: 'useable',
+                        DoctorId: null,
+                        ClientId: findTransaction.UserId,
+                        transactionId: findTransaction.id
+                    }
+                }
+            })
+
             const tryUpdateCart = await OrderProduct.update(
                 {
                     status: `completed`
@@ -364,13 +387,7 @@ class TransactionController {
                 returning: true
             })
 
-            const newVoucher = await Voucher.create({
-                voucherToken: '',
-                status: 'useable',
-                DoctorId: null,
-                ClientId: findOneOrderId[1][0].UserId,
-                transactionId: findOneOrderId[1][0].id
-            })
+            const newVoucher = await Voucher.bulkCreate(isTicket)
 
             res.status(200).json(findOneOrderId)
             

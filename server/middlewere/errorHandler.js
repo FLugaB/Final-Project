@@ -4,6 +4,7 @@ const errorsLog = (err, req, res, next) => {
 
     let code = 500
     let message = "Internal server error"
+  
     if ( err.name === `SequelizeUniqueConstraintError` || 
         err.name === `SequelizeValidationError` ) {
         code = 400
@@ -60,6 +61,9 @@ const errorsLog = (err, req, res, next) => {
     } else if ( err.name === `CANNOT_ADD_PRODUCT`) {
         code = 403
         message = "Product is Exist, Please Only Add to Detail Product Refer to this Product Id"
+    } else if ( err.name === `CANNOT_ADD_DETAIL`) {
+        code = 403
+        message = "Ticket Product is Exist, Please Only Add Skincare Product"
     } else if ( err.name === "CANNOT_DELETE_PRODUCT") {
         code = 403
         message = "You Can't Delete This Product"
@@ -76,23 +80,42 @@ const errorsLog = (err, req, res, next) => {
         code = 404
         message = "There is no Doctor"
     } else if ( err.name === `TYPE_IS_NULL`) {
-        code = 404
+        code = 400
         message = "Type is Required"
+    } else if ( err.name === `NAME_IS_REQUIRED`) {
+        code = 400
+        message = "Name is Required"
+    } else if ( err.name === `PRICE_IS_REQUIRED`) {
+        code = 400
+        message = "Price is Required"
+    } else if ( err.name === `STOCK_IS_REQUIRED`) {
+        code = 400
+        message = "DetailProduct.stock cannot be null"
+    } else if ( err.name === `CATEGORY_IS_REQUIRED`) {
+        code = 400
+        message = "Category is Required"
+    } else if ( err.name === `IMAGE_IS_REQUIRED`) {
+        code = 400
+        message = "Image is Required"
+    } else if ( err.name === `DESCRIPTION_IS_REQUIRED`) {
+        code = 400
+        message = "Description is Required"
+    } else if ( err.name === `MIN_PRICE_IS_REQUIRED`) {
+        code = 400
+        message = "Price can't be 0 or < Rp. 9.999"
+    } else if ( err.name === `MIN_STOCK_IS_REQUIRED`) {
+        code = 400
+        message = "Stock can't be lower than 1"
+    } else if ( err.name === `PRODUCT_ID_IS_REQUIRED`) {
+        code = 404
+        message = "Product Id is Required"
     }
-    // else if ( err.name === "CANNOT_DELETE_PRODUCT") {
-    //     code = 403
-    //     message = "You Can't Delete This Product"
-    // } 
-    // else if ( err.name === `CANNOT_UPDATE_PRODUCT`) {
-    //     code = 403
-    //     message = "you can't update this product"
-    // }
+
     // NEXT
     // else if ( err.response.data.error_messages[0] === 'transaction_details.order_id sudah digunakan') {
     //     code = 404
     //     message = "Transaction ID Has Been Used"
     // } 
-console.log(err);
    res.status(code).json({message})
 }
 

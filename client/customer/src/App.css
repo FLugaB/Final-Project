@@ -165,6 +165,20 @@ iframe body {
   border-radius: 20px;
 }
 
+.checkout.section-dashboard {
+  overflow: hidden;
+  max-height: 100vh;
+}
+
+.checkout-image-wrapper {
+  max-width: 50px;
+}
+
+.checkout-image-wrapper img {
+  width: 100%;
+  height: auto;
+}
+
 /* LOADER START */
 
 .loader-wrapper {

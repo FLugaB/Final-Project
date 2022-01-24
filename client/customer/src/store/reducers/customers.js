@@ -1,6 +1,8 @@
 import {
   FETCH_CUSTOMERS,
   FETCH_CUSTOMER_DETAIL,
+  FETCH_CUSTOMER_CART,
+  FETCH_CUSTOMER_CHECKOUT,
   CUSTOMER_IS_SUCCESS_LOGIN,
   SET_LOADING,
   SET_ERROR,
@@ -9,9 +11,13 @@ import {
   CUSTOMER_IS_SUCCESS_LOGOUT,
 } from "../actionType/customers";
 
+import { IS_ERROR, } from '../actionType/index'
+
 const initialState = {
   customers: [],
   customerDetail: [],
+  customerCart: [],
+  customerCheckout: {},
   loadingCustomers: false,
   errorCustomers: null,
   isSuccessLogin: false,
@@ -30,6 +36,13 @@ export default function customersReducer(state = initialState, action) {
         ...state,
         customerDetail: action.payload,
       }
+    case FETCH_CUSTOMER_CART:
+      return {
+        ...state,
+        customerCart: action.payload,
+      };
+    case FETCH_CUSTOMER_CHECKOUT:
+      return { ...state, customerCheckout: action.payload };
     case CUSTOMER_IS_SUCCESS_LOGIN:
       return { ...state, isSuccessLogin: action.payload }
     case CUSTOMER_IS_SUCCESS_LOGOUT:
@@ -37,6 +50,8 @@ export default function customersReducer(state = initialState, action) {
       return initialState
     case CUSTOMER_IS_SUCCESS_REGISTER:
       return { ...state, isSuccessRegister: action.payload }
+    case IS_ERROR:
+      return { ...state, errorCustomers: action.payload }
     case SET_LOADING: 
       return {
         ...state,

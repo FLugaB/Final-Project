@@ -13,6 +13,7 @@ import NotFound from './pages/NotFound'
 import ProfileOutlet from './components/DashboardComponents/ProfileOutlet'
 import CartOutlet from './components/DashboardComponents/CartOutlet'
 import HistoryOutlet from './components/DashboardComponents/HistoryOutlet'
+import DetailCheckOut from './components/DashboardComponents/DetaiCheckOut'
 import { pageLoad } from './Hooks/load'
 
 import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
@@ -33,21 +34,6 @@ function App() {
     }, 5000)
   }, [])
 
-  useEffect(() => {
-    const snapSrcUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
-    const myMidtransClientKey = "SB-Mid-client-a4h5p1uZna2ekBBq";
-
-    const script = document.createElement("script");
-    script.src = snapSrcUrl;
-    script.setAttribute("data-client-key", myMidtransClientKey);
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   const mode = 'login';
 
   if (loader) return pageLoad()
@@ -62,6 +48,7 @@ function App() {
           <Route path="account" element={<Dashboard />}>
             <Route path="profile" element={ <ProfileOutlet />} />
             <Route path="cart" element={ <CartOutlet />} />
+            <Route path="checkout" element={ <DetailCheckOut />} />
             <Route path="history" element={ <HistoryOutlet />} />
             {/* <Route path="logout" element={ <ProfileOutlet />} /> */}
             <Route path="ticket" element={ <CardTicket />} />

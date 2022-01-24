@@ -6,7 +6,6 @@ const SANDBOX_BASE_URL = "https://app.sandbox.midtrans.com"
 const requestSnapToken = async (req, res, next) => {
 
     try {
-        console.log("MASUK TOKEN <<<<<<<<<<");
         const AUTH_STRING = Buffer.from(`${process.env.MID_SERVER_KEY}:`).toString('base64')
 
         const headers = {
@@ -14,16 +13,13 @@ const requestSnapToken = async (req, res, next) => {
             Accept: "application/json",
             Authorization : `Basic ${AUTH_STRING}`,
         }
-
-        console.log(req.user.checkout.order_id, req.user.checkout.ammount)
         
         const parameter = {
             "transaction_details": {
               "order_id": req.user.checkout.order_id, // OrderId Must Unique
               "gross_amount": req.user.checkout.ammount // Total Ammount
             }
-          }
-        console.log("%c 💥: requestSnapToken -> parameter ", "font-size:16px;background-color:#cdcfa3;color:black;", parameter)
+        }
 
         const response = await axios.post( 
             `${SANDBOX_BASE_URL}/snap/v1/transactions`, 
@@ -32,8 +28,6 @@ const requestSnapToken = async (req, res, next) => {
                 headers: headers
             }
         )
-        
-        console.log("%c 💠: requestSnapToken -> response ", "font-size:16px;background-color:#b2d137;color:black;", response)
 
         const snap_token = response.data
         
