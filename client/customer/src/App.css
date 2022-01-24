@@ -149,6 +149,22 @@ iframe body {
   color: var(--soft)
 }
 
+.profile-image-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+.profile-image-wrapper {
+  width: 100%;
+  max-width: 25vw;
+}
+
+.section-dashboard {
+  background-color: rgba(0, 0, 0, 0.07);
+  border-radius: 20px;
+}
+
 /* LOADER START */
 
 .loader-wrapper {
@@ -1266,3 +1282,5 @@ span {
   transition: all 0.4s ease-out;
 }
 /* PAGE NOT FOUND END */
+
+

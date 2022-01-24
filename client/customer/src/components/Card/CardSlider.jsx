@@ -6,7 +6,7 @@ import "./CardSlider.css";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDoctors } from "../../store/actionCreator/doctors";
 import { useNavigate } from "react-router-dom";
-import { BsFillChatDotsFill } from "react-icons/bs";
+import { BsFillChatDotsFill, BsFillFilePersonFill } from "react-icons/bs";
 
 function CardSlider() {
   const { doctors, loadingDoctors, errorDoctors } = useSelector(
@@ -60,122 +60,20 @@ function CardSlider() {
                     </li>
                     <li>
                       <a href="">
-                        <i className="fa fa-instagram"></i>
+                        <BsFillFilePersonFill></BsFillFilePersonFill>
                       </a>
                     </li>
                   </ul>
                   <div className="details">
                     <h2>
                       {el.Profile.fullName}{" "}
-                      <span className="job-title">UI Developer</span>
+                      <span className="job-title">{el.Profile.address}{" "}</span>
                     </h2>
                   </div>
                 </div>
               </div>
             );
           })}
-          <div className="card-wrapper">
-            <div className="card">
-              <div className="card-image">
-                <img src={require("../../assets/bg-flower-clean.jpg")} alt="" />
-              </div>
-              <ul className="social-icons">
-                <li>
-                  <a href="#">
-                    <i className="fa fa-facebook"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fa fa-instagram"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fa fa-twitter"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fa fa-dribbble"></i>
-                  </a>
-                </li>
-              </ul>
-              <div className="details">
-                <h2>
-                  John Doe <span className="job-title">UI Developer</span>
-                </h2>
-              </div>
-            </div>
-          </div>
-          <div className="card-wrapper">
-            <div className="card">
-              <div className="card-image">
-                <img src={require("../../assets/bg-flower-clean.jpg")} alt="" />
-              </div>
-              <ul className="social-icons">
-                <li>
-                  <a href="#">
-                    <i className="fa fa-facebook"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fa fa-instagram"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fa fa-twitter"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fa fa-dribbble"></i>
-                  </a>
-                </li>
-              </ul>
-              <div className="details">
-                <h2>
-                  John Doe <span className="job-title">UI Developer</span>
-                </h2>
-              </div>
-            </div>
-          </div>
-          <div className="card-wrapper">
-            <div className="card">
-              <div className="card-image">
-                <img src={require("../../assets/bg-flower-clean.jpg")} alt="" />
-              </div>
-              <ul className="social-icons">
-                <li>
-                  <a href="#">
-                    <i className="fa fa-facebook"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fa fa-instagram"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fa fa-twitter"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fa fa-dribbble"></i>
-                  </a>
-                </li>
-              </ul>
-              <div className="details">
-                <h2>
-                  John Doe <span className="job-title">UI Developer</span>
-                </h2>
-              </div>
-            </div>
-          </div>
         </Slider>
       </div>
     </div>
