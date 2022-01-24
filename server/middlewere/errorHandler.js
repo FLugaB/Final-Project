@@ -116,7 +116,7 @@ const errorsLog = (err, req, res, next) => {
     //     code = 404
     //     message = "Transaction ID Has Been Used"
     // } 
-console.log(err);
+console.log(err,">>>>>>>>>>>>>ini err");
    res.status(code).json({message})
 }
 

@@ -6,7 +6,6 @@ const SANDBOX_BASE_URL = "https://app.sandbox.midtrans.com"
 const requestSnapToken = async (req, res, next) => {
 
     try {
-        console.log("MASUK TOKEN <<<<<<<<<<");
         const AUTH_STRING = Buffer.from(`${process.env.MID_SERVER_KEY}:`).toString('base64')
 
         const headers = {

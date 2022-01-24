@@ -35,6 +35,7 @@ const list = [
     "imageUrl": "https://images.soco.id/b85bac8d-38ac-4506-b49e-fca873c46609-image-0-1629982004097",
     "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik."
   }
+
 ]
 
 const product  = [
@@ -120,7 +121,6 @@ beforeAll(async () => {
   } catch (err) {
     console.log(err);
   }
-
 
 })
 

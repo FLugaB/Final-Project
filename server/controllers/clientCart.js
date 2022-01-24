@@ -7,8 +7,9 @@ module.exports = class Controller {
     const t = await sequelize.transaction()
     try {
       const {id} = req.params
+
       const getProduct = await DetailProduct.findOne({where: {id}})
-      if (!getProduct) {
+      if (!getProduct || getProduct.length < 1) {
         throw {name: "Product_not_found"}
       }
       const input = {UserId: req.auth.id, ProductId: getProduct.id, status:'pending'}
