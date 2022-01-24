@@ -3,16 +3,20 @@
   font-family: 'Montserrat', sans-serif;
   width: 70%;
 } */
+.containerTicket > a {
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.containerTicket > a .ticket:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
 .ticket {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   margin: 20px auto;
 }
 .ticket .stub,
@@ -23,7 +27,7 @@
   background: #664c68;
   height: 150px;
   width: 150px;
-  color: white;
+  color: var(--soft);
   padding: 20px;
   position: relative;
 }
@@ -89,7 +93,8 @@
   margin-bottom: 5px;
 }
 .check {
-  background: #fff;
+  background: var(--soft);
+  color: var(--hard);
   height: 150px;
   width: 280px;
   padding: 15px;
@@ -101,7 +106,7 @@
   top: 0;
   left: 0;
   border-top: 20px solid #412c42;
-  border-right: 20px solid #fff;
+  border-right: 20px solid var(--soft);
   width: 0;
 }
 .check:after {
@@ -110,7 +115,7 @@
   bottom: 0;
   left: 0;
   border-bottom: 20px solid #412c42;
-  border-right: 20px solid #fff;
+  border-right: 20px solid var(--soft);
   width: 0;
 }
 .check .big {
