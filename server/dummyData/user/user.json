@@ -5,8 +5,8 @@
         "role": "Admin"
     },
     {
-        "email": "doctor1@mail.com",
-        "password": "doctor",
+        "email": "erivia@mail.com",
+        "password": "erivia",
         "role": "Doctor"
     },
     {
@@ -16,12 +16,17 @@
     },
     {
         "email": "putri@mail.com",
-        "password": "doctor",
+        "password": "putri",
         "role": "Doctor"
     },
     {
         "email": "vera@mail.com",
-        "password": "doctor",
+        "password": "vera",
+        "role": "Doctor"
+    },
+    {
+        "email": "yessi@mail.com",
+        "password": "yessi",
         "role": "Doctor"
     }
 ]

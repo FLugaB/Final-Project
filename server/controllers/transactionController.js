@@ -80,18 +80,18 @@ class TransactionController {
 
         try {
 
-            // const findUserClient = await Voucher.findAll({
-            //     where: {
-            //         [Op.and]: [
-            //             { ClientId: req.auth.id }, 
-            //             { status: `useable` }
-            //         ], 
-            //     }
-            // })
-
             const findUserClient = await Voucher.findAll({
-                where: { ClientId: req.auth.id }, 
+                where: {
+                    [Op.and]: [
+                        { ClientId: req.auth.id }, 
+                        { status: `useable` }
+                    ], 
+                }
             })
+
+            // const findUserClient = await Voucher.findAll({
+            //     where: { ClientId: req.auth.id }, 
+            // })
 
             if (findUserClient.length < 1) {
                 res.status(200).json({ msg: `there is no orders yet`})

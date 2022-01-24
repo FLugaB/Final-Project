@@ -8,8 +8,8 @@
     "test:down": "npx sequelize-cli db:migrate:undo:all --env=test",
     "test": "clear && jest  --coverage --runInBand --watchAll --detectOpenHandles --forceExit",
     "dev": "nodemon app.js",
-    "dev:up": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "dev:down": "npx sequelize-cli db:migrate:undo:all"
+    "dev:up": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "dev:down": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate:undo:all"
   },
   "keywords": [],
   "author": "",
