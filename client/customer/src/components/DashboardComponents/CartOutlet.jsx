@@ -1,8 +1,27 @@
-import React from 'react';
-
-import { Col, Row, Button } from 'react-bootstrap'
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchCart } from '../../store/actionCreator/customers'
+import { Col, Row, Button, Card } from 'react-bootstrap'
 
 const CartOutlet = () => {
+
+    const { customerCart } = useSelector((state) => state.customers)
+
+    const dispatch = useDispatch();
+
+    useEffect( () => {
+        fetchDataCart()
+    }, [])
+
+    const fetchDataCart = async () => {
+        try {
+            await dispatch(fetchCart())
+            console.log(customerCart)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <Col md={12} className="d-flex justify-content-start section-dashboard p-5"> 
             <Row>
@@ -10,8 +29,30 @@ const CartOutlet = () => {
                     <div className="title text-start">
                         <h1>Cart</h1>
                     </div>
+                    { customerCart.msg && 
+                     <div>
+                         <h3 className="capitalize">{customerCart.msg}</h3>
+                     </div>
+                    }
+                    { customerCart && customerCart.map((e) => {
+                        return (
+                            <Card key={e.id} style={{ width: '18rem' }}>
+                                <Card.Img variant="top" src={e.DetailProduct.imageUrl} />
+                                <Card.Body>
+                                    <Card.Title>{e.DetailProduct.name}</Card.Title>
+                                    <Card.Text>
+                                    {e.DetailProduct.description}
+                                    </Card.Text>
+                                    <Card.Text>
+                                    {e.DetailProduct.price}
+                                    </Card.Text>
+                                    <Button variant="primary">Go somewhere</Button>
+                                </Card.Body>
+                            </Card>
+                        )
+                    }) }
                     <div className="text-start mt-5">
-                        <Button variant="warning" className="text-white">Edit Profile</Button>
+                        <Button variant="success" className="text-white">Checkout</Button>
                     </div>
                 </Col>
      
