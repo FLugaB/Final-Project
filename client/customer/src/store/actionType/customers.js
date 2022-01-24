@@ -12,3 +12,4 @@ export const CUSTOMER_IS_SUCCESS_LOGIN = `customer/successLogin`
 export const CUSTOMER_IS_SUCCESS_REGISTER = `customer/successRegister`
 //logout
 export const CUSTOMER_IS_SUCCESS_LOGOUT=`CUSTOMER_IS_SUCCESS_LOGOUT`
+export const CUSTOMER_CHOOSE_DOCTOR=`customer/chooseDoctor`

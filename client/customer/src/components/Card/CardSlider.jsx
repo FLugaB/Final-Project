@@ -7,19 +7,27 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchDoctors } from "../../store/actionCreator/doctors";
 import { useNavigate } from "react-router-dom";
 import { BsFillChatDotsFill, BsFillFilePersonFill } from "react-icons/bs";
+import { chooseClientDoctor } from "../../store/actionCreator/customers.js"
 
 function CardSlider() {
   const { doctors, loadingDoctors, errorDoctors } = useSelector(
     (state) => state.doctors
   );
+  const { customerChooseDoctor } = useSelector((state) => state.customers)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   
-  const handlerChatButton = (payload) => {
-    const str = payload.replace('.', '').replace(/\s+/g, '');
-    console.log(str, "payload");
-    navigate(`/video/${str}`);
+  const handlerChatButton = async (payloadId, payloadName) => {
+    const str = payloadName.replace('.', '').replace(/\s+/g, '');
+    console.log(payloadId, str, "payload");
+    try {
+      await dispatch(chooseClientDoctor(payloadId))
+      console.log(customerChooseDoctor, "result status");
+      if (customerChooseDoctor == "OK") {
+        navigate(`/video/${str}`); 
+      }
+    } catch (err) {
+    }
   };
 
   console.log(doctors, "fetch Card.jsx");
@@ -55,7 +63,7 @@ function CardSlider() {
                   <ul className="social-icons">
                     <li>
                       <a className="ButtonBox">
-                        <BsFillChatDotsFill onClick={() => handlerChatButton(el.Profile.fullName)} />
+                        <BsFillChatDotsFill onClick={() => handlerChatButton(el.Profile.id, el.Profile.fullName)} />
                       </a>
                     </li>
                     <li>
