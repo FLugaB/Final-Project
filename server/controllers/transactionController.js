@@ -331,7 +331,7 @@ class TransactionController {
                 newStatus = `failed`
             }
 
-            if (status.transaction_status === `expire` || 
+            if (status.transaction_status === `expired` || 
                 status.transaction_status === `cancel` ||
                 status.transaction_status === `deny`) {
                 newStatus = `failed`
