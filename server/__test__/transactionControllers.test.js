@@ -60,11 +60,6 @@ beforeAll(async () => {
     password: "doctor",
     role: "Doctor"
   }
-  try {
-    const result = User.create(newDoctor) 
-  } catch (err) {
-    console.log(err);
-  }
 
   // /! USER1
   let newAdmin = {
@@ -114,13 +109,11 @@ describe("ticket consultation", () => {
         .post("/products/chat")
         .set('access_token', tokenMatch1)
         .then((res) => {
-          console.log(res,">>>>>>>>>>ini res");
           expect(res.status).toBe(201);
           expect(res.body).toEqual(expect.any(Object));
           done();
         })
         .catch((err) => {
-          console.log(err, "ini err");
           done(err);
         });
   })
@@ -137,7 +130,6 @@ describe("ticket consultation", () => {
           done();
         })
         .catch((err) => {
-          console.log(err, "ini err");
           done(err);
         });
   })
@@ -155,12 +147,9 @@ describe("ticket consultation", () => {
           done();
         })
         .catch((err) => {
-          console.log(err, "ini err");
           done(err);
         });
   })
-
-
 })
 
 describe ("client cart", () => {
