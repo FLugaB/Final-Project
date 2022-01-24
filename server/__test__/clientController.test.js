@@ -2,6 +2,7 @@ const app = require("../");
 const request = require("supertest");
 const { User, Profile } = require("../models");
 const { getToken } = require("../helpers/jwt");
+const ImageKit = require("imagekit");
 
 
 const defaultImage =
@@ -1647,4 +1648,50 @@ describe("Fetch doctor list", () => {
       done(err);
     });  
   });
+})
+
+describe("show client account", () => {
+  //TODO 1 success show client account
+  test("success show client account", (done) => {
+    request(app)  
+      .get("/account")
+      .set("access_token", tokenMatch1)
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object))
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+    //TODO 2 show client failed  if don't have accessToken
+    test("failed show client if don't have accessToken", (done) => {
+      request(app)
+        .get("/account")
+        .then((res) => {
+          expect(res.status).toBe(403);
+          expect(res.body).toHaveProperty('message', "Please Login first")
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+
+    //TODO 3 show profile not authorized
+    test("show profile not authorized", (done) => {
+      request(app)
+        .get("/account")
+        .set("access_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
+        .then((res) => {
+          expect(res.status).toBe(401);
+          expect(res.body).toHaveProperty('message', "Invalid token")
+          done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
 })

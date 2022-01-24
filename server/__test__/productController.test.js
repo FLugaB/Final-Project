@@ -16,39 +16,50 @@ const list = [
     "description": "Ticket Counsultation via Chat"
   },
   {
-    "title": "LipCare", 
-    "type": "Lip Mouisturizer",
-    "name": "VASELINE Lip Theraphy Jar",
-    "price": 31000,
-    "category": "Lip care",
-    "stock": 4,
+    "title": "Booking consultation", 
+    "type": "Ticket Booking",
+    "name": "Ticket Booking",
+    "price": 300000,
+    "category": "Ticket",
+    "stock": 0,
     "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-    "description": "Vaseline Lip Therapy dari USA dengan kandungan Petroleum Jelly yang memberikan kelembaban pada bibir. Gunakan setiap hari untuk mengurangi bibir kering dan pecah-pecah serta menjaga kesehatan bibir. Simpan ditempat sejuk dan hindari dari paparan matahari langsung.Jika terjadi iritasi pada bibir harap hentikan penggunaan produk Oleskan lip care secara merata di bibir.How to Use : Gunakan sebelum memakai lipstick, atau kapanpun ketika bibir terasa kering.Ingredients : Petrolatum; Butyrospermum Parkii (Shea) Butter; Tocopheryl Acetate"
+    "description": "Ticket Counsultation via Chat"
   },
   {
-    "title": "Cleanser", 
-    "type": "Face Wash",
-    "name": "Senka - Perfect Whip",
-    "price": 29000,
-    "category": "Facewash",
-    "stock": 5,
-    "imageUrl": "https://images.soco.id/b85bac8d-38ac-4506-b49e-fca873c46609-image-0-1629982004097",
-    "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik untuk menciptakan busa yang lembut, tebal dan melimpah yang mampu membersihkan make-up, kotoran dan minyak berlebih dengan halus."
+    "title": "Booking consultation", 
+    "type": "Ticket Booking",
+    "name": "Ticket Booking",
+    "price": 300000,
+    "category": "Ticket",
+    "stock": 0,
+    "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+    "description": "Ticket Counsultation via Chat"
+  },
+  {
+    "title": "Booking consultation", 
+    "type": "Ticket Booking",
+    "name": "Ticket Booking",
+    "price": 300000,
+    "category": "Ticket",
+    "stock": 0,
+    "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+    "description": "Ticket Counsultation via Chat"
   }
+
 ]
 
 const product  = [
+  {
+    "title": "Chat consultation", 
+    "type": "Ticket Chat"
+  },
   {
     "title": "Booking consultation", 
     "type": "Ticket Booking"
   },
   {
-    "title": "LipCare", 
-    "type": "Lip Mouisturizer"
-  },
-  {
-    "title": "Cleanser", 
-    "type": "Face Wash"
+    "title": "Skincare Product", 
+    "type": "Product Skincare"
   }
 ]
 
@@ -123,24 +134,9 @@ beforeAll(async () => {
     console.log(err);
   }
 
-
 })
 
   describe("add product", () => {
-    //TODO 1 show product empty
-    // test("don't have product", (done) => {
-    //   request(app)
-    //     .get("/products")
-    //     .set("access_token", clientToken)
-    //     .then((res) => {
-    //       expect(res.status).toBe(200);
-    //       expect(res.body).toEqual(expect.any(Object));
-    //       done();
-    //     })
-    //     .catch((err) => {
-    //       done(err);
-    //     });
-    // });
 
     //TODO 1 success add product
     test("success create ", (done) => {
@@ -416,7 +412,7 @@ beforeAll(async () => {
         .then((res) => {
           expect(res.status).toBe(400);
           expect(res.body).toEqual(expect.any(Object));
-          expect(res.body).toHaveProperty("message", "DetailProduct.stock cannot be null");
+          expect(res.body).toHaveProperty("message", "Stock is required");
           done();
         })
         .catch((err) => {
@@ -881,7 +877,7 @@ beforeAll(async () => {
     //TODO 1 success updated product
     test("success update ", (done) => {
       request(app)
-      .put("/cms/products/1")
+      .put("/cms/products/3")
       .set('access_token', tokenMatch1)
       .send ({
           "title": "Chat consultation", 
@@ -903,7 +899,7 @@ beforeAll(async () => {
       //TODO 2 update title is empty
       test("update title is empty should be return invalid response", (done) => {
         request(app)
-          .put("/cms/products/1")
+          .put("/cms/products/3")
           .set("access_token", tokenMatch1)
           .send({
             title: "",
@@ -923,7 +919,7 @@ beforeAll(async () => {
       //TODO 3 update title is null
       test("update title is null should be return invalid response", (done) => {
         request(app)
-          .put("/cms/products/1")
+          .put("/cms/products/3")
           .set("access_token", tokenMatch1)
           .send({
             type: "ticket chat",
@@ -943,7 +939,7 @@ beforeAll(async () => {
         //TODO 4 update type is empty
         test("update type is empty should be return invalid response", (done) => {
           request(app)
-            .put("/cms/products/1")
+            .put("/cms/products/3")
             .set("access_token", tokenMatch1)
             .send({
               title: "Title",
@@ -964,7 +960,7 @@ beforeAll(async () => {
         //TODO 5 update type is null
         test("update type is null should be return invalid response", (done) => {
           request(app)
-            .put("/cms/products/1")
+            .put("/cms/products/3")
             .set("access_token", tokenMatch1)
             .send({
               title: "ticket chat",
@@ -983,7 +979,7 @@ beforeAll(async () => {
       //TODO 1 no access_token edit product
       test("no access_token edit product ", (done) => {
         request(app)
-        .put("/cms/products/1")
+        .put("/cms/products/3")
         .send ({
             "title": "Chat consultation", 
             "type": "Ticket Chat",
@@ -1003,8 +999,8 @@ beforeAll(async () => {
       //TODO 1 invalid access_token add product
       test(" invalid access_token add product ", (done) => {
         request(app)
-        .put("/cms/products/1")
-        .set('access_token', 'fjj566ff')
+        .put("/cms/products/3")
+        .set('access_token', 'fjj5sdsd66ff')
         .send ({
             "title": "Chat consultation", 
             "type": "Ticket Chat",
@@ -1016,7 +1012,6 @@ beforeAll(async () => {
           done()
         })   
         .catch((err => {
-          console.log (err,">>>>>>>>>>>>err")
           done(err)
         }))
       })
@@ -1039,24 +1034,24 @@ beforeAll(async () => {
         }))
       })
 
-        // test("update not found ", (done) => {
-        //   request(app)
-        //   .put("/cms/products/")
-        //   .set('access_token', tokenMatch1)
-        //   .send ({
-        //     title: "ticket chat",
-        //     type: "ticket"
-        //   })
-        //   .then((resp) => {
-        //     expect(resp.body).toEqual(expect.any(Object))
-        //     expect(resp.status).toBe(404)
-        //     expect(resp.body).toHaveProperty("message", "Product not found");
-        //     done()
-        //   })   
-        //   .catch((err => {
-        //     done(err)
-        //   }))
-        // })
+      test("update not found ", (done) => {
+        request(app)
+        .put("/cms/products/30")
+        .set('access_token', 'fjj5sdsd66ff')
+        .send ({
+          title: "ticket chat",
+          type: "ticket"
+        })
+        .then((resp) => {
+          expect(resp.body).toEqual(expect.any(Object))
+          expect(resp.status).toBe(401)
+          expect(resp.body).toHaveProperty("message", "Product not found");
+          done()
+        })   
+        .catch((err => {
+          done(err)
+        }))
+      })
     })
 
   describe("update details", () => {
@@ -1075,13 +1070,11 @@ beforeAll(async () => {
         
       })
       .then((resp) => {
-        console.log(resp,">>>>>>>>ini re");
         expect(resp.body).toEqual(expect.any(Object))
         expect(resp.status).toBe(200)
         done()
       })   
       .catch((err => {
-        console.log (err,">>>>>>>>>>>>err")
         done(err)
       }))
     })
@@ -1135,56 +1128,6 @@ beforeAll(async () => {
           });
       });
     
-      // //TODO 8 price price is empty
-      // test("price is empty should be return invalid response", (done) => {
-      //   request(app)
-      //     .put("/cms/details/3")
-      //     .set("access_token", tokenMatch1)
-      //     .send({
-      //       title: "ticket",
-      //       type: "ticket chat",
-      //       name: "Ticket Consultation",
-      //       category: "Ticket",
-      //       stock: 0,
-      //       imageUrl: "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-      //       description: "Ticket Counsultation via Chat"
-      //     })
-      //     .then((res) => {
-      //       expect(res.status).toBe(200);
-      //       expect(res.body).toEqual(expect.any(Object));
-      //       expect(res.body).toHaveProperty("message", "Price can't be 0");
-      //       done();
-      //     })
-      //     .catch((err) => {
-      //       done(err);
-      //     });
-      // });
-      
-      //TODO 9 update price is null
-      test("update price is null should be return invalid response", (done) => {
-        request(app)
-          .put("/cms/details/4")
-          .set("access_token", tokenMatch1)
-          .send({
-            title: "ticket",
-            type: "ticket chat",
-            name: "ticket",
-            category: "Ticket",
-            stock: 0,
-            imageUrl: "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-            description: "Ticket Counsultation via Chat"
-          })
-          .then((res) => {
-            console.log(res, ".............res");
-            expect(res.status).toBe(200);
-            expect(res.body).toEqual(expect.any(Object));
-            expect(res.body).toHaveProperty("message", "Price is required");
-            done();
-          })
-          .catch((err) => {
-            done(err);
-          });
-      });
 
       //TODO 10 update price is less than 1
       test("update price is less than 1 should be return invalid response", (done) => {
@@ -1210,213 +1153,8 @@ beforeAll(async () => {
           .catch((err) => {
             done(err);
           });
-      });
+      });  
 
-      
-      
-      //TODO 9 update stock is null
-      test("update stock is null should be return invalid response", (done) => {
-        request(app)
-          .put("/cms/details/1")
-          .set("access_token", tokenMatch1)
-          .send({
-            title: "ticket",
-            type: "ticket chat",
-            name: "ticket",
-            category: "Ticket",
-            price: 50000,
-            imageUrl: "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-            description: "Ticket Counsultation via Chat"
-          })
-          .then((res) => {
-            expect(res.status).toBe(400);
-            expect(res.body).toEqual(expect.any(Object));
-            expect(res.body).toHaveProperty("message", "DetailProduct.stock cannot be null");
-            done();
-          })
-          .catch((err) => {
-            done(err);
-          });
-      });
-
-      //TODO 10 update stock is less than 0
-      test("update price is less than 1 should be return invalid response", (done) => {
-        request(app)
-          .put("/cms/details/1")
-          .set("access_token", tokenMatch1)
-          .send({
-            title: "ticket",
-            type: "ticket chat",
-            name: "Ticket Consultation",
-            price: 100000,
-            category: "Ticket",
-            stock: -1,
-            imageUrl: "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-            description: "Ticket Counsultation via Chat"
-          })
-          .then((res) => {
-            expect(res.status).toBe(400);
-            expect(res.body).toEqual(expect.any(Object));
-            expect(res.body).toHaveProperty("message", "Stock can't be lower then 0");
-            done();
-          })
-          .catch((err) => {
-            done(err);
-          }); 
-      });
-
-      //TODO 2 update category is empty
-      test("update category is empty should be return invalid response", (done) => {
-        request(app)
-          .put("/cms/details/1")
-          .set("access_token", tokenMatch1)
-          .send({
-            title: "ticket",
-            type: "ticket chat",
-            name: "Ticket Consultation",
-            price: 240000,
-            category: "",
-            stock: 0,
-            imageUrl: "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-            description: "Ticket Counsultation via Chat"
-          })
-          .then((res) => {
-            expect(res.status).toBe(400);
-            expect(res.body).toEqual(expect.any(Object));
-            expect(res.body).toHaveProperty("message", "Category is required");
-            done();
-          }) 
-          .catch((err) => {
-            done(err);
-          });
-      });
-    
-      //TODO 3 update category is null
-      test("update category is null should be return invalid response", (done) => {
-        request(app)
-          .put("/cms/details/1")
-          .set("access_token", tokenMatch1)
-          .send({
-            type: "ticket chat",
-            name: "Ticket Consultation",
-            price: 240000,
-            title: "Ticket",
-            stock: 0,
-            imageUrl: "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-            description: "Ticket Counsultation via Chat"
-          })
-          .then((res) => {
-            expect(res.status).toBe(400);
-            expect(res.body).toEqual(expect.any(Object));
-            expect(res.body).toHaveProperty("message", "Category is required");
-            done();
-          })
-          .catch((err) => {
-            done(err);
-          });
-      });
-    
-        //TODO 4 update ImageUrl is empty
-        test("update ImageUrl is empty should be return invalid response", (done) => {
-          request(app)
-            .put("/cms/details/1")
-            .set("access_token", tokenMatch1)
-            .send({
-              title: "Title",
-              type: "ticket",
-              name: "Ticket Consultation",
-              price: 240000,
-              category: "Ticket",
-              stock: 0,
-              imageUrl: "",
-              description: "Ticket Counsultation via Chat"
-            })
-            .then((res) => {
-              expect(res.status).toBe(400);
-              expect(res.body).toEqual(expect.any(Object));
-              expect(res.body).toHaveProperty("message", "Image is required");
-              done();
-            })
-            .catch((err) => {
-              done(err);
-            });
-        });
-      
-        //TODO 5 update image is null
-        test("update image is null should be return invalid response", (done) => {
-          request(app)
-            .put("/cms/details/1")
-            .set("access_token", tokenMatch1)
-            .send({
-              title: "ticket chat",
-              name: "Ticket Consultation",
-              price: 240000,
-              category: "Ticket",
-              stock: 0,
-              type: "ticket",
-              description: "Ticket Counsultation via Chat"
-            })
-            .then((res) => {
-              expect(res.status).toBe(400);
-              expect(res.body).toEqual(expect.any(Object));
-              expect(res.body).toHaveProperty("message", "Image is required");
-              done();
-            })
-            .catch((err) => {
-              done(err);
-            });
-        });
-
-      //TODO 6 update description is empty
-      test("update description is empty should be return invalid response", (done) => {
-        request(app)
-          .put("/cms/details/1")
-          .set("access_token", tokenMatch1)
-          .send({
-            title: "ticket",
-            type: "ticket chat",
-            name: "ticket konsultasi",
-            price: 240000,
-            category: "Ticket",
-            stock: 0,
-            imageUrl: "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-            description: ""
-          })
-          .then((res) => {
-            expect(res.status).toBe(400);
-            expect(res.body).toEqual(expect.any(Object));
-            expect(res.body).toHaveProperty("message", "Description is required");
-            done();
-          }) 
-          .catch((err) => {
-            done(err);
-          });
-      });
-    
-      //TODO 7 edit description is null
-      test("edit description is null should be return invalid response", (done) => {
-        request(app)
-          .put("/cms/details/1")
-          .set("access_token", tokenMatch1)
-          .send({
-            title: "ticket",
-            type: "ticket chat",
-            price: 240000,
-            category: "Ticket",
-            stock: 0,
-            name: "ticket konsultasi",
-            imageUrl: "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-          })
-          .then((res) => {
-            expect(res.status).toBe(400);
-            expect(res.body).toEqual(expect.any(Object));
-            expect(res.body).toHaveProperty("message", "Description is required");
-            done();
-          })
-          .catch((err) => {
-            done(err);
-          });
-      });
 
       //TODO 1 no access_token edit product
       test("no access_token edit product ", (done) => {
@@ -1468,17 +1206,23 @@ beforeAll(async () => {
           done()
         })   
         .catch((err => {
-          console.log (err,">>>>>>>>>>>>err")
           done(err)
         }))
       })
+
       test("update not found ", (done) => {
         request(app)
         .put("/cms/details/30")
         .set('access_token', tokenMatch1)
         .send ({
-          title: "ticket chat",
-          type: "ticket"
+            "title": "Chat consultation", 
+            "type": "Ticket Chat",
+            "name": "Ticket Consultation",
+            "price": 240000,
+            "category": "Ticket",
+            "stock": 0,
+            "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+            "description": "Ticket Counsultation via Chat"
         })
         .then((resp) => {
           expect(resp.body).toEqual(expect.any(Object))
@@ -1492,25 +1236,6 @@ beforeAll(async () => {
         })
       })
 
-    //     test("update not found ", (done) => {
-    //       request(app)
-    //       .put("/cms/details/")
-    //       .set('access_token', tokenMatch1)
-    //       .send ({
-    //         title: "ticket chat",
-    //         type: "ticket"
-    //       })
-    //       .then((resp) => {
-    //         expect(resp.body).toEqual(expect.any(Object))
-    //         expect(resp.status).toBe(404)
-    //         expect(resp.body).toHaveProperty("message", "Product not found");
-    
-    //         done()
-    //       })   
-    //       .catch((err => {
-    //         done(err)
-    //       }))
-    //     })
     })
 
   describe("delete product", () => {
@@ -1574,8 +1299,6 @@ beforeAll(async () => {
       .delete(`/cms/products/30`)
       .set("access_token", tokenMatch1)
       .end((err, res) => {
-      console.log("%c 🙍‍♂️: err ", "font-size:16px;background-color:#919ab1;color:white;", err)
-      console.log("%c 🇧🇮: res ", "font-size:16px;background-color:#7cc94b;color:white;", res.body)
         if (err) return done(err)
         expect(res.status).toBe(404)
         // expect(res.body).toHaveProperty('message', "Product not found")
@@ -1599,40 +1322,40 @@ beforeAll(async () => {
   })
 
   
-// describe("show product by id doctor", () => {
-//   //TODO 1 don't have product by id
-//   test("don't have product by id", (done) => {
-//     request(app)
-//       .get("/cms/product/9")
-//       .set("access_token", tokenMatch1)
-//       .then((res) => {
-//         expect(res.status).toBe(404);
-//         expect(res.body).toEqual(expect.any(Object));
-//         expect(res.body).toHaveProperty("message", "Product not found");
-//         done();
-//       })
-//       .catch((err) => {
-//         done(err);
-//       });
-//   });
+describe("show product by id doctor", () => {
+  //TODO 1 don't have product by id
+  test("don't have product by id", (done) => {
+    request(app)
+      .get("/cms/product/9")
+      .set("access_token", tokenMatch1)
+      .then((res) => {
+        expect(res.status).toBe(404);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toHaveProperty("message", "Product not found");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
   
-//   //TODO 2 show product by id
-//   test("success show product by id", (done) => {
-//     request(app)
-//     .get("/cms/product/3")
-//       .set("access_token", doctr)
-//       .then((res) => {
-//         console.log(res,">>>>>>>>>>>>lalala");
-//         expect(res.status).toBe(200);
-//         expect(res.body).toEqual(expect.any(Object));
-//         done();
-//       })
-//       .catch((err) => {
-//         done(err);
-//       });
-//   });
+  //TODO 2 show product by id
+  test("success show product by id", (done) => {
+    request(app)
+    .get("/cms/product/3")
+      .set("access_token", doctr)
+      .then((res) => {
+        console.log(res,">>>>>>>>>>>>lalala");
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object));
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
     
-// })
+})
 
 describe("delete details", () => {
   test('Success Case', done => {
@@ -1644,7 +1367,7 @@ describe("delete details", () => {
     })
     request(app)
     .delete(`/cms/details/7`)
-    .set("access_token", tokenMatch1)
+    .set('access_token', tokenMatch1)
     .end((err, res) => {
       if (err) return done(err)
       expect(res.status).toBe(200)
@@ -1680,7 +1403,7 @@ describe("delete details", () => {
   test('no product Case', (done) => {
     request(app)
     .delete(`/cms/details/30`)
-    .set("access_token", tokenMatch1)
+    .set('access_token', tokenMatch1)
     .end((err, res) => {
       if (err) return done(err)
       expect(res.status).toBe(404)
@@ -1689,18 +1412,7 @@ describe("delete details", () => {
     })
   })
   
-  // test('no product Case', (done) => {
-  //   request(app)
-  //   .delete(`/cms/details/`)
-  //   .set("access_token", tokenMatch1)
-  //   .end((err, res) => {
-  //     if (err) return done(err)
-  //     expect(res.status).toBe(404)
-  //     expect(res.body).toHaveProperty('message', "Product not found")
-  //     done()
-      
-  //   })
-  // })
+  
   // test("don't have product", (done) => {
   //   Product.destroy()
   //   request(app)
