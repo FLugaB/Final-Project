@@ -4,10 +4,10 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon bin/www",
-    "test:up": "npx sequelize-cli db:create --env=test && npx sequelize-cli db:migrate --env=test && npx sequelize-cli --env test db:seed:all",
+    "test:up": "npx sequelize-cli db:drop --env=test && npx sequelize-cli db:create --env=test && npx sequelize-cli db:migrate --env=test && npx sequelize-cli db:seed:all --env test",
     "test:down": "npx sequelize-cli db:migrate:undo:all --env=test",
-    "test": "clear && jest --coverage --runInBand --watchAll --detectOpenHandles --forceExit",
-    "test1": "clear && jest -i productController.test.js --coverage --runInBand --detectOpenHandles --forceExit",
+    "test": "clear && jest --coverage --runInBand --detectOpenHandles --forceExit",
+    "test1": "clear && jest --coverage -i productController.test.js --runInBand --detectOpenHandles --forceExit",
     "test2": "clear && jest -i clientController.test.js --coverage --runInBand --detectOpenHandles --forceExit",
     "test3": "clear && jest -i cmsController.test.js --coverage --runInBand --detectOpenHandles --forceExit",
     "test4": "clear && jest -i doctorController.test.js --coverage --runInBand --detectOpenHandles --forceExit",
