@@ -6,7 +6,10 @@ const { requestSnapToken, updateStatusTransactions } = require('../apis/midtrans
 
 
 // cek orderPorduct with status completed
+//ini embat ticket yang sudah dibeli useable atau used
 route.get('/account/tickets',[authentication, authorization], TransactionController.clientTickets);
+// ini setelah pilih dokter client ngepatch voucher ticket untuk  dokter id dan voucher token
+route.patch('/account/tickets/:DoctorId',[authentication, authorization], TransactionController.clientTicketsDoctors);
 
 // cek orderPorduct with id sesuai yg login show (only orderPorduct)
 route.get('/account/cart',[authentication, authorization], TransactionController.clientCart);

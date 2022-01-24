@@ -36,6 +36,7 @@ const authorization = async (req, res, next) => {
                 email: email
             }
         })
+
         req.auth = {
             id: findUser.id,
             role: findUser.role
