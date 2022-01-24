@@ -17,7 +17,7 @@ function CardSlider() {
 
   
   const handlerChatButton = (payload) => {
-    const str = payload.replace(/\s+/g, '');
+    const str = payload.replace('.', '').replace(/\s+/g, '');
     console.log(str, "payload");
     navigate(`/video/${str}`);
   };
