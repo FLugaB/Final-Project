@@ -36,7 +36,7 @@ const videoDaily = async (req, res, next) => {
         data: JSON.stringify({
           "properties": {
             "user_name":"Customers", 
-            "room_name":"DrVera"
+            "room_name":roomGET.name
         }})
     });
     console.log(token.data, "result");

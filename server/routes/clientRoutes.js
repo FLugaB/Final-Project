@@ -9,7 +9,9 @@ route.put('/account',[authentication, authorization], clientUpdateAccount);
 // DOCTOR
 route.get('/doctors', clientDoctorFetch);
 
+
 route.get('/doctors/:id', clientDoctorDetail);
+
 // route khusus untuk chat, pakai server socket
 // route.get('/doctors-chat', DoctorController.getSchedules);
 module.exports = route

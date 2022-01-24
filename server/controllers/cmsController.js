@@ -4,9 +4,11 @@ const { compareHash } = require('../helpers/bycrpt')
 const { getToken } = require('../helpers/jwt')
 
 const cmsRegister = async (req, res, next) => {
+    
     const transaction = await sequelize.transaction();
 
     try {
+
         const {  email, password, fullName, birthdate, gender, address, photoProfile, phoneNumber } = req.body
         const addUser = await User.create({ email, password, role: "Admin",  }, { transaction });
         if (!addUser) throw { name: `USER_NOT_FOUND` }

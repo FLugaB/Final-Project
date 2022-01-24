@@ -40,8 +40,8 @@ const videoDailyOwner = async (req, res, next) => {
         data: JSON.stringify({
           "properties": {
             "is_owner":true,
-            "user_name":"Doctor Vera", 
-            "room_name":"DrVera"
+            "user_name":roomGET.name, 
+            "room_name":roomGET.name
         }})
     });
     console.log(token.data, "token");
