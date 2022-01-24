@@ -3,8 +3,6 @@ const { User, Product, Voucher, Schedule } = require("../models")
 const { Op } = require("sequelize");
 const { authentication, authorization } = require("../middlewere/auth");
 const { TransactionController } = require(`../controllers/transactionController`)
-const { DoctorController, getSchedules } = require(`../controllers/doctorController`)
-const { clientDoctorDetail } = require('../controllers/clientController')
 
 // create orderPorduct untuk khusus Product Chat
 route.post('/products/chat',[authentication, authorization], TransactionController.ticketConsultation);
