@@ -13,7 +13,6 @@ export const login = (payload) => {
             dispatch(isSuccess(false))
             dispatch(isLoading(true))
             dispatch(isError(null))
-            console.log(payload);
             const response = await fetch(`${server}/login`, {
                 method: "POST",
                 body: JSON.stringify(payload),
@@ -88,6 +87,22 @@ export const fetchCheckout = (payload) => {
             const access_token = localStorage.getItem(`access_token`)
             const response = await axios.get(`${server}/account/detail-checkout`, {headers: { access_token }});
             dispatch({ type: FETCH_CUSTOMER_CHECKOUT, payload: response.data});
+        } catch (error) {
+            dispatch(isError(error));
+        } finally { dispatch(isLoading(false)); }
+    }
+}
+
+export const requestSnap = (payload) => {
+
+    return async (dispatch, getState) => {
+        try {
+            dispatch(isSuccess(false))
+            dispatch(isLoading(true))
+            dispatch(isError(null))
+            const access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJzdWJzY3JpYmVyQG1haWwuY29tIiwiaWF0IjoxNjQzMDQwNzcwfQ.UnsyRSxQHmlWgwANn_RbhKyCvZyW8e9bunuJ8rDDvo8"
+            const response = await axios.post(`${server}/account/payment`, {}, {headers: { access_token }});
+             window.snap.pay(response.data.snap_token.token)
         } catch (error) {
             dispatch(isError(error));
         } finally { dispatch(isLoading(false)); }

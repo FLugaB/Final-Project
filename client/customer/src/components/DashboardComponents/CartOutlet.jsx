@@ -18,6 +18,7 @@ const CartOutlet = () => {
     const fetchDataCart = async () => {
         try {
             await dispatch(fetchCart())
+            console.log(customerCart)
         } catch (error) {
             console.log(error)
         }
@@ -25,7 +26,7 @@ const CartOutlet = () => {
 
     const onCheckOut = () => {
         try {
-            navigate('/accpimt/checkout')
+            navigate('/account/checkout')
         } catch (error) {
             console.log(error)
         }
@@ -39,11 +40,11 @@ const CartOutlet = () => {
                         <h1>Cart</h1>
                     </div>
                     { customerCart.msg && 
-                     <div>
-                         <h3 className="capitalize">{customerCart.msg}</h3>
+                     <div className="mt-5">
+                         <h3 className="text-capitalize font-hard">{customerCart.msg}</h3>
                      </div>
                     }
-                    { customerCart && customerCart.map((e) => {
+                    { !customerCart.msg && customerCart.map((e) => {
                         return (
                             <Card key={e.id} style={{ width: '18rem' }}>
                                 <Card.Img variant="top" src={e.DetailProduct.imageUrl} />
@@ -60,9 +61,12 @@ const CartOutlet = () => {
                             </Card>
                         )
                     }) }
-                    <div className="text-start mt-5">
-                        <Button variant="success" onClick={onCheckOut} className="text-white">Checkout</Button>
-                    </div>
+                    {
+                        !customerCart.msg && 
+                        <div className="text-start mt-5">
+                            <Button variant="success" onClick={onCheckOut} className="text-white">Checkout</Button>
+                        </div>
+                    }
                 </Col>
      
             </Row>
