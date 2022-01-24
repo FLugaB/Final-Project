@@ -20,7 +20,6 @@ module.exports = class Controller {
       }
       res.status(200).json(result)
     } catch (err) {
-      console.log(err);
       next(err)
     } 
   }
@@ -175,16 +174,17 @@ module.exports = class Controller {
 
         throw {name: "Product_not_found"}
       } 
-      if (getProductId.ProductId < 3) {
+      // if (getProductId.ProductId < 3) {
 
-        throw { name: "CANNOT_ADD_DETAIL"}
-      } else if (getProductId.ProductId === 3) {
+      //   throw { name: "CANNOT_ADD_DETAIL"}
+      // } else 
+      if (getProductId.ProductId === 3) {
 
         const result = await DetailProduct.create(input, {transaction:t})
         await t.commit()
         res.status(201).json(result)
       } else {
-
+        // PROBLEM TEST
         throw { name: "CANNOT_ADD_DETAIL"}
       }
       
@@ -220,10 +220,11 @@ module.exports = class Controller {
       }
     
       const getProductId = await DetailProduct.findOne({where: {id}})
-      
+      // PROBLEM TEST
       if(!getProductId) {
         throw {name: "Product_not_found"}
       } 
+      // PROBLEM TEST
       if (getProductId.ProductId < 3) {
         const input = {price}
       
@@ -255,6 +256,7 @@ module.exports = class Controller {
       if (!find) {
         throw {name: "Product_not_found"}
       } 
+      // PROBLEM TEST
       if (find.ProductId === 1 || find.ProductId === 2) {
         throw { name: "CANNOT_DELETE_PRODUCT" }
       } 

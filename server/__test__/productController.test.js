@@ -149,6 +149,31 @@ beforeAll(async () => {
         done(err)
       }))
     })
+    //TODO 22 failed add product
+    test("add product failed create exist product", (done) => {
+      request(app)
+      .post("/cms/products")
+      .set('access_token', tokenMatch1)
+      .send ({  
+        "title": "Chat consultation", 
+        "type": "Ticket Chat",
+        "name": "Ticket Consultation",
+        "price": 300000,
+        "category": "Ticket",
+        "stock": 1,
+        "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+        "description": "Ticket Counsultation via Chat"
+      })
+      .then((resp) => {
+        expect(resp.status).toBe(403);
+        expect(resp.body).toEqual(expect.any(Object));
+        expect(resp.body).toHaveProperty("message", "Product is Exist, Please Only Add to Detail Product Refer to this Product Id");
+        done()
+      })   
+      .catch((err => {
+        done(err)
+      }))
+    })
 
     //TODO 1 no access_token add product
     test("add product no access_token", (done) => {
@@ -1288,6 +1313,59 @@ beforeAll(async () => {
         done(err)
       }))
     })
+
+    //TODO 18 not found updated id detail
+    // test("updated detail id not found", (done) => {
+    //   request(app)
+    //   .put("/cms/details/999")
+    //   .set('access_token', tokenMatch1)
+    //   .send ({
+    //       "name": "3 VASELINE Lip Theraphy Jar Baru",
+    //       "price": 299999,
+    //       "category": "Lip care",
+    //       "stock": 1,
+    //       "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+    //       "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik."
+        
+    //   })
+    //   .then((resp) => {
+    //     console.log(resp,">>>>>>>>ini re");
+    //     expect(resp.body).toEqual(expect.any(Object))
+    //     expect(resp.status).toBe(404)
+    //     expect(res.body).toHaveProperty("message", "Product_not_found");
+    //     done()
+    //   })   
+    //   .catch((err => {
+    //     console.log (err,">>>>>>>>>>>>err")
+    //     done(err)
+    //   }))
+    // })
+
+    //TODO 19 success updated detail ticket
+    // test("updated detail ticket success", (done) => {
+    //   request(app)
+    //   .put("/cms/details/1")
+    //   .set('access_token', tokenMatch1)
+    //   .send ({
+    //       "name": "1 VASELINE Lip Theraphy Jar Baru",
+    //       "price": 599999,
+    //       "category": "Lip care",
+    //       "stock": 1,
+    //       "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+    //       "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik."
+        
+    //   })
+    //   .then((resp) => {
+    //     console.log(resp,">>>>>>>>ini re");
+    //     expect(resp.body).toEqual(expect.any(Object))
+    //     expect(resp.status).toBe(200)
+    //     done()
+    //   })   
+    //   .catch((err => {
+    //     console.log (err,">>>>>>>>>>>>err")
+    //     done(err)
+    //   }))
+    // })
     
   })
 
@@ -1513,7 +1591,7 @@ beforeAll(async () => {
       }))
     })
 
-    //TODO 4 product id not found
+    //TODO 6 product id not found
     test("add detail product id not found", (done) => {
       request(app)
       .post("/cms/details")
@@ -1553,17 +1631,19 @@ beforeAll(async () => {
     //     "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik."
     //   })
     //   .then((resp) => {
+    //   console.log("%c 📅: resp BANGET ", "font-size:16px;background-color:#6ee48c;color:black;", resp)
     //     expect(resp.body).toEqual(expect.any(Object))
     //     expect(resp.status).toBe(403)
     //     expect(resp.body).toHaveProperty("message", "Ticket Product is Exist, Please Only Add Skincare Product")
     //     done()
     //   })   
     //   .catch((err => {
+    //   console.log("%c 🇮🇨: err BANGET ", "font-size:16px;background-color:#572ba2;color:white;", err)
     //     done(err)
     //   }))
     // })
 
-    //TODO 4 add product success
+    //TODO 7 add product success
     test("add detail success", (done) => {
       request(app)
       .post("/cms/details")
@@ -1922,4 +2002,14 @@ beforeAll(async () => {
         done()
       })
     })
+
+    //TODO 8 show products not found
+    test("don't have product", async () => {
+      await Product.destroy({ truncate: true, cascade: true, restartIdentity: true})
+      const res = await request(app)
+        .get(`/products`)
+        .set("access_token", tokenMatch1)
+      expect(res.status).toBe(404);
+      expect(res.body).toHaveProperty("message", "Product not found");
+    });
   })
