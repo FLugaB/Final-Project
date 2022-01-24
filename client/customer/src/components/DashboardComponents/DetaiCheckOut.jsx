@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCheckout, requestSnap } from '../../store/actionCreator/customers'
 import { formatCurrency } from '../../Hooks/helpers'
@@ -13,6 +14,7 @@ const DetaiCheckOut = () => {
     const { customerCheckout, errorCustomers } = useSelector((state) => state.customers)
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect( async () => {
         await fetchDataCheckout()
@@ -25,6 +27,8 @@ const DetaiCheckOut = () => {
 
 
             //UDAH DAPET KAGA NGERTI ABIS ITU WKWKKWKWKKWKWKWK
+           if (customerCheckout.orderDetail) {
+               console.log(customerCheckout, `==================================`)
             let counts = {};
 
             for (let i = 0; i < customerCheckout.orderDetail.product.length; i++) {
@@ -37,6 +41,7 @@ const DetaiCheckOut = () => {
                     
                 }
             })
+           }
 
         } catch (error) {
             console.log(error, `ini error effect`)
@@ -66,6 +71,14 @@ const DetaiCheckOut = () => {
         }
     }
 
+    const backToDetails = () => {
+        try {
+            navigate('/account/cart')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     if (onLoad) return localLoad()
 
     return (
@@ -74,6 +87,7 @@ const DetaiCheckOut = () => {
                 <Col md={12} className="mb-5 overflow-wrapper">
                     <div className="title text-start">
                         <h1>Detail Checkout</h1>
+                        <a className="no-style" href="" onClick={backToDetails}> {`< Back`} </a>
                     </div>
 
                     { errorCustomers && 
@@ -104,14 +118,20 @@ const DetaiCheckOut = () => {
                         }) }
                     </Row>
 
-                    <div className="title text-start">
-                        <h4>Order ID: {customerCheckout.orderDetail.order_id}</h4>
-                        <h4>Total Price: {formatCurrency(customerCheckout.orderDetail.totalPrice)}</h4>
-                    </div>
-                
-                    <div className="text-start mt-5">
-                        <Button variant="success" onClick={sendMidtrans} className="text-white">Pay Now</Button>
-                    </div>
+                    { customerCheckout.orderDetail &&  
+                    (
+                        <div>
+                            <div className="title text-start">
+                                <h4>Order ID: {customerCheckout.orderDetail.order_id}</h4>
+                                <h4>Total Price: {formatCurrency(customerCheckout.orderDetail.totalPrice)}</h4>
+                            </div>
+                        
+                            <div className="text-start mt-5">
+                                <Button variant="success" onClick={sendMidtrans} className="text-white">Pay Now</Button>
+                            </div>
+                        </div>
+                    )}
+
                 </Col>
     
             </Row>
