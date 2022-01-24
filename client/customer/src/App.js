@@ -18,6 +18,7 @@ import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import { LogoutComponent } from './components/Logout.jsx';
+import CardTicket from './components/Card/CardTicket.jsx';
 
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
           <Route path="account" element={<Dashboard />}>
             <Route path="profile" element={ <ProfileOutlet />} />
             {/* <Route path="logout" element={ <ProfileOutlet />} /> */}
+            <Route path="ticket" element={ <CardTicket />} />
           </Route>
           
           <Route path="/notification/handling" element={<Notif />} />
