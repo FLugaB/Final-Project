@@ -13,6 +13,7 @@ import NotFound from './pages/NotFound'
 import ProfileOutlet from './components/DashboardComponents/ProfileOutlet'
 import CartOutlet from './components/DashboardComponents/CartOutlet'
 import HistoryOutlet from './components/DashboardComponents/HistoryOutlet'
+import DetailCheckOut from './components/DashboardComponents/DetaiCheckOut'
 import { pageLoad } from './Hooks/load'
 
 import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
@@ -62,6 +63,7 @@ function App() {
           <Route path="account" element={<Dashboard />}>
             <Route path="profile" element={ <ProfileOutlet />} />
             <Route path="cart" element={ <CartOutlet />} />
+            <Route path="checkout" element={ <DetailCheckOut />} />
             <Route path="history" element={ <HistoryOutlet />} />
             {/* <Route path="logout" element={ <ProfileOutlet />} /> */}
             <Route path="ticket" element={ <CardTicket />} />

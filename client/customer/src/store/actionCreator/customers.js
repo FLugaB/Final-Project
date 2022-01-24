@@ -1,4 +1,4 @@
-import { FETCH_CUSTOMER_CART, CUSTOMER_LOGIN, CUSTOMER_REGISTER,CUSTOMER_IS_SUCCESS_REGISTER, CUSTOMER_IS_SUCCESS_LOGIN, CUSTOMER_IS_SUCCESS_LOGOUT } from "../actionType/customers";
+import { FETCH_CUSTOMER_CHECKOUT, FETCH_CUSTOMER_CART, CUSTOMER_LOGIN, CUSTOMER_REGISTER,CUSTOMER_IS_SUCCESS_REGISTER, CUSTOMER_IS_SUCCESS_LOGIN, CUSTOMER_IS_SUCCESS_LOGOUT } from "../actionType/customers";
 import { isError, isSuccess, isLoading } from './status'
 
 import axios from 'axios'
@@ -71,11 +71,24 @@ export const fetchCart = (payload) => {
             dispatch(isError(null))
             const access_token = localStorage.getItem(`access_token`)
             const response = await axios.get(`${server}/account/cart`, {headers: { access_token }});
-      
-            console.log( response.data, `<<<<<<<<<<<<<<<<`)
             dispatch({ type: FETCH_CUSTOMER_CART, payload: response.data});
         } catch (error) {
-            console.log(error)
+            dispatch(isError(error));
+        } finally { dispatch(isLoading(false)); }
+    }
+}
+
+export const fetchCheckout = (payload) => {
+
+    return async (dispatch, getState) => {
+        try {
+            dispatch(isSuccess(false))
+            dispatch(isLoading(true))
+            dispatch(isError(null))
+            const access_token = localStorage.getItem(`access_token`)
+            const response = await axios.get(`${server}/account/detail-checkout`, {headers: { access_token }});
+            dispatch({ type: FETCH_CUSTOMER_CHECKOUT, payload: response.data});
+        } catch (error) {
             dispatch(isError(error));
         } finally { dispatch(isLoading(false)); }
     }
