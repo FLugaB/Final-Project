@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row, Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
 
 const ProfileOutlet = () => {
@@ -11,7 +11,14 @@ const ProfileOutlet = () => {
     return (
         <Col md={12} className="d-flex justify-content-start section-dashboard p-5"> 
             <Row>
-                <Col md={12} className="mb-5"><div className="title text-start"><h1>Profile</h1></div></Col>
+                <Col md={12} className="mb-5">
+                    <div className="title text-start">
+                        <h1>Profile</h1>
+                    </div>
+                    <div className="text-start mt-5">
+                        <Button variant="warning" className="text-white">Edit Profile</Button>
+                    </div>
+                </Col>
                 <Col md={12} className="d-flex justify-content-start">
                     
                     <Row>

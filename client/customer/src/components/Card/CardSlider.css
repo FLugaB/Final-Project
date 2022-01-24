@@ -15,7 +15,7 @@
 
 .slider_title {
   font-size: 5vw;
-  color: tomato;
+  color: var(--hard);
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 2vw;
@@ -98,11 +98,12 @@
   height: 50px;
   line-height: 50px;
   text-align: center;
-  background: #fff;
+  background: var(--soft);
   font-size: 23px;
-  color: #333;
+  color: var(--hard);
   font-weight: bold;
   margin: 0 6px;
+  border-radius: 50px;
   -webkit-transition: .4s;
   transition: .4s;
   -webkit-transform: translateY(200px);
@@ -117,19 +118,20 @@
 }
 
 .social-icons li a:hover {
-  background: #000;
+  background: var(--hard);
   -webkit-transition: .2s;
-  transition: .2s;
+  transition: .3s;
 }
 
-.social-icons li a:hover .fa {
-  color: #fff;
+.social-icons li a:hover > svg {
+  color: var(--soft);
+  transition: 0.3;
 }
 
-.social-icons li a .fa {
+/* .social-icons li a .fa {
   -webkit-transition: .8s;
-  transition: .8s;
-}
+  transition: .3s;
+} */
 
 .social-icons li a .fa:hover {
   -webkit-transform: rotateY(360deg);
@@ -188,6 +190,10 @@
   bottom: 0;
 }
 
+.carousel-wrapper {
+  background-color: var(--soft);
+}
+
 .carousel .slick-dots {
   bottom: -2.5vw;
 }
@@ -229,24 +235,49 @@
 .carousel .slick-prev, .carousel .slick-next {
   width: 50px;
   height: 50px;
-  background-color: rgb(33, 90, 196);
+  /* background-color: rgb(33, 90, 196); */
 }
 
-.carousel .slick-prev:hover, .carousel .slick-prev:focus, .carousel .slick-next:hover, .carousel .slick-next:focus {
-  color: rgb(25, 100, 212);
+.slick-prev:hover:before ,
+.slick-next:hover:before {
+  color: var(--hard);
+}
+
+.carousel .slick-prev:hover, 
+.carousel .slick-next:hover {
   outline: none;
-  background-color: rgb(80, 114, 177);
+  background-color: var(--bright);
+  border: 3px solid var(--hard);
+  transition: 0.3s;
 }
 
-.carousel .slick-prev:before, .carousel .slick-next:before {
-  color: rgb(122, 27, 27);
+.carousel .slick-prev:before, 
+.carousel .slick-next:before {
+  /* color: var(--soft); */
   font-family: "Raleway", sans-serif;
 }
 
 .carousel .slick-next {
-  right: -55px;
+  right: -10px;
 }
 
 .carousel .slick-prev {
-  left: -55px;
+  left: -10px;
+  z-index: 4;
+}
+
+.carousel .slick-next,
+.carousel .slick-prev {
+  background-color: var(--hard);
+  border-radius: 50px;
+  border: 3px solid var(--bright);
+}
+
+.slick-prev:before ,
+.slick-next:before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-weight: 600;
+  transform: translate(-50%, -50%);
 }

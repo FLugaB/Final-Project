@@ -43,8 +43,7 @@ const Card = () => {
                       </div>
                     </div>
                     <p className="card__description">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Asperiores, blanditiis?
+                      {el.Profile.address}
                     </p>
 
                   </div>

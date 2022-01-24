@@ -35,7 +35,7 @@ const Navbar = ({ navbarLinks }) => {
   return (
     <nav id="navigate" className="navigation-fixed">
       <ul className="justify-content-md-center d-flex">
-          <li className=""><Link to="/">Forsythia</Link></li>
+          <li className=""><Link to="/">Home</Link></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Services</a></li>
           <li><a href="#">Team</a></li>
