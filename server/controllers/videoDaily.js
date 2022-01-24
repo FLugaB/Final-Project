@@ -30,23 +30,20 @@ const videoDaily = async (req, res, next) => {
   try {
     const roomId = req.params.id;
     const roomGET = await getRoom(roomId);
-    res.status(200).send(roomGET)
-    
-    console.log(roomGET, "roomget");
-    
-    const result = await axios('https://api.daily.co/v1/meeting-tokens', {
+    const token = await axios('https://api.daily.co/v1/meeting-tokens', {
         method: 'POST',
         headers: headerTokenCustomers,
         data: JSON.stringify({
           "properties": {
             "user_name":"Customers", 
-            "room_name":"DrVera"
+            "room_name":roomGET.name
         }})
     });
-    console.log(result.data, "result");
+    console.log(token.data, "result");
 
-    
-
+    if (token.data) {
+      res.status(200).send( {token: token.data.token, room: roomGET })
+    }
   } catch (error) {
     console.log(error);
     next(error);
