@@ -4,7 +4,7 @@ const errorsLog = (err, req, res, next) => {
 
     let code = 500
     let message = "Internal server error"
-    console.log(err.name,"<<<<");
+  
     if ( err.name === `SequelizeUniqueConstraintError` || 
         err.name === `SequelizeValidationError` ) {
         code = 400
@@ -116,7 +116,6 @@ const errorsLog = (err, req, res, next) => {
     //     code = 404
     //     message = "Transaction ID Has Been Used"
     // } 
-console.log(err,">>>>>>>>>>>>>ini err");
    res.status(code).json({message})
 }
 

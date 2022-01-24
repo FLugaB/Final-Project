@@ -100,9 +100,9 @@ export const requestSnap = (payload) => {
             dispatch(isSuccess(false))
             dispatch(isLoading(true))
             dispatch(isError(null))
-            const access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJzdWJzY3JpYmVyQG1haWwuY29tIiwiaWF0IjoxNjQzMDQwNzcwfQ.UnsyRSxQHmlWgwANn_RbhKyCvZyW8e9bunuJ8rDDvo8"
+            const access_token = localStorage.getItem(`access_token`)
             const response = await axios.post(`${server}/account/payment`, {}, {headers: { access_token }});
-             window.snap.pay(response.data.snap_token.token)
+            window.snap.pay(response.data.snap_token.token)
         } catch (error) {
             dispatch(isError(error));
         } finally { dispatch(isLoading(false)); }

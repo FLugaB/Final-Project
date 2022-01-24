@@ -3,7 +3,7 @@ const fs = require(`fs`);
 const { hashPass } = require("../helpers/bycrpt");
 module.exports = {
   async up (queryInterface, Sequelize) {
-     const userAdmin = JSON.parse(fs.readFileSync(`./dummyData/user.json`, `utf8`));
+     const userAdmin = JSON.parse(fs.readFileSync(`./dummyData/user/user.json`, `utf8`));
      userAdmin.forEach(element => {
        element.createdAt = new Date(),
        element.updatedAt = new Date(),

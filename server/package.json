@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon bin/www",
-    "test:up": "npx sequelize-cli db:create --npm env=test && npx sequelize-cli db:migrate --env=test && npx sequelize-cli --env test db:seed:all",
+    "test:up": "npx sequelize-cli db:migrate --env=test && npx sequelize-cli --env test db:seed:all",
     "test:down": "npx sequelize-cli db:migrate:undo:all --env=test",
     "test": "clear && jest  --coverage --runInBand --watchAll --detectOpenHandles --forceExit",
     "dev": "nodemon app.js",
