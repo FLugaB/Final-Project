@@ -13,5 +13,15 @@
         "email": "client1@mail.com",
         "password": "client",
         "role": "Client"
+    },
+    {
+        "email": "putri@mail.com",
+        "password": "doctor",
+        "role": "Doctor"
+    },
+    {
+        "email": "vera@mail.com",
+        "password": "doctor",
+        "role": "Doctor"
     }
 ]

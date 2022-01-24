@@ -80,35 +80,67 @@ class TransactionController {
 
         try {
 
-            const findUserOrder = await OrderProduct.findAll({
-                where: {
-                    [Op.and]: [
-                        { UserId: req.auth.id }, 
-                        { status: `completed` }
-                    ], 
-                },
-                include: [
-                    {
-                        model: Product,
-                        attributes: {
-                            exclude: ['createdAt', `updatedAt`, ]
-                        },
-                        include: [
-                            {
-                                model: DetailProduct,
-                                attributes: {
-                                    exclude: ['createdAt', `updatedAt`, ]
-                                }
-                            }, 
-                        ]
-                    }, 
-                ]
+            // const findUserClient = await Voucher.findAll({
+            //     where: {
+            //         [Op.and]: [
+            //             { ClientId: req.auth.id }, 
+            //             { status: `useable` }
+            //         ], 
+            //     }
+            // })
+
+            const findUserClient = await Voucher.findAll({
+                where: { ClientId: req.auth.id }, 
             })
 
-            if (findUserOrder.length < 1) {
+            if (findUserClient.length < 1) {
                 res.status(200).json({ msg: `there is no orders yet`})
             } else {
-                res.status(200).json(findUserOrder);
+                res.status(200).json(findUserClient);
+            }
+            
+        } catch (error) {
+            console.log(error)
+            next (error)
+        }
+    }
+
+    static clientTicketsDoctors = async (req, res, next) => {
+
+        try {
+
+            const { DoctorId } = req.params
+
+            if (!DoctorId) throw { name: 'DOCTOR_ID_NOT_FOUND' }
+
+            const findUserClient = await Voucher.findAll({
+                where: {
+                    [Op.and]: [
+                        { ClientId: req.auth.id }, 
+                        { status: `useable` }
+                    ], 
+                }
+            })
+
+            if (findUserClient.length < 1) {
+                res.status(200).json({ msg: `There is no Voucher Ticket`})
+            } else {
+
+                const patchUserVoucher = await Voucher.update(
+                {
+                    DoctorId,
+                    voucherToken: `123`, // INI TOKEN DARI DAILY TOLONG LUDFI DIVANTUUU
+                    status: 'used'
+                },
+                {
+                    where: {
+                        id: findUserClient[0].id
+                    }
+                },
+                    { returning: true}
+                )
+
+                res.status(200).json(patchUserVoucher);
             }
             
         } catch (error) {
@@ -257,11 +289,33 @@ class TransactionController {
     }
 
     static notificationTransaction = async (req, res, next) => {
+
         try {
             
-            const status = req.body
+            // {
+            //     "transaction_time": "2022-01-21 19:45:12",
+            //     "transaction_status": "capture",
+            //     "transaction_id": "9debe4e5-285b-4525-9bcd-d85fe123496a",
+            //     "status_message": "midtrans payment notification",
+            //     "status_code": "200",
+            //     "signature_key": "939f6fff54821f0d466eb7be1182735676abf27478725507ae6c89a1826542e76d16716062daa0cc1fc39dd5811604ab70bec48ba3ed2683b04a0b10b7ed3d51",
+            //     "payment_type": "credit_card",
+            //     "order_id": "9um93c",
+            //     "merchant_id": "G656665790",
+            //     "masked_card": "481111-1114",
+            //     "gross_amount": "240000.00",
+            //     "fraud_status": "accept",
+            //     "currency": "IDR",
+            //     "channel_response_message": "Approved",
+            //     "channel_response_code": "00",
+            //     "card_type": "credit",
+            //     "bank": "cimb",
+            //     "approval_code": "1642769112700"
+            //   }
 
-            console.log(status)
+            // "merchant_id": "G656665790", Verify Merchant Id <-----------
+            
+            const status = req.body
 
             const findTransaction = await Transaction.findOne({
                 where: {
@@ -285,8 +339,19 @@ class TransactionController {
                         status.transaction_status === `capture`) {
                 newStatus = `paid`
             } 
-            // ini mestinya newStatus === 'failed' kan? bukan falsy
+  
             if (!newStatus) throw { name: "PLEASE_PAY_FIRST" }
+
+            const tryUpdateCart = await OrderProduct.update(
+                {
+                    status: `completed`
+                },
+                {
+                    where: {
+                        UserId: findTransaction.UserId,
+                    }
+                }
+            )
 
             const findOneOrderId = await Transaction.update(
                 {
@@ -307,7 +372,6 @@ class TransactionController {
                 transactionId: findOneOrderId[1][0].id
             })
 
-            console.log(status,"<<<<<<<<<<<<<<<<<<<<<<");
             res.status(200).json(findOneOrderId)
             
         } catch (error) {
