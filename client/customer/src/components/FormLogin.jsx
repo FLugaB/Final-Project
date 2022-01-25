@@ -114,7 +114,7 @@ const FormLogin = (props) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            minLength="5"
+            minLength="4"
             maxLength="255"
             type="password"
             required
