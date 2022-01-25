@@ -37,7 +37,7 @@ const Navbar = ({ navbarLinks }) => {
       <ul className="justify-content-md-center d-flex">
           <li className=""><Link to="/">Home</Link></li>
           <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
+          <li><a href="products">Services</a></li>
           <li><a href="#">Team</a></li>
           <li><a href="#">Contact</a></li>
           {
