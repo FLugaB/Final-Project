@@ -5,16 +5,10 @@ import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import * as IconName  from "react-icons/fc";
 import { IconContext } from "react-icons";
-// import { useDispatch } from 'react-redux';
-// import { logout } from '../store/actionCreator/customers';
 
 const DashboardSidebar = () => {
     const [sidebar, setSidebar] = useState(false);
-    // const dispatch=useDispatch()
-    // const logOut=()=>{
-    //   console.log(`tombol logot`);
-    //   dispatch(logout())
-    // }
+    
     const SidebarData = [
         {
           title: "Profile",
@@ -40,20 +34,15 @@ const DashboardSidebar = () => {
           icon: <IconName.FcWebcam />,
           cName: "nav-text"
         },
-        // {
-        //   title: "Schedule",
-        //   path: "schedule",
-        //   icon: <IconName.FcCalendar />,
-        //   cName: "nav-text"
-        // },
         {
           title: "Logout",
           path: "/logout",
           icon: <IconName.FcDownLeft />,
           cName: "nav-text",
-          // onClick:{logOut}
         }
-      ];
+    ];
+
+
 
     const showSidebar = () => setSidebar(!sidebar);
     return (
