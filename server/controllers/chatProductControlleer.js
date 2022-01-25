@@ -40,8 +40,10 @@ module.exports = class Controller {
 
         if (findAllTicket.length < 1 ) {
             const text = "There is No Ticket yet.."
+            
             res.status(200).json({text})
         } else {
+            
             res.status(200).json(findAllTicket)
         }
     } catch (error) {
@@ -61,10 +63,7 @@ module.exports = class Controller {
             where: {id }
         })
 
-        if (findAllTicket.length < 1 ) {
-            const text = "There is No Ticket yet.."
-            res.status(200).json({text})
-        } else {
+        
             const updateTicket = await Voucher.update(
             {
                 status: 'completed'
@@ -73,9 +72,9 @@ module.exports = class Controller {
                 where: {id},
                 returning: true
             })
-
+            console.log("masuk else");
             res.status(200).json(updateTicket)
-        }
+        
 
 
         
