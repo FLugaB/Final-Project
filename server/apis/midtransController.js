@@ -36,96 +36,10 @@ const requestSnapToken = async (req, res, next) => {
         })
         
     } catch (error) {
-        console.log(error.response.data);
         next(error)
     }
 }
 
-// const updateStatusTransactions = async (req, res, next) => {
-
-//     try {
-
-//         console.log("MASUk");
-//         const { orderId } = req.params
-
-//         if (!orderId) throw { name: "TRANSACTION_NOT_FOUND" }
-
-//         const findTransaction = await Transaction.findOne({
-//             where: {
-//                 order_id: orderId
-//             }
-//         })
-
-//         if (!findTransaction) throw { name: "TRANSACTION_NOT_FOUND" }
-
-//         let AUTH_STRING = Buffer.from(`${process.env.MID_SERVER_KEY}:`).toString('base64')
-
-//         const headers = {
-//             "Content-Type": "application/json",
-//             Accept: "application/json",
-//             Authorization : `Basic ${AUTH_STRING}`,
-//         }        
-
-//         const response = await axios.get( 
-//             `https://api.sandbox.midtrans.com/v2/${orderId}/status`,  
-//             {
-//                 headers: headers
-//             }
-//         )
-
-//         const status = response.data
-//         let newStatus;
-
-//         if (status.status_code === 404) {
-//             newStatus = `failed`
-//         }
-
-//         if (status.transaction_status === `expire` || 
-//             status.transaction_status === `cancel` ||
-//             status.transaction_status === `deny`) {
-//             newStatus = `failed`
-//         } else if ( status.transaction_status === `settlement` ||
-//                     status.transaction_status === `capture`) {
-//             newStatus = `paid`
-//         } 
-
-//         if (!newStatus) throw { name: "PLEASE_PAY_FIRST" }
-
-//         await OrderProduct.update(
-//             {
-//                 status: `completed`
-//             },
-//             {
-//                 where: {
-//                     UserId: req.auth.id,
-//                 }
-//             }
-//         )
-
-//         const findOneOrderId = await Transaction.update(
-//             {
-//                 status: newStatus
-//             },
-//             {
-//             where: {
-//                 order_id: orderId
-//             },
-//             returning: true
-//         })
-
-//         const result = findOneOrderId[1]
-
-//         res.status(200).json({
-//             result
-//         })
-        
-//     } catch (error) {
-//         console.log(error)
-//         next(error)
-//     }
-// }
-
 module.exports = {
-    requestSnapToken,
-    // updateStatusTransactions
+    requestSnapToken
 }

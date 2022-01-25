@@ -24,6 +24,7 @@ const CardTicket = () => {
     findTickets(role);
   }, [isLoading]);
   const findTickets = async (role) => {
+
     try {
       if (role === "Doctor") {
         await dispatch(fetchDoctorConsultationTickets());
@@ -45,10 +46,12 @@ const CardTicket = () => {
           setDateFormat(splited);
         }
       }
+
     } catch (error) {
       console.log(error);
     }
   };
+  
   if (role === "Doctor") {
     const handleUseButton = () => {
       navigate(`/doctors`);
