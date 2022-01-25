@@ -39,13 +39,13 @@ const ConsultationRequest = () => {
   return (
     <div>
       {!isLoading && consultationRequests.text === "There is No Ticket yet.." && (
-        <div>
+        <div className="titleStyle">
           <h2>You don't have a counsultation reuqest yet...</h2>
         </div>
       )}
 
       {!isLoading && consultationRequests.length >= 1 && (
-        <table className="container">
+        <table className="containerTable1">
           <thead>
             <tr>
               <th>
