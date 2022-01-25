@@ -168,7 +168,7 @@ export const chooseClientDoctor = (payload) => {
         { headers: { access_token } }
       );
       console.log(response.statusText, "hayo");
-      dispatch({ type: CUSTOMER_CHOOSE_DOCTOR, payload: response.statusText });
+      dispatch({ type: CUSTOMER_CHOOSE_DOCTOR, payload: true });
       window.snap.pay(response.data.snap_token.token);
     } catch (err) {
       dispatch(isError(err));
