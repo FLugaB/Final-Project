@@ -8,10 +8,9 @@ const cmsRegister = async (req, res, next) => {
     const transaction = await sequelize.transaction();
 
     try {
-
-        const {  email, password, fullName, birthdate, gender, address, photoProfile, phoneNumber } = req.body
-        const addUser = await User.create({ email, password, role: "Admin",  }, { transaction });
-        if (!addUser) throw { name: `USER_NOT_FOUND` }
+        const {  email, password, role, fullName, birthdate, gender, address, photoProfile, phoneNumber } = req.body
+        const addUser = await User.create({ email, password, role }, { transaction });
+        // if (!addUser) throw { name: `USER_NOT_FOUND` }
 
         const addProfile = await Profile.create({
             fullName,
@@ -22,7 +21,6 @@ const cmsRegister = async (req, res, next) => {
             phoneNumber,
             UserId: addUser.id
         }, { transaction })
-        console.log(addProfile, ">>>>>>>>>");
         await transaction.commit();
         res.status(201).json({
             id: addUser.id,
@@ -30,7 +28,6 @@ const cmsRegister = async (req, res, next) => {
             fullName: addProfile.fullName
         });
     } catch (error) {
-        console.log(error,">>>>>>>>>>err")
         next(error);
         await transaction.rollback()
     }
@@ -39,6 +36,12 @@ const cmsRegister = async (req, res, next) => {
 const cmsLogin = async (req, res, next) => {
     try {
         const {  email, password } = req.body
+        if (!email || !password) {
+            throw ({
+                name: "BAD_REQUEST",
+                message: "Email/Password is required"
+            })
+        }
         const findUser = await User.findOne({
             where: {
                 email: email

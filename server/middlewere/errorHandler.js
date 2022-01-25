@@ -4,7 +4,7 @@ const errorsLog = (err, req, res, next) => {
 
     let code = 500
     let message = "Internal server error"
-    console.log(err.name,"<<<<");
+  
     if ( err.name === `SequelizeUniqueConstraintError` || 
         err.name === `SequelizeValidationError` ) {
         code = 400
@@ -23,6 +23,9 @@ const errorsLog = (err, req, res, next) => {
         code = 403
         message = "Please Login first"
     } else if ( err.name === `FORBIDDEN`){
+        code = 403
+        message = "Invalid access"
+    } else if ( err.name === `TRANSACTION_NOT_FOUND`){
         code = 403
         message = "Invalid access"
     } else if ( err.name === `Product_not_found`) {
@@ -116,7 +119,6 @@ const errorsLog = (err, req, res, next) => {
     //     code = 404
     //     message = "Transaction ID Has Been Used"
     // } 
-console.log(err);
    res.status(code).json({message})
 }
 

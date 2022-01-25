@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { fetchCart } from '../../store/actionCreator/customers'
+import { formatCurrency } from '../../Hooks/helpers'
 import { Col, Row, Button, Card } from 'react-bootstrap'
 
 const CartOutlet = () => {
@@ -18,6 +19,7 @@ const CartOutlet = () => {
     const fetchDataCart = async () => {
         try {
             await dispatch(fetchCart())
+            console.log(customerCart)
         } catch (error) {
             console.log(error)
         }
@@ -25,7 +27,7 @@ const CartOutlet = () => {
 
     const onCheckOut = () => {
         try {
-            navigate('/accpimt/checkout')
+            navigate('/account/checkout')
         } catch (error) {
             console.log(error)
         }
@@ -39,30 +41,37 @@ const CartOutlet = () => {
                         <h1>Cart</h1>
                     </div>
                     { customerCart.msg && 
-                     <div>
-                         <h3 className="capitalize">{customerCart.msg}</h3>
+                     <div className="mt-5">
+                         <h3 className="text-capitalize font-hard">{customerCart.msg}</h3>
                      </div>
                     }
-                    { customerCart && customerCart.map((e) => {
-                        return (
-                            <Card key={e.id} style={{ width: '18rem' }}>
-                                <Card.Img variant="top" src={e.DetailProduct.imageUrl} />
-                                <Card.Body>
-                                    <Card.Title>{e.DetailProduct.name}</Card.Title>
-                                    <Card.Text>
-                                    {e.DetailProduct.description}
-                                    </Card.Text>
-                                    <Card.Text>
-                                    {e.DetailProduct.price}
-                                    </Card.Text>
-                                    <Button variant="primary">Go somewhere</Button>
-                                </Card.Body>
-                            </Card>
-                        )
-                    }) }
-                    <div className="text-start mt-5">
-                        <Button variant="success" onClick={onCheckOut} className="text-white">Checkout</Button>
-                    </div>
+                    <Row className="mt-5">
+                        { !customerCart.msg && customerCart.map((e) => {
+                            return (
+                                <Col md={12} key={e.id} className="bg-soft px-0 mb-3">
+                                    <Row className="d-flex justify-content-between align-items-center">
+                                        <Col md={4}>
+                                            <div className="checkout-image-wrapper">
+                                                <img src={e.DetailProduct.imageUrl} alt="" />
+                                            </div>
+                                        </Col>
+                                        <Col md={5}>
+                                            <h6>{e.DetailProduct.name}</h6>
+                                        </Col>
+                                        <Col md={3}>
+                                            <h6>{formatCurrency(e.DetailProduct.price)}</h6>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            )
+                        }) }
+                    </Row>
+                    {
+                        !customerCart.msg && 
+                        <div className="text-start mt-5">
+                            <Button variant="success" onClick={onCheckOut} className="text-white">Checkout</Button>
+                        </div>
+                    }
                 </Col>
      
             </Row>

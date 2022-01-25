@@ -3,8 +3,6 @@ const { User, Product, Voucher, Schedule } = require("../models")
 const { Op } = require("sequelize");
 const { authentication, authorization } = require("../middlewere/auth");
 const { TransactionController } = require(`../controllers/transactionController`)
-const { DoctorController } = require(`../controllers/doctorController`)
-const { clientDoctorDetail } = require('../controllers/clientController')
 
 // create orderPorduct untuk khusus Product Chat
 route.post('/products/chat',[authentication, authorization], TransactionController.ticketConsultation);
@@ -66,6 +64,6 @@ route.patch('/account/voucherUsed/:token',[authentication, authorization], async
     }
 });
 // route khusus untuk chat, pakai server socket
-// route.get('/doctors-chat', DoctorController.getSchedules);
+// route.get('/doctors-chat', getSchedules);
 
 module.exports = route

@@ -26,6 +26,9 @@ module.exports = class Controller {
 
   static showProductById = async(req,res,next) => {
     try {
+      if(!req.params) {
+        throw {name: "NO_TOKEN"}
+      }
       const {id} = req.params
       const result = await Product.findByPk(id, {
         include: [
@@ -198,7 +201,6 @@ module.exports = class Controller {
   static updateDetail = async(req,res,next) => {
     const t = await sequelize.transaction()
     try {
-      
       const {id} = req.params
       const {name, price, stock, category, imageUrl, description} = req.body
       if (!name) {
@@ -229,9 +231,8 @@ module.exports = class Controller {
         const input = {price}
       
         const result = await DetailProduct.update(input, {where: {id}, returning:true, transaction:t})
-        await t.commit()
         res.status(200).json(result)   
-        
+        await t.commit()
       } else {
         const input = {ProductId: getProductId.ProductId, name, price, stock, category,imageUrl, description}
       
