@@ -61,6 +61,7 @@ function App() {
         {/* <Route path="/products" element={<ProductPage />} /> */}
         <Route path="/doctors" element={<JoinMeeting />} />
         <Route path="/doctors/:id" element={<DoctorDetail />} />
+        
         <Route path="/video/:id" element={<VideoCall />} />
         <Route path="/video-owner/:id" element={<VideoCallOwner />} />
 
