@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./CardTicket.css";
-import { Col, Row, Button } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchConsultationTickets } from "../../store/actionCreator/consultationTickets";
 import { useNavigate } from "react-router-dom";
 import { addTicketToCart } from '../../store/actionCreator/customers'
+import { localLoad } from '../../Hooks/load'
 
 const CardTicket = () => {
 
@@ -16,21 +17,20 @@ const CardTicket = () => {
 
   useEffect(() => dispatch(fetchConsultationTickets()), []);
 
-  const {
-    consultationTickets,
-    loadingConsultationTickets,
-    errorConsultationTickets,
-  } = useSelector((state) => state.consultationTickets);
-
+  const { consultationTickets, } = useSelector((state) => state.consultationTickets);
+  
   useEffect(() => {
-    if (consultationTickets.length > 1) {
+    if (consultationTickets.length >= 1) {
+      if (consultationTickets[0].createdAt) {
+        const test = consultationTickets[0].createdAt
+        const splited = test.split('T')[0].split('-')
+        setDateFormat(splited)
+      }
       setIsLoad(false)
     } else {
       setIsLoad(false)
     }
   }, [consultationTickets.length])
-
-  console.log(errorConsultationTickets)
 
   const handleUseButton = () => {
     navigate(`/doctors`);
@@ -38,21 +38,15 @@ const CardTicket = () => {
 
   const addTicket = async () => {
     try {
-
         await dispatch(addTicketToCart())
         navigate("/account/cart")
-        
     } catch (error) {
         console.log(error)
     }
   }
 
   if (isLoading) {
-    return (
-      <div>
-        <h2>LAODING</h2>
-      </div>
-    );
+    return localLoad()
   }
 
   return (
@@ -77,8 +71,7 @@ const CardTicket = () => {
             )
             }
 
-            { !isLoading && consultationTickets.length > 1 && (
-              // <div>Eroorr</div>
+            { !isLoading && consultationTickets.length >= 1 && (
                 <div className="containerTicket">
                   <a href="#" onClick={() => handleUseButton()}>
                     <div className="ticket shadow-lg">
@@ -94,7 +87,7 @@ const CardTicket = () => {
                         <div className="info">
                           <div>
                             <div className="title">Date</div>
-                            {/* <div>{consultationTickets[0].createdAt && (`${dateFormat[2]}/${dateFormat[1]}/${dateFormat[0]}`)}</div> */}
+                            <div>{consultationTickets[0].createdAt && (`${dateFormat[2]}/${dateFormat[1]}/${dateFormat[0]}`)}</div>
                           </div>
                           <div className=" ms-4">
                             <div className="title">Status</div>

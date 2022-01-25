@@ -1336,4 +1336,26 @@ span {
 }
 /* PAGE NOT FOUND END */
 
+/* LOCAL LOADER START */
+
+.overlay-load {
+  background-color: rgba(233, 224, 229, .6);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  overflow: hidden;
+  z-index: 999999999;
+}
+
+.local-load > div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* LOCAL LOADER END */
+
 

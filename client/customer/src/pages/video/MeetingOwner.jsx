@@ -12,7 +12,7 @@ export default function Video({ match }) {
     const domain = "https://forsythiateam.daily.co/";
 
     axios
-      .get(`http://localhost:3000/video-call-owner/${id}`)
+      .get(`https://forsythia-server.herokuapp.com/video-call-owner/${id}`)
       .then((res) => {
         console.log(`tersend OWNER`);
         if (res.status === 200) {

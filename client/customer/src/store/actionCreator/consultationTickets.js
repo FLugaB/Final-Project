@@ -6,7 +6,7 @@ import {
 import { isError, isSuccess, isLoading } from "./status";
 const axios = require("axios");
 //Server EndPoint
-const server = `https://forsythia-server.herokuapp.com/`;
+const server = `https://forsythia-server.herokuapp.com`;
 
 export const fetchConsultationTickets = () => {
 
