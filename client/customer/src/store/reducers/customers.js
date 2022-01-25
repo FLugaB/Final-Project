@@ -19,7 +19,7 @@ const initialState = {
   customerDetail: [],
   customerCart: [],
   customerCheckout: {},
-  customerChooseDoctor: "STATUS",
+  customerChooseDoctor: false,
   loadingCustomers: false,
   errorCustomers: null,
   isSuccessLogin: false,
