@@ -79,8 +79,8 @@ describe("voucher used", () => {
       });
   });
 
-  //TODO 2 voucher used not authorized
-  test("voucher used no access_token", (done) => {
+  //TODO 2 voucher used wrong authorized
+  test("voucher used wrong access_token", (done) => {
     request(app)
       .get("/account/voucherUsed")
       .set("access_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
@@ -94,28 +94,45 @@ describe("voucher used", () => {
       });
   });
   
-  // //TODO 3 voucher used uccess
-  // test("voucher used success", (done) => {
-  //   request(app)  
-  //     .get("/account/voucherUsed")
-  //     .set("access_token", tokenMatch1)
-  //     .then((res) => {
-  //       expect(res.status).toBe(200);
-  //       expect(res.body).toEqual(expect.any(Object))
-  //       done();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err,">>>>>>>>>ini err");
-  //       done(err);
-  //     });
-  // });
+  //TODO 3 voucher used uccess
+  test("voucher used success", (done) => {
+    request(app)  
+      .get("/account/voucherUsed")
+      .set("access_token", tokenMatch1)
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object))
+        done();
+      })
+      .catch((err) => {
+        console.log(err,">>>>>>>>>ini err");
+        done(err);
+      });
+  });
+
+    
+  //TODO 3 voucher used uccess
+  test("doesn't have vocher", (done) => {
+    request(app)  
+      .get("/account/voucherUsed")
+      .set("access_token", doctorToken)
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object))
+        done();
+      })
+      .catch((err) => {
+        console.log(err,">>>>>>>>>ini err");
+        done(err);
+      });
+  });
 })
 
 describe("voucher completed", () => {
   //TODO 1 voucher used no access_token
   test("voucher used no access_token", (done) => {
     request(app)
-      .get("/account/voucherUsed")
+      .get("/account/voucherCompleted")
       .then((res) => {
         expect(res.status).toBe(403);
         expect(res.body).toHaveProperty('message', "Please Login first")
@@ -126,10 +143,75 @@ describe("voucher completed", () => {
       });
   });
 
-  //TODO 2 voucher completed not authorized
-  test("voucher completed no access_token", (done) => {
+  //TODO 2 voucher completed wrong authorized
+  test("voucher completed wrong access_token", (done) => {
     request(app)
       .get("/account/voucherCompleted")
+      .set("access_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toHaveProperty('message', "Invalid token")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+  
+  //TODO 3 voucher completed  success
+  test("voucher completed ", (done) => {
+    request(app)  
+      .get("/account/voucherCompleted")
+      .set("access_token", tokenMatch1)
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object))
+        done();
+      })
+      .catch((err) => {
+        console.log(err,">>>>>>>>>ini err");
+        done(err);
+      });
+  });
+
+    //TODO 4 voucher no completed  success
+    test("voucher no completed ", (done) => {
+      request(app)  
+        .get("/account/voucherCompleted")
+        .set("access_token", tokenMatch1)
+        .then((res) => {
+          expect(res.status).toBe(200);
+          expect(res.body).toEqual(expect.any(Object))
+          done();
+        })
+        .catch((err) => {
+          console.log(err,">>>>>>>>>ini err");
+          done(err);
+        });
+    });
+
+})
+
+
+describe("voucher usedByToken", () => {
+  //TODO 1 voucher usedByToken no access_token
+  test("voucher usedByToken no access_token", (done) => {
+    request(app)
+      .patch("/account/voucherUsed/ferw43")
+      .then((res) => {
+        expect(res.status).toBe(403);
+        expect(res.body).toHaveProperty('message', "Please Login first")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  //TODO 2 voucher completed wrong authorized
+  test("voucher completed wrong access_token", (done) => {
+    request(app)
+      .patch("/account/voucherUsed/ge443e")
       .set("access_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
       .then((res) => {
         expect(res.status).toBe(401);
@@ -144,7 +226,7 @@ describe("voucher completed", () => {
   // //TODO 3 voucher completed  success
   // test("voucher completed ", (done) => {
   //   request(app)  
-  //     .get("/account/voucherCompleted")
+  //     .patch("/account/voucherUsed/:token")
   //     .set("access_token", tokenMatch1)
   //     .then((res) => {
   //       expect(res.status).toBe(200);
@@ -157,9 +239,23 @@ describe("voucher completed", () => {
   //     });
   // });
 
+    //TODO 4 voucher no completed  success
+    test("voucher no completed ", (done) => {
+      request(app)  
+        .patch("/account/voucherUsed/ge443e")
+        .set("access_token", doctorToken)
+        .then((res) => {
+          expect(res.status).toBe(200);
+          expect(res.body).toEqual(expect.any(Object))
+          done();
+        })
+        .catch((err) => {
+          console.log(err,">>>>>>>>>ini err");
+          done(err);
+        });
+    });
 
 })
-
 // describe("voucher used by token", () => {
 //   //TODO 1 voucher used by token not found
 //   test("voucher used by token not found", (done) => {
