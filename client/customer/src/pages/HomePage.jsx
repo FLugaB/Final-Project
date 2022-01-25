@@ -36,9 +36,9 @@ const HomePage = () => {
           <Slider
             imageSrc="https://www.drmanalyoussef.com.au/wp-content/uploads/brizy/38/assets/images/iW=5000&iH=any/f9fc8d65c576afbe222b43ec99822d05.jpg"
             // imageSrc={bg_flowerForsythia}
-            title={"PRODUCT FROM FORSYTHIA"}
+            title={"Thread Lift Treatment"}
             subtitle={
-              "A professional skin consultation should be the first step you take when you're considering starting treatments or skincare"
+              "The thread lift procedure is relatively with minimal downtime, allowing quick return to work and social life."
             }
           />
         </div>
