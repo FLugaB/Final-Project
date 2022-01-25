@@ -499,7 +499,7 @@ beforeAll(async () => {
         .then((res) => {
           expect(res.status).toBe(400);
           expect(res.body).toEqual(expect.any(Object));
-          expect(res.body).toHaveProperty("message", "DetailProduct.stock cannot be null");
+          expect(res.body).toHaveProperty("message", "Stock is required");
           // expect(res.body).toHaveProperty("message", "DetailProduct.stock cannot be null");
           done();
         })
