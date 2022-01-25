@@ -66,10 +66,26 @@ function App() {
         <Route path="/notification/handling" element={<Notif />} />
         <Route path="/products" element={ <ProductPage/> } />
         <Route path="/doctors" element={<JoinMeeting />} />
-        <Route path="/doctors/:id" element={<DoctorDetail />} />
+
+        <Route path="/doctors/:id" element={
+          <RoutesGuard>
+            <DoctorDetail />
+          </RoutesGuard>
+        } />
         
-        <Route path="/video/:id" element={<VideoCall />} />
-        <Route path="/video-owner/:id" element={<VideoCallOwner />} />
+        {/* hanya boleh client yg memilik tiket dgn status sudah bayar */}
+        <Route path="/video/:id" element={
+          
+        <VideoCall />
+        
+        } />
+
+        {/* hanya boleh diakses oleh dokter yg dipilih oleh client */}
+        <Route path="/video-owner/:id" element={
+
+        <VideoCallOwner />
+        
+        } />
 
         <Route
           path="/login"
