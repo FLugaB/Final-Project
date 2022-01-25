@@ -24,15 +24,8 @@ const CardTicket = () => {
     findTickets(role);
   }, [isLoading]);
   const findTickets = async (role) => {
+
     try {
-<<<<<<< HEAD
-      await dispatch(fetchConsultationTickets());
-      setIsLoad(false)
-      if (consultationTickets[0].createdAt) {
-        const test = consultationTickets[0].createdAt
-        const splited = test.split('T')[0].split('-')
-        setDateFormat(splited)
-=======
       if (role === "Doctor") {
         await dispatch(fetchDoctorConsultationTickets());
 
@@ -52,12 +45,13 @@ const CardTicket = () => {
           const splited = test.split("T")[0].split("-");
           setDateFormat(splited);
         }
->>>>>>> 84df55ac5d2a3ffe6c4f06eb32e8803a137bd7b1
       }
+
     } catch (error) {
       console.log(error);
     }
   };
+  
   if (role === "Doctor") {
     const handleUseButton = () => {
       navigate(`/doctors`);
@@ -130,36 +124,6 @@ const CardTicket = () => {
       navigate(`/doctors`);
     };
 
-<<<<<<< HEAD
-  // console.log(lengthTicket);
-
-  // if (errorConsultationTickets) {
-  //   setLengthTicket = 0
-  // } else {
-  //   setLengthTicket = consultationTickets.length
-  // }
-
-  return (
-    <Col md={12} className="d-flex justify-content-start">
-      <Row>
-        <Col md={12} className="mb-5">
-          <div className="title text-start">
-            <h1>Ticket Consultation</h1>
-          </div>
-        </Col>
-        <Col md={12} className="d-flex justify-content-start">
-          {consultationTickets.msg ? (
-            <div>
-              <h2 className="text-capitalize">{consultationTickets.msg}</h2>
-            </div> ) : 
-            (
-            <div className="containerTicket">
-              <a href="#" onClick={() => handleUseButton()}>
-                <div className="ticket shadow-lg">
-                  <div className="stub">
-                    <div className="top">
-                      <span className="text-start">Total Ticket</span>
-=======
     if (isLoading) {
       return (
         <div>
@@ -190,7 +154,6 @@ const CardTicket = () => {
                         <span className="text-start">Total Ticket</span>
                       </div>
                       <div className="number">{consultationTickets.length}</div>
->>>>>>> 84df55ac5d2a3ffe6c4f06eb32e8803a137bd7b1
                     </div>
                     <div className="check">
                       <div className="big">Consultation Ticket</div>

@@ -627,6 +627,12 @@ input[type=checkbox]:checked + label:after {
   overflow: hidden;
 }
 
+.slider-outer-wrapper.no-slide {
+  width: 170px;
+  height: 100px;
+  /* overflow: hidden */
+}
+
 .untitled {
   height: 100%;
   width: 100%;
@@ -976,6 +982,18 @@ input[type=checkbox]:checked + label:after {
   display: block;
   font-size: 15vmin;
 }
+
+.no-slide.slider-outer-wrapper .button {
+  border: 3px solid var(--bright);
+  color: var(--hard);
+  box-shadow: -0.5vmin 0.5vmin 0 rgba(65, 44, 66, .5)
+}
+
+/* .no-slide.slider-outer-wrapper .button:hover {
+  box-shadow: -1vmin 1vmin 0 rgba(255, 255, 255, 0.5);
+  background: var(--hard);
+  color: var(--hard);
+} */
 
 .slider-outer-wrapper .button {
   font-family: "acta-display", sans-serif;
