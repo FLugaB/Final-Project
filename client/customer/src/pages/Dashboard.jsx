@@ -22,7 +22,7 @@ const Dashboard = () => {
             <Container>
                 <Row>
                     <Col md={4}> 
-                      <DashboardSidebar /> 
+                      <DashboardSidebar role={role} /> 
                     </Col>
                     <Col md={8}> 
                       <Row>
