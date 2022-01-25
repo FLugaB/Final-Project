@@ -24,6 +24,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { LogoutComponent } from "./components/Logout.jsx";
 import CardTicket from "./components/Card/CardTicket.jsx";
+import ProductPage from "./pages/Products.jsx";
 
 function App() {
   const [loader, setLoader] = useState(true);
@@ -43,8 +44,12 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-
-        <Route path="account" element={<Dashboard />}>
+        <Route path="account" element={
+          <RoutesGuard>
+            <Dashboard />
+          </RoutesGuard>
+        }>
+    
           <Route path="profile" element={<ProfileOutlet />} />
           <Route path="cart" element={<CartOutlet />} />
           <Route path="checkout" element={<DetailCheckOut />} />
@@ -55,10 +60,11 @@ function App() {
             path="consultation-request"
             element={<ConsultationRequest />}
           />
+    
         </Route>
 
         <Route path="/notification/handling" element={<Notif />} />
-        {/* <Route path="/products" element={<ProductPage />} /> */}
+        <Route path="/products" element={ <ProductPage/> } />
         <Route path="/doctors" element={<JoinMeeting />} />
         <Route path="/doctors/:id" element={<DoctorDetail />} />
         

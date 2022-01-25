@@ -12,14 +12,13 @@ const RoutesGuard = ({children}) => {
 const LogGuard = ({children}) => {
 
     const accessToken = localStorage.getItem(`access_token`)
-    console.log(accessToken,"<<< CEK TOKEN");
 
-    if (!accessToken) return <Navigate to="/" />;
+    if (accessToken) return <Navigate to="/" />;
 
     return children
 };
 
 export {
     RoutesGuard,
-    LogGuard
+    LogGuard,
 };

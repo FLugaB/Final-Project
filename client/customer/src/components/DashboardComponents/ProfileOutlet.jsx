@@ -4,13 +4,13 @@ import { Col, Row, Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
 import { formattedDate  } from '../../Hooks/helpers'
 
-
 const ProfileOutlet = () => {
     const { profile, loading, error } = useSelector(
         (state) => state.userRole
       );
       
     return (
+        
         <Col md={12} className="d-flex justify-content-start section-dashboard p-5"> 
             <Row>
                 <Col md={12} className="mb-5">
@@ -39,6 +39,7 @@ const ProfileOutlet = () => {
                 </Col>
             </Row>
         </Col>
+        
   );
 };
 
