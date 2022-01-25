@@ -1,9 +1,11 @@
 const { User, Product, Voucher, Schedule } = require("../models")
+const { Op } = require("sequelize");
 
 module.exports = class Controller {
 
   static  voucherUsed = async (req, res, next) => {
     try {
+
         const findAllTicket = await Voucher.findAll({
             where: {
                 [Op.and]: [
