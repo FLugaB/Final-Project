@@ -26,7 +26,6 @@ const CardTicket = () => {
   const findTickets = async (role) => {
 
     try {
-
       if (role === "Doctor") {
         await dispatch(fetchDoctorConsultationTickets());
 
