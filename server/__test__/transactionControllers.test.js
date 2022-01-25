@@ -24,24 +24,34 @@ const detail =
 const order = [
   {
     "UserId" : 1,
-    "Ordder_Id": "7ufie4",
-    "status": "accept"
+    "order_id": "7ufie4",
+    "status": "accept",
+    "ammount": 240000
   },
   {
     "UserId" : 2,
-    "Ordder_Id": "SANDBOX-G656665790-381",
-    "status": "cancel"
+    "order_id": "SANDBOX-G656665790-381",
+    "status": "cancel",
+    "ammount": 240000
   },
   {
     "UserId" : 3,
-    "Ordder_Id": "1m4734",
-    "status": "expired"
+    "order_id": "1m4734",
+    "status": "expired",
+    "ammount": 240000
   },
   {
     "UserId" : 4,
-    "Ordder_Id": "FF-02",
-    "status": "credit"
+    "order_id": "1m4734",
+    "status": "deny",
+    "ammount": 240000
   },
+  {
+    "UserId" : 5,
+    "order_id": "FF-02",
+    "status": "settlement",
+    "ammount": 240000
+  }
 ]
 
 beforeAll(async () => {
@@ -69,7 +79,13 @@ beforeAll(async () => {
     restartIdentity: true,
     cascade: true,
   });
-
+  await Transaction.destroy({
+    where: {},
+    truncate: true,
+    restartIdentity: true,
+    cascade: true,
+  });
+  Transaction.bulkCreate(order)
   const newDoctor  = {
     email: "doctor@gmail.com",
     password: "doctor",
@@ -229,7 +245,7 @@ describe ("client detail checkout", () => {
     .get("/account/detail-checkout")
     .set('access_token', tokenMatch1)
     .then((res) => {
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(201);
       expect(res.body).toEqual(expect.any(Object));
       done();
     })
@@ -397,7 +413,7 @@ describe ("notification transaction", () => {
     test(" notification transaction not authorize", (done) => {
       request(app)
       .post("/notification/handling")
-      .set('access_token', 'cdds6f')
+      .set('access_token', tokenPayloadInvalid)
       .send({
         transaction_time: "2022-01-21 19:45:12",
         transaction_status: "capture",
@@ -421,7 +437,7 @@ describe ("notification transaction", () => {
       .then((res) => {
         expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toEqual({ message: "Invalid token" });
+        expect(res.body).toEqual({ message: "Invalid access" });
         done();
       })
       .catch((err) => {
@@ -512,7 +528,7 @@ describe ("notification transaction", () => {
         status_code: "200",
         signature_key: "939f6fff54821f0d466eb7be1182735676abf27478725507ae6c89a1826542e76d16716062daa0cc1fc39dd5811604ab70bec48ba3ed2683b04a0b10b7ed3d51",
         payment_type: "credit_card",
-        order_id: "1m4734",
+        order_id: "1m47d34",
         merchant_id: "G656665790",
         masked_card: "481111-1114",
         gross_amount: "240000.00",
@@ -525,7 +541,7 @@ describe ("notification transaction", () => {
         approval_code: "1642769112700"
     })
     .then((res) => {
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(403);
       expect(res.body).toEqual(expect.any(Object));
       done();
     })
@@ -534,40 +550,7 @@ describe ("notification transaction", () => {
     });
   })
 
-  //TODO 5 notification transaction not success
-  test("notification transaction not success", (done) => {
-    request(app)
-    .post("/notification/handling")
-    .set('access_token', tokenMatch1)
-    .send({
-        transaction_time: "2022-01-21 19:45:12",
-        transaction_status: "capture",
-        transaction_id: "9debe4e5-285b-4525-9bcd-d85fe123496a",
-        status_message: "midtrans payment notification",
-        status_code: "200",
-        signature_key: "939f6fff54821f0d466eb7be1182735676abf27478725507ae6c89a1826542e76d16716062daa0cc1fc39dd5811604ab70bec48ba3ed2683b04a0b10b7ed3d51",
-        payment_type: "credit_card",
-        order_id: "FF-02",
-        merchant_id: "G656665790",
-        masked_card: "481111-1114",
-        gross_amount: "240000.00",
-        fraud_status: "settlement",
-        currency: "IDR",
-        channel_response_message: "Approved",
-        channel_response_code: "00",
-        card_type: "credit",
-        bank: "cimb",
-        approval_code: "1642769112700"
-    })
-    .then((res) => {
-      expect(res.status).toBe(200);
-      expect(res.body).toEqual(expect.any(Object));
-      done();
-    })
-    .catch((err) => {
-      done(err);
-    });
-  })
+
 
 
     //TODO 5 notification transaction not success
@@ -596,15 +579,16 @@ describe ("notification transaction", () => {
           approval_code: "1642769112700"
       })
       .then((res) => {
-        expect(res.status).toBe(200);
+        expect(res.status).toBe(403);
         expect(res.body).toEqual(expect.any(Object));
-        expect(res.body).toEqual(expect.any({ name: "PLEASE_PAY_FIRST" }));
         done();
       })
       .catch((err) => {
         done(err);
       });
     })
+
+  
 })
 
 
