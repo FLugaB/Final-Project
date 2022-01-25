@@ -1,6 +1,7 @@
 import {
   FETCH_CUSTOMER_CHECKOUT,
   FETCH_CUSTOMER_CART,
+  FETCH_CUSTOMER_ORDER,
   CUSTOMER_LOGIN,
   CUSTOMER_REGISTER,
   CUSTOMER_IS_SUCCESS_REGISTER,
@@ -170,6 +171,31 @@ export const chooseClientDoctor = (payload) => {
       console.log(response.statusText, "hayo");
       dispatch({ type: CUSTOMER_CHOOSE_DOCTOR, payload: true });
       window.snap.pay(response.data.snap_token.token);
+    } catch (err) {
+      dispatch(isError(err));
+    } finally {
+      dispatch(isLoading(false));
+    }
+  };
+};
+
+// fetch history order
+export const fetchHistoryOrder = () => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch(isSuccess(false));
+      dispatch(isLoading(true));
+      dispatch(isError(null));
+      const access_token = localStorage.getItem("access_token")
+      const response = await axios.get(
+        `${server}/account/status-transactions`,
+        {
+          headers: {
+            access_token
+          }
+        }
+      );
+      dispatch({ type: CUSTOMER_CHOOSE_DOCTOR, payload: response.data })
     } catch (err) {
       dispatch(isError(err));
     } finally {
