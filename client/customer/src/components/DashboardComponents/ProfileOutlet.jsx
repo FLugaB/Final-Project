@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import { Col, Row, Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
@@ -39,7 +39,7 @@ const ProfileOutlet = () => {
                 </Col>
             </Row>
         </Col>
-    );
+  );
 };
 
 export default ProfileOutlet;
