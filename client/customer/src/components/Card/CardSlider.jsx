@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -16,24 +16,29 @@ function CardSlider() {
   const { customerChooseDoctor } = useSelector((state) => state.customers);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [localLoad, setLocalLoad] = useState(false)
 
   useEffect(() => {
     dispatch(fetchDoctors());
   }, [dispatch]);
   console.log(doctors, "fetch Card.jsx");
 
-  const handlerChatButton = (payloadId, payloadName) => {
-    const str = payloadName.replace(".", "").replace(/\s+/g, "");
-    console.log(payloadId, str, "payload");
-    dispatch(chooseClientDoctor(payloadId));
-    console.log(customerChooseDoctor, "result status");
-    if (customerChooseDoctor == "STATUS") {
-      dispatch(chooseClientDoctor(payloadId));
-    } else if (customerChooseDoctor == "OK") {
-      navigate(`/video/${str}`);
+  const handlerChatButton = async (payloadId, payloadName) => {
+    try {
+      setLocalLoad(true)
+      const str = payloadName.replace(".", "").replace(/\s+/g, "");
+      console.log(payloadId, str, "payload");
+      const result = await dispatch(chooseClientDoctor(payloadId));
+      setLocalLoad(false)
+      console.log(customerChooseDoctor, "result status");
+      if (!localLoad) {
+        navigate(`/video/${str}`);
+      }
+      
+    } catch (err) {
+      console.log(err);
     }
-  };
-
+  }
   let settings = {
     dots: true,
     infinite: true,
@@ -48,7 +53,7 @@ function CardSlider() {
         <Slider {...settings}>
           {doctors.map((el) => {
             return (
-              <div className="card-wrapper">
+              <div key={el.Profile.id} className="card-wrapper">
                 <div className="card">
                   <div className="card-image">
                     <img
