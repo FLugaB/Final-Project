@@ -68,7 +68,7 @@ const FormLogin = (props) => {
     if (isSuccessLogin) {
       setClickLoad(false);
       navigate("/");
-      const text = "Hi, Welcomeback <fullName> !";
+      const text = `Hi, Welcomeback ${fullName} !`;
       timerAlert(text);
     }
   };
@@ -76,7 +76,7 @@ const FormLogin = (props) => {
     if (isSuccessRegister) {
       setClickLoad(false);
       navigate("/");
-      const text = "Hi, <fullName> Register Success !";
+      const text = `Hi, ${fullName} Register Success !`;
       timerAlert(text);
     }
   };
