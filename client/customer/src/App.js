@@ -45,7 +45,8 @@ function App() {
       <Navbar />
       <Routes>
           <Route path="/" element={<HomePage />} />
-
+{/* HARUS LOGIN */}
+{/* <LogGuard> */}
           <Route path="account" element={<Dashboard />}>
             <Route path="profile" element={ <ProfileOutlet />} />
             <Route path="cart" element={ <CartOutlet />} />
@@ -54,11 +55,12 @@ function App() {
             {/* <Route path="logout" element={ <ProfileOutlet />} /> */}
             <Route path="consultation" element={ <CardTicket />} />
           </Route>
-          
+{/* </LogGuard> */}
           <Route path="/notification/handling" element={<Notif />} />
           {/* <Route path="/products" element={<ProductPage />} /> */}
           <Route path="/doctors" element={<JoinMeeting />} />
           <Route path="/doctors/:id" element={< DoctorDetail />} />
+          
           <Route path="/video/:id" element={<VideoCall />} />
           <Route path="/video-owner/:id" element={<VideoCallOwner />} />
 
