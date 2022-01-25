@@ -26,7 +26,6 @@ const CardTicket = () => {
       setIsLoad(false)
       if (consultationTickets[0].createdAt) {
         const test = consultationTickets[0].createdAt
-        console.log(test, `======================`)
         const splited = test.split('T')[0].split('-')
         setDateFormat(splited)
       }
@@ -49,6 +48,14 @@ const CardTicket = () => {
       </div>
     );
   }
+
+  // console.log(lengthTicket);
+
+  // if (errorConsultationTickets) {
+  //   setLengthTicket = 0
+  // } else {
+  //   setLengthTicket = consultationTickets.length
+  // }
 
   return (
     <Col md={12} className="d-flex justify-content-start">

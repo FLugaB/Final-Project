@@ -7,13 +7,6 @@ class TransactionController {
 
       try {
 
-        // const findTicket = await Product.findOne({
-        //     where: {
-        //         type: {
-        //             [Op.iLike]: '%Ticket Chat'
-        //         }
-        //     }
-        // })
         const getProduct = await DetailProduct.findOne({where: {
             ProductId:1
         }})
