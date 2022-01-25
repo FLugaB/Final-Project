@@ -280,7 +280,7 @@ class TransactionController {
                     UserId: req.auth.id 
                 }
             })
-
+        
             res.status(200).json(findAllTransactions)
             
         } catch (error) {
