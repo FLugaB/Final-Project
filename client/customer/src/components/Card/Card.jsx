@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { fetchDoctors } from "../../store/actionCreator/doctors";
+import { Link } from 'react-router-dom'
 import React from "react";
 import "./Card.css"
 import { useEffect } from "react";
@@ -19,7 +20,12 @@ const Card = () => {
           doctors.map((el, index) => {
             return (
               <li>
-                <a href="" className="card">
+                {/* <Link to={{
+                    pathname: `your/location`,
+                    state: {send anything from here}
+                }} */}
+                <Link to={{ pathname: `doctors/${el.Profile.id}`, state: { doctors }}} 
+                  className="card">
                   <img
                     src={el.Profile.photoProfile}
                     className="card__image"
@@ -46,7 +52,7 @@ const Card = () => {
                     </p>
 
                   </div>
-                </a>
+                </Link>
               </li>
             )
           })
