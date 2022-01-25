@@ -2,6 +2,8 @@ import React from "react";
 
 import { Col, Row, Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
+import { formattedDate  } from '../../Hooks/helpers'
+
 
 const ProfileOutlet = () => {
     const { profile, loading, error } = useSelector(
@@ -23,7 +25,7 @@ const ProfileOutlet = () => {
                     <Row>
                         <Col md={6} className="text-start">
                             <p>Full Name: {profile.fullName}</p>
-                            <p>Birth Date: {profile.birthdate}</p>
+                            <p>Birth Date: {profile?.birthdate?.split('T')[0]}</p>
                             <p>Gender: {profile.gender}</p>
                             <p>Phone Number: {profile.phoneNumber}</p>
                             <p>Address: {profile.address}</p>

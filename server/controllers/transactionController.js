@@ -8,6 +8,7 @@ const {
 const { Op } = require("sequelize");
 
 class TransactionController {
+
   static ticketConsultation = async (req, res, next) => {
     try {
       // const findTicket = await Product.findOne({

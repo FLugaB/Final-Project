@@ -834,27 +834,27 @@ describe("New Doctor Test on  login Field", () => {
       });
   });
 
-  // // TODO 6 Login find Admin not found
-  // test("Login find Admin not found should be return invalid response", (done) => {
-  //   request(app)
-  //     .post("/login")
-  //     .send({
-  //       email: "doctor11@gmail.com",
-  //       password: "doctor",
-  //       role: "Doctor"
-  //     })
-  //     .then((res) => {
-  //       expect(res.status).toBe(401);
-  //       expect(res.body).toEqual(expect.any(Object));
-  //       expect(res.body).toEqual({
-  //         message: "Invalid email/password",
-  //       });
-  //       done();
-  //     })
-  //     .catch((err) => {
-  //       done(err);
-  //     });
-  // });
+  // TODO 6 Login find Admin not found
+  test("Login find Admin not found should be return invalid response", (done) => {
+    request(app)
+      .post("/login")
+      .send({
+        email: "doctor11@gmail.com",
+        password: "doctor1",
+        role: "Doctor"
+      })
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toEqual(expect.any(Object));
+        expect(res.body).toEqual({
+          message: "Invalid email/password",
+        });
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
 
   // TODO 7 Login verify is undefined
   test("Login verify is undefined should be return invalid response", (done) => {
