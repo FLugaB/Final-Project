@@ -4,10 +4,10 @@ import { Col, Row, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchConsultationTickets } from "../../store/actionCreator/consultationTickets";
 import { useNavigate } from "react-router-dom";
-import { formattedDate  } from '../../Hooks/helpers'
+import { formattedDate } from "../../Hooks/helpers";
 const CardTicket = () => {
-  const [isLoading, setIsLoad] = useState(true)
-  const [dateFormat, setDateFormat] = useState('')
+  const [isLoading, setIsLoad] = useState(true);
+  const [dateFormat, setDateFormat] = useState("");
   const {
     consultationTickets,
     loadingConsultationTickets,
@@ -16,36 +16,33 @@ const CardTicket = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect( () => {
-    findTickets()
+  useEffect(() => {
+    findTickets();
   }, [isLoading]);
 
   const findTickets = async () => {
     try {
       await dispatch(fetchConsultationTickets());
-      setIsLoad(false)
+      setIsLoad(false);
       if (consultationTickets[0].createdAt) {
-        const test = consultationTickets[0].createdAt
-        console.log(test, `======================`)
-        const splited = test.split('T')[0].split('-')
-        setDateFormat(splited)
+        const test = consultationTickets[0].createdAt;
+        console.log(test, `======================`);
+        const splited = test.split("T")[0].split("-");
+        setDateFormat(splited);
       }
-      
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const handleUseButton = () => {
     navigate(`/doctors`);
   };
 
-  
-
   if (isLoading) {
     return (
       <div>
-        <h2>LAODING</h2>
+        <h2>LOADING</h2>
       </div>
     );
   }
@@ -62,8 +59,8 @@ const CardTicket = () => {
           {consultationTickets.msg ? (
             <div>
               <h2 className="text-capitalize">{consultationTickets.msg}</h2>
-            </div> ) : 
-            (
+            </div>
+          ) : (
             <div className="containerTicket">
               <a href="#" onClick={() => handleUseButton()}>
                 <div className="ticket shadow-lg">
@@ -79,7 +76,10 @@ const CardTicket = () => {
                     <div className="info">
                       <div>
                         <div className="title">Date</div>
-                        <div>{consultationTickets[0].createdAt && (`${dateFormat[2]}/${dateFormat[1]}/${dateFormat[0]}`)}</div>
+                        <div>
+                          {consultationTickets[0].createdAt &&
+                            `${dateFormat[2]}/${dateFormat[1]}/${dateFormat[0]}`}
+                        </div>
                       </div>
                       <div className=" ms-4">
                         <div className="title">Status</div>
@@ -90,9 +90,7 @@ const CardTicket = () => {
                 </div>
               </a>
             </div>
-          )
-         
-          }
+          )}
         </Col>
       </Row>
     </Col>
