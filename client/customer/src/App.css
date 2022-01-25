@@ -983,17 +983,18 @@ input[type=checkbox]:checked + label:after {
   font-size: 15vmin;
 }
 
-.no-slide.slider-outer-wrapper .button {
+.slider-outer-wrapper.no-slide .button {
   border: 3px solid var(--bright);
   color: var(--hard);
-  box-shadow: -0.5vmin 0.5vmin 0 rgba(65, 44, 66, .5)
+  box-shadow: -0.5vmin 0.5vmin 0 rgba(65, 44, 66, .5);
 }
 
-/* .no-slide.slider-outer-wrapper .button:hover {
-  box-shadow: -1vmin 1vmin 0 rgba(255, 255, 255, 0.5);
-  background: var(--hard);
-  color: var(--hard);
-} */
+.slider-outer-wrapper.no-slide .button.bg-soft {
+  background: transparent;
+  border: 3px solid white;
+  color: white;
+  box-shadow: -0.5vmin 0.5vmin 0 rgb(255 255 255 / 50%);
+}
 
 .slider-outer-wrapper .button {
   font-family: "acta-display", sans-serif;
@@ -1016,6 +1017,8 @@ input[type=checkbox]:checked + label:after {
   transform: translate3d(0.5vmin, -0.5vmin, 0);
   transition: all 100ms linear;
 }
+
+.slider-outer-wrapper.no-slide .bg-soft.button:hover ,
 .slider-outer-wrapper  .button:hover {
   transform: translate3d(1vmin, -1vmin, 0);
   box-shadow: -1vmin 1vmin 0 rgba(255, 255, 255, 0.5);
@@ -1332,5 +1335,27 @@ span {
   transition: all 0.4s ease-out;
 }
 /* PAGE NOT FOUND END */
+
+/* LOCAL LOADER START */
+
+.overlay-load {
+  background-color: rgba(233, 224, 229, .6);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  overflow: hidden;
+  z-index: 999999999;
+}
+
+.local-load > div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* LOCAL LOADER END */
 
 

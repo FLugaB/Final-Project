@@ -5,11 +5,13 @@ import {
   SET_ERROR,
 } from "../actionType/products.js";
 
+const server = "https://forsythia-server.herokuapp.com"
+
 export const fetchProducts = () => {
   return (dispatch, getState) => {
     dispatch({ type: SET_LOADING, payload: true})
     setTimeout(() => {
-      fetch(`http://localhost:3000/products`, {
+      fetch(`${server}/products`, {
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           access_token: localStorage.access_token
@@ -40,7 +42,7 @@ export const fetchProductDetail = (id) => {
   return (dispatch, getState) => {
     dispatch({ type: SET_LOADING, payload: true})
     setTimeout(() => {
-      fetch(`http://localhost:3000/products/${id}`, {
+      fetch(`${server}/products/${id}`, {
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           access_token: localStorage.access_token

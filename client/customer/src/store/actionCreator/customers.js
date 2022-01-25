@@ -14,7 +14,7 @@ import { isError, isSuccess, isLoading } from "./status";
 import axios from "axios";
 
 //Server EndPoint
-const server = `http://localhost:3000`;
+const server = `https://forsythia-server.herokuapp.com`;
 
 export const login = (payload) => {
   return async (dispatch, getState) => {
@@ -162,16 +162,16 @@ export const chooseClientDoctor = (payload) => {
       dispatch(isLoading(true));
       dispatch(isError(null));
       const access_token = localStorage.getItem("access_token");
-      console.log(access_token);
+      console.log(access_token, `acess_token dalam action CREATOR`);
       const response = await axios.patch(
         `${server}/account/tickets/${payload}`,
         {},
         { headers: { access_token } }
       );
-      console.log(response.statusText, "hayo");
+      console.log(response.statusText, "INI KALO BERHASIL DAPET PATCH");
       dispatch({ type: CUSTOMER_CHOOSE_DOCTOR, payload: true });
-      window.snap.pay(response.data.snap_token.token);
     } catch (err) {
+      console.log(err)
       dispatch(isError(err));
     } finally {
       dispatch(isLoading(false));
