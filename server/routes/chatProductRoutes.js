@@ -13,7 +13,7 @@ route.get('/account/voucherUsed',[authentication, authorization], voucherUsed);
 route.get('/account/voucherCompleted',[authentication, authorization], voucherCompleted)
 
 // ini jalur dokter saat client kelar nge-patch dokter yang dia mau, apabila dia klik dokter tersebut dokter akan get table voucher
-route.patch('/account/voucherUsed/:token',[authentication, authorization], voucherUsedByToken)
+route.patch('/account/voucherUsed/:id',[authentication, authorization], voucherUsedByToken)
 // route khusus untuk chat, pakai server socket
 // route.get('/doctors-chat', getSchedules);
 
