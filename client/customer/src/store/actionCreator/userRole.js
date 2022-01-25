@@ -2,7 +2,7 @@ import { USER_ACCOUNT, USER_ROLE } from "../actionType/userRole";
 import { IS_LOADING, IS_ERROR, IS_SUCCESS } from "../actionType/index";
 import { isError, isLoading } from "./status";
 //Server EndPoint
-const server=`http://localhost:3000`
+const server=`https://forsythia-server.herokuapp.com`
 export const userRole = (payload) => {
   return async (dispatch, getState) => {
     try {
