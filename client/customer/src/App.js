@@ -55,6 +55,7 @@ function App() {
           </Route>
           
           <Route path="/notification/handling" element={<Notif />} />
+          {/* <Route path="/products" element={<ProductPage />} /> */}
           <Route path="/doctors" element={<JoinMeeting />} />
           <Route path="/video/:id" element={<VideoCall />} />
           <Route path="/video-owner/:id" element={<VideoCallOwner />} />
