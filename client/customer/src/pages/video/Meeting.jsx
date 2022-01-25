@@ -33,7 +33,7 @@ export default function Video({ match }) {
             showLeaveButton: true,
             showFullscreenButton: true,
           }).join({
-            url: "${domain}DrVera?t=${res.data.token}",
+            url: "${domain}${res.data.room.name}?t=${res.data.token}",
           });`;
 
           document.body.appendChild(script);
