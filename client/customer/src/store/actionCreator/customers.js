@@ -195,7 +195,7 @@ export const fetchHistoryOrder = () => {
           }
         }
       );
-      dispatch({ type: CUSTOMER_CHOOSE_DOCTOR, payload: response.data })
+      dispatch({ type: FETCH_CUSTOMER_ORDER, payload: response.data })
     } catch (err) {
       dispatch(isError(err));
     } finally {
