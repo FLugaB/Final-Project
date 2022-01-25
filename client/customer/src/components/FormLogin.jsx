@@ -75,9 +75,10 @@ const FormLogin = (props) => {
   const regSuccess = (isSuccessRegister) => {
     if (isSuccessRegister) {
       setClickLoad(false);
-      navigate("/");
       const text = "Hi, <fullName> Register Success !";
       timerAlert(text);
+      navigate("/login");
+      window.location.reload(true)
     }
   };
 
