@@ -1,10 +1,9 @@
+const { default: axios } = require("axios");
 const FormData = require("form-data");
-const {ResponseAxiosPost} = require("../apis/axios.js");
 
 const UploadImage = async (req, res, next) => {
     // console.log(req.body,`ini reqbody`);
     try {
-
         if (req.file == undefined) {
             next()
         } else {
@@ -22,10 +21,18 @@ const UploadImage = async (req, res, next) => {
             let encodedImage = req.file.buffer.toString("base64");
             formData.append("file", encodedImage);
             formData.append("fileName", req.file.originalname);
+
+            let encodedKey = Buffer.from(process.env.IMAGEKIT_KEY + ":").toString("base64");
+
+            const {data} = await axios.post ("https://upload.imagekit.io/api/v1/files/upload", formData, {
+                headers: {
+                    ...formData.getHeaders(),
+                    Authorization: `Basic ${encodedKey}`,
+                }
+            })
             
-            const response = await ResponseAxiosPost(formData)
             // console.log(response, "this is from response")
-            req.body.photoProfile = response.data.url;
+            req.body.photoProfile = data.url;
             next();
 
         }
