@@ -1,37 +1,37 @@
-const FormData = require('form-data')
-const axios = require('axios')
-const { contentImageValidate } = require('../helpers/imagekit')
+const FormData = require("form-data");
+const {ResponseAxiosPost} = require("../apis/axios.js");
 
-const ImageKit_API = async (req, res, next) => {
-  try {
-    if(req.file) {
-      let name = req.body.name
-      contentImageValidate(req)
-      let imageFile = req.file.buffer.toString("base64")
-      let form = new FormData()
-      form.append("fileName", name)
-      form.append("file", imageFile)
-      const instance = axios.create({
-        baseURL: process.env.BASE_URL_IMAGEKIT,
-        auth: {
-          username: process.env.IMAGEKIT_KEY
+const UploadImage = async (req, res, next) => {
+    // console.log(req.body,`ini reqbody`);
+    try {
+
+        if (req.file == undefined) {
+            next()
+        } else {
+            console.log("imagekit area field", req.file);
+            
+            let typeFile = req.file.mimetype
+            // console.log(typeFile);
+            if (!typeFile.includes('image')) {
+                // console.log(object);
+                throw { name: "Unsopported File Type"}
+            }
+            // console.log(req.file, "<<<<<");
+            
+            let formData = new FormData();
+            let encodedImage = req.file.buffer.toString("base64");
+            formData.append("file", encodedImage);
+            formData.append("fileName", req.file.originalname);
+            
+            const response = await ResponseAxiosPost(formData)
+            // console.log(response, "this is from response")
+            req.body.photoProfile = response.data.url;
+            next();
+
         }
-      })
-      
-      const response = await instance({
-        method: "POST",
-        url: "files/upload",
-        data: form,
-        headers: {
-          ...form.getHeaders()
-        }
-      })
-      req.body.imageUrl = response.data.url
+    } catch (err) {
+        next(err)
     }
-    next()
-  } catch (err) {
-    next(err)
-  }
-}
+};
 
-module.exports = ImageKit_API
+module.exports = UploadImage

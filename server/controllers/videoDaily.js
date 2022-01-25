@@ -44,6 +44,7 @@ const videoDaily = async (req, res, next) => {
     if (token.data) {
       res.status(200).send( {token: token.data.token, room: roomGET })
     }
+    res.status(200).send( { message: "Token Not Found"})
   } catch (error) {
     console.log(error);
     next(error);
