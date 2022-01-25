@@ -26,9 +26,7 @@ module.exports = class Controller {
 
   static showProductById = async(req,res,next) => {
     try {
-      if(!req.params) {
-        throw {name: "NO_TOKEN"}
-      }
+
       const {id} = req.params
       const result = await Product.findByPk(id, {
         include: [
@@ -177,19 +175,13 @@ module.exports = class Controller {
 
         throw {name: "Product_not_found"}
       } 
-      // if (getProductId.ProductId < 3) {
 
-      //   throw { name: "CANNOT_ADD_DETAIL"}
-      // } else 
       if (getProductId.ProductId === 3) {
 
         const result = await DetailProduct.create(input, {transaction:t})
         await t.commit()
         res.status(201).json(result)
-      } else {
-        // PROBLEM TEST
-        throw { name: "CANNOT_ADD_DETAIL"}
-      }
+      } 
       
       
 

@@ -50,14 +50,6 @@ const CardTicket = () => {
     );
   }
 
-  // console.log(lengthTicket);
-
-  // if (errorConsultationTickets) {
-  //   setLengthTicket = 0
-  // } else {
-  //   setLengthTicket = consultationTickets.length
-  // }
-
   return (
     <Col md={12} className="d-flex justify-content-start">
       <Row>

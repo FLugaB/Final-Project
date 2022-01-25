@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,28 +7,38 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchDoctors } from "../../store/actionCreator/doctors";
 import { useNavigate } from "react-router-dom";
 import { BsFillChatDotsFill, BsFillFilePersonFill } from "react-icons/bs";
+import { chooseClientDoctor } from "../../store/actionCreator/customers.js";
 
 function CardSlider() {
   const { doctors, loadingDoctors, errorDoctors } = useSelector(
     (state) => state.doctors
   );
+  const { customerChooseDoctor } = useSelector((state) => state.customers);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [localLoad, setLocalLoad] = useState(false)
 
-  
-  const handlerChatButton = (payload) => {
-    const str = payload.replace('.', '').replace(/\s+/g, '');
-    console.log(str, "payload");
-    navigate(`/video/${str}`);
-  };
-
-  console.log(doctors, "fetch Card.jsx");
   useEffect(() => {
     dispatch(fetchDoctors());
   }, [dispatch]);
+  console.log(doctors, "fetch Card.jsx");
 
-
-
+  const handlerChatButton = async (payloadId, payloadName) => {
+    try {
+      setLocalLoad(true)
+      const str = payloadName.replace(".", "").replace(/\s+/g, "");
+      console.log(payloadId, str, "payload");
+      const result = await dispatch(chooseClientDoctor(payloadId));
+      setLocalLoad(false)
+      console.log(customerChooseDoctor, "result status");
+      if (!localLoad) {
+        navigate(`/video/${str}`);
+      }
+      
+    } catch (err) {
+      console.log(err);
+    }
+  }
   let settings = {
     dots: true,
     infinite: true,
@@ -43,7 +53,7 @@ function CardSlider() {
         <Slider {...settings}>
           {doctors.map((el) => {
             return (
-              <div className="card-wrapper">
+              <div key={el.Profile.id} className="card-wrapper">
                 <div className="card">
                   <div className="card-image">
                     <img
@@ -55,7 +65,14 @@ function CardSlider() {
                   <ul className="social-icons">
                     <li>
                       <a className="ButtonBox">
-                        <BsFillChatDotsFill onClick={() => handlerChatButton(el.Profile.fullName)} />
+                        <BsFillChatDotsFill
+                          onClick={() =>
+                            handlerChatButton(
+                              el.Profile.id,
+                              el.Profile.fullName
+                            )
+                          }
+                        />
                       </a>
                     </li>
                     <li>
@@ -67,7 +84,7 @@ function CardSlider() {
                   <div className="details">
                     <h2>
                       {el.Profile.fullName}{" "}
-                      <span className="job-title">{el.Profile.address}{" "}</span>
+                      <span className="job-title">{el.Profile.address} </span>
                     </h2>
                   </div>
                 </div>
