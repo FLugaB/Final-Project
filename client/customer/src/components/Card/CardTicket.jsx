@@ -1,41 +1,36 @@
 import React, { useEffect, useState } from "react";
 import "./CardTicket.css";
-import { Col, Row, Button } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchConsultationTickets } from "../../store/actionCreator/consultationTickets";
 import { useNavigate } from "react-router-dom";
 import { addTicketToCart } from '../../store/actionCreator/customers'
+import { localLoad } from '../../Hooks/load'
 
 const CardTicket = () => {
+
   const [isLoading, setIsLoad] = useState(true)
   const [dateFormat, setDateFormat] = useState('')
-  const {
-    consultationTickets,
-    loadingConsultationTickets,
-    errorConsultationTickets,
-  } = useSelector((state) => state.consultationTickets);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect( () => {
-    findTickets()
-  }, [isLoading]);
+  useEffect(() => dispatch(fetchConsultationTickets()), []);
 
-  const findTickets = async () => {
-    try {
-      await dispatch(fetchConsultationTickets());
-      setIsLoad(false)
+  const { consultationTickets, } = useSelector((state) => state.consultationTickets);
+  
+  useEffect(() => {
+    if (consultationTickets.length >= 1) {
       if (consultationTickets[0].createdAt) {
         const test = consultationTickets[0].createdAt
-        console.log(test, `======================`)
         const splited = test.split('T')[0].split('-')
         setDateFormat(splited)
       }
-
-    } catch (error) {
-      console.log(error, `INI ERRORNYA`)
+      setIsLoad(false)
+    } else {
+      setIsLoad(false)
     }
-  }
+  }, [consultationTickets.length])
 
   const handleUseButton = () => {
     navigate(`/doctors`);
@@ -44,20 +39,14 @@ const CardTicket = () => {
   const addTicket = async () => {
     try {
         await dispatch(addTicketToCart())
-
         navigate("/account/cart")
-        
     } catch (error) {
         console.log(error)
     }
   }
 
   if (isLoading) {
-    return (
-      <div>
-        <h2>LAODING</h2>
-      </div>
-    );
+    return localLoad()
   }
 
   return (
@@ -70,7 +59,8 @@ const CardTicket = () => {
         </Col>
         <Col md={12} className="d-flex justify-content-start">
           {
-            errorConsultationTickets.message &&
+            !isLoading && consultationTickets.length < 1 &&
+            
             (
               <div>
                 <h2>You don't have a counsultation ticket yet...</h2>
@@ -79,37 +69,36 @@ const CardTicket = () => {
                 </div>
               </div>
             )
-          }
-          {
-            !errorConsultationTickets.message && (
-              <div className="containerTicket">
-                <a href="#" onClick={() => handleUseButton()}>
-                  <div className="ticket shadow-lg">
-                    <div className="stub">
-                      <div className="top">
-                        <span className="text-start">Total Ticket</span>
-                      </div>
-                      <div className="number">{consultationTickets.length}</div>
-                    </div>
-                    <div className="check">
-                      <div className="big">Consultation Ticket</div>
-                      <div className="number">#{consultationTickets.length}</div>
-                      <div className="info">
-                        <div>
-                          <div className="title">Date</div>
-                          <div>{consultationTickets[0].createdAt && (`${dateFormat[2]}/${dateFormat[1]}/${dateFormat[0]}`)}</div>
+            }
+
+            { !isLoading && consultationTickets.length >= 1 && (
+                <div className="containerTicket">
+                  <a href="#" onClick={() => handleUseButton()}>
+                    <div className="ticket shadow-lg">
+                      <div className="stub">
+                        <div className="top">
+                          <span className="text-start">Total Ticket</span>
                         </div>
-                        <div className=" ms-4">
-                          <div className="title">Status</div>
-                          <div>useable</div>
+                        <div className="number">{consultationTickets.length}</div>
+                      </div>
+                      <div className="check">
+                        <div className="big">Consultation Ticket</div>
+                        <div className="number">#{consultationTickets.length}</div>
+                        <div className="info">
+                          <div>
+                            <div className="title">Date</div>
+                            <div>{consultationTickets[0].createdAt && (`${dateFormat[2]}/${dateFormat[1]}/${dateFormat[0]}`)}</div>
+                          </div>
+                          <div className=" ms-4">
+                            <div className="title">Status</div>
+                            <div>useable</div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </a>
-              </div>
-            )
-          }
+                  </a>
+                </div>
+              )}
         </Col>
       </Row>
     </Col>

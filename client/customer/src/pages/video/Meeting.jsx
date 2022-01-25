@@ -12,9 +12,9 @@ export default function Video({ match }) {
 
     // https://forsythiateam.daily.co/DrVera
     axios
-      .get(`http://localhost:3000/video-call/${id}`)
+      .get(`https://forsythia-server.herokuapp.com/video-call/${id}`)
       .then((res) => {
-        console.log(`tersend CUSTOMERS`);
+        console.log(`tersend CUSTOMERS ==================`, res.data);
         if (res.status === 200) {
           if (!res.data.token) {
             return (
@@ -33,7 +33,7 @@ export default function Video({ match }) {
             showLeaveButton: true,
             showFullscreenButton: true,
           }).join({
-            url: "${domain}DrVera?=${res.data.token}",
+            url: "${domain}DrVera?t=${res.data.token}",
           });`;
 
           document.body.appendChild(script);

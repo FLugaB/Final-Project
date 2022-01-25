@@ -11,13 +11,11 @@ const HistoryOutlet = () => {
 
     useEffect( () => {
         fetchOrder()
-        console.log(customerOrder)
     }, [])
 
     const fetchOrder = async () => {
         try {
             await dispatch(fetchHistoryOrder())
-            console.log(customerOrder)
         } catch (error) {
             console.log(error)
         }
