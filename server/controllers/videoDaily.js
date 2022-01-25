@@ -23,7 +23,7 @@ const getRoom = (room) => {
     .then((response) => {
       return response.data;
     })
-    .catch((err) => console.error("error:" + err));
+    // .catch((err) => console.error("error:" + err));
 };
 
 const videoDaily = async (req, res, next) => {
