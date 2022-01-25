@@ -7,27 +7,32 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchDoctors } from "../../store/actionCreator/doctors";
 import { useNavigate } from "react-router-dom";
 import { BsFillChatDotsFill, BsFillFilePersonFill } from "react-icons/bs";
+import { chooseClientDoctor } from "../../store/actionCreator/customers.js";
 
 function CardSlider() {
   const { doctors, loadingDoctors, errorDoctors } = useSelector(
     (state) => state.doctors
   );
+  const { customerChooseDoctor } = useSelector((state) => state.customers);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  
-  const handlerChatButton = (payload) => {
-    const str = payload.replace('.', '').replace(/\s+/g, '');
-    console.log(str, "payload");
-    navigate(`/video/${str}`);
-  };
-
-  console.log(doctors, "fetch Card.jsx");
   useEffect(() => {
     dispatch(fetchDoctors());
   }, [dispatch]);
+  console.log(doctors, "fetch Card.jsx");
 
-
+  const handlerChatButton = (payloadId, payloadName) => {
+    const str = payloadName.replace(".", "").replace(/\s+/g, "");
+    console.log(payloadId, str, "payload");
+    dispatch(chooseClientDoctor(payloadId));
+    console.log(customerChooseDoctor, "result status");
+    if (customerChooseDoctor == "STATUS") {
+      dispatch(chooseClientDoctor(payloadId));
+    } else if (customerChooseDoctor == "OK") {
+      navigate(`/video/${str}`);
+    }
+  };
 
   let settings = {
     dots: true,
@@ -55,7 +60,14 @@ function CardSlider() {
                   <ul className="social-icons">
                     <li>
                       <a className="ButtonBox">
-                        <BsFillChatDotsFill onClick={() => handlerChatButton(el.Profile.fullName)} />
+                        <BsFillChatDotsFill
+                          onClick={() =>
+                            handlerChatButton(
+                              el.Profile.id,
+                              el.Profile.fullName
+                            )
+                          }
+                        />
                       </a>
                     </li>
                     <li>
@@ -67,7 +79,7 @@ function CardSlider() {
                   <div className="details">
                     <h2>
                       {el.Profile.fullName}{" "}
-                      <span className="job-title">{el.Profile.address}{" "}</span>
+                      <span className="job-title">{el.Profile.address} </span>
                     </h2>
                   </div>
                 </div>
