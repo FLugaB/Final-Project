@@ -21,6 +21,7 @@ module.exports = class Controller {
         } else {
             res.status(200).json(findAllTicket)
         }
+
     } catch (error) {
         next(error)
     }
@@ -54,7 +55,27 @@ module.exports = class Controller {
 
         // Nanti Setelah Client Ke tendang atau di kick oleh dokter atau waktu consul habis maka di patch status voucher tersebut menajadi Completed
 
-        const { idTicket } = req.params
+        const { id } = req.params
+
+        const findAllTicket = await Voucher.findOne({
+            where: {id }
+        })
+
+        if (findAllTicket.length < 1 ) {
+            const text = "There is No Ticket yet.."
+            res.status(200).json({text})
+        } else {
+            const updateTicket = await Voucher.update(
+            {
+                status: 'completed'
+            },
+            {
+                where: {id},
+                returning: true
+            })
+
+            res.status(200).json(updateTicket)
+        }
 
 
         
