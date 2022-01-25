@@ -6,7 +6,7 @@ import {
 import { isError, isSuccess, isLoading } from "./status";
 const axios = require("axios");
 //Server EndPoint
-const server = `http://localhost:3000`;
+const server = `https://forsythia-server.herokuapp.com/`;
 
 export const fetchConsultationTickets = () => {
 
@@ -20,8 +20,6 @@ export const fetchConsultationTickets = () => {
           access_token: access_token,
         },
       });
-      console.log(`===========================================`)
-      console.log(result, `INI ADA DI STORE`)
       dispatch({ type: FETCH_CONSULTATION_TICKETS, payload: result.data });
     } catch (err) {
       dispatch({ type: SET_ERROR, payload: err.response.data });

@@ -14,7 +14,7 @@ import { isError, isSuccess, isLoading } from "./status";
 import axios from "axios";
 
 //Server EndPoint
-const server = `http://localhost:3000`;
+const server = `https://forsythia-server.herokuapp.com/`;
 
 export const login = (payload) => {
   return async (dispatch, getState) => {
