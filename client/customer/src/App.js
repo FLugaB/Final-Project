@@ -14,6 +14,7 @@ import ProfileOutlet from './components/DashboardComponents/ProfileOutlet'
 import CartOutlet from './components/DashboardComponents/CartOutlet'
 import HistoryOutlet from './components/DashboardComponents/HistoryOutlet'
 import DetailCheckOut from './components/DashboardComponents/DetaiCheckOut'
+import DoctorDetail from './components/DoctorDetail'
 import { pageLoad } from './Hooks/load'
 
 import { RoutesGuard, LogGuard } from "./routes/RoutesGuard"
@@ -57,6 +58,7 @@ function App() {
           <Route path="/notification/handling" element={<Notif />} />
           {/* <Route path="/products" element={<ProductPage />} /> */}
           <Route path="/doctors" element={<JoinMeeting />} />
+          <Route path="/doctors/:id" element={< DoctorDetail />} />
           <Route path="/video/:id" element={<VideoCall />} />
           <Route path="/video-owner/:id" element={<VideoCallOwner />} />
 

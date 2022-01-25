@@ -10,7 +10,6 @@ const CntentSlider = () => {
 
     const addTicket = async () => {
         try {
-
             await dispatch(addTicketToCart())
 
             navigate("/account/cart")
