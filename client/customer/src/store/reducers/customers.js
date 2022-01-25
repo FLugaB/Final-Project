@@ -9,6 +9,7 @@ import {
   CUSTOMER_LOGIN,
   CUSTOMER_IS_SUCCESS_REGISTER,
   CUSTOMER_IS_SUCCESS_LOGOUT,
+  CUSTOMER_CHOOSE_DOCTOR
 } from "../actionType/customers";
 
 import { IS_ERROR, } from '../actionType/index'
@@ -18,6 +19,7 @@ const initialState = {
   customerDetail: [],
   customerCart: [],
   customerCheckout: {},
+  customerChooseDoctor: "STATUS",
   loadingCustomers: false,
   errorCustomers: null,
   isSuccessLogin: false,
@@ -64,6 +66,11 @@ export default function customersReducer(state = initialState, action) {
       }
     case CUSTOMER_LOGIN:
       return state
+    case CUSTOMER_CHOOSE_DOCTOR:
+      return {
+        ...state,
+        customerChooseDoctor: action.payload
+      }
     default:
       return state;
   }
