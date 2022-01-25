@@ -53,6 +53,10 @@ module.exports = class Controller {
     try {
 
         // Nanti Setelah Client Ke tendang atau di kick oleh dokter atau waktu consul habis maka di patch status voucher tersebut menajadi Completed
+
+        const { idTicket } = req.params
+
+
         
     } catch (error) {
         next(error)
