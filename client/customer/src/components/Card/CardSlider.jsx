@@ -46,6 +46,17 @@ function CardSlider() {
     slidesToShow: 3,
     slidesToScroll: 1,
     cssEase: "linear",
+    responsive: [
+      {
+        breakpoint: 700,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+    ]
   };
   return (
     <div className="containerSlider">
