@@ -17,7 +17,10 @@ const ConsultationRequest = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleButtonConsultation = async () => {
+  const handleButtonConsultation = async (id) => {
+
+    console.log(id, `==========================`)
+
     const str = profile.fullName.replace(".", "").replace(/\s+/g, "");
     navigate(`/video-owner/${str}`);
   };
@@ -46,11 +49,11 @@ const ConsultationRequest = () => {
         <table className="containerTable1">
           <thead>
             <tr>
-              <th>
+              {/* <th>
                 <h1>#ID</h1>
-              </th>
+              </th> */}
               <th>
-                <h1>Voucher Token</h1>
+                <h1>#Client Id</h1>
               </th>
               <th>
                 <h1>Status</h1>
@@ -64,13 +67,16 @@ const ConsultationRequest = () => {
             {consultationRequests.map((el) => {
               return (
                 <tr key={el.id}>
-                  <td>{el.id}</td>
-                  <td>{el.voucherToken}</td>
+                  {/* <td>{el.id}</td> */}
+                  <td>{el.ClientId}</td>
                   <td>{el.status}</td>
                   <td>
                     <SiGooglemeet
                       style={{ fontSize: 30 }}
-                      onClick={handleButtonConsultation}
+                      onClick={ (e) => { 
+                        e.preventDefault(); 
+                        handleButtonConsultation(el.id);
+                      }}
                     />
                   </td>
                 </tr>
