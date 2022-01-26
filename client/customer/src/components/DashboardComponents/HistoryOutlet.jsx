@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Col, Row } from 'react-bootstrap'
+import { formatDate } from "../../Hooks/helpers";
 import { fetchHistoryOrder } from '../../store/actionCreator/customers'
 import { Table } from 'react-bootstrap';
 const HistoryOutlet = () => {
