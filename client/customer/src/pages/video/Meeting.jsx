@@ -1,12 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import Slider from "../../components/Slider/Slider";
 import { useParams  } from "react-router-dom";
+
+import { pageLoad } from '../../Hooks/load'
 
 export default function Video({ match }) {
   
   const { id } = useParams();
+<<<<<<< HEAD
   console.log("%c ♻️: Video -> id ", "font-size:16px;background-color:#23f727;color:black;", id)
+=======
+
+  const [isLocalLoad, setIsLocalLoad] = useState(true)
+>>>>>>> 2510f793c4b1b01b7548d532b4bee099514802d2
   
   useEffect(() => {
     const domain = "https://forsythiateam.daily.co/";
@@ -25,11 +32,12 @@ export default function Video({ match }) {
           const script = document.createElement("script");
           script.innerHTML = `window.DailyIframe.createFrame({
             iframeStyle: {
-              position: "relative",
+              position: "fixed",
               width: "100%",
-              height: "100vh",
+              height: "90vh",
               border: "0",
-              zIndex: 9999
+              zIndex: 9,
+              top: 0
             },
             showLeaveButton: true,
             showFullscreenButton: true,
@@ -38,14 +46,19 @@ export default function Video({ match }) {
           });`;
 
           document.body.appendChild(script);
+          setIsLocalLoad(false)
         }
       })
       .catch((err) => console.log(err));
   }, [id]);
 
+  if (isLocalLoad) return pageLoad()
+
   return (
     <div className="homepage-container">
-
+      <div className="section-container video-joins">
+        <h1>Thank You for using our Services</h1>
+      </div>
     </div>
   );
 }
