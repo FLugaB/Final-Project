@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ConsultationRequest.css";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchConsultationTickets } from "../../store/actionCreator/consultationRequests.js";
+import { fetchConsultationTickets, patchConsultationTickets } from "../../store/actionCreator/consultationRequests.js";
 import { fetchDoctorDetail } from "../../store/actionCreator/doctors.js";
 import { useNavigate } from "react-router-dom";
 import { SiGooglemeet } from "react-icons/si";
@@ -17,9 +17,12 @@ const ConsultationRequest = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleButtonConsultation = async () => {
+  const handleButtonConsultation = async (id) => {
+    console.log(id, "id");
+    await dispatch(patchConsultationTickets(id))
     const str = profile.fullName.replace(".", "").replace(/\s+/g, "");
     navigate(`/video-owner/${str}`);
+    
   };
 
   useEffect(() => {
@@ -70,7 +73,7 @@ const ConsultationRequest = () => {
                   <td>
                     <SiGooglemeet
                       style={{ fontSize: 30 }}
-                      onClick={handleButtonConsultation}
+                      onClick={(e) => {e.preventDefault(); handleButtonConsultation(el.id)}}
                     />
                   </td>
                 </tr>
