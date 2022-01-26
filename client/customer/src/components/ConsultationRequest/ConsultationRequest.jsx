@@ -70,9 +70,9 @@ const ConsultationRequest = () => {
               return (
                 <tr key={el.id}>
                   {/* <td>{el.id}</td> */}
-                  <td>{el.ClientId}</td>
-                  <td>{el.status}</td>
-                  <td>
+                  <td className="text-center">{el.ClientId}</td>
+                  <td className="text-center">{el.status}</td>
+                  <td className="text-center">
                     <SiGooglemeet
                       style={{ fontSize: 30 }}
                       onClick={(e) => {

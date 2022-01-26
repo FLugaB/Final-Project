@@ -87,7 +87,7 @@ const DetaiCheckOut = () => {
                 <Col md={12} className="mb-5 overflow-wrapper">
                     <div className="title text-start">
                         <h1>Detail Checkout</h1>
-                        <a className="no-style" href="" onClick={backToDetails}> {`< Back`} </a>
+                        <a className="no-style" href="" onClick={backToDetails}> {`< Back to cart`} </a>
                     </div>
 
                     { errorCustomers && 
@@ -99,18 +99,18 @@ const DetaiCheckOut = () => {
                     <Row className="mt-5">
                         { customerCheckout.orderDetail && 
                             (
-                                <Col md={12} key={customerCheckout.orderDetail.product[0].id} className="bg-soft px-0 mb-3">
+                                <Col md={12} key={customerCheckout.orderDetail.product[0].id} className="px-0 mb-3">
                                     <Row className="d-flex justify-content-between align-items-center">
-                                        <Col md={4}>
+                                        <Col md={1}>
                                             <div className="checkout-image-wrapper">
                                                 <img src={customerCheckout.orderDetail.product[0].DetailProduct.imageUrl} alt="" />
                                             </div>
                                         </Col>
-                                        <Col md={5}>
-                                            <h6>{customerCheckout.orderDetail.product[0].DetailProduct.name}</h6>
+                                        <Col md={3} className="ms-0 me-0">
+                                            <h6 className="fw-bold">{customerCheckout.orderDetail.product[0].DetailProduct.name}</h6>
                                         </Col>
-                                        <Col md={3}>
-                                            <h6>x {customerCheckout.orderDetail.product.length}</h6>
+                                        <Col md={3} className="ms-0 me-auto">
+                                            <h6 className="fw-bold">x {customerCheckout.orderDetail.product.length}</h6>
                                         </Col>
                                     </Row>
                                 </Col>
@@ -121,9 +121,9 @@ const DetaiCheckOut = () => {
                     { customerCheckout.orderDetail &&  
                     (
                         <div>
-                            <div className="title text-start">
-                                <h4>Order ID: {customerCheckout.orderDetail.order_id}</h4>
-                                <h4>Total Price: {formatCurrency(customerCheckout.orderDetail.totalPrice)}</h4>
+                            <div className="title text-start mt-5">
+                                <h4 className="fw-bold">Order ID: {customerCheckout.orderDetail.order_id}</h4>
+                                <h4 className="fw-bold">Total Price: {formatCurrency(customerCheckout.orderDetail.totalPrice)}</h4>
                             </div>
                         
                             <div className="text-start mt-5">
