@@ -6,7 +6,6 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
-import DoctorDetail from "../components/DoctorDetail";
 import { Login } from "../components/Login/Login";
 import { Register } from "../components/Register/Register";
 import HomePage from "../pages/HomePage";
@@ -18,8 +17,6 @@ function Navigator() {
         <Route index element={<HomePage />}></Route>
         <Route path="login" element={<Login />}></Route>
         <Route path="register" element={<Register />}></Route>
-        <Route path="doctorDetail/:id" element={<DoctorDetail />}></Route>
-
       </Route>
     </Routes>
   );

@@ -10,6 +10,7 @@ import { BsFillChatDotsFill, BsFillFilePersonFill } from "react-icons/bs";
 import { chooseClientDoctor } from "../../store/actionCreator/customers.js";
 import { Col, Row, Button, Card, handleShow, Modal } from 'react-bootstrap'
 
+
 function CardSlider() {
   const { doctors, loadingDoctors, errorDoctors } = useSelector(
     (state) => state.doctors
@@ -47,6 +48,17 @@ function CardSlider() {
     slidesToShow: 3,
     slidesToScroll: 1,
     cssEase: "linear",
+    responsive: [
+      {
+        breakpoint: 700,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+    ]
   };
 
   const [show, setShow] = useState(false);

@@ -71,6 +71,7 @@ describe("Thrid API Daily.co Video Chat Field", () => {
 //     request(app)
 //       .get("/video-call/DrVera")
 //       .then((res) => {
+//         console.log(res, "whatsthis");
 //         expect(res.status).toBe(500);
 
 //         expect(res.body.err).toBe("Error");

@@ -1,64 +1,29 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import {fetchDoctorDetail} from "../store/actionCreator/doctors"
-import { Col, Row, Button, Card, handleShow, Modal } from 'react-bootstrap'
+
 
 const DoctorDetail = () => {
 
-    const [isload, setIsLoad] = useState(true)  
-    const dispatch = useDispatch();
-    const doctorDetail = useSelector(state => state.doctors.doctorDetail)
-    const {id} = useParams()
+    const params = useParams()
+
+    console.log(params.doctors,` DETAIL`)
+
+    const [localLoad, setLocalLoad] = useState(true)
+    // const { } = useSelector( (state) => state.doctor)
     
-    useEffect(() => {
-        dispatch(fetchDoctorDetail(id))
-    },[id]);
+    // const dispatach = useDispatch();
 
-    useEffect(() => {
-        if(doctorDetail) {
-            setIsLoad(false) 
-            console.log(doctorDetail);
-        }
-    }, [doctorDetail])
-    const [show, setShow] = useState(false);
+    // useEffect(() => dispatch(fetchProduct(params)), [params.id]);
+    // useEffect(() => pageLoaded(), [beforeUpdateProduct.id])
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     
 
 
     return (
-        <>
-        <Button variant="primary" onClick={handleShow}>
-        </Button>
-
-        <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-        >
-    {!isload && doctorDetail && ( 
-        <>
-        <Modal.Header closeButton>
-        <Modal.Title>{doctorDetail.Profile.fullName}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{doctorDetail.email}</Modal.Body>
-        <Modal.Body>{doctorDetail.Profile.gender}</Modal.Body>
-        <Modal.Body>{doctorDetail.Profile.birthdate.slice(0,10).split('-').reverse().join('/')}</Modal.Body>
-        <Modal.Body>{doctorDetail.Profile.phoneNumber}</Modal.Body>
-        <Modal.Body>{doctorDetail.Profile.address}</Modal.Body>  
-        </>
-    )}
-        <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-        Close
-        </Button>
-        <Button variant="primary">Understood</Button>
-          </Modal.Footer>
-        </Modal>
-      </>
+        <div>
+            
+        </div>
     );
 };
 

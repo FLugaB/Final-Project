@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import customersReducer from "./customers.js";
-import doctorsReducer from "./doctors.js";
+import doctorsReducer from "./doctors";
 import userRoleReducer from "./userRole.js";
 import productsReducer from "./products.js"
 import consultationTicketsReducer from "./consultationTickets.js"
