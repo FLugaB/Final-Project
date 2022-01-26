@@ -20,7 +20,9 @@ export const fetchConsultationTickets = () => {
           access_token: access_token,
         },
       });
-      localStorage.setItem(`ticket`, false)
+        const {ClientId, status} = result.data[0]
+        localStorage.setItem("status", status)
+        localStorage.setItem("ClientId", ClientId)
       dispatch({ type: FETCH_CONSULTATION_TICKETS, payload: result.data });
     } catch (err) {
       dispatch({ type: SET_ERROR, payload: err.response.data });

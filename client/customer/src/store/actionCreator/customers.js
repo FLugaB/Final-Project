@@ -31,6 +31,7 @@ export const login = (payload) => {
       });
       const output = await response.json();
       if (!response.ok) throw output;
+      
       localStorage.setItem("access_token", output.access_token);
       dispatch({ type: CUSTOMER_IS_SUCCESS_LOGIN, payload: true });
     } catch (error) {
@@ -85,6 +86,25 @@ export const addTicketToCart = (payload) => {
       const response = await axios.post(
         `${server}/products/chat`,
         {},
+        { headers: { access_token } }
+      );
+    } catch (error) {
+      dispatch(isError(error));
+    } finally {
+      dispatch(isLoading(false));
+    }
+  };
+};
+
+export const deleteTicketToCart = (payload) => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch(isSuccess(false));
+      dispatch(isLoading(true));
+      dispatch(isError(null));
+      const access_token = localStorage.getItem(`access_token`);
+      const response = await axios.delete(
+        `${server}/account/client-cart/${payload}`,
         { headers: { access_token } }
       );
     } catch (error) {

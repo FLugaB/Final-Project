@@ -6,7 +6,11 @@
     "start": "nodemon bin/www",
     "test:up": "npx sequelize-cli db:migrate --env=test && npx sequelize-cli --env test db:seed:all",
     "test:down": "npx sequelize-cli db:migrate:undo:all --env=test",
-    "test": "clear && jest  --coverage --runInBand --watchAll --detectOpenHandles --forceExit",
+    "test": "clear && jest --coverage --runInBand --watchAll --detectOpenHandles --forceExit",
+    "test0": "clear && jest --coverage --runInBand --detectOpenHandles --forceExit",
+    "test1": "clear && npx jest -i productController.test.js --coverage --runInBand --detectOpenHandles --forceExit",
+    "test2": "clear && npx jest -i imageKit.test.js --coverage --runInBand --detectOpenHandles --forceExit",
+    "test3": "clear && npx jest -i transactionControllers.test.js --coverage --runInBand --detectOpenHandles --forceExit",
     "dev": "nodemon app.js",
     "dev:up": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "dev:down": "npx sequelize-cli db:migrate:undo:all"

@@ -99,13 +99,13 @@ beforeAll(async () => {
     };
     clientToken = getToken(payload);
 
-    let newDoctor1 = {
-      email: "newDoctor1@gmail.com",
-      password: "newDoctor1",
+    let newDoctor = {
+      email: "newDoctor@gmail.com",
+      password: "newDoctor",
       role: "Doctor",
     }; 
 
-    const createdDoctor = await User.create(newDoctor1);
+    const createdDoctor = await User.create(newDoctor);
     let payload2 = {
       id: createdDoctor.id,
       email: createdDoctor.email,
@@ -120,9 +120,12 @@ beforeAll(async () => {
 
     await Product.create(product);
     await DetailProduct.create(detail);
+    // await OrderProduct.create(detail);
     return Transaction.bulkCreate(order)
+    // done()
   } catch (err) {
     console.log(err, "ERROR BEFORE");
+    // done(err)
   }
 }, 8000)
 
@@ -174,6 +177,8 @@ describe("ticket consultation", () => {
           done(err);
         });
   })
+
+  // DELETE PRODUCT
 
 })
 
@@ -414,9 +419,9 @@ describe ("notification transaction", () => {
         approval_code: "1642769112700"
     })
     .then((res) => {
-      expect(res.status).toBe(403);
+      expect(res.status).toBe(404);
       expect(res.body).toEqual(expect.any(Object));
-      expect(res.body).toHaveProperty("message", "Invalid access");
+      expect(res.body).toHaveProperty("message", "Transaction Not Found");
       done();
     })
     .catch((err) => {
@@ -557,7 +562,7 @@ describe ("notification transaction", () => {
         approval_code: "1642769112700"
     })
     .then((res) => {
-      expect(res.status).toBe(403);
+      expect(res.status).toBe(404);
       expect(res.body).toEqual(expect.any(Object));
       done();
     })
@@ -592,7 +597,7 @@ describe ("notification transaction", () => {
         approval_code: "1642769112700"
     })
     .then((res) => {
-      expect(res.status).toBe(403);
+      expect(res.status).toBe(404);
       expect(res.body).toEqual(expect.any(Object));
       done();
     })
@@ -654,7 +659,6 @@ describe ("detail checkout", () => {
       done(err);
     });
   })
-
   // TODO 4 detail checkout not found order product
   test("detail checkout not found order product", (done) => {
 
@@ -878,3 +882,35 @@ describe ("test transaction not found", () => {
     }) 
     
 })
+
+
+
+//   //TODO 1 client detail chekout success
+//   test("client detail checkout success", (done) => {
+//     request(app)
+//     .get("/account/detail-checkout")
+//     .set('access_token', clientToken)
+//     .then((res) => {
+//       expect(res.status).toBe(200);
+//       expect(res.body).toEqual(expect.any(Object));
+//       done();
+//     })
+//     .catch((err) => {
+//       done(err);
+//     });
+//   })
+
+//     //TODO 1 client detail chekout success
+//     test("client detail checkout success", (done) => {
+//       request(app)
+//       .get("/account/detail-checkout")
+//       .set('access_token', clientToken)
+//       .then((res) => {
+//         expect(res.status).toBe(200);
+//         expect(res.body).toEqual(expect.any(Object));
+//         done();
+//       })
+//       .catch((err) => {
+//         done(err);
+//       });
+// })

@@ -19,7 +19,7 @@ const Card = () => {
         {
           doctors.map((el, index) => {
             return (
-              <li>
+              <li key={el.Profile.id}>
                 {/* <Link to={{
                     pathname: `your/location`,
                     state: {send anything from here}

@@ -69,6 +69,11 @@ a.no-style {
   background-color: var(--soft);
 }
 
+.inner-scroll {
+  height: 50vh;
+  overflow-x: hidden
+}
+
 iframe .banner.jsx-3977386152 {
   display: none;
 }
@@ -1062,7 +1067,7 @@ input[type=checkbox]:checked + label:after {
   background-color: var(--soft);
   border: 2px solid var(--hard);
   border-radius: 50px;
-  padding: 5px;
+  padding: 5px 20px;
 }
 
 .navbar > .menu-bars:hover {
@@ -1435,10 +1440,6 @@ span {
   }
 }
 
-
-body{
-  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-}
 .emp-profile{
   padding: 3%;
   margin-top: 5%;
@@ -1531,3 +1532,7 @@ body{
   font-weight: 600;
   color: #0062cc;
 }
+
+/* .video-joins > .slider--zoom {
+  z-index: 99;
+} */
