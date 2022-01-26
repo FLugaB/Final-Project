@@ -34,12 +34,12 @@ const Navbar = ({ navbarLinks }) => {
 
   return (
     <nav id="navigate" className="navigation-fixed">
-      <ul className="justify-content-md-center d-flex">
+      <ul className="justify-content-center d-flex">
           <li className=""><Link to="/">Home</Link></li>
-          <li><a href="#">About</a></li>
+          {/* <li><a href="#">About</a></li>
           <li><a href="products">Services</a></li>
           <li><a href="#">Team</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#">Contact</a></li> */}
           {
             localStorage.getItem(`access_token`) ? 
 
