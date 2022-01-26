@@ -46,6 +46,7 @@ const clientRegister = async (req, res, next) => {
       fullName: addProfile.fullName,
     });
   } catch (error) {
+    console.log(error);
     next(error);
     await transaction.rollback();
   }
@@ -54,6 +55,7 @@ const clientRegister = async (req, res, next) => {
 const clientLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+    console.log(email, password);
     if (!email || !password) {
       throw {
         name: "BAD_REQUEST",
@@ -67,6 +69,7 @@ const clientLogin = async (req, res, next) => {
     });
 
     if (!findUser) throw { name: `USER_NOT_FOUND` };
+    console.log(`user found`);
     const verfyPass = compareHash(password, findUser.password);
 
     if (!verfyPass) throw { name: `USER_NOT_FOUND` };
@@ -77,6 +80,7 @@ const clientLogin = async (req, res, next) => {
 
     res.status(200).json({ access_token });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
@@ -207,6 +211,7 @@ const clientDoctorFetch = async (req, res, next) => {
 const clientDoctorDetail = async (req, res, next) => {
   try {
     const { id } = req.params;
+    console.log(id);
     const findDoctorDetail = await User.findOne({
       where: {
         [Op.and]: [{ id: id }, { role: `Doctor` }],

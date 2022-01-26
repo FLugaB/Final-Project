@@ -25,7 +25,7 @@ const ProfileOutlet = () => {
                     <Row>
                         <Col md={6} className="text-start">
                             <p>Full Name: {profile.fullName}</p>
-                            <p>Birth Date: {profile?.birthdate?.slice(0,10).split('-').reverse().join('/')}</p>
+                            <p>Birth Date: {profile?.birthdate?.split('T')[0]}</p>
                             <p>Gender: {profile.gender}</p>
                             <p>Phone Number: {profile.phoneNumber}</p>
                             <p>Address: {profile.address}</p>

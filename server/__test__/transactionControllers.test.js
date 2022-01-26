@@ -216,6 +216,7 @@ describe ("client cart", () => {
     .get("/account/cart")
     .set('access_token', 'fffj66g')
     .then((res) => {
+      console.log(res,">>>>>>>>ini res");
       expect(res.status).toBe(401);
       expect(res.body).toEqual(expect.any(Object));
       expect(res.body).toEqual({
@@ -224,6 +225,7 @@ describe ("client cart", () => {
       done();
     })
     .catch((err) => {
+      console.log(err, "ini err");
       done(err);
     });
   })
@@ -673,6 +675,7 @@ describe ("client ticket", () => {
     .patch("/account/tickets/9")
     .set('access_token', 'fffj66g')
     .then((res) => {
+      console.log(res,">>>>>>>>ini res");
       expect(res.status).toBe(401);
       expect(res.body).toEqual(expect.any(Object));
       expect(res.body).toEqual({
@@ -681,6 +684,7 @@ describe ("client ticket", () => {
       done();
     })
     .catch((err) => {
+      console.log(err, "ini err");
       done(err);
     });
   })

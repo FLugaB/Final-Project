@@ -1303,11 +1303,13 @@ beforeAll(async () => {
         
       })
       .then((resp) => {
+        console.log(resp,">>>>>>>>ini re");
         expect(resp.body).toEqual(expect.any(Object))
         expect(resp.status).toBe(200)
         done()
       })   
       .catch((err => {
+        console.log (err,">>>>>>>>>>>>err")
         done(err)
       }))
     })
@@ -1327,12 +1329,14 @@ beforeAll(async () => {
         
     //   })
     //   .then((resp) => {
+    //     console.log(resp,">>>>>>>>ini re");
     //     expect(resp.body).toEqual(expect.any(Object))
     //     expect(resp.status).toBe(404)
     //     expect(res.body).toHaveProperty("message", "Product_not_found");
     //     done()
     //   })   
     //   .catch((err => {
+    //     console.log (err,">>>>>>>>>>>>err")
     //     done(err)
     //   }))
     // })
@@ -1352,11 +1356,13 @@ beforeAll(async () => {
         
     //   })
     //   .then((resp) => {
+    //     console.log(resp,">>>>>>>>ini re");
     //     expect(resp.body).toEqual(expect.any(Object))
     //     expect(resp.status).toBe(200)
     //     done()
     //   })   
     //   .catch((err => {
+    //     console.log (err,">>>>>>>>>>>>err")
     //     done(err)
     //   }))
     // })
@@ -1437,6 +1443,7 @@ beforeAll(async () => {
     //   .delete("/cms/details/2")
     //   .set('access_token', tokenMatch1)
     //   .then((resp) => {
+    //   console.log("%c 🔂: resp ", "font-size:16px;background-color:#253016;color:white;", resp)
         
     //     expect(resp.body).toEqual(expect.any(Object))
     //     expect(resp.status).toBe(403)
@@ -1444,6 +1451,7 @@ beforeAll(async () => {
     //     done()
     //   })   
     //   .catch((err => {
+    //   console.log("%c 🕴️: err ", "font-size:16px;background-color:#1b59c6;color:white;", err)
     //     done(err)
     //   }))
     // })
@@ -1623,12 +1631,14 @@ beforeAll(async () => {
     //     "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik."
     //   })
     //   .then((resp) => {
+    //   console.log("%c 📅: resp BANGET ", "font-size:16px;background-color:#6ee48c;color:black;", resp)
     //     expect(resp.body).toEqual(expect.any(Object))
     //     expect(resp.status).toBe(403)
     //     expect(resp.body).toHaveProperty("message", "Ticket Product is Exist, Please Only Add Skincare Product")
     //     done()
     //   })   
     //   .catch((err => {
+    //   console.log("%c 🇮🇨: err BANGET ", "font-size:16px;background-color:#572ba2;color:white;", err)
     //     done(err)
     //   }))
     // })

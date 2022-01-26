@@ -32,7 +32,6 @@ export const fetchDoctors = () => {
 }
 
 export const fetchDoctorDetail = (id) => {
-  console.log("masuk sini", id);
   return (dispatch, getState) => {
     dispatch({ type: SET_LOADING, payload: true})
     setTimeout(() => {

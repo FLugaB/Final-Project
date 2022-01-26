@@ -25,12 +25,14 @@ const getRoom = (room) => {
     })
     .catch((err) => console.error("error:" + err));
 };
+console.log(getRoom, "getRoom");
 
 
 const videoDailyOwner = async (req, res, next) => {
   try {
     const roomId = req.params.id;
     const roomGET = await getRoom(roomId);
+    console.log(roomGET, "roomget");
     
     const token = await axios('https://api.daily.co/v1/meeting-tokens', {
         method: 'POST',
@@ -42,11 +44,13 @@ const videoDailyOwner = async (req, res, next) => {
             "room_name":roomGET.name
         }})
     });
+    console.log(token.data, "token");
     if (token.data.token) {
       res.status(200).send( {token: token.data.token, room: roomGET })
     }
     res.status(200).send( { message: "Token Not Found"})
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
