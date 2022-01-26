@@ -1435,10 +1435,6 @@ span {
   }
 }
 
-
-body{
-  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-}
 .emp-profile{
   padding: 3%;
   margin-top: 5%;
@@ -1531,3 +1527,7 @@ body{
   font-weight: 600;
   color: #0062cc;
 }
+
+/* .video-joins > .slider--zoom {
+  z-index: 99;
+} */
