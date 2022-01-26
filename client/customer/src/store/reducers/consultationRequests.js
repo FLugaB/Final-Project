@@ -1,12 +1,14 @@
 import {
   FETCH_CONSULTATION_REQUESTS,
   FETCH_DOCTOR_CONSULTATION_REQUESTS,
+  PATCH_VOUCHER_CONSULTATION_REQUESTS,
   SET_LOADING,
   SET_ERROR,
 } from "../actionType/consultationRequests.js";
 
 const initialState = {
   consultationRequests: [],
+  patchConsultationRequest: [],
   doctorConsultationRequests: [],
   loadingConsultationRequests: false,
   errorConsultationRequests: null,
@@ -22,6 +24,11 @@ export default function consultationRequestsReducer(
       return {
         ...state,
         consultationRequests: action.payload,
+      };
+    case PATCH_VOUCHER_CONSULTATION_REQUESTS:
+      return {
+        ...state,
+        patchConsultationRequest: action.payload,
       };
     case FETCH_DOCTOR_CONSULTATION_REQUESTS:
       return {
