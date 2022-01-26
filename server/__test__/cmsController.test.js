@@ -80,7 +80,6 @@ beforeAll(async () => {
           done();
         })
         .catch((err) => {
-          console.log(err,">>>>>>>>ini err");
           done(err);
         });
     });
@@ -885,7 +884,6 @@ beforeAll(async () => {
           done();
         })
         .catch((err) => {
-          console.log(err,">>>>>>>>ini err");
           done(err);
         });
     });

@@ -62,7 +62,6 @@ beforeAll(async () => {
       };
   
       doctorToken = getToken(payload3);
-      console.log(doctorToken, ">>>>>>>>ini llaaa");
 
 
     const createdAdmin = await User.create(newAdmin);
@@ -935,7 +934,6 @@ describe("New Client Test on clientAccount Authentication Field", () => {
         done();
       })
       .catch((err) => {
-        console.log(err);
         done(err);
       });
   });
@@ -1590,7 +1588,6 @@ describe("Fetch doctor list", () => {
     request(app)
     .get("/doctors/2")
     .then((res) => {
-      console.log(res.bodu, "resDoctor");
       expect(res.status).toBe(200)
       expect(res.body).toEqual(expect.any(Object))
       done();
