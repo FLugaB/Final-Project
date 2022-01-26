@@ -66,7 +66,7 @@ function CardSlider() {
     }
 
     const handleClose = () => setShow(false);
-    const handleShow = (id) => setShow(true), dispatch(fetchDoctorDetail(id));
+    // const handleShow = (id) => setShow(true), dispatch(fetchDoctorDetail(id));
 
   return (
     <div className="containerSlider">
