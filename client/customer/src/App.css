@@ -45,6 +45,7 @@ a.no-style {
 .h-100vh { height: 100vh; }
 
 .section-container {
+  filter: grayscale(50%);
   align-items: center;
   display: flex;
   flex-direction: column;
