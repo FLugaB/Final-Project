@@ -8,6 +8,8 @@ import { fetchDoctors } from "../../store/actionCreator/doctors";
 import { useNavigate } from "react-router-dom";
 import { BsFillChatDotsFill, BsFillFilePersonFill } from "react-icons/bs";
 import { chooseClientDoctor } from "../../store/actionCreator/customers.js";
+import { Col, Row, Button, Card, handleShow, Modal } from 'react-bootstrap'
+
 
 function CardSlider() {
   const { doctors, loadingDoctors, errorDoctors } = useSelector(
@@ -58,6 +60,11 @@ function CardSlider() {
       },
     ]
   };
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <div className="containerSlider">
       <div className="container">
@@ -87,8 +94,9 @@ function CardSlider() {
                       </a>
                     </li>
                     <li>
-                      <a href="">
-                        <BsFillFilePersonFill></BsFillFilePersonFill>
+                      <a>
+                        <BsFillFilePersonFill onClick={handleShow}></BsFillFilePersonFill>
+                        
                       </a>
                     </li>
                   </ul>
