@@ -15,8 +15,8 @@ const ProductPage = () => {
       <ul className="cards">
         {products.map((el, index) => {
           return (
-            <li>
-              <a href="" className="card">
+            <li key={el.DetailProducts[0].id}>
+              <div className="card">
                 <img
                   src={el.DetailProducts[0].imageUrl}
                   className="card__image"
@@ -45,7 +45,7 @@ const ProductPage = () => {
                     {el.DetailProducts[0].description}
                   </p>
                 </div>
-              </a>
+              </div>
             </li>
           );
         })}

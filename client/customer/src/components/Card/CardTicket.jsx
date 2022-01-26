@@ -8,7 +8,7 @@ import { addTicketToCart } from '../../store/actionCreator/customers'
 import { localLoad } from '../../Hooks/load'
 
 const CardTicket = () => {
-
+  
   const [isLoading, setIsLoad] = useState(true)
   const [dateFormat, setDateFormat] = useState('')
 
@@ -18,6 +18,7 @@ const CardTicket = () => {
   useEffect(() => dispatch(fetchConsultationTickets()), []);
 
   const { consultationTickets, } = useSelector((state) => state.consultationTickets);
+  console.log("%c 🇪🇬: CardTicket -> consultationTickets ", "font-size:16px;background-color:#fe3b57;color:white;", consultationTickets)
   
   useEffect(() => {
     if (consultationTickets.length >= 1) {

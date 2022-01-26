@@ -31,6 +31,7 @@ export const login = (payload) => {
       });
       const output = await response.json();
       if (!response.ok) throw output;
+      
       localStorage.setItem("access_token", output.access_token);
       dispatch({ type: CUSTOMER_IS_SUCCESS_LOGIN, payload: true });
     } catch (error) {

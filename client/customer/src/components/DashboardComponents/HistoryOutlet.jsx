@@ -31,7 +31,7 @@ const HistoryOutlet = () => {
   console.log(customerOrder);
 
   return (
-    <div>
+    <div className="inner-scroll ">
       {!isLoading && customerOrder.length < 1 && (
         <div className="titleStyle">
           <h2>You don't have a History Order yet...</h2>
@@ -39,7 +39,7 @@ const HistoryOutlet = () => {
       )}
 
       {!isLoading && customerOrder.length >= 1 && (
-        <table className="containerTable1">
+        <table className="containerTable1 ">
           <thead>
             <tr>
               <th>
