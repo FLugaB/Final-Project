@@ -52,7 +52,14 @@ function CardSlider() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [doctor, setDoctor] = useState(null)
+  const handleShow = (payload) =>{
+    console.log(payload,">>>>>>>>ini payload");
+    setShow(true)
+    setDoctor(payload)
+  };
+
+
   return (
     <div className="containerSlider">
       <div className="container">
@@ -83,8 +90,8 @@ function CardSlider() {
                     </li>
                     <li>
                       <a>
-                        <BsFillFilePersonFill onClick={handleShow}></BsFillFilePersonFill>
-                        
+                        <BsFillFilePersonFill onClick={() => handleShow(el)} ></BsFillFilePersonFill>
+
                       </a>
                     </li>
                   </ul>
@@ -98,7 +105,29 @@ function CardSlider() {
               </div>
             );
           })}
+          
         </Slider>
+        <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        
+        <Modal.Header closeButton>
+          <Modal.Title  >{doctor?.Profile?.fullName}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{doctor?.id}</Modal.Body>
+        <Modal.Body>{doctor?.Profile?.gender}</Modal.Body>
+        <Modal.Body>{doctor?.Profile?.birthDate}</Modal.Body>
+        <Modal.Body>{doctor?.Profile?.phoneNumber}</Modal.Body>
+        <Modal.Body>{doctor?.Profile?.address}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       </div>
     </div>
   );
