@@ -40,7 +40,7 @@ const ConsultationRequest = () => {
   }, [consultationRequests]);
 
   return (
-    <div>
+    <div className="inner-scroll ">
       {!isLoading && consultationRequests.text === "There is No Ticket yet.." && (
         <div className="titleStyle">
           <h2>You don't have a counsultation reuqest yet...</h2>
