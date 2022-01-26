@@ -1356,7 +1356,35 @@ span {
   transform: translate(-50%, -50%);
 }
 
+.ls-15 {
+  letter-spacing: 0.15em;
+}
+
 /* LOCAL LOADER END */
+
+/* MODAL PROFILE START */
+
+.modal-content {
+  padding: 20px;
+  border-radius: 20px;
+  background-color: var(--soft)
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--hard);
+}
+
+.modal-image-wrapper {
+  width: 100%;
+}
+
+.modal-image-wrapper img {
+  width: 100%;
+  height: auto;
+}
+
+
+/* MODAL PROFILE END */
 
 /* MEDIA QUERY START */
 
@@ -1405,7 +1433,4 @@ span {
   .check {
     width: 200px;
   }
-
-
-
 }
