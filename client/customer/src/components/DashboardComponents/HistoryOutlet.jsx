@@ -34,8 +34,9 @@ const HistoryOutlet = () => {
                                 <thead>
                                     <tr>
                                     <th>No</th>
-                                    <th>OrderId</th>
+                                    <th>Order Id</th>
                                     <th>Status</th>
+                                    <th>Ammount</th>
                                     <th>Transaction Date</th>
                                     </tr>
                                 </thead>
@@ -44,7 +45,8 @@ const HistoryOutlet = () => {
                                     <td>{index+1}</td>
                                     <td>{el.order_id}</td>
                                     <td>{el.status}</td>
-                                    <td>{el.createdAt.split('T')[0]}</td>
+                                    <td>{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(el.ammount)}</td>
+                                    <td>{el.createdAt.slice(0,10).split('-').reverse().join('/')}</td>
                                     </tr>
                                 </tbody>
                                 </Table>
