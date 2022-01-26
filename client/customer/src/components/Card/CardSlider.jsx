@@ -51,6 +51,17 @@ function CardSlider() {
     slidesToShow: 3,
     slidesToScroll: 1,
     cssEase: "linear",
+    responsive: [
+      {
+        breakpoint: 700,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+    ]
   };
 
   const [isload, setIsLoad] = useState(true)  
@@ -58,8 +69,8 @@ function CardSlider() {
     
     const [show, setShow] = useState(false);
 
-    const [model, setModel] = userState(false)
-    const [tempdata, setTempdata] = useState(initialState)
+    const [model, setModel] = useState(false)
+    const [tempdata, setTempdata] = useState('')
 
     const getData = (email, fullName, birthdate,photoProfile, phoneNumber,address) => {
       let tempData = []
