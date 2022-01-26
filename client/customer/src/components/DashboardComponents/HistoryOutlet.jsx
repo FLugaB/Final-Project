@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Col, Row } from 'react-bootstrap'
 import { fetchHistoryOrder } from '../../store/actionCreator/customers'
-
+import { Table } from 'react-bootstrap';
 const HistoryOutlet = () => {
 
     const { customerOrder } = useSelector(state => state.customers)
@@ -27,12 +27,37 @@ const HistoryOutlet = () => {
                 
                 <Col md={12} className="mb-5">
                     <div className="title text-start">
-                        {/* <h3>{ JSON.stringify(customerOrder) }</h3> */}
+                        
+                        <Table striped bordered hover>
+                        <thead>
+                            <tr style={{textAlign: "center"}}>
+                            <th>id</th>
+                            <th>order_id</th>
+                            <th>UserId</th>
+                            <th>status</th>
+                            <th>ammount</th>
+                            <th>createdAt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         {customerOrder.map(el => {
                             return (
-                                <h1>{ JSON.stringify(el) }</h1>
+                            <>
+                            <tr key={el.id} style={{textAlign: "center"}}>
+                                <td>{el.id}</td>
+                                <td>{el.order_id}</td>
+                                <td>{el.UserId}</td>
+                                <td>{el.status}</td>
+                                <td>{el.ammount}</td>
+                                <td>{el.createdAt}</td>
+                            </tr>
+                            </>
                             )
-                        }) }
+                        })
+                        }
+                        </tbody>
+                        </Table>
+                            
                     </div>
                 </Col>
      

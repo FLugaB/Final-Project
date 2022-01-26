@@ -6,6 +6,7 @@ import { useParams  } from "react-router-dom";
 export default function Video({ match }) {
   
   const { id } = useParams();
+  console.log("%c ♻️: Video -> id ", "font-size:16px;background-color:#23f727;color:black;", id)
   
   useEffect(() => {
     const domain = "https://forsythiateam.daily.co/";

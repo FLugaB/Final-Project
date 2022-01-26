@@ -18,7 +18,7 @@ import DoctorDetail from "./components/DoctorDetail.jsx";
 import ConsultationRequest from "./components/ConsultationRequest/ConsultationRequest.jsx";
 import { pageLoad } from "./Hooks/load";
 
-import { RoutesGuard, LogGuard } from "./routes/RoutesGuard";
+import { RoutesGuard, LogGuard, ClientVideoGuard, DoctorVideoGuard } from "./routes/RoutesGuard";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -73,18 +73,22 @@ function App() {
           </RoutesGuard>
         } />
         
-        {/* hanya boleh client yg memilik tiket dgn status sudah bayar */}
+        {/* hanya boleh client yg memilik tiket dgn status sudah bayar, card slider */}
         <Route path="/video/:id" element={
-          
-        <VideoCall />
-        
+          <ClientVideoGuard> 
+
+            <VideoCall />
+
+          </ClientVideoGuard>
         } />
 
-        {/* hanya boleh diakses oleh dokter yg dipilih oleh client */}
+        {/* hanya boleh diakses oleh dokter yg dipilih oleh client, consultation req  */}
         <Route path="/video-owner/:id" element={
+          <DoctorVideoGuard> 
 
-        <VideoCallOwner />
-        
+            <VideoCallOwner />
+          
+          </DoctorVideoGuard>
         } />
 
         <Route
