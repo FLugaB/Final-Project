@@ -60,10 +60,10 @@ const HistoryOutlet = () => {
             {customerOrder.map((el) => {
               return (
                 <tr key={el.id}>
-                  <td>{el.id}</td>
-                  <td>{el.order_id}</td>
-                  <td>{el.status}</td>
-                  <td>{formatDate(el.updatedAt)}</td>
+                  <td className="text-center">{el.id}</td>
+                  <td className="text-center">{el.order_id}</td>
+                  <td className="text-center">{el.status}</td>
+                  <td className="text-center">{formatDate(el.updatedAt)}</td>
                 </tr>
               );
             })}

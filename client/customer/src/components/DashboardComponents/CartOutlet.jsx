@@ -73,37 +73,16 @@ const CartOutlet = () => {
             </div>
           )}
           <Row className="mt-5">
-            {/* {!customerCart.msg &&
-              customerCart.map((e) => {
-                return (
-                  <Col md={12} key={e.id} className="bg-soft px-0 mb-3">
-                    <Row className="d-flex justify-content-between align-items-center">
-                      <Col md={4}>
-                        <div className="checkout-image-wrapper">
-                          <img src={e.DetailProduct.imageUrl} alt="" />
-                        </div>
-                      </Col>
-                      <Col md={5}>
-                        <h6>{e.DetailProduct.name}</h6>
-                      </Col>
-                      <Col md={3}>
-                        <h6>{formatCurrency(e.DetailProduct.price)}</h6>
-                      </Col>
-                    </Row>
-                  </Col>
-                );
-              })} */}
-
             {!customerCart.msg && customerCart.length >= 1 && (
               <div className="container-fluid">
                 <div className="row align-items-start">
-                  <div className="col-12 col-sm-8 items">
+                  <div className="col-12 col-sm-6 items">
                     <div className="cartItem row align-items-start">
                       <div className="col-3 mb-2">
                         <img
                           style={{ width: 2 }}
                           className="w-100"
-                          src={require("../../assets/consultIcon.png")}
+                          src="https://ik.imagekit.io/h8finalproject/Remote-consultation-icon_oA81_GliE.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643214899445"
                           alt=""
                         />
                       </div>
@@ -112,35 +91,37 @@ const CartOutlet = () => {
                           {customerCart[0].DetailProduct.name}
                         </h6>
                       </div>
-                      <div className="d-flex flex-row">
-                      <div className="p-2">
+                      <div className="d-flex flex-row cart-wrappers">
 
-                        <BiMinus
-                          onClick={(e) => {
+                        <div 
+                        onClick={(e) => {
                             e.preventDefault();
                             decrementCounter(customerCart[0].id);
-                          }}
-                        />
-                      </div>
-                      <di className="p-2">
-                        <p className="cartItemQuantity p-1 text-center">
+                        }}
+                        className="wrapper-cart-button">
+                            <BiMinus />
+                        </div>
+
+                      <di className="">
+                        <p className="mx-3 mb-0 mt-2 text-center">
                           {counter}
                         </p>
 
                       </di>
-                      <div className="p-2">
-
-                        <BiPlus onClick={incrementCounter} />
+                        <div 
+                        onClick={incrementCounter}
+                        className="wrapper-cart-button">
+                            <BiPlus />
+                        </div>
                       </div>
-                      </div>
-                      <div className="col-2">
+                      <div className="col-2 mt-5">
                         <p id="cartItem1Price">
                           {formatCurrency(customerCart[0].DetailProduct.price)}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div className="col-12 col-sm-4 p-3 proceed form">
+                  <div className="col-12 col-sm-6 p-3 proceed form">
                     <div className="row m-0">
                       <div className="col-sm-8 p-0">
                         <h6>Subtotal</h6>
@@ -153,14 +134,14 @@ const CartOutlet = () => {
                         </p>
                       </div>
                     </div>
-                    <div className="row m-0">
+                    {/* <div className="row m-0">
                       <div className="col-sm-8 p-0 ">
                         <h6>Tax</h6>
                       </div>
                       <div className="col-sm-4 p-0">
                         <p id="tax">0%</p>
                       </div>
-                    </div>
+                    </div> */}
 
                     <div className="row mx-0 mb-2">
                       <div className="col-sm-8 p-0 d-inline">
@@ -175,7 +156,7 @@ const CartOutlet = () => {
                       </div>
                     </div>
                     {!customerCart.msg && (
-                      <div className="text-start mt-5 ms-4">
+                      <div className="text-end mt-5 ms-4">
                         <Button
                           variant="success"
                           onClick={onCheckOut}
