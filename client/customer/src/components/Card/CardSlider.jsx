@@ -8,6 +8,8 @@ import { fetchDoctors } from "../../store/actionCreator/doctors";
 import { useNavigate } from "react-router-dom";
 import { BsFillChatDotsFill, BsFillFilePersonFill } from "react-icons/bs";
 import { chooseClientDoctor } from "../../store/actionCreator/customers.js";
+import { Col, Row, Button, Card, handleShow, Modal } from 'react-bootstrap'
+
 
 function CardSlider() {
   const { doctors, loadingDoctors, errorDoctors } = useSelector(
@@ -46,7 +48,30 @@ function CardSlider() {
     slidesToShow: 3,
     slidesToScroll: 1,
     cssEase: "linear",
+    responsive: [
+      {
+        breakpoint: 700,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+    ]
   };
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const [doctor, setDoctor] = useState(null)
+  const handleShow = (payload) =>{
+    console.log(payload,">>>>>>>>ini payload");
+    setShow(true)
+    setDoctor(payload)
+  };
+
+
   return (
     <div className="containerSlider">
       <div className="container">
@@ -76,8 +101,9 @@ function CardSlider() {
                       </a>
                     </li>
                     <li>
-                      <a href="">
-                        <BsFillFilePersonFill></BsFillFilePersonFill>
+                      <a>
+                        <BsFillFilePersonFill onClick={() => handleShow(el)} ></BsFillFilePersonFill>
+
                       </a>
                     </li>
                   </ul>
@@ -91,7 +117,29 @@ function CardSlider() {
               </div>
             );
           })}
+          
         </Slider>
+        <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        
+        <Modal.Header closeButton>
+          <Modal.Title  >{doctor?.Profile?.fullName}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{doctor?.id}</Modal.Body>
+        <Modal.Body>{doctor?.Profile?.gender}</Modal.Body>
+        <Modal.Body>{doctor?.Profile?.birthDate}</Modal.Body>
+        <Modal.Body>{doctor?.Profile?.phoneNumber}</Modal.Body>
+        <Modal.Body>{doctor?.Profile?.address}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       </div>
     </div>
   );

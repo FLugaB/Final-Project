@@ -1358,4 +1358,54 @@ span {
 
 /* LOCAL LOADER END */
 
+/* MEDIA QUERY START */
 
+@media screen and (max-width: 500px) {
+  .hero__title {
+     font-size: 32px;
+  }
+
+  .slider.slider--zoom {
+    background-color: transparent
+  }
+
+  .untitled__slideBg {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    top: 250px;
+  }
+
+  .untitled__slideContent {
+    top: 50%;
+  }
+
+  .cards {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .card { height: 300px; }
+
+  .form-block--is-signup {
+    width: 350px;
+  }
+
+  .dashboard {
+    background-size: cover;
+  }
+
+  .menu-bars {
+    margin-left: 0;
+  }
+
+  .stub {
+    width: 100%;
+  }
+
+  .check {
+    width: 200px;
+  }
+
+
+
+}
