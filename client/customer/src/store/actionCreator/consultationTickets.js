@@ -20,6 +20,7 @@ export const fetchConsultationTickets = () => {
           access_token: access_token,
         },
       });
+      localStorage.setItem(`ticket`, false)
       dispatch({ type: FETCH_CONSULTATION_TICKETS, payload: result.data });
     } catch (err) {
       dispatch({ type: SET_ERROR, payload: err.response.data });

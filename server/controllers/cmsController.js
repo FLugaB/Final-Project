@@ -61,6 +61,7 @@ const cmsLogin = async (req, res, next) => {
 
         res.status(200).json({access_token});
     } catch (error) {
+        console.log(error)
         next(error);
     }
 };
