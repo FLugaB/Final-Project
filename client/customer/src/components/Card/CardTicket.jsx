@@ -8,7 +8,7 @@ import { addTicketToCart } from '../../store/actionCreator/customers'
 import { localLoad } from '../../Hooks/load'
 
 const CardTicket = () => {
-
+  
   const [isLoading, setIsLoad] = useState(true)
   const [dateFormat, setDateFormat] = useState('')
 

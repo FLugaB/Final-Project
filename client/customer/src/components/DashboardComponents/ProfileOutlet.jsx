@@ -7,7 +7,7 @@ import { formattedDate  } from '../../Hooks/helpers'
 const ProfileOutlet = () => {
     const { profile, loading, error } = useSelector(
         (state) => state.userRole
-      );
+    );
       
     return (
         
@@ -40,7 +40,7 @@ const ProfileOutlet = () => {
             </Row>
         </Col>
         
-  );
+    );
 };
 
 export default ProfileOutlet;

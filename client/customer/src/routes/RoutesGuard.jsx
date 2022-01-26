@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom"
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchConsultationTickets } from "../store/actionCreator/consultationTickets";
+import { userRole } from "../store/actionCreator/userRole";
 const RoutesGuard = ({children}) => {
 
     const accessToken = localStorage.getItem(`access_token`)
@@ -11,35 +12,47 @@ const RoutesGuard = ({children}) => {
     return children
 };
 const ClientVideoGuard = ({children}) => {
-    // const [status, setStatus] = useState('')
+    const { profile, loading, error } = useSelector(
+        (state) => state.userRole
+    );
     const dispatch = useDispatch();
-    // const dummyState = true
-
-    useEffect(() => dispatch(fetchConsultationTickets()), []);
-    const ClientId = localStorage.getItem(`ClientId`)
-    console.log("%c ⚱️: ClientVideoGuard -> ClientId ", "font-size:16px;background-color:#56b220;color:white;", ClientId)
     
-    // const status = localStorage.getItem(`status`)
+    useEffect(() => {
+        dispatch(userRole())
+    }, []);
 
+    useEffect(() => dispatch(
+        fetchConsultationTickets()
+    ), []);
 
-    if (ClientId===3) return <Navigate to="/login" />;
-    // if (status === 'usable' || !status) return <Navigate to="/login" />;
+    const ClientId = localStorage.getItem(`ClientId`)
+    const status = localStorage.getItem(`status`)
+    
+    if ( +ClientId !== +profile.UserId || status !== 'useable' || !status ) {
+        console.log("FAIL VALIDASI GO TO TICKET");
+        return <Navigate to="/login" />;
+    }
 
     return children
-};
-const DoctorVideoGuard = ({children}) => {
-//     const dummyState = false
-
-//     if (!dummyState) return <Navigate to="/login" />;
-
-    // return children
 };
 
 const LogGuard = ({children}) => {
 
-    const accessToken = localStorage.getItem(`access_token`)
+    const { profile, loading, error } = useSelector(
+        (state) => state.userRole
+    );
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        dispatch(userRole())
+    }, []);
 
-    if (accessToken) return <Navigate to="/" />;
+    useEffect(() => dispatch(
+        fetchConsultationTickets()
+    ), []);
+
+    const ClientId = localStorage.getItem(`ClientId`)
+    const status = localStorage.getItem(`status`)
 
     return children
 };
@@ -47,6 +60,5 @@ const LogGuard = ({children}) => {
 export {
     RoutesGuard,
     LogGuard,
-    ClientVideoGuard,
-    DoctorVideoGuard
+    ClientVideoGuard
 };
