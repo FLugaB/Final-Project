@@ -12,7 +12,7 @@ const DoctorDetail = () => {
 
     const [localLoad, setLocalLoad] = useState(true)
     // const { } = useSelector( (state) => state.doctor)
-    
+
     const dispatch = useDispatch();
     const data = useSelector(state => state.doctors.doctorDetail)
     const {id} = useParams()
@@ -27,14 +27,14 @@ const DoctorDetail = () => {
     },[localLoad]);
     // useEffect(() => pageLoaded(), [beforeUpdateProduct.id])
 
-    
+
 
 
     return (
     <div>
-        {/* <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> */}
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <Link type="button" to="/" className="btn btn-warning" style={{marginTop: 30, marginLeft: 30}}>Back</Link>
         <div className="container emp-profile">
             <div className="row">
@@ -96,5 +96,4 @@ const DoctorDetail = () => {
     </div>
     );
 };
-
 export default DoctorDetail;

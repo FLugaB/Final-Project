@@ -72,7 +72,6 @@ module.exports = class Controller {
                 where: {id},
                 returning: true
             })
-            console.log("masuk else");
             res.status(200).json(updateTicket)
         
 

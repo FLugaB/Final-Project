@@ -35,7 +35,6 @@ class TransactionController {
         });
 
       } catch (err) {
-        console.log(err, `==============`)
         next (err)
       }
 
@@ -72,7 +71,6 @@ class TransactionController {
             }
             
         } catch (error) {
-            console.log(error)
             next (error)
         }
     }
@@ -97,7 +95,6 @@ class TransactionController {
             }
             
         } catch (error) {
-            console.log(error)
             next (error)
         }
     }
@@ -132,7 +129,6 @@ class TransactionController {
             })
 
             if (findUserClient.length < 1) {
-                console.log(findUserClient,"<< CONTROLLER VOUCHER");
                 res.status(200).json({ msg: `There is no Voucher Ticket`})
             } else {
 
@@ -154,7 +150,6 @@ class TransactionController {
             }
             
         } catch (error) {
-            console.log(error)
             next (error)
         }
     }
@@ -230,7 +225,6 @@ class TransactionController {
             }
             
         } catch (error) {
-            console.log(error,"<<<<<<<<<<<< ERROR")
             next(error)
         }
     }
@@ -400,7 +394,6 @@ class TransactionController {
             res.status(200).json(findOneOrderId)
             
         } catch (error) {
-            console.log(error)
             next(error)
         }
     }

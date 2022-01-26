@@ -1303,69 +1303,63 @@ beforeAll(async () => {
         
       })
       .then((resp) => {
-        console.log(resp,">>>>>>>>ini re");
         expect(resp.body).toEqual(expect.any(Object))
         expect(resp.status).toBe(200)
         done()
       })   
       .catch((err => {
-        console.log (err,">>>>>>>>>>>>err")
         done(err)
       }))
     })
 
-    //TODO 18 not found updated id detail
-    // test("updated detail id not found", (done) => {
-    //   request(app)
-    //   .put("/cms/details/999")
-    //   .set('access_token', tokenMatch1)
-    //   .send ({
-    //       "name": "3 VASELINE Lip Theraphy Jar Baru",
-    //       "price": 299999,
-    //       "category": "Lip care",
-    //       "stock": 1,
-    //       "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-    //       "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik."
+    // TODO 18 not found updated id detail
+    test("updated detail id not found", (done) => {
+      request(app)
+      .put("/cms/details/30")
+      .set('access_token', tokenMatch1)
+      .send ({
+          "name": "3 VASELINE Lip Theraphy Jar Baru",
+          "price": 299999,
+          "category": "Lip care",
+          "stock": 1,
+          "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+          "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik."
         
-    //   })
-    //   .then((resp) => {
-    //     console.log(resp,">>>>>>>>ini re");
-    //     expect(resp.body).toEqual(expect.any(Object))
-    //     expect(resp.status).toBe(404)
-    //     expect(res.body).toHaveProperty("message", "Product_not_found");
-    //     done()
-    //   })   
-    //   .catch((err => {
-    //     console.log (err,">>>>>>>>>>>>err")
-    //     done(err)
-    //   }))
-    // })
+      })
+      .then((resp) => {
+        expect(resp.body).toEqual(expect.any(Object))
+        expect(resp.status).toBe(404)
+        expect(resp.body).toHaveProperty("message", "Product not found");
+        done()
+      })   
+      .catch((err => {
+        done(err)
+      }))
+    })
 
-    //TODO 19 success updated detail ticket
-    // test("updated detail ticket success", (done) => {
-    //   request(app)
-    //   .put("/cms/details/1")
-    //   .set('access_token', tokenMatch1)
-    //   .send ({
-    //       "name": "1 VASELINE Lip Theraphy Jar Baru",
-    //       "price": 599999,
-    //       "category": "Lip care",
-    //       "stock": 1,
-    //       "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
-    //       "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik."
+    // TODO 19 success updated detail ticket
+    test("updated detail ticket success", (done) => {
+      request(app)
+      .put("/cms/details/1")
+      .set('access_token', tokenMatch1)
+      .send ({
+          "name": "1 VASELINE Lip Theraphy Jar Baru",
+          "price": 599999,
+          "category": "Lip care",
+          "stock": 1,
+          "imageUrl": "https://www.soco.id/cdn-cgi/image/w=425,format=auto,dpr=1.45/https://images.soco.id/image-0-1595500867038",
+          "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik."
         
-    //   })
-    //   .then((resp) => {
-    //     console.log(resp,">>>>>>>>ini re");
-    //     expect(resp.body).toEqual(expect.any(Object))
-    //     expect(resp.status).toBe(200)
-    //     done()
-    //   })   
-    //   .catch((err => {
-    //     console.log (err,">>>>>>>>>>>>err")
-    //     done(err)
-    //   }))
-    // })
+      })
+      .then((resp) => {
+        expect(resp.body).toEqual(expect.any(Object))
+        expect(resp.status).toBe(200)
+        done()
+      })   
+      .catch((err => {
+        done(err)
+      }))
+    })
     
   })
 
@@ -1437,21 +1431,21 @@ beforeAll(async () => {
       }))
     })
 
+
+    
     // //TODO 6 cannot delete this detail
     // test("delete detail is not allowed", (done) => {
     //   request(app)
     //   .delete("/cms/details/2")
     //   .set('access_token', tokenMatch1)
     //   .then((resp) => {
-    //   console.log("%c 🔂: resp ", "font-size:16px;background-color:#253016;color:white;", resp)
         
     //     expect(resp.body).toEqual(expect.any(Object))
-    //     expect(resp.status).toBe(403)
+    //     expect(resp.status).toBe(200)
     //     expect(resp.body).toHaveProperty("message", "You Can't Delete This Product");
     //     done()
     //   })   
     //   .catch((err => {
-    //   console.log("%c 🕴️: err ", "font-size:16px;background-color:#1b59c6;color:white;", err)
     //     done(err)
     //   }))
     // })
@@ -1631,14 +1625,12 @@ beforeAll(async () => {
     //     "description": "Facial Foam ini mengandung White Cocoon Essence kualitas terbaik."
     //   })
     //   .then((resp) => {
-    //   console.log("%c 📅: resp BANGET ", "font-size:16px;background-color:#6ee48c;color:black;", resp)
     //     expect(resp.body).toEqual(expect.any(Object))
     //     expect(resp.status).toBe(403)
     //     expect(resp.body).toHaveProperty("message", "Ticket Product is Exist, Please Only Add Skincare Product")
     //     done()
     //   })   
     //   .catch((err => {
-    //   console.log("%c 🇮🇨: err BANGET ", "font-size:16px;background-color:#572ba2;color:white;", err)
     //     done(err)
     //   }))
     // })
