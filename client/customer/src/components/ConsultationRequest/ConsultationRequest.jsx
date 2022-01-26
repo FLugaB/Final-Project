@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./ConsultationRequest.css";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchConsultationTickets, patchConsultationTickets } from "../../store/actionCreator/consultationRequests.js";
+import {
+  fetchConsultationTickets,
+  patchConsultationTickets,
+} from "../../store/actionCreator/consultationRequests.js";
 import { fetchDoctorDetail } from "../../store/actionCreator/doctors.js";
 import { useNavigate } from "react-router-dom";
 import { SiGooglemeet } from "react-icons/si";
@@ -19,10 +22,9 @@ const ConsultationRequest = () => {
 
   const handleButtonConsultation = async (id) => {
     console.log(id, "id");
-    await dispatch(patchConsultationTickets(id))
+    await dispatch(patchConsultationTickets(id));
     const str = profile.fullName.replace(".", "").replace(/\s+/g, "");
     navigate(`/video-owner/${str}`);
-    
   };
 
   useEffect(() => {
@@ -49,11 +51,11 @@ const ConsultationRequest = () => {
         <table className="containerTable1">
           <thead>
             <tr>
-              <th>
+              {/* <th>
                 <h1>#ID</h1>
-              </th>
+              </th> */}
               <th>
-                <h1>Voucher Token</h1>
+                <h1>#Client Id</h1>
               </th>
               <th>
                 <h1>Status</h1>
@@ -67,13 +69,16 @@ const ConsultationRequest = () => {
             {consultationRequests.map((el) => {
               return (
                 <tr key={el.id}>
-                  <td>{el.id}</td>
-                  <td>{el.voucherToken}</td>
+                  {/* <td>{el.id}</td> */}
+                  <td>{el.ClientId}</td>
                   <td>{el.status}</td>
                   <td>
                     <SiGooglemeet
                       style={{ fontSize: 30 }}
-                      onClick={(e) => {e.preventDefault(); handleButtonConsultation(el.id)}}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleButtonConsultation(el.id);
+                      }}
                     />
                   </td>
                 </tr>

@@ -19,7 +19,7 @@ const DashboardSidebar = ({ role }) => {
       },
       {
         title: "Consultation",
-        path: "consultation",
+        path: "consultation-request",
         icon: <IconName.FcWebcam />,
         cName: "nav-text",
       },
