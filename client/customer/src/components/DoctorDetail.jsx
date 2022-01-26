@@ -2,47 +2,60 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {fetchDoctorDetail} from "../store/actionCreator/doctors"
+import { Col, Row, Button, Card, handleShow, Modal } from 'react-bootstrap'
 
 const DoctorDetail = () => {
 
+    const [isload, setIsLoad] = useState(true)  
     const dispatch = useDispatch();
     const doctorDetail = useSelector(state => state.doctors.doctorDetail)
     const {id} = useParams()
-    console.log(id, "ini id ");
     
-    // const [localLoad, setLocalLoad] = useState(true)
-    // const { } = useSelector( (state) => state.doctor)
-    
-
     useEffect(() => {
         dispatch(fetchDoctorDetail(id))
     },[id]);
-    // useEffect(() => pageLoaded(), [beforeUpdateProduct.id])
+
+    useEffect(() => {
+        if(doctorDetail) {
+            setIsLoad(false)
+            console.log(doctorDetail);
+        }
+    }, [doctorDetail])
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    
+
 
     return (
         <>
         <Button variant="primary" onClick={handleShow}>
-          Launch static backdrop modal
         </Button>
-  
+
         <Modal
-          show={show}
-          onHide={handleClose}
-          backdrop="static"
-          keyboard={false}
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
         >
-          <Modal.Header closeButton>
-            <Modal.Title>{doctorDetail.Profile.fullName}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            I will not close if you click outside me. Don't even try to press
-            escape key.
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary">Understood</Button>
+    {!isload && doctorDetail && ( 
+        <>
+        <Modal.Header closeButton>
+        <Modal.Title>{doctorDetail.Profile.fullName}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{doctorDetail.email}</Modal.Body>
+        <Modal.Body>{doctorDetail.Profile.gender}</Modal.Body>
+        <Modal.Body>{doctorDetail.Profile.birthdate.split('T')[0]}</Modal.Body>
+        <Modal.Body>{doctorDetail.Profile.phoneNumber}</Modal.Body>
+        <Modal.Body>{doctorDetail.Profile.address}</Modal.Body>
+        </>
+    )}
+        <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+        Close
+        </Button>
+        <Button variant="primary">Understood</Button>
           </Modal.Footer>
         </Modal>
       </>

@@ -5,11 +5,13 @@ import {
   SET_ERROR,
 } from "../actionType/doctors.js";
 
+const server = "https://forsythia-server.herokuapp.com"
+
 export const fetchDoctors = () => {
   return (dispatch, getState) => {
     dispatch({ type: SET_LOADING, payload: true})
     setTimeout(() => {
-      fetch(`http://localhost:3000/doctors`)
+      fetch(`${server}/doctors`)
       .then((res) => {
         if (!res.ok) throw new Error ("throwed Error from Fetch Doctors")
         return res.json();
@@ -34,7 +36,7 @@ export const fetchDoctorDetail = (id) => {
   return (dispatch, getState) => {
     dispatch({ type: SET_LOADING, payload: true})
     setTimeout(() => {
-      fetch(`http://localhost:3000/doctors/${id}`)
+      fetch(`${server}/doctors/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error ("throwed Error from Fetch Doctors")
         return res.json();

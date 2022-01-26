@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row, Table } from 'react-bootstrap'
 import { fetchHistoryOrder } from '../../store/actionCreator/customers'
 
 const HistoryOutlet = () => {
@@ -11,13 +11,11 @@ const HistoryOutlet = () => {
 
     useEffect( () => {
         fetchOrder()
-        console.log(customerOrder)
     }, [])
 
     const fetchOrder = async () => {
         try {
             await dispatch(fetchHistoryOrder())
-            console.log(customerOrder)
         } catch (error) {
             console.log(error)
         }
@@ -30,9 +28,26 @@ const HistoryOutlet = () => {
                 <Col md={12} className="mb-5">
                     <div className="title text-start">
                         {/* <h3>{ JSON.stringify(customerOrder) }</h3> */}
-                        {customerOrder.map(el => {
+                        {customerOrder.map((el, index) => {
                             return (
-                                <h1>{ JSON.stringify(el) }</h1>
+                                <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                    <th>No</th>
+                                    <th>OrderId</th>
+                                    <th>Status</th>
+                                    <th>Transaction Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    <td>{index+1}</td>
+                                    <td>{el.order_id}</td>
+                                    <td>{el.status}</td>
+                                    <td>{el.createdAt.split('T')[0]}</td>
+                                    </tr>
+                                </tbody>
+                                </Table>
                             )
                         }) }
                     </div>

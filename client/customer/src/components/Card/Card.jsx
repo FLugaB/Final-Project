@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { fetchDoctors } from "../../store/actionCreator/doctors";
 import React from "react";
-import {Link} from "react-router-dom"
 import "./Card.css"
 import { useEffect } from "react";
 
@@ -20,14 +19,12 @@ const Card = () => {
           doctors.map((el, index) => {
             return (
               <li>
-                <a  className="card">
-                <Link to={`/doctors/${el.Profile.id}`}>
-
+                <a href="" className="card">
                   <img
                     src={el.Profile.photoProfile}
                     className="card__image"
                     alt=""
-                    />
+                  />
                   <div className="card__overlay">
                     <div className="card__header">
                       <svg className="card__arc" xmlns="http://www.w3.org/2000/svg">
@@ -35,8 +32,8 @@ const Card = () => {
                       </svg>
                       {/* <div className="card__thumb">
                         <img
-                        src={el.Profile.photoProfile}
-                        alt=""
+                          src={el.Profile.photoProfile}
+                          alt=""
                         />
                       </div> */}
                       <div className="card__header-text">
@@ -49,7 +46,6 @@ const Card = () => {
                     </p>
 
                   </div>
-                  </Link>
                 </a>
               </li>
             )
