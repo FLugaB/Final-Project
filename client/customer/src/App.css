@@ -1372,10 +1372,12 @@ span {
   .untitled__slideBg {
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center;
+    top: 250px;
   }
 
   .untitled__slideContent {
-    top: 42%;
+    top: 50%;
   }
 
   .cards {
