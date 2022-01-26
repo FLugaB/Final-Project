@@ -17,7 +17,7 @@ const DoctorDetail = () => {
 
     useEffect(() => {
         if(doctorDetail) {
-            setIsLoad(false)
+            setIsLoad(false) 
             console.log(doctorDetail);
         }
     }, [doctorDetail])
@@ -46,9 +46,9 @@ const DoctorDetail = () => {
         </Modal.Header>
         <Modal.Body>{doctorDetail.email}</Modal.Body>
         <Modal.Body>{doctorDetail.Profile.gender}</Modal.Body>
-        <Modal.Body>{doctorDetail.Profile.birthdate.split('T')[0]}</Modal.Body>
+        <Modal.Body>{doctorDetail.Profile.birthdate.slice(0,10).split('-').reverse().join('/')}</Modal.Body>
         <Modal.Body>{doctorDetail.Profile.phoneNumber}</Modal.Body>
-        <Modal.Body>{doctorDetail.Profile.address}</Modal.Body>
+        <Modal.Body>{doctorDetail.Profile.address}</Modal.Body>  
         </>
     )}
         <Modal.Footer>

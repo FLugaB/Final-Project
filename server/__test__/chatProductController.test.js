@@ -273,7 +273,6 @@ describe("voucher usedByToken", () => {
         done();
       })
       .catch((err) => {
-        console.log(err,">>>>>>>>>ini err");
         done(err);
       });
   });

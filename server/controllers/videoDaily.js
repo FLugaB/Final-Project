@@ -23,7 +23,7 @@ const getRoom = (room) => {
     .then((response) => {
       return response.data;
     })
-    // .catch((err) => console.error("error:" + err));
+    .catch((err) => console.error("error:" + err));
 };
 
 const videoDaily = async (req, res, next) => {
@@ -39,14 +39,12 @@ const videoDaily = async (req, res, next) => {
             "room_name":roomGET.name
         }})
     });
-    console.log(token.data, "result");
 
     if (token.data) {
       res.status(200).send( {token: token.data.token, room: roomGET })
     }
     res.status(200).send( { message: "Token Not Found"})
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };

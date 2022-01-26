@@ -4,10 +4,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./CardSlider.css";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from 'react-router-dom'
 import { fetchDoctors } from "../../store/actionCreator/doctors";
 import { useNavigate } from "react-router-dom";
 import { BsFillChatDotsFill, BsFillFilePersonFill } from "react-icons/bs";
 import { chooseClientDoctor } from "../../store/actionCreator/customers.js";
+import {fetchDoctorDetail} from "../../store/actionCreator/doctors.js"
+import { Col, Row, Button, Card, handleShow, Modal } from 'react-bootstrap'
+
 
 function CardSlider() {
   const { doctors, loadingDoctors, errorDoctors } = useSelector(
@@ -39,6 +43,7 @@ function CardSlider() {
       console.log(err);
     }
   }
+  
   let settings = {
     dots: true,
     infinite: true,
@@ -47,6 +52,22 @@ function CardSlider() {
     slidesToScroll: 1,
     cssEase: "linear",
   };
+
+  const [isload, setIsLoad] = useState(true)  
+  const doctorDetail = useSelector(state => state.doctors.doctorDetail)
+    
+    const [show, setShow] = useState(false);
+
+    const [model, setModel] = userState(false)
+    const [tempdata, setTempdata] = useState(initialState)
+
+    const getData = (email, fullName, birthdate,photoProfile, phoneNumber,address) => {
+      let tempData = []
+    }
+
+    const handleClose = () => setShow(false);
+    const handleShow = (id) => setShow(true), dispatch(fetchDoctorDetail(id));
+
   return (
     <div className="containerSlider">
       <div className="container">
@@ -77,14 +98,15 @@ function CardSlider() {
                     </li>
                     <li>
                       <a href="">
-                        <BsFillFilePersonFill></BsFillFilePersonFill>
+                        <BsFillFilePersonFill onClick={() =>getData(el.id)}></BsFillFilePersonFill>
+                      
                       </a>
                     </li>
                   </ul>
                   <div className="details">
                     <h2>
                       {el.Profile.fullName}{" "}
-                      <span className="job-title">{el.Profile.address} </span>
+                      <span className="job-title">{el.email, el.Profile.fullName,el.Profile.birthdate, el.Profile.photoProfile, el.Profile.phoneNumber,el.Profile.address} </span>
                     </h2>
                   </div>
                 </div>
