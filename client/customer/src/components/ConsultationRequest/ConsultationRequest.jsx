@@ -24,7 +24,7 @@ const ConsultationRequest = () => {
 
   useEffect(() => {
     dispatch(fetchConsultationTickets());
-  }, []);
+  }, [consultationRequests]);
 
   useEffect(() => {
     if (consultationRequests.length >= 1) {
@@ -32,9 +32,7 @@ const ConsultationRequest = () => {
     } else {
       setIsLoading(false);
     }
-  }, [consultationRequests.length]);
-
-  console.log(consultationRequests, "stateCheck");
+  }, [consultationRequests]);
 
   return (
     <div>
