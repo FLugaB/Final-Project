@@ -216,7 +216,6 @@ describe ("client cart", () => {
     .get("/account/cart")
     .set('access_token', 'fffj66g')
     .then((res) => {
-      console.log(res,">>>>>>>>ini res");
       expect(res.status).toBe(401);
       expect(res.body).toEqual(expect.any(Object));
       expect(res.body).toEqual({
@@ -225,7 +224,6 @@ describe ("client cart", () => {
       done();
     })
     .catch((err) => {
-      console.log(err, "ini err");
       done(err);
     });
   })
@@ -279,6 +277,28 @@ describe ("client detail checkout", () => {
       done(err);
     });
   })
+
+  const voucher = {
+    "UserId" : 1,
+    "ProductId": "FF-02",
+    "status": "pending",
+  }
+  Voucher.create(voucher);
+
+    //TODO 1 client detail chekout success
+    test("client detail checkout success", (done) => {
+      request(app)
+      .get("/account/detail-checkout")
+      .set('access_token', clientToken)
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object));
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+    })
 })
 
 describe ("post client detail checkout", () => {
@@ -675,7 +695,6 @@ describe ("client ticket", () => {
     .patch("/account/tickets/9")
     .set('access_token', 'fffj66g')
     .then((res) => {
-      console.log(res,">>>>>>>>ini res");
       expect(res.status).toBe(401);
       expect(res.body).toEqual(expect.any(Object));
       expect(res.body).toEqual({
@@ -684,7 +703,6 @@ describe ("client ticket", () => {
       done();
     })
     .catch((err) => {
-      console.log(err, "ini err");
       done(err);
     });
   })
@@ -753,6 +771,52 @@ describe ("client ticket", () => {
     });
   }) 
 
+})
+
+describe("fetch status transaction", () => {
+  //TODO 1 fetch status transaction no access_token
+  test("fetch status transaction no access_token", (done) => {
+    request(app)
+      .get("/account/status-transactions")
+      .then((res) => {
+        expect(res.status).toBe(403);
+        expect(res.body).toHaveProperty('message', "Please Login first")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  //TODO 2 fetch status transaction not authorized
+  test("fetch status transaction not authorized", (done) => {
+    request(app)
+      .get("/account/status-transactions")
+      .set("access_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
+      .then((res) => {
+        expect(res.status).toBe(401);
+        expect(res.body).toHaveProperty('message', "Invalid token")
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+  
+  //TODO 3 fetch status transaction success
+  test("fetch status transaction success", (done) => {
+    request(app)  
+      .get("/account/status-transactions")
+      .set("access_token", clientToken)
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.body).toEqual(expect.any(Object))
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
 })
 
 describe ("test transaction not found", () => {

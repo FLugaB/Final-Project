@@ -33,7 +33,6 @@ export const fetchDoctors = () => {
 
 export const fetchDoctorDetail = (id) => {
   return (dispatch, getState) => {
-    console.log("masuk",id);
     dispatch({ type: SET_LOADING, payload: true})
     setTimeout(() => {
       fetch(`${server}/doctors/${id}`)

@@ -43,7 +43,6 @@ module.exports = class Controller {
       } 
       res.status(200).json(result)
     } catch (err) {
-      console.log(err);
       next(err)
     }
   }
@@ -245,12 +244,11 @@ module.exports = class Controller {
     try {
       const {id} = req.params
       const find = await DetailProduct.findByPk(id)
-      
       if (!find) {
         throw {name: "Product_not_found"}
       } 
       // PROBLEM TEST
-      if (find.ProductId === 1 || find.ProductId === 2) {
+      if (find.ProductId == 1 || find.ProductId == 2) {
         throw { name: "CANNOT_DELETE_PRODUCT" }
       } 
         await DetailProduct.destroy ({where : {id}, transaction:t})
