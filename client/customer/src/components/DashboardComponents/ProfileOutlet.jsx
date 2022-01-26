@@ -1,45 +1,49 @@
 import React from "react";
-
+import "./profileOutlet.css";
 import { Col, Row, Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
 import { formattedDate  } from '../../Hooks/helpers'
-
+import * as AiIcons from "react-icons/ai";
+import { Link } from "react-router-dom";
 const ProfileOutlet = () => {
     const { profile, loading, error } = useSelector(
         (state) => state.userRole
     );
       
     return (
-        
-        <Col md={12} className="d-flex justify-content-start section-dashboard p-5"> 
-            <Row>
-                <Col md={12} className="mb-5">
-                    <div className="title text-start">
-                        <h1>Profile</h1>
-                    </div>
-                    <div className="text-start mt-5">
-                        <Button variant="warning" className="text-white">Edit Profile</Button>
-                    </div>
-                </Col>
-                <Col md={12} className="d-flex justify-content-start">
-                    <Row>
-                        <Col md={6} className="text-start">
-                            <p>Full Name: {profile.fullName}</p>
-                            <p>Birth Date: {profile?.birthdate?.split('T')[0]}</p>
-                            <p>Gender: {profile.gender}</p>
-                            <p>Phone Number: {profile.phoneNumber}</p>
-                            <p>Address: {profile.address}</p>
-                        </Col>
-                        <Col md={6}>
-                            <div className="profile-image-wrapper">
-                                <img src={profile.photoProfile}/>
+        <>
+            <section class="section-dashboard p-5 mx-sm-auto" id="about">
+                <div class="container">
+                    <div class="row align-items-center justify-content-start flex-row-reverse">
+                        
+                        <div class="col-lg-6">
+                            <div class="d-flex justify-content-end">
+                             
+                                <img src={profile.photoProfile} class="profile-image-wrapper rounded" alt="" />
+                           
                             </div>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
-        </Col>
-        
+                            <div class="about-text text-right">
+                                <h3 class="dark-color">{profile.fullName}</h3>
+                                <h4 class="theme-color">{profile.gender}</h4>
+                                    <div class="">
+                                        <p class="">Birth Date: {profile?.birthdate?.split('T')[0]}</p>
+                                        <p class="">Phone Number: <br/>{profile.phoneNumber}</p>
+                                        <p>Address: {profile.address}</p>
+                                    </div>
+                                
+                                <div className="navbar flex justify-content-end">
+                                <Link to="#" class="menu-bars"  >
+                                    <AiIcons.AiFillCaretLeft />
+                                    Menu
+                                </Link>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+        </>
     );
 };
 
