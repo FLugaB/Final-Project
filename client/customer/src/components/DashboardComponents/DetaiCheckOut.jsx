@@ -97,25 +97,25 @@ const DetaiCheckOut = () => {
                     }
 
                     <Row className="mt-5">
-                        { customerCheckout.orderDetail && customerCheckout.orderDetail.product.map((e) => {
-                            return (
-                                <Col md={12} key={e.id} className="bg-soft px-0 mb-3">
+                        { customerCheckout.orderDetail && 
+                            (
+                                <Col md={12} key={customerCheckout.orderDetail.product[0].id} className="bg-soft px-0 mb-3">
                                     <Row className="d-flex justify-content-between align-items-center">
                                         <Col md={4}>
                                             <div className="checkout-image-wrapper">
-                                                <img src={e.DetailProduct.imageUrl} alt="" />
+                                                <img src={customerCheckout.orderDetail.product[0].DetailProduct.imageUrl} alt="" />
                                             </div>
                                         </Col>
                                         <Col md={5}>
-                                            <h6>{e.DetailProduct.name}</h6>
+                                            <h6>{customerCheckout.orderDetail.product[0].DetailProduct.name}</h6>
                                         </Col>
                                         <Col md={3}>
-                                            <h6>{formatCurrency(e.DetailProduct.price)}</h6>
+                                            <h6>x {customerCheckout.orderDetail.product.length}</h6>
                                         </Col>
                                     </Row>
                                 </Col>
                             )
-                        }) }
+                        }
                     </Row>
 
                     { customerCheckout.orderDetail &&  
