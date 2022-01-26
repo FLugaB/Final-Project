@@ -26,8 +26,8 @@ const errorsLog = (err, req, res, next) => {
         code = 403
         message = "Invalid access"
     } else if ( err.name === `TRANSACTION_NOT_FOUND`){
-        code = 403
-        message = "Invalid access"
+        code = 404
+        message = "Transaction Not Found"
     } else if ( err.name === `Product_not_found`) {
         code = 404
         message = "Product not found"
@@ -119,6 +119,7 @@ const errorsLog = (err, req, res, next) => {
     //     code = 404
     //     message = "Transaction ID Has Been Used"
     // } 
+    console.log(err,"<<<< ERROR");
    res.status(code).json({message})
 }
 

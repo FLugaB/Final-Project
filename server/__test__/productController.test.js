@@ -122,7 +122,7 @@ beforeAll(async () => {
     console.log(err);
   }
 
-})
+}, 8000)
 
   describe("add product", () => {
     //TODO 21 success add product

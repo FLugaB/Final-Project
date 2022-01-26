@@ -18,12 +18,13 @@ import DoctorDetail from "./components/DoctorDetail.jsx";
 import ConsultationRequest from "./components/ConsultationRequest/ConsultationRequest.jsx";
 import { pageLoad } from "./Hooks/load";
 
-import { RoutesGuard, LogGuard } from "./routes/RoutesGuard";
+import { RoutesGuard, LogGuard, ClientVideoGuard } from "./routes/RoutesGuard";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { LogoutComponent } from "./components/Logout.jsx";
 import CardTicket from "./components/Card/CardTicket.jsx";
+import ProductPage from "./pages/Products.jsx";
 
 function App() {
   const [loader, setLoader] = useState(true);
@@ -43,8 +44,12 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-
-        <Route path="account" element={<Dashboard />}>
+        <Route path="account" element={
+          <RoutesGuard>
+            <Dashboard />
+          </RoutesGuard>
+        }>
+    
           <Route path="profile" element={<ProfileOutlet />} />
           <Route path="cart" element={<CartOutlet />} />
           <Route path="checkout" element={<DetailCheckOut />} />
@@ -55,15 +60,30 @@ function App() {
             path="consultation-request"
             element={<ConsultationRequest />}
           />
+    
         </Route>
 
         <Route path="/notification/handling" element={<Notif />} />
-        {/* <Route path="/products" element={<ProductPage />} /> */}
+        <Route path="/products" element={ <ProductPage/> } />
         <Route path="/doctors" element={<JoinMeeting />} />
-        <Route path="/doctors/:id" element={<DoctorDetail />} />
+
+        <Route path="/doctors/:id" element={
+          <RoutesGuard>
+            <DoctorDetail />
+          </RoutesGuard>
+        } />
         
-        <Route path="/video/:id" element={<VideoCall />} />
-        <Route path="/video-owner/:id" element={<VideoCallOwner />} />
+        {/* hanya boleh client yg memilik tiket dgn status sudah bayar, card slider */}
+        <Route path="/video/:id" element={
+          <ClientVideoGuard>
+            <VideoCall />
+          </ClientVideoGuard>
+        } />
+
+        {/* hanya boleh diakses oleh dokter yg dipilih oleh client, consultation req  */}
+        <Route path="/video-owner/:id" element={
+            <VideoCallOwner />
+        } />
 
         <Route
           path="/login"

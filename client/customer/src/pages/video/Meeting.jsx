@@ -8,8 +8,12 @@ import { pageLoad } from '../../Hooks/load'
 export default function Video({ match }) {
   
   const { id } = useParams();
+<<<<<<< HEAD
+  console.log("%c ♻️: Video -> id ", "font-size:16px;background-color:#23f727;color:black;", id)
+=======
 
   const [isLocalLoad, setIsLocalLoad] = useState(true)
+>>>>>>> 2510f793c4b1b01b7548d532b4bee099514802d2
   
   useEffect(() => {
     const domain = "https://forsythiateam.daily.co/";
