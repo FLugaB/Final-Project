@@ -8,7 +8,7 @@ import { fetchDoctors } from "../../store/actionCreator/doctors";
 import { useNavigate } from "react-router-dom";
 import { BsFillChatDotsFill, BsFillFilePersonFill } from "react-icons/bs";
 import { chooseClientDoctor } from "../../store/actionCreator/customers.js";
-import { Col, Row, Button, Card, handleShow, Modal } from 'react-bootstrap'
+import { Col, Row, Button, Card, handleShow, Modal, Badge } from 'react-bootstrap'
 
 
 function CardSlider() {
@@ -127,18 +127,22 @@ function CardSlider() {
       >
         
         <Modal.Header closeButton>
-          <Modal.Title  >{doctor?.Profile?.fullName}</Modal.Title>
+          <Modal.Title className="fw-bold">{doctor?.Profile?.fullName}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{doctor?.id}</Modal.Body>
-        <Modal.Body>{doctor?.Profile?.gender}</Modal.Body>
-        <Modal.Body>{doctor?.Profile?.birthDate}</Modal.Body>
-        <Modal.Body>{doctor?.Profile?.phoneNumber}</Modal.Body>
-        <Modal.Body>{doctor?.Profile?.address}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
+        <Modal.Body> 
+          <Row>
+            <Col md={12}>
+              <div className="modal-image-wrapper">
+                <img src={doctor?.Profile?.photoProfile } alt="" />
+              </div>
+            </Col>
+            <Col md={12} className="mt-3">
+              <Badge bg="info ms-0 ls-15 mb-3">{doctor?.Profile?.gender}</Badge>
+              <h3>Clinic Location:</h3>
+              <h3 className="fw-bold">{doctor?.Profile?.address}</h3>
+            </Col>
+          </Row>
+        </Modal.Body>
       </Modal>
       </div>
     </div>
